@@ -44,6 +44,22 @@ O Handbook deve ser usado como fonte para:
 - Integrações próprias do produto.
 - Deploy e infraestrutura do YA Hub.
 
+## Documentos disponíveis
+
+### Planejamento inicial
+
+- [Visão geral](planejamento-inicial/visao-geral.md)
+- [Roadmap](planejamento-inicial/roadmap.md)
+- [Arquitetura planejada](planejamento-inicial/arquitetura.md)
+- [Conteúdo dos projetos](planejamento-inicial/conteudo-dos-projetos.md)
+- [Painel administrativo](planejamento-inicial/painel-admin.md)
+- [Integrações futuras](planejamento-inicial/integracoes-futuras.md)
+
+### Técnico
+
+- [Arquitetura da V1](tecnico/arquitetura/v1.md)
+- [Contratos da API V1](tecnico/api/v1-contratos.md)
+
 ## O que não deve ficar aqui
 
 - Padrões gerais da YA LABS.
