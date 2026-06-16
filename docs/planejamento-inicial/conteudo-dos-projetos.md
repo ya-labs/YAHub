@@ -19,6 +19,8 @@ Cada projeto poderá ter:
 
 O arquivo `project.json` guarda as informações públicas do projeto. A pasta `assets/` guarda imagens usadas no showcase.
 
+Esse formato é uma proposta específica do YA Hub para metadados de projetos. Se futuramente esse padrão virar reutilizável para outros produtos da YA LABS, a parte geral deve ser consolidada no YABook.
+
 ## Campos planejados
 
 Campos iniciais esperados:
@@ -91,6 +93,8 @@ O YA Hub deve:
 - apresentar as informações no portal.
 
 O YA Hub não deve duplicar manualmente tudo que pertence ao projeto.
+
+O GitHub continua sendo fonte de versionamento e revisão. Quando o painel administrativo existir, alterações nesses metadados devem passar por branch e Pull Request, seguindo o fluxo do YABook.
 
 ## Fallback
 

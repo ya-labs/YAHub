@@ -6,6 +6,8 @@ Este documento registra os contratos conceituais da API V1 do YA Hub.
 
 Os nomes finais de DTOs, propriedades e rotas podem ser refinados durante a implementação, mas a intenção da API deve permanecer clara: entregar dados públicos da YA LABS já tratados para o front-end.
 
+Este documento é conceitual. Quando a implementação definir contratos reais, os exemplos devem ser atualizados para refletir o comportamento efetivo da API.
+
 ## Padrão de resposta
 
 A API deve usar um envelope de resposta inspirado no `ServiceResult<T>` usado no CADE O DANO.

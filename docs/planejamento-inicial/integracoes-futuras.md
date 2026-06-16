@@ -87,6 +87,7 @@ O back-end do YA Hub pode tratar os eventos antes de enviar mensagens ao Discord
 
 - O Discord deve comunicar eventos relevantes, não todo ruído técnico.
 - Automações importantes devem preservar revisão e controle.
+- Automações que alterarem repositórios devem respeitar o fluxo de branch e Pull Request documentado no YABook.
 - O Discord não substitui o YA Hub como fonte pública de informação.
 - O bot deve consumir dados tratados pelo back-end quando possível.
 

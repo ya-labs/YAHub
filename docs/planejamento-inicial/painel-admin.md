@@ -6,6 +6,8 @@ O painel administrativo será a forma futura de manter os metadados dos projetos
 
 Ele deve facilitar a atualização de descrições, links, imagens, showcase e notas de atualização, preservando revisão e histórico pelo GitHub.
 
+O fluxo de publicação deve seguir o YABook: mudanças relevantes precisam manter rastreabilidade entre issue, branch, commit, Pull Request e validação.
+
 ## Papel no roadmap
 
 O painel administrativo está planejado para a V3.
@@ -40,6 +42,8 @@ Usar Pull Request traz:
 - menor risco de quebrar produção;
 - rastreabilidade;
 - alinhamento com o fluxo profissional da YA LABS.
+
+Esse comportamento não é uma regra exclusiva do YA Hub; é uma aplicação do fluxo oficial da YA LABS documentado no YABook.
 
 ## Responsabilidades
 
