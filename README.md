@@ -30,7 +30,7 @@ Em planejamento inicial.
 
 ## Stack prevista
 
-- Front-end: React, TypeScript e Vite.
+- Front-end: Angular e TypeScript.
 - Back-end: a definir durante o planejamento técnico.
 - Integrações: GitHub API, Spotifolio e Discord em fases futuras.
 - Infraestrutura: a definir, com possibilidade de uso da Azure para o back-end.
