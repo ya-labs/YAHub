@@ -22,6 +22,7 @@ Responsabilidades do front-end:
 - construir as telas públicas;
 - organizar componentes e rotas;
 - cuidar da experiência visual;
+- aplicar a direção visual institucional do YA Hub;
 - consumir endpoints do back-end;
 - não depender diretamente da origem real dos dados.
 
@@ -102,6 +103,14 @@ spotifolioUsername
 ```
 
 O YA Hub deve apontar para perfis do Spotifolio, e o Spotifolio pode apontar de volta para projetos no YA Hub.
+
+## Relação com documentação e design system
+
+A arquitetura específica do YA Hub deve ficar neste repositório.
+
+Padrões reutilizáveis de documentação, condução de projeto, uso de IA, fluxo GitHub e design system devem permanecer no YABook.
+
+Quando a implementação do portal consolidar decisões visuais reutilizáveis, essas decisões podem ser promovidas para o YABook. Enquanto forem específicas do portal, devem ficar em [Direção visual](direcao-visual.md).
 
 ## V5 - Discord e automações
 

@@ -1,8 +1,8 @@
 # YA Hub
 
-Portal oficial da YA LABS para apresentar a organização, seus projetos, membros e atividades.
+Portal oficial da YA LABS para apresentar a organização, seus projetos, membros, atividades e evolução técnica.
 
-O YA Hub será o painel público da organização: um lugar para centralizar projetos, exibir informações vindas do GitHub e registrar a evolução dos produtos mantidos pela YA LABS.
+O YA Hub será o painel público da organização: um lugar para centralizar projetos, exibir informações vindas do GitHub, registrar a evolução dos produtos mantidos pela YA LABS e servir como principal referência visual institucional do ecossistema.
 
 ## Visão geral
 
@@ -15,6 +15,8 @@ O que a YA LABS constrói?
 ```
 
 O projeto deve evoluir de forma incremental, começando como portal público full-stack e abrindo caminho para integrações futuras com painel administrativo, Spotifolio e automações no Discord.
+
+O YA Hub também terá papel importante na evolução do design system da YA LABS: decisões visuais estáveis podem nascer aqui e, depois de validadas em uso real, serem registradas no YABook como padrão reutilizável.
 
 ## Responsabilidades iniciais
 
@@ -35,7 +37,7 @@ Em planejamento inicial.
 - Integrações: GitHub API, Spotifolio e Discord em fases futuras.
 - Infraestrutura: a definir, com possibilidade de uso da Azure para o back-end.
 
-## Documentação
+## Documentação do projeto
 
 A documentação específica do YA Hub fica em:
 
@@ -43,11 +45,28 @@ A documentação específica do YA Hub fica em:
 docs/
 ```
 
-Este projeto segue os padrões da YA LABS documentados no Handbook:
+Leitura inicial recomendada:
 
-- [Handbook da YA LABS](https://github.com/ya-labs/Handbook)
+- [Índice da documentação](docs/README.md)
+- [Guia de consulta da documentação](docs/guia-da-documentacao.md)
+- [Guia de documentação para IA](docs/guia-de-documentacao-para-ia.md)
 
-O Handbook é a fonte oficial para fluxo de trabalho, uso de IA, padrões de issues, branches, commits, Pull Requests e documentação técnica.
+## Referência organizacional
+
+Este projeto segue os padrões da YA LABS documentados no YABook:
+
+- [YABook](https://github.com/ya-labs/YABook)
+
+O YABook é a fonte oficial para:
+
+- condução de projetos;
+- fluxo de trabalho com GitHub;
+- uso de IA;
+- documentação técnica;
+- design system;
+- templates reutilizáveis.
+
+O YA Hub deve manter apenas documentação própria do produto. Regras gerais da organização devem continuar no YABook.
 
 ## Fluxo de trabalho
 
@@ -57,4 +76,4 @@ Mudanças relevantes devem seguir o fluxo da YA LABS:
 Issue -> Branch -> Commit -> Pull Request -> Merge -> Validação
 ```
 
-Consulte o Handbook para o processo completo.
+Consulte o YABook para o processo completo e use `docs/fluxo-de-trabalho-github.md` apenas para adaptações locais do YA Hub.

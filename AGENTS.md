@@ -12,8 +12,8 @@ A IA deve:
 
 - consultar a estrutura real do repositório antes de propor ou executar mudanças;
 - preservar a separação entre documentação específica do YA Hub e padrões gerais da YA LABS;
-- usar o [Handbook da YA LABS](https://github.com/ya-labs/Handbook) como fonte oficial para fluxo de trabalho, uso de IA e padrões organizacionais;
-- evitar repetir no YA Hub documentos que já pertencem ao Handbook;
+- usar o [YABook](https://github.com/ya-labs/YABook) como fonte oficial para fluxo de trabalho, uso de IA, documentação técnica, condução de projetos, design system e padrões organizacionais;
+- evitar repetir no YA Hub documentos que já pertencem ao YABook;
 - preservar acentos e textos em português usando UTF-8;
 - manter rastreabilidade entre issue, branch, commit e Pull Request;
 - sugerir mensagem de commit ao alterar arquivos.
@@ -23,6 +23,8 @@ A IA deve:
 O YA Hub é o portal oficial da YA LABS.
 
 Ele deve apresentar a organização, seus projetos, membros, atividades e evolução técnica. O projeto também deve preparar uma base para integrações futuras com painel administrativo, Spotifolio e Discord.
+
+O YA Hub também é a principal referência visual institucional da YA LABS. Decisões visuais próprias do produto devem ser registradas aqui quando forem específicas do portal. Decisões estáveis e reutilizáveis para outros projetos devem ser consolidadas no YABook.
 
 ## Responsabilidades iniciais
 
@@ -42,16 +44,24 @@ Antes de executar uma alteração relevante, valide:
 
 Se não houver issue relacionada ou se a branch estiver incompatível, avise antes de editar ou registre a exceção quando houver autorização explícita.
 
+Use `docs/fluxo-de-trabalho-github.md` apenas para regras locais do YA Hub. Para o processo completo, consulte o YABook.
+
 ## Documentação
 
 Ao alterar documentação:
 
 - mantenha no YA Hub apenas informações próprias do produto;
-- coloque padrões reutilizáveis da organização no Handbook;
+- coloque padrões reutilizáveis da organização no YABook;
 - use Markdown limpo;
 - escreva em português com acentos;
 - não copie documentação de outros projetos sem adaptar ao contexto do YA Hub;
 - não invente contratos, arquitetura ou integrações ainda não definidos.
+
+Guias locais:
+
+- `docs/README.md`: índice da documentação do YA Hub;
+- `docs/guia-da-documentacao.md`: onde consultar e atualizar cada assunto;
+- `docs/guia-de-documentacao-para-ia.md`: leitura recomendada para assistentes de IA.
 
 ## Código
 

@@ -20,6 +20,7 @@ Entregas previstas:
 - exibição básica do Spotifolio como projeto da YA LABS;
 - contratos de API limpos para o front-end;
 - configuração inicial para dados que o GitHub não cobre.
+- direção visual inicial alinhada ao design system da YA LABS.
 
 Fora da V1:
 
@@ -29,6 +30,8 @@ Fora da V1:
 - escrita automática em repositórios;
 - integração real com Spotifolio;
 - bot ou automações no Discord.
+
+Critério de direção visual: a V1 deve validar a linguagem institucional do YA Hub sem tentar consolidar todo o design system da organização dentro deste repositório.
 
 ## V2 - Metadados ricos por projeto
 

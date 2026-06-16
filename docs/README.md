@@ -2,51 +2,77 @@
 
 Este diretório reúne a documentação específica do YA Hub.
 
-Use este espaço para registrar informações reais do produto, como visão, roadmap, arquitetura, contratos de API, integrações, deploy e decisões técnicas.
+Use este espaço para registrar informações reais do produto, como visão, roadmap, arquitetura, contratos de API, integrações, direção visual, deploy e decisões técnicas.
 
-## Estrutura planejada
+## Leitura recomendada
+
+1. [README principal](../README.md)
+2. [Guia de consulta da documentação](guia-da-documentacao.md)
+3. [Guia de documentação para IA](guia-de-documentacao-para-ia.md)
+4. [Visão geral](planejamento-inicial/visao-geral.md)
+5. Documentos técnicos ou de planejamento relacionados à tarefa.
+
+## Estrutura atual
 
 ```text
 docs/
 |-- README.md
+|-- guia-da-documentacao.md
+|-- guia-de-documentacao-para-ia.md
 |-- fluxo-de-trabalho-github.md
 |-- planejamento-inicial/
 `-- tecnico/
     |-- arquitetura/
-    |-- api/
-    `-- infraestrutura/
+    `-- api/
 ```
 
-Crie apenas as pastas e documentos necessários para o momento atual do projeto.
+Crie apenas as pastas e documentos necessários para o momento atual do projeto. O YABook recomenda uma estrutura mais ampla para projetos, mas o YA Hub deve abrir novas pastas somente quando houver conteúdo real para manter.
 
 ## Referência organizacional
 
-Este projeto segue os padrões da YA LABS documentados no Handbook:
+Este projeto segue os padrões da YA LABS documentados no YABook:
 
-- [Handbook da YA LABS](https://github.com/ya-labs/Handbook)
+- [YABook](https://github.com/ya-labs/YABook)
 
-O Handbook deve ser usado como fonte para:
+Use o YABook como fonte para:
 
-- fluxo de trabalho com GitHub;
-- padrão de issues;
-- padrão de branches;
-- padrão de commits;
-- padrão de Pull Requests;
-- uso de IA;
-- boas práticas de documentação técnica.
+- [condução de projetos](https://github.com/ya-labs/YABook/blob/main/docs/processos/conducao-de-projetos.md);
+- [fluxo de trabalho com GitHub](https://github.com/ya-labs/YABook/blob/main/docs/processos/fluxo-de-trabalho-github.md);
+- [uso de IA](https://github.com/ya-labs/YABook/blob/main/docs/guias/uso-de-ia.md);
+- [documentação técnica](https://github.com/ya-labs/YABook/blob/main/docs/guias/documentacao-tecnica.md);
+- [design system](https://github.com/ya-labs/YABook/blob/main/docs/guias/design-system.md);
+- templates reutilizáveis.
 
 ## O que deve ficar aqui
 
 - Visão e roadmap do YA Hub.
 - Arquitetura real do projeto.
 - Contratos de API do YA Hub.
+- Direção visual específica do portal.
 - Decisões técnicas específicas.
 - Integrações próprias do produto.
 - Deploy e infraestrutura do YA Hub.
+
+## Documentos disponíveis
+
+### Planejamento inicial
+
+- [Visão geral](planejamento-inicial/visao-geral.md)
+- [Roadmap](planejamento-inicial/roadmap.md)
+- [Arquitetura planejada](planejamento-inicial/arquitetura.md)
+- [Conteúdo dos projetos](planejamento-inicial/conteudo-dos-projetos.md)
+- [Direção visual](planejamento-inicial/direcao-visual.md)
+- [Painel administrativo](planejamento-inicial/painel-admin.md)
+- [Integrações futuras](planejamento-inicial/integracoes-futuras.md)
+
+### Técnico
+
+- [Arquitetura da V1](tecnico/arquitetura/v1.md)
+- [Contratos da API V1](tecnico/api/v1-contratos.md)
 
 ## O que não deve ficar aqui
 
 - Padrões gerais da YA LABS.
 - Templates reutilizáveis para outros projetos.
-- Regras completas de processo já documentadas no Handbook.
+- Regras completas de processo já documentadas no YABook.
 - Documentação específica de outros produtos da organização.
