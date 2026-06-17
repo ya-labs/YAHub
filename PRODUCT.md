@@ -67,9 +67,11 @@ O design system da YA LABS deve nascer de decisões aplicadas primeiro no YA Hub
 
 Microinterações, motion, mascote e futuras experiências exploráveis devem reforçar a marca e ajudar a navegação. Interação não deve ser usada como decoração solta.
 
-### Tema claro como base, tema escuro como profundidade
+### Tema claro como padrão, tema escuro como opção completa
 
-A identidade da YA LABS deve funcionar em tema claro e escuro. O tema claro representa a base institucional limpa, branca e azul; o tema escuro pode carregar momentos mais imersivos, premium e marcantes.
+A identidade da YA LABS deve funcionar em tema claro e escuro em todos os sites, aplicativos e ferramentas da organização. O tema claro é o padrão inicial, com base institucional limpa, branca e azul. O tema escuro deve ser uma alternativa completa de uso, não apenas um recurso decorativo ou uma área especial.
+
+No YA Hub, o tema escuro também pode carregar momentos mais imersivos, premium e marcantes, mas isso não elimina a obrigação de oferecer dark mode como opção consistente para toda a experiência.
 
 ### Personalidade sem perder maturidade
 

@@ -130,8 +130,9 @@ Entregas previstas:
 
 - Home institucional com primeira impressão forte;
 - navegação clara para projetos, membros, documentação, atividades e links oficiais;
-- tema claro como base institucional, com branco, azul escuro, azul forte e azul claro;
-- previsão de tema escuro para momentos mais imersivos;
+- tema claro como padrão institucional, com branco, azul escuro, azul forte e azul claro;
+- tema escuro como opção completa para sites, aplicativos e ferramentas da YA LABS;
+- uso do tema escuro também em momentos mais imersivos;
 - cards de projetos objetivos, legíveis e fáceis de comparar;
 - interações leves em elementos principais da Home;
 - introdução sutil do mascote ou assistente digital;

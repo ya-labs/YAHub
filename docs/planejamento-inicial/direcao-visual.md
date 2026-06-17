@@ -137,9 +137,11 @@ As cores oficiais da marca devem seguir o YABook:
 - superfície clara: `#F8FAFC`;
 - texto principal: `#0F172A`.
 
-O tema claro deve representar a base institucional da YA LABS: branco, limpo, organizado e com detalhes em azul escuro, azul forte e azul claro.
+O tema claro deve representar o padrão inicial da YA LABS: branco, limpo, organizado e com detalhes em azul escuro, azul forte e azul claro.
 
-O tema escuro também deve ser previsto desde o início. Ele pode carregar momentos mais imersivos, premium e marcantes da experiência, principalmente na Home, em áreas de destaque e em futuras experiências exploráveis.
+O tema escuro também deve ser previsto desde o início como opção completa para todos os sites, aplicativos e ferramentas da YA LABS. Ele não deve ser tratado apenas como decoração, seção especial ou recurso exclusivo da Home.
+
+No YA Hub, o tema escuro pode carregar momentos mais imersivos, premium e marcantes da experiência, principalmente na Home, em áreas de destaque e em futuras experiências exploráveis. Ainda assim, a navegação, as páginas internas, os cards, os formulários e os estados da interface devem funcionar bem em tema claro e escuro.
 
 A identidade da YA LABS não deve depender exclusivamente de dark mode. O sistema visual precisa funcionar bem em tema claro e escuro.
 
