@@ -22,6 +22,7 @@ docs/
 |-- fluxo-de-trabalho-github.md
 |-- planejamento-inicial/
 `-- tecnico/
+    |-- back-end/
     |-- arquitetura/
     `-- api/
 ```
@@ -68,6 +69,7 @@ Use o YABook como fonte para:
 ### Técnico
 
 - [Arquitetura da V1](tecnico/arquitetura/v1.md)
+- [Back-end da V1](tecnico/back-end/v1.md)
 - [Contratos da API V1](tecnico/api/v1-contratos.md)
 
 ## O que não deve ficar aqui

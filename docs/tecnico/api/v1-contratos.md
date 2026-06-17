@@ -40,6 +40,8 @@ GET /api/projects
 GET /api/projects/:slug
 GET /api/members
 GET /api/activity
+POST /api/register
+POST /api/login
 ```
 
 ## GET /api/organization
@@ -189,11 +191,75 @@ Dados esperados:
 - data;
 - URL de referência.
 
+## POST /api/register
+
+Cadastra um usuário administrativo inicial.
+
+Este endpoint foi antecipado para a V1 para permitir a evolução do cadastro de projetos pelo back-end.
+
+Entrada esperada:
+
+```json
+{
+  "name": "Caio",
+  "email": "caio@email.com",
+  "password": "senha"
+}
+```
+
+Resposta esperada:
+
+```json
+{
+  "result": true,
+  "message": null,
+  "data": {
+    "id": "00000000-0000-0000-0000-000000000000",
+    "name": "Caio",
+    "email": "caio@email.com"
+  }
+}
+```
+
+Regras:
+
+- senha deve ser armazenada apenas como hash;
+- `passwordHash` não deve ser retornado pela API;
+- email deve ser único.
+
+## POST /api/login
+
+Autentica um usuário administrativo.
+
+Entrada esperada:
+
+```json
+{
+  "email": "caio@email.com",
+  "password": "senha"
+}
+```
+
+Resposta inicial esperada:
+
+```json
+{
+  "result": true,
+  "message": null,
+  "data": {
+    "id": "00000000-0000-0000-0000-000000000000",
+    "name": "Caio",
+    "email": "caio@email.com"
+  }
+}
+```
+
+Em uma evolução posterior, o login deve retornar token JWT para proteger endpoints administrativos.
+
 ## Fora da API V1
 
 Não fazem parte da API V1:
 
-- login;
 - permissões;
 - painel administrativo;
 - upload;

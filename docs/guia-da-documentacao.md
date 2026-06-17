@@ -29,6 +29,7 @@ O YA Hub segue as diretrizes gerais do YABook, mas mantém aqui apenas documenta
 | Painel administrativo futuro | `docs/planejamento-inicial/painel-admin.md` |
 | Integrações futuras | `docs/planejamento-inicial/integracoes-futuras.md` |
 | Arquitetura técnica da V1 | `docs/tecnico/arquitetura/v1.md` |
+| Especificação do back-end da V1 | `docs/tecnico/back-end/v1.md` |
 | Contratos conceituais da API V1 | `docs/tecnico/api/v1-contratos.md` |
 
 ## Referências do YABook
