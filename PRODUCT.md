@@ -20,6 +20,15 @@ O sucesso do produto significa entregar uma experiência institucional clara, co
 
 A Home não deve tentar mostrar tudo acima da dobra. Ela deve funcionar como uma narrativa progressiva: primeiro identidade, depois proposta, depois cultura de criação, depois ecossistema oficial e produtos.
 
+A direção final da Home é uma interface híbrida de **white space + terminal**. O YA Hub deve parecer a porta de entrada da YA LABS: um portal técnico, autoral e útil, com sensação de sistema operacional/dev tool, sem virar landing page genérica.
+
+Separação conceitual:
+
+```text
+YA LABS = laboratório, organização e ecossistema.
+YA Hub = portal, interface e central de acesso.
+```
+
 ## Brand Personality
 
 A YA LABS deve transmitir uma personalidade técnica, clara, confiável, produtiva e moderna, com uma camada de criatividade controlada.
@@ -44,6 +53,7 @@ O YA Hub não deve parecer:
 - sistema administrativo antigo;
 - dashboard operacional na Home pública;
 - portal cheio de cards, métricas e atalhos competindo na primeira dobra;
+- uso de "Entrar no laboratório" como CTA principal, porque laboratório é o conceito da YA LABS e portal é a função real do YA Hub;
 - interface poluída ou decorativa demais;
 - experiência infantil, mesmo com mascote;
 - navegação experimental que dificulta encontrar informações.
@@ -65,6 +75,32 @@ A Home deve conduzir o usuário por uma história: o que é a YA LABS, como uma 
 ### YA LABS primeiro, YA Hub depois
 
 A YA LABS é a organização e o ecossistema. O YA Hub é o portal oficial desse ecossistema. A primeira dobra deve apresentar a YA LABS; o YA Hub deve aparecer depois como porta de entrada para projetos, membros, documentação e atividades.
+
+O header pode mostrar `YAHub by YA LABS`, pois a pessoa está navegando pelo portal. O hero deve apresentar `YA LABS — Code. Automate. Scale.`, pois a Home apresenta a organização por meio do portal.
+
+O CTA principal da Home deve ser `Acessar o portal`.
+
+A seção `Construímos como laboratório.` não deve aparecer na primeira dobra. Ela é a segunda etapa da narrativa e deve surgir apenas após o usuário iniciar o scroll.
+
+### White space + terminal
+
+A Home deve misturar muito espaço em branco, tipografia forte, comandos de terminal, detalhes em azul, status de sistema, botões pretos, linhas finas, cards minimalistas e sensação de dev tool própria.
+
+Na direção final aprovada, o terminal não deve dominar o hero como um bloco grande. A linguagem terminal deve aparecer em microdetalhes: prompts curtos, itens de navegação numerados, status `online`, cursores, rótulos técnicos e pequenos comandos espalhados pela interface.
+
+O elemento ASCII/YA Mark deve ser tratado como assinatura visual da marca: uma construção monoespaçada memorável, integrada com partículas, pontos, linhas orbitais e sensação de renderização/formação do símbolo YA.
+
+A experiência desejada é:
+
+```text
+O usuário abriu o YA Hub.
+O portal inicializa a YA LABS.
+A página apresenta a organização.
+Depois mostra o ecossistema.
+Depois mostra o fluxo.
+Depois mostra os produtos.
+E no final revela o próprio YA Hub como central de acesso.
+```
 
 ### Ecossistema YA e produtos com identidade própria
 

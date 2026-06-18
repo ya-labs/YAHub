@@ -36,19 +36,91 @@ A experiência visual pode ser mais expressiva na Home, desde que a navegação 
 
 O objetivo não é criar apenas uma landing page bonita, nem um painel informativo compacto. A Home deve ser uma apresentação narrativa da YA LABS, enquanto o YA Hub como portal pode ser explicado em uma seção própria mais adiante.
 
+## Direção final escolhida
+
+A direção final para a Home do YA Hub é uma interface híbrida de **white space + terminal**.
+
+Essa direção combina com a identidade da YA LABS porque faz o site parecer uma ferramenta própria, um terminal visual e uma central técnica da organização, em vez de uma landing page genérica de startup.
+
+Separação conceitual:
+
+```text
+YAHub = portal, interface e central de acesso.
+YA LABS = organização, laboratório e ecossistema apresentado pelo portal.
+```
+
+Frase conceitual:
+
+```text
+YAHub é a porta de entrada da YA LABS.
+```
+
+Ou:
+
+```text
+Tudo que a YA LABS constrói, organiza e documenta começa pelo YAHub.
+```
+
+Sensação desejada:
+
+```text
+Não parece só um site.
+Parece uma ferramenta.
+Parece um terminal visual.
+Parece o sistema operacional da YA LABS.
+```
+
+### Linguagem visual
+
+Manter como base:
+
+- muito espaço em branco;
+- tipografia grande, forte e limpa;
+- comandos de terminal;
+- fonte monoespaçada em pontos estratégicos;
+- detalhes em azul;
+- status de sistema;
+- botões pretos;
+- cards minimalistas;
+- linhas finas;
+- sensação de sistema operacional/dev tool;
+- aparência de produto técnico, não de landing page comum.
+
+### CTA principal
+
+O CTA principal deve ser:
+
+```text
+Acessar o portal →
+```
+
+Evitar como CTA principal:
+
+```text
+Entrar no laboratório
+```
+
+Motivo:
+
+```text
+YA LABS = laboratório.
+YAHub = portal.
+```
+
+O usuário acessa o portal para explorar o laboratório.
+
 ## Narrativa da Home
 
 A Home deve contar a história da YA LABS progressivamente, com bastante espaço em branco, seções amplas, animações suaves e foco em uma ideia por vez.
 
 Fluxo conceitual recomendado:
 
-1. Apresentar a YA LABS como organização e ecossistema.
-2. Explicar o que a YA LABS faz e por que existe.
-3. Mostrar como uma ideia vira produto dentro da cultura da organização.
-4. Apresentar o Ecossistema YA, com ferramentas oficiais da organização.
-5. Apresentar os produtos criados pela YA LABS.
-6. Explicar o YA Hub como portal oficial para explorar projetos, membros, documentação e atividades.
-7. Fechar com uma chamada forte para GitHub, documentação, Discord ou exploração do laboratório.
+1. Hero — YA LABS.
+2. O laboratório / organização.
+3. Ecossistema YA.
+4. Fluxo de construção.
+5. Produtos.
+6. Central YAHub.
 
 A primeira dobra deve ser quase fullscreen, com foco total em:
 
@@ -60,7 +132,34 @@ Code. Automate. Scale.
 Texto base sugerido:
 
 ```text
-Um laboratório de software para transformar ideias em projetos reais, automatizar fluxos e construir produtos com aprendizado contínuo.
+Um laboratório para construir, automatizar
+e evoluir software com propósito.
+```
+
+Terminal sugerido:
+
+```text
+yahub:~$ welcome
+
+> inicializando YA LABS...
+> conectando ecossistema...
+> verificando projetos...
+> documentação online
+> automações ativas
+
+> pronto!
+```
+
+CTA:
+
+```text
+Acessar o portal →
+```
+
+Status:
+
+```text
+status: online ●
 ```
 
 Evitar na primeira dobra:
@@ -71,6 +170,82 @@ Evitar na primeira dobra:
 - atalhos competindo;
 - aparência de dashboard;
 - tentativa de explicar todo o ecossistema de uma vez.
+
+## Seções da Home
+
+### 01. Hero — YA LABS
+
+Objetivo: apresentar a YA LABS como o universo principal dentro do portal YAHub.
+
+Conteúdo:
+
+```text
+YA LABS
+Code. Automate. Scale.
+
+Um laboratório para construir, automatizar
+e evoluir software com propósito.
+```
+
+Elementos visuais:
+
+- `YAHub` no topo esquerdo;
+- `by YA LABS` abaixo;
+- navbar central com itens numerados, como `[01] Ecossistema`, `[02] Produtos`, `[03] Fluxo`, `[04] Membros` e `[05] Docs`;
+- botão `Acessar o portal →` no canto direito;
+- microdetalhes de terminal distribuídos pela interface, como `yahub:~$ welcome`, cursor, comandos curtos e rótulos técnicos;
+- título central `YA LABS`;
+- subtítulo `Code. Automate. Scale.`;
+- arte ASCII/terminal à direita, formando algo relacionado à identidade YA;
+- `status: online` no canto inferior;
+- fundo branco e muito espaço vazio.
+
+A arte ASCII da direita deve ser marcante e memorável, não apenas decorativa. Ela pode ser animada na implementação real, como se o sistema estivesse formando o símbolo ou identidade da YA LABS com caracteres monoespaçados, pontos, partículas, linhas orbitais, nós e pequenos sinais de renderização.
+
+O hero não deve ter um bloco grande de terminal competindo com `YA LABS`. A linguagem terminal deve aparecer como assinatura visual em microdetalhes.
+
+A primeira dobra deve fechar em si mesma. A seção `Construímos como laboratório.` não deve aparecer visível na tela inicial; ela começa apenas depois do scroll.
+
+### 02. O laboratório / organização
+
+Objetivo: explicar a cultura da YA LABS, como pensamos, criamos e evoluímos.
+
+Título preferencial:
+
+```text
+Construímos como laboratório.
+```
+
+Texto sugerido:
+
+```text
+YA LABS é um laboratório independente de software.
+Construímos, automatizamos e documentamos soluções para resolver problemas reais com clareza, eficiência e evolução contínua.
+```
+
+Blocos conceituais:
+
+- **Desenvolvimento:** código limpo, modular e testável.
+- **Automação:** eliminamos o repetitivo para liberar o que realmente importa.
+- **Documentação:** registramos o essencial para garantir clareza, uso e evolução.
+- **Aprendizado:** compartilhamos conhecimento e incentivamos a prática.
+
+Comandos de apoio:
+
+```text
+ya@hub:~$ sobre
+ya@hub:~$ áreas
+```
+
+Bloco de missão:
+
+```text
+nossa missão:
+simplificar o complexo.
+potencializar pessoas.
+```
+
+Essa seção deve seguir a estética terminal/dev tool e evitar parecer institucional genérica.
 
 ## Arquitetura conceitual da organização
 
@@ -110,6 +285,82 @@ Regra de nome:
 Se serve para organizar, operar, documentar ou automatizar a YA LABS, pode usar prefixo YA.
 ```
 
+Texto principal:
+
+```text
+Ecossistema YA
+
+As ferramentas que mantêm a YA LABS em movimento.
+```
+
+Terminal:
+
+```text
+ya@hub:~$ ecossistema ya
+
+> conectando ecossistema...
+> mapeando módulos...
+> estruturando relações...
+> sincronizando ferramentas...
+
+> pronto!
+```
+
+A estrutura visual deve manter a ideia de módulos conectados, com YAHub como portal central e YABook, YAGit e YABot como módulos conectados.
+
+### Fluxo de construção
+
+Essa seção deve mostrar o jeito YA LABS de transformar uma ideia em produto.
+
+Título:
+
+```text
+Como uma ideia vira produto.
+```
+
+Subtexto:
+
+```text
+Um fluxo colaborativo, transparente e iterativo.
+Da ideia à entrega, com clareza, qualidade e foco em impacto real.
+```
+
+Etapas:
+
+```text
+01. Ideia
+02. Documentação
+03. Issue
+04. Branch
+05. Pull Request
+06. Release
+```
+
+Comandos:
+
+```text
+yahub:~$ new idea
+yahub:~$ docs init
+yahub:~$ issue create
+yahub:~$ git checkout -b
+yahub:~$ pr open
+yahub:~$ release create
+```
+
+Frases de apoio:
+
+```text
+# colaboração distribuída
+# qualidade por padrão
+# entregas com propósito
+
+status: contínuo
+princípio: ship value, not features
+métrica: impacto > output
+```
+
+Manter a linha horizontal com etapas conectadas.
+
 ### Produtos
 
 Produtos são projetos criados pela YA LABS, mas com identidade própria. Eles não precisam usar prefixo `YA`, porque podem existir como produtos independentes dentro do portfólio da organização.
@@ -129,6 +380,80 @@ Regra de nome:
 Se é um produto criado pela YA LABS, mas com identidade própria, não precisa usar prefixo YA.
 ```
 
+Texto principal:
+
+```text
+Produtos que nasceram no laboratório.
+```
+
+Texto de apoio:
+
+```text
+Softwares com identidade própria, criados na YA LABS para resolver problemas reais com código, automação e escala.
+```
+
+Os cards de produto devem funcionar como comandos executáveis dentro do YAHub.
+
+Comandos iniciais:
+
+```text
+ys@hub:~$ svnflow --start
+ys@hub:~$ devlab --open
+ys@hub:~$ spotifolio --sync
+ys@hub:~$ cadeodano --scan
+```
+
+Visual:
+
+- cards grandes;
+- bastante espaço em branco;
+- ícones simples;
+- cor própria por produto;
+- terminal no topo de cada card;
+- linha ou borda colorida no rodapé;
+- seta discreta de ação.
+
+### Central YAHub
+
+Essa seção representa o próprio YAHub como portal/dashboard central.
+
+Ela conclui a narrativa:
+
+```text
+Depois de entender a YA LABS, o ecossistema, o fluxo e os produtos,
+o usuário entende onde tudo isso se conecta: no YAHub.
+```
+
+Título sugerido:
+
+```text
+YAHub: a porta de entrada da YA LABS
+```
+
+Subtexto:
+
+```text
+YAHub conecta pessoas, projetos e conhecimento.
+Centralizamos projetos, membros, documentação e atividade em um só lugar.
+```
+
+Itens:
+
+- **Explore projetos:** descubra iniciativas e acompanhe seu progresso.
+- **Conecte-se com membros:** colabore com a comunidade e amplie sua rede.
+- **Acesse documentação:** encontre guias, referências e boas práticas.
+- **Acompanhe a atividade:** veja o que está acontecendo em tempo real.
+
+CTAs:
+
+```text
+Acessar o portal
+Ver projetos
+Acessar documentação
+```
+
+Aqui pode aparecer um preview mais parecido com dashboard/portal. O hero não deve ser dashboard; o dashboard deve aparecer apenas aqui, como representação do YAHub.
+
 ## Referências visuais iniciais
 
 As referências analisadas indicam uma preferência por interfaces tech modernas, com acabamento premium, bom uso de espaço, contraste forte e composições que misturam produto, marca e interação.
@@ -138,7 +463,6 @@ Aprendizados principais:
 - **Linear:** principal referência para clareza, foco, seções grandes, ritmo narrativo, hierarquia forte e apresentação progressiva.
 - **Vercel:** referência para estética tech minimalista, precisão visual e sensação institucional moderna.
 - **Apple:** referência para narrativa no scroll, revelação progressiva e impacto visual por respiro, sem exagerar na complexidade.
-- **Raycast:** referência para acabamento premium, tema escuro sofisticado, navegação refinada e microinterações com personalidade.
 - **Raycast:** referência para acabamento premium, tema escuro sofisticado, navegação refinada e microinterações com personalidade.
 - **Supabase:** referência para grids modulares, cards de funcionalidades e apresentação objetiva de blocos técnicos.
 - **Mintlify:** referência para áreas de documentação, leitura técnica, navegação lateral e organização de conteúdo.
@@ -226,6 +550,8 @@ O mascote não deve ser a identidade inteira da YA LABS. Ele deve funcionar como
 - Priorizar scroll narrativo, seções grandes e uma ideia por vez na Home.
 - Separar claramente YA LABS, Ecossistema YA, Produtos e YA Hub.
 - Evitar transformar a primeira dobra em dashboard, portal cheio de cards ou listagem compacta de projetos.
+- Usar linguagem de terminal e comandos como parte estrutural da narrativa visual.
+- Usar `Acessar o portal →` como CTA principal da Home.
 - Tratar interações como parte da identidade, não como enfeites soltos.
 - Evitar que o site pareça uma landing page SaaS genérica, especialmente com excesso de roxo, azul, gradientes e cards repetitivos.
 - Evitar visual cripto, NFT ou web3 abstrato quando isso não comunicar algo real sobre a YA LABS.
