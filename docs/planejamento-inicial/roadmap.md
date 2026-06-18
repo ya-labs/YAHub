@@ -124,23 +124,32 @@ Esta trilha orienta a evolução visual do YA Hub em paralelo ao roadmap funcion
 
 ### V1 - Identidade aplicada e Home marcante
 
-Objetivo: aplicar uma primeira versão da identidade visual da YA LABS no portal público, com uma Home memorável e navegação objetiva.
+Objetivo: aplicar uma primeira versão da identidade visual da YA LABS no portal público, com uma Home narrativa, memorável e objetiva.
 
 Entregas previstas:
 
-- Home institucional com primeira impressão forte;
+- Hero quase fullscreen apresentando a YA LABS, não o dashboard do YA Hub;
+- Home institucional com primeira impressão forte e scroll narrativo;
+- seções amplas com uma ideia por vez;
+- seção "O que é a YA LABS";
+- seção "Como uma ideia vira produto", conectando ideia, documentação, issue, branch, Pull Request e release;
+- seção "Ecossistema YA", separando YAHub, YABook, YAGit e YABot;
+- seção "Produtos", separando SVNFlow, DevLab, Spotifolio, CADE-O-DANO, RMAWorker e Meu Treino;
+- seção específica apresentando o YA Hub como portal oficial do ecossistema;
 - navegação clara para projetos, membros, documentação, atividades e links oficiais;
 - tema claro como padrão institucional, com branco, azul escuro, azul forte e azul claro;
 - tema escuro como opção completa para sites, aplicativos e ferramentas da YA LABS;
 - uso do tema escuro também em momentos mais imersivos;
-- cards de projetos objetivos, legíveis e fáceis de comparar;
-- interações leves em elementos principais da Home;
+- cards ou vitrines de projetos objetivos, legíveis e fáceis de comparar, sem competir com o hero;
+- interações leves e progressivas conforme o scroll;
 - introdução sutil do mascote ou assistente digital;
 - validação inicial de linguagem visual, espaçamentos, cards, botões e seções.
 
 Fora da V1 visual:
 
 - modo explorável completo;
+- dashboard compacto na primeira dobra;
+- tentativa de mostrar projetos, métricas, atividades, documentação e bot no mesmo espaço;
 - mascote como assistente funcional;
 - experiência 3D ou mundo navegável;
 - tokens finais do design system;

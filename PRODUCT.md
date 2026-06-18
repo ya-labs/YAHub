@@ -16,7 +16,9 @@ O YA Hub é o portal oficial da YA LABS.
 
 Ele existe para apresentar a organização, centralizar projetos, membros, atividades e documentos, e servir como primeiro produto real de validação da identidade visual da YA LABS.
 
-O sucesso do produto significa entregar uma experiência institucional clara, confiável e memorável, sem perder objetividade nas informações importantes. A Home deve funcionar como a cara da organização; as áreas internas devem manter navegação direta, conteúdo útil e leitura fácil.
+O sucesso do produto significa entregar uma experiência institucional clara, confiável e memorável, sem perder objetividade nas informações importantes. A Home deve apresentar primeiro a YA LABS como organização e ecossistema; depois deve mostrar que o YA Hub é o portal oficial para explorar projetos, membros, documentação e atividades.
+
+A Home não deve tentar mostrar tudo acima da dobra. Ela deve funcionar como uma narrativa progressiva: primeiro identidade, depois proposta, depois cultura de criação, depois ecossistema oficial e produtos.
 
 ## Brand Personality
 
@@ -41,11 +43,12 @@ O YA Hub não deve parecer:
 - site abstrato de IA, cripto, NFT ou web3 sem clareza de propósito;
 - sistema administrativo antigo;
 - dashboard operacional na Home pública;
+- portal cheio de cards, métricas e atalhos competindo na primeira dobra;
 - interface poluída ou decorativa demais;
 - experiência infantil, mesmo com mascote;
 - navegação experimental que dificulta encontrar informações.
 
-Referências como Linear, Raycast, Supabase, Mintlify e Railway são úteis pela clareza, acabamento e composição, mas não devem ser copiadas literalmente.
+Referências como Linear, Vercel, Apple, Raycast, Supabase, Mintlify e Railway são úteis pela clareza, acabamento e composição, mas não devem ser copiadas literalmente.
 
 Referências mais atmosféricas, como ASM e Starlight, podem inspirar profundidade visual, brilho e impacto, mas apenas como tempero. A YA LABS não deve parecer uma startup genérica de web3 ou uma marca puramente especulativa.
 
@@ -53,7 +56,19 @@ Referências mais atmosféricas, como ASM e Starlight, podem inspirar profundida
 
 ### Primeira impressão memorável, uso contínuo objetivo
 
-A Home deve causar impacto e apresentar a YA LABS com personalidade. As páginas internas devem priorizar leitura, navegação, dados úteis, status, links e comparação objetiva entre projetos.
+A Home deve causar impacto e apresentar a YA LABS com personalidade. O hero deve focar na organização, não no YA Hub como produto nem em uma lista compacta de projetos. As páginas internas devem priorizar leitura, navegação, dados úteis, status, links e comparação objetiva entre projetos.
+
+### Narrativa progressiva, uma ideia por seção
+
+A Home deve conduzir o usuário por uma história: o que é a YA LABS, como uma ideia vira produto, quais ferramentas sustentam a organização, quais produtos nasceram dela e como o YA Hub conecta tudo. Cada seção deve ter foco próprio, bastante espaço e revelação progressiva no scroll.
+
+### YA LABS primeiro, YA Hub depois
+
+A YA LABS é a organização e o ecossistema. O YA Hub é o portal oficial desse ecossistema. A primeira dobra deve apresentar a YA LABS; o YA Hub deve aparecer depois como porta de entrada para projetos, membros, documentação e atividades.
+
+### Ecossistema YA e produtos com identidade própria
+
+Ferramentas oficiais que organizam, operam, documentam ou automatizam a YA LABS podem usar prefixo `YA`, como YAHub, YABook, YAGit e YABot. Produtos criados pela organização podem ter identidade própria e não precisam usar prefixo `YA`, como SVNFlow, DevLab, Spotifolio, CADE-O-DANO, RMAWorker e Meu Treino.
 
 ### Útil por estrutura, marcante por experiência
 

@@ -11,16 +11,17 @@ description: Portal oficial da YA LABS e primeira validação visual da marca.
 
 **Creative North Star: "Laboratório Vivo"**
 
-O sistema visual do YA Hub deve parecer um laboratório técnico moderno em operação: claro o suficiente para orientar, expressivo o suficiente para ser lembrado e confiável o bastante para representar uma organização de engenharia.
+O sistema visual da Home deve parecer uma apresentação guiada de um laboratório técnico moderno: claro o suficiente para orientar, expressivo o suficiente para ser lembrado e confiável o bastante para representar uma organização de engenharia.
 
-A direção parte de uma base institucional branca e azul, com tema claro como padrão e tema escuro como opção completa para sites, aplicativos e ferramentas da YA LABS. A Home pode ter presença visual marcante, motion coreografado e interações memoráveis; páginas internas devem manter leitura objetiva, navegação clara e informação fácil de comparar nos dois temas.
+A direção parte de uma base institucional branca e azul, com tema claro como padrão e tema escuro como opção completa para sites, aplicativos e ferramentas da YA LABS. A Home deve usar scroll narrativo, seções grandes e bastante espaço em branco para revelar uma ideia por vez: primeiro YA LABS, depois a proposta da organização, depois o fluxo de criação, depois o ecossistema YA, depois os produtos e, então, o YA Hub como portal oficial.
 
-O visual rejeita landing page SaaS genérica roxa/azul, abstração cripto/web3 sem propósito, dashboard administrativo antigo e mascote infantil. Referências como Linear, Raycast, Supabase e Railway são usadas como norte de qualidade, não como molde literal.
+O visual rejeita landing page SaaS genérica roxa/azul, abstração cripto/web3 sem propósito, dashboard administrativo antigo, hero cheio de cards e mascote infantil. Linear é a principal referência de ritmo, foco e apresentação progressiva; Vercel ajuda na estética tech minimalista; Apple inspira narrativa no scroll sem virar espetáculo pesado.
 
 **Key Characteristics:**
 
 - técnico e claro;
 - institucional sem parecer corporativo antigo;
+- narrativo e espaçado, com uma ideia por seção;
 - interativo sem esconder informação;
 - tema claro como padrão, tema escuro como opção completa;
 - mascote como camada de personalidade, não como identidade inteira.
@@ -50,6 +51,8 @@ A paleta deve seguir uma estratégia **Committed**: a identidade azul da YA LABS
 
 **The No Crypto Glow Rule.** Brilho, profundidade e efeitos luminosos só entram quando reforçam a experiência de laboratório digital. Nunca use brilho para transformar o YA Hub em visual cripto, NFT ou web3 abstrato.
 
+**The One Idea Per Section Rule.** Cada dobra ou seção principal deve defender uma ideia clara. Não compacte projetos, métricas, docs, bot, atividades e atalhos no mesmo espaço.
+
 ## 3. Typography
 
 **Display Font:** [font pairing to be chosen at implementation]  
@@ -72,6 +75,8 @@ A paleta deve seguir uma estratégia **Committed**: a identidade azul da YA LABS
 
 **The No Generic SaaS Scale Rule.** Títulos grandes são permitidos na Home, mas não devem repetir a fórmula de landing page com hero genérico, subtítulo cinza e grid de cards iguais.
 
+**The Narrative Scroll Rule.** A escala tipográfica deve ajudar o usuário a descobrir a YA LABS aos poucos. Use títulos fortes e pouco texto por seção, em vez de blocos densos de informação.
+
 ## 4. Elevation
 
 O sistema deve usar profundidade em camadas, não sombras decorativas pesadas. No tema claro, profundidade pode vir de contraste sutil, bordas discretas e separação espacial. No tema escuro, a interface deve continuar completa, legível e operacional; brilho controlado, sombras suaves e atmosfera mais imersiva podem aparecer principalmente na Home e no futuro modo de exploração.
@@ -89,7 +94,9 @@ O sistema deve usar profundidade em camadas, não sombras decorativas pesadas. N
 - **Do** usar o tema claro como padrão institucional da YA LABS, com branco, azul escuro, azul forte e azul claro.
 - **Do** oferecer tema escuro como opção completa em sites, aplicativos e ferramentas, não só como efeito visual de seções especiais.
 - **Do** usar o tema escuro também para profundidade, hero, momentos premium e futuras experiências exploráveis.
-- **Do** criar uma Home visualmente memorável sem comprometer acesso rápido a projetos, membros, documentos e links oficiais.
+- **Do** criar uma Home narrativa, com primeira dobra focada na YA LABS e seções progressivas com bastante espaço em branco.
+- **Do** apresentar o YA Hub depois do contexto da organização, como portal oficial do ecossistema.
+- **Do** separar Ecossistema YA de Produtos: ferramentas oficiais com prefixo `YA`, produtos com identidade própria.
 - **Do** usar interações para orientar, encantar e reforçar a identidade, não para esconder conteúdo.
 - **Do** tratar o mascote como assistente digital amigável e técnico, aplicado com cuidado.
 - **Do** manter contraste, navegação por teclado e respeito a `prefers-reduced-motion` desde a primeira interface.
@@ -99,6 +106,8 @@ O sistema deve usar profundidade em camadas, não sombras decorativas pesadas. N
 - **Don't** criar uma landing page SaaS genérica roxa/azul com gradientes e cards repetitivos.
 - **Don't** usar visual abstrato de IA, cripto, NFT ou web3 sem clareza de propósito.
 - **Don't** transformar a Home em dashboard administrativo antigo.
+- **Don't** tentar mostrar projetos, métricas, docs, bot, atividades e atalhos na primeira dobra.
+- **Don't** tratar YA Hub como sinônimo de YA LABS. YA LABS é a organização; YA Hub é o portal.
 - **Don't** infantilizar a YA LABS por causa do mascote.
 - **Don't** depender de animação, mascote ou modo explorável para comunicar informação essencial.
 - **Don't** copiar Linear, Raycast, Supabase ou Railway literalmente. Use essas referências como régua de qualidade, não como template.

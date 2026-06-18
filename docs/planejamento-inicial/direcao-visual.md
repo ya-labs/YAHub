@@ -30,11 +30,104 @@ O YA Hub deve comunicar:
 
 O YA Hub deve ser útil por estrutura e marcante por experiência.
 
-A página principal deve funcionar como a cara da YA LABS. Ao acessar o portal, a pessoa deve perceber uma organização técnica, moderna, produtiva e confiável, mas também com identidade própria, criatividade e interações memoráveis.
+A página principal deve funcionar como a cara da YA LABS, não como um painel tentando mostrar todos os dados do portal. Ao acessar a Home, a pessoa deve perceber uma organização técnica, moderna, produtiva e confiável, mas também com identidade própria, criatividade e interações memoráveis.
 
 A experiência visual pode ser mais expressiva na Home, desde que a navegação continue clara e as informações principais sejam encontradas sem esforço.
 
-O objetivo não é criar apenas uma landing page bonita, nem apenas um painel informativo. O YA Hub deve equilibrar apresentação institucional, utilidade real e uma camada interativa que faça a marca ser lembrada.
+O objetivo não é criar apenas uma landing page bonita, nem um painel informativo compacto. A Home deve ser uma apresentação narrativa da YA LABS, enquanto o YA Hub como portal pode ser explicado em uma seção própria mais adiante.
+
+## Narrativa da Home
+
+A Home deve contar a história da YA LABS progressivamente, com bastante espaço em branco, seções amplas, animações suaves e foco em uma ideia por vez.
+
+Fluxo conceitual recomendado:
+
+1. Apresentar a YA LABS como organização e ecossistema.
+2. Explicar o que a YA LABS faz e por que existe.
+3. Mostrar como uma ideia vira produto dentro da cultura da organização.
+4. Apresentar o Ecossistema YA, com ferramentas oficiais da organização.
+5. Apresentar os produtos criados pela YA LABS.
+6. Explicar o YA Hub como portal oficial para explorar projetos, membros, documentação e atividades.
+7. Fechar com uma chamada forte para GitHub, documentação, Discord ou exploração do laboratório.
+
+A primeira dobra deve ser quase fullscreen, com foco total em:
+
+```text
+YA LABS
+Code. Automate. Scale.
+```
+
+Texto base sugerido:
+
+```text
+Um laboratório de software para transformar ideias em projetos reais, automatizar fluxos e construir produtos com aprendizado contínuo.
+```
+
+Evitar na primeira dobra:
+
+- cards demais;
+- métricas demais;
+- listagem de projetos;
+- atalhos competindo;
+- aparência de dashboard;
+- tentativa de explicar todo o ecossistema de uma vez.
+
+## Arquitetura conceitual da organização
+
+A Home deve separar claramente a YA LABS, o Ecossistema YA e os produtos da organização.
+
+```text
+YA LABS
+|-- Ecossistema YA
+|   |-- YAHub
+|   |-- YABook
+|   |-- YAGit
+|   `-- YABot
+|
+`-- Produtos
+    |-- CADE-O-DANO
+    |-- SVNFlow
+    |-- DevLab
+    |-- RMAWorker
+    |-- Meu Treino
+    `-- Spotifolio
+```
+
+### Ecossistema YA
+
+O Ecossistema YA reúne ferramentas oficiais usadas para organizar, operar, documentar, automatizar ou visualizar a própria YA LABS.
+
+Ferramentas iniciais:
+
+- **YAHub:** portal central da organização, usado para visualizar projetos, membros, atividades, documentação e status geral.
+- **YABook:** documentação, padrões, guias e engenharia da organização.
+- **YAGit:** ferramenta para automação e padronização de fluxos Git/GitHub.
+- **YABot:** bot do Discord para comunicação, notificações, automações e integrações.
+
+Regra de nome:
+
+```text
+Se serve para organizar, operar, documentar ou automatizar a YA LABS, pode usar prefixo YA.
+```
+
+### Produtos
+
+Produtos são projetos criados pela YA LABS, mas com identidade própria. Eles não precisam usar prefixo `YA`, porque podem existir como produtos independentes dentro do portfólio da organização.
+
+Produtos iniciais:
+
+- **SVNFlow:** ferramenta para padronizar fluxos com SVN, Git e entregas.
+- **DevLab:** produto educacional da YA LABS, focado em aprendizado, trilhas, conteúdos, exercícios e evolução técnica.
+- **Spotifolio:** plataforma de portfólio musical/profissional.
+- **CADE-O-DANO:** projeto divertido e experimental voltado para League of Legends.
+- **RMAWorker:** produto/ferramenta voltado para automação e processos.
+- **Meu Treino:** app voltado para treinos, academia e acompanhamento pessoal.
+
+Regra de nome:
+
+```text
+Se é um produto criado pela YA LABS, mas com identidade própria, não precisa usar prefixo YA.
+```
 
 ## Referências visuais iniciais
 
@@ -42,7 +135,10 @@ As referências analisadas indicam uma preferência por interfaces tech modernas
 
 Aprendizados principais:
 
-- **Linear:** referência para clareza, foco, seriedade visual, hierarquia forte e sensação de produto bem resolvido.
+- **Linear:** principal referência para clareza, foco, seções grandes, ritmo narrativo, hierarquia forte e apresentação progressiva.
+- **Vercel:** referência para estética tech minimalista, precisão visual e sensação institucional moderna.
+- **Apple:** referência para narrativa no scroll, revelação progressiva e impacto visual por respiro, sem exagerar na complexidade.
+- **Raycast:** referência para acabamento premium, tema escuro sofisticado, navegação refinada e microinterações com personalidade.
 - **Raycast:** referência para acabamento premium, tema escuro sofisticado, navegação refinada e microinterações com personalidade.
 - **Supabase:** referência para grids modulares, cards de funcionalidades e apresentação objetiva de blocos técnicos.
 - **Mintlify:** referência para áreas de documentação, leitura técnica, navegação lateral e organização de conteúdo.
@@ -60,8 +156,12 @@ Ela deve transmitir:
 - primeira impressão forte;
 - identidade própria da YA LABS;
 - clareza sobre o que a organização constrói;
-- acesso rápido aos projetos e documentos;
+- descoberta progressiva do ecossistema;
 - sensação de tecnologia, organização e movimento.
+
+A Home não deve compactar projetos, membros, documentação e atividades no hero. Esses conteúdos podem existir, mas devem aparecer em seções separadas, com foco único e bastante respiro visual.
+
+O dashboard pode aparecer como representação do YA Hub em uma seção específica, não como linguagem dominante da Home inteira.
 
 As páginas internas devem ser mais objetivas. Projetos, membros, documentação, atividade recente e futuras áreas operacionais devem priorizar leitura, navegação, filtros, links, status e informações úteis.
 
@@ -123,6 +223,9 @@ O mascote não deve ser a identidade inteira da YA LABS. Ele deve funcionar como
 - Usar cards e seções institucionais quando ajudarem a apresentar projetos.
 - Evitar excesso de decoração que atrapalhe leitura, navegação ou manutenção.
 - Permitir uma experiência mais marcante na Home, desde que ela continue acessível e compreensível.
+- Priorizar scroll narrativo, seções grandes e uma ideia por vez na Home.
+- Separar claramente YA LABS, Ecossistema YA, Produtos e YA Hub.
+- Evitar transformar a primeira dobra em dashboard, portal cheio de cards ou listagem compacta de projetos.
 - Tratar interações como parte da identidade, não como enfeites soltos.
 - Evitar que o site pareça uma landing page SaaS genérica, especialmente com excesso de roxo, azul, gradientes e cards repetitivos.
 - Evitar visual cripto, NFT ou web3 abstrato quando isso não comunicar algo real sobre a YA LABS.
