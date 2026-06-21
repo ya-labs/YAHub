@@ -88,11 +88,18 @@ A seção `Construímos como laboratório.` não deve aparecer na primeira dobra
 
 ### Laboratório OS
 
-A Home deve misturar muito espaço em branco, tipografia forte, comando de terminal pontual, azul escuro, status de sistema, painéis técnicos discretos, órbitas leves, nuvens/fumaça sutis, chão/grid de laboratório, painel inferior operacional e sensação de dev tool própria.
+A Home deve misturar muito espaço em branco, tipografia forte, comando de terminal pontual, azul escuro, status de sistema, dois painéis técnicos flutuantes, órbitas leves, nuvens/fumaça sutis, chão/grid de laboratório, plataforma circular e sensação de dev tool própria.
 
 Na direção final aprovada, o terminal não deve dominar o hero como um bloco grande. A linguagem terminal deve aparecer em microdetalhes: prompt curto como `yahub:~$ boot portal`, itens de navegação numerados, status `online`, cursores, rótulos técnicos e pequenos comandos espalhados pela interface.
 
 O elemento ASCII/YA Mark deve ser tratado como assinatura visual da marca: uma construção monoespaçada memorável, grande e centralizada, integrada com partículas, pontos, linhas orbitais, plataforma circular e sensação de renderização/formação do símbolo YA.
+
+A hero deve ter duas versões equivalentes:
+
+- **Tema claro:** branco/cinza frio, leve, respirável e premium, com `YA` quase preto/navy, `Scale.` em azul, nuvens suaves, órbitas visíveis, chão de laboratório sutil e plataforma clara luminosa.
+- **Tema escuro:** navy profundo, sem preto seco, com `YA` branco/quase branco, ASCII holográfico, plataforma mais luminosa, fumaça escura discreta, órbitas fortes e bordas/glow azulados com leve violeta controlado.
+
+Em ambos os temas, manter apenas dois painéis à direita: `ATIVIDADE DO SISTEMA` e `YA.SYSTEM`. Não usar barra inferior grande de informações na hero.
 
 A experiência desejada é:
 

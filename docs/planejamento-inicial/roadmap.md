@@ -134,8 +134,10 @@ Entregas previstas:
 - hero com `YA LABS` como protagonista, `YA` seguindo o símbolo oficial da marca com o corte correto no `A`, microdetalhes de terminal, arte ASCII/YA Mark, `status: online` e CTA `Acessar o portal`;
 - navbar minimalista com identidade técnica e itens numerados;
 - ASCII/YA Mark grande e central, com partículas, pontos, linhas orbitais, plataforma circular e sensação de formação/renderização;
-- fundo branco/cinza muito claro, nuvens/fumaça sutis e chão/grid de laboratório na parte inferior;
-- painéis flutuantes com dados técnicos e painel inferior operacional integrado ao fundo, sem virar dashboard compacto;
+- tema claro com fundo branco/cinza frio, nuvens/fumaça sutis, órbitas visíveis, plataforma clara e chão/grid de laboratório na parte inferior;
+- tema escuro com fundo navy profundo, ASCII branco/azul gelo, plataforma mais luminosa, fumaça escura discreta e bordas/glow azulados;
+- dois painéis flutuantes com dados técnicos: `ATIVIDADE DO SISTEMA` e `YA.SYSTEM`, sem virar dashboard compacto;
+- ausência de barra inferior operacional na hero;
 - seção "Construímos como laboratório" começando após a primeira dobra, sem aparecer como prévia no hero;
 - seção "Ecossistema YA", separando YAHub, YABook, YAGit e YABot;
 - seção "Como uma ideia vira produto", conectando ideia, documentação, issue, branch, Pull Request e release;

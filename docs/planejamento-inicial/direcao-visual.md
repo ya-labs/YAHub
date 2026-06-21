@@ -81,15 +81,17 @@ Manter como base:
 - azul escuro como cor secundária principal;
 - status de sistema;
 - CTA azul escuro/azul forte;
-- painéis flutuantes com dados técnicos;
+- dois painéis flutuantes com dados técnicos: `ATIVIDADE DO SISTEMA` e `YA.SYSTEM`;
 - nuvens/fumaça sutis no fundo;
 - chão de laboratório/grid sutil na parte inferior;
 - plataforma circular como base da arte central;
-- órbitas leves atrás do ASCII;
+- órbitas visíveis atrás do ASCII;
 - cards minimalistas;
 - linhas finas;
 - sensação de sistema operacional/dev tool;
 - aparência de produto técnico, não de landing page comum.
+
+Não manter a barra inferior grande com dados operacionais na hero. A primeira dobra deve respirar; dados como versão, kernel, ambiente, região e conexão podem aparecer em outras áreas do portal, mas não como faixa inferior da hero.
 
 ### CTA principal
 
@@ -194,11 +196,11 @@ Elementos visuais:
 - `YA` do título seguindo o símbolo oficial da marca, com o corte correto no `A`;
 - subtítulo `Code. Automate. Scale.`;
 - grande ASCII `YA` centralizado sobre uma plataforma circular;
-- órbitas leves atrás do ASCII;
+- órbitas visíveis atrás do ASCII;
 - nuvens/fumaça sutis no fundo;
 - chão de laboratório/grid sutil na parte inferior;
-- painéis flutuantes com dados técnicos;
-- painel inferior com informações operacionais diretamente integrado ao fundo;
+- dois painéis flutuantes com dados técnicos: `ATIVIDADE DO SISTEMA` e `YA.SYSTEM`;
+- sem barra inferior grande de informações operacionais;
 - `status: online` no canto inferior;
 - fundo branco/cinza muito claro e muito espaço vazio.
 
@@ -207,6 +209,46 @@ A arte ASCII central deve ser marcante e memorável, não apenas decorativa. Ela
 O hero não deve ter um bloco grande de terminal competindo com `YA LABS` ou com o ASCII `YA`. A linguagem terminal deve aparecer como assinatura visual em microdetalhes.
 
 A primeira dobra deve fechar em si mesma. A seção `Construímos como laboratório.` não deve aparecer visível na tela inicial; ela começa apenas depois do scroll.
+
+#### Tema claro
+
+O tema claro deve usar a imagem clara refinada como referência principal.
+
+Direção:
+
+- fundo branco/cinza muito claro, frio, limpo e premium;
+- bastante espaço em branco;
+- `YA` do título em navy quase preto, forte e pesado;
+- `LABS` fino, elegante e espaçado;
+- `Scale.` pode receber azul de destaque;
+- ASCII `YA` grande, formado por caracteres/dígitos, sem ficar azul demais nem apagado;
+- órbitas suaves, finas e visíveis atrás/em volta do ASCII, com pequenos pontos luminosos;
+- nuvens/fumaça suaves e névoa leve, presentes sem pesar;
+- chão/plano inferior sutil, com grid/reflexos de laboratório;
+- plataforma circular clara, prateada, com glow suave;
+- terminal/input claro com glassmorphism leve, borda suave e cursor no final;
+- painéis `ATIVIDADE DO SISTEMA` e `YA.SYSTEM` em glass claro, com sombra leve e textos legíveis.
+
+Evitar fundo cinza pesado, brilho estourado, ASCII azul saturado, excesso de labels técnicos e aparência de concept art sem cara de site.
+
+#### Tema escuro
+
+O tema escuro deve parecer a mesma hero em versão noturna.
+
+Direção:
+
+- fundo navy profundo, sem preto seco;
+- evitar roxo demais, mas permitir azul violeta muito suave no glow e nas bordas;
+- `YA` do título branco ou quase branco;
+- `LABS` fino, elegante e claro;
+- ASCII `YA` maior, holográfico, branco/azul gelo, com brilho controlado;
+- órbitas visíveis, finas e elegantes, com pontos luminosos;
+- plataforma circular mais presente, com glow azul/branco suave e profundidade;
+- fumaça/nuvens escuras discretas;
+- terminal/input escuro com glassmorphism, borda azul suave e cursor claro;
+- painéis `ATIVIDADE DO SISTEMA` e `YA.SYSTEM` em glass escuro translúcido, bordas azuladas e glow sutil.
+
+Evitar neon agressivo, fundo preto puro, azul saturado demais, brilho estourado, excesso de cards, barra inferior operacional e visual sci-fi poluído.
 
 ### 02. O laboratório / organização
 

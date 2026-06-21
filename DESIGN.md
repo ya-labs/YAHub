@@ -13,9 +13,9 @@ description: Portal oficial da YA LABS e primeira validação visual da marca.
 
 O sistema visual da Home deve parecer uma apresentação guiada de um laboratório técnico moderno através de uma interface própria: claro o suficiente para orientar, expressivo o suficiente para ser lembrado e confiável o bastante para representar uma organização de engenharia.
 
-A direção final da hero é **laboratório futurista + sistema operacional técnico**: base branca/cinza muito clara, azul escuro como cor secundária principal, tipografia grande, comando de terminal pontual, painéis flutuantes discretos, nuvens/fumaça sutis, grid/chão de laboratório na parte inferior, painel operacional integrado ao fundo e um grande ASCII `YA` como arte de marca. A Home deve usar scroll narrativo, seções grandes e bastante espaço em branco para revelar uma ideia por vez: primeiro YA LABS, depois a proposta da organização, depois o Ecossistema YA, depois o fluxo de construção, depois os produtos e, então, a Central YAHub como portal oficial.
+A direção final da hero é **laboratório futurista + sistema operacional técnico**: tema claro com base branca/cinza fria e tema escuro com navy profundo, tipografia grande, comando de terminal pontual, dois painéis flutuantes discretos, nuvens/fumaça atmosféricas, grid/chão de laboratório na parte inferior, plataforma circular luminosa e um grande ASCII `YA` como arte de marca. A Home deve usar scroll narrativo, seções grandes e bastante espaço em branco para revelar uma ideia por vez: primeiro YA LABS, depois a proposta da organização, depois o Ecossistema YA, depois o fluxo de construção, depois os produtos e, então, a Central YAHub como portal oficial.
 
-O visual rejeita landing page SaaS genérica roxa/azul, abstração cripto/web3 sem propósito, dashboard administrativo antigo, hero cheio de cards e mascote infantil. A Home deve parecer uma ferramenta, um portal técnico e o sistema operacional da YA LABS. A referência final da hero prioriza atmosfera de laboratório limpo, plataforma circular, ASCII `YA` orbital, painéis técnicos leves e painel inferior operacional integrado ao fundo.
+O visual rejeita landing page SaaS genérica roxa/azul, abstração cripto/web3 sem propósito, dashboard administrativo antigo, hero cheio de cards e mascote infantil. A Home deve parecer uma ferramenta, um portal técnico e o sistema operacional da YA LABS. A referência final da hero prioriza atmosfera de laboratório limpo, plataforma circular, ASCII `YA` orbital e apenas dois painéis técnicos flutuantes. A hero não deve ter faixa inferior operacional.
 
 **Key Characteristics:**
 
@@ -24,7 +24,7 @@ O visual rejeita landing page SaaS genérica roxa/azul, abstração cripto/web3 
 - institucional sem parecer corporativo antigo;
 - narrativo e espaçado, com uma ideia por seção;
 - comandos de terminal em pontos estratégicos, sem bloco grande competindo com a marca;
-- atmosfera sutil de laboratório futurista, com fumaça/nuvens leves, órbitas e grid técnico;
+- atmosfera de laboratório futurista, com fumaça/nuvens presentes porém sutis, órbitas visíveis e grid/chão técnico;
 - interativo sem esconder informação;
 - tema claro como padrão, tema escuro como opção completa;
 - mascote como camada de personalidade, não como identidade inteira.
@@ -57,6 +57,10 @@ A paleta deve seguir uma estratégia **Committed**: a identidade azul da YA LABS
 **The One Idea Per Section Rule.** Cada dobra ou seção principal deve defender uma ideia clara. Não compacte projetos, métricas, docs, bot, atividades e atalhos no mesmo espaço.
 
 **The Laboratory OS Rule.** O tema claro deve carregar a identidade principal da Home: branco/cinza muito claro, azul escuro, azul de ação, terminal pontual, painéis técnicos, atmosfera sutil e grid operacional. O terminal deve ser assinatura visual e narrativa, não um bloco dominante.
+
+**The Twin Theme Rule.** Tema claro e tema escuro devem compartilhar a mesma composição da hero: `YAHub` no topo, navbar centralizada, CTA `Acessar o portal`, bloco textual à esquerda, ASCII `YA` à direita, plataforma circular, órbitas, terminal e dois painéis flutuantes. A diferença deve estar em cor, luz, contraste, borda, sombra e tratamento do glass.
+
+**The No Bottom Status Bar Rule.** A hero não deve usar faixa inferior operacional com versão, kernel, ambiente, região ou conexão. Essas informações podem existir em outras áreas do portal, mas a primeira dobra deve respirar.
 
 ## 3. Typography
 
@@ -113,10 +117,17 @@ Como este `DESIGN.md` ainda é seed, os componentes finais devem ser extraídos 
 - **Composição:** ampla, clara, técnica, respirável e futurista, com sensação de laboratório limpo e sistema operacional.
 - **Cena:** grande ASCII `YA` centralizado sobre uma plataforma circular, com órbitas leves ao fundo, nuvens/fumaça sutis, chão/grid técnico na parte inferior e painéis flutuantes de dados sem excesso.
 - **Terminal:** abaixo da descrição, usar comando curto como `yahub:~$ boot portal`.
-- **Painel inferior:** informações operacionais integradas diretamente ao fundo, como versão, kernel, ambiente, região, hora do sistema e conexão segura.
+- **Painéis flutuantes:** manter dois painéis à direita: `ATIVIDADE DO SISTEMA` e `YA.SYSTEM`.
+- **Sem faixa inferior:** não usar barra inferior operacional/status na hero.
 - **Regra:** a primeira dobra deve fechar em si mesma. A seção `Construímos como laboratório.` começa apenas após o scroll e não deve aparecer como prévia visível na tela inicial.
 - **CTA:** `Acessar o portal →`.
 - **Assinatura:** `status: online` com ponto verde.
+
+### Hero Themes
+
+- **Tema claro:** fundo branco/cinza frio, leve e respirável, com nuvens suaves, névoa, chão/plano inferior sutil, órbitas visíveis atrás do ASCII e plataforma circular luminosa. O `YA` do título deve ser forte e quase preto/navy; `LABS` deve ser fino e elegante; `Scale.` pode receber azul de destaque.
+- **Tema escuro:** fundo navy profundo, sem preto seco, com brilho azul/branco controlado, fumaça escura discreta, órbitas visíveis, ASCII mais holográfico e plataforma mais luminosa. O `YA` do título pode ser branco ou quase branco; o glow pode ter azul violeta bem suave, sem virar roxo.
+- **Consistência:** os dois temas mantêm mesma estrutura, hierarquia, navbar, CTA, terminal, painéis, ASCII, plataforma e órbitas. O escuro deve parecer a mesma hero em versão noturna, não outra página.
 
 ### Terminal Narrative
 
