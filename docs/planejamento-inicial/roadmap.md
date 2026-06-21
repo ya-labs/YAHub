@@ -129,11 +129,13 @@ Objetivo: aplicar uma primeira versão da identidade visual da YA LABS no portal
 Entregas previstas:
 
 - Hero quase fullscreen apresentando a YA LABS, não o dashboard do YA Hub;
-- Home institucional com primeira impressão forte, scroll narrativo e direção white space + terminal;
+- Home institucional com primeira impressão forte, scroll narrativo e direção de laboratório futurista + sistema operacional técnico;
 - seções amplas com uma ideia por vez;
-- hero com `YA LABS` como protagonista, microdetalhes de terminal, arte ASCII/YA Mark, `status: online` e CTA `Acessar o portal`;
-- navbar com identidade técnica e itens numerados, como `[01] Ecossistema`, `[02] Produtos`, `[03] Fluxo`, `[04] Membros` e `[05] Docs`;
-- ASCII/YA Mark mais marcante, com partículas, pontos, linhas orbitais e sensação de formação/renderização;
+- hero com `YA LABS` como protagonista, `YA` seguindo o símbolo oficial da marca com o corte correto no `A`, microdetalhes de terminal, arte ASCII/YA Mark, `status: online` e CTA `Acessar o portal`;
+- navbar minimalista com identidade técnica e itens numerados;
+- ASCII/YA Mark grande e central, com partículas, pontos, linhas orbitais, plataforma circular e sensação de formação/renderização;
+- fundo branco/cinza muito claro, nuvens/fumaça sutis e chão/grid de laboratório na parte inferior;
+- painéis flutuantes com dados técnicos e painel inferior operacional integrado ao fundo, sem virar dashboard compacto;
 - seção "Construímos como laboratório" começando após a primeira dobra, sem aparecer como prévia no hero;
 - seção "Ecossistema YA", separando YAHub, YABook, YAGit e YABot;
 - seção "Como uma ideia vira produto", conectando ideia, documentação, issue, branch, Pull Request e release;

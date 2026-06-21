@@ -9,13 +9,13 @@ description: Portal oficial da YA LABS e primeira validação visual da marca.
 
 ## 1. Overview
 
-**Creative North Star: "Terminal Vivo"**
+**Creative North Star: "Laboratory OS"**
 
 O sistema visual da Home deve parecer uma apresentação guiada de um laboratório técnico moderno através de uma interface própria: claro o suficiente para orientar, expressivo o suficiente para ser lembrado e confiável o bastante para representar uma organização de engenharia.
 
-A direção escolhida é **white space + terminal**: base branca, tipografia grande, comandos de terminal, detalhes em azul, status de sistema, botões pretos, linhas finas e componentes minimalistas. A Home deve usar scroll narrativo, seções grandes e bastante espaço em branco para revelar uma ideia por vez: primeiro YA LABS, depois a proposta da organização, depois o Ecossistema YA, depois o fluxo de construção, depois os produtos e, então, a Central YAHub como portal oficial.
+A direção final da hero é **laboratório futurista + sistema operacional técnico**: base branca/cinza muito clara, azul escuro como cor secundária principal, tipografia grande, comando de terminal pontual, painéis flutuantes discretos, nuvens/fumaça sutis, grid/chão de laboratório na parte inferior, painel operacional integrado ao fundo e um grande ASCII `YA` como arte de marca. A Home deve usar scroll narrativo, seções grandes e bastante espaço em branco para revelar uma ideia por vez: primeiro YA LABS, depois a proposta da organização, depois o Ecossistema YA, depois o fluxo de construção, depois os produtos e, então, a Central YAHub como portal oficial.
 
-O visual rejeita landing page SaaS genérica roxa/azul, abstração cripto/web3 sem propósito, dashboard administrativo antigo, hero cheio de cards e mascote infantil. A Home deve parecer uma ferramenta, um terminal visual e o sistema operacional da YA LABS. Linear é a principal referência de ritmo, foco e apresentação progressiva; Vercel ajuda na estética tech minimalista; Apple inspira narrativa no scroll sem virar espetáculo pesado.
+O visual rejeita landing page SaaS genérica roxa/azul, abstração cripto/web3 sem propósito, dashboard administrativo antigo, hero cheio de cards e mascote infantil. A Home deve parecer uma ferramenta, um portal técnico e o sistema operacional da YA LABS. A referência final da hero prioriza atmosfera de laboratório limpo, plataforma circular, ASCII `YA` orbital, painéis técnicos leves e painel inferior operacional integrado ao fundo.
 
 **Key Characteristics:**
 
@@ -23,7 +23,8 @@ O visual rejeita landing page SaaS genérica roxa/azul, abstração cripto/web3 
 - autoral, com sensação de dev tool própria;
 - institucional sem parecer corporativo antigo;
 - narrativo e espaçado, com uma ideia por seção;
-- comandos de terminal em pontos estratégicos;
+- comandos de terminal em pontos estratégicos, sem bloco grande competindo com a marca;
+- atmosfera sutil de laboratório futurista, com fumaça/nuvens leves, órbitas e grid técnico;
 - interativo sem esconder informação;
 - tema claro como padrão, tema escuro como opção completa;
 - mascote como camada de personalidade, não como identidade inteira.
@@ -55,7 +56,7 @@ A paleta deve seguir uma estratégia **Committed**: a identidade azul da YA LABS
 
 **The One Idea Per Section Rule.** Cada dobra ou seção principal deve defender uma ideia clara. Não compacte projetos, métricas, docs, bot, atividades e atalhos no mesmo espaço.
 
-**The White Terminal Rule.** O tema claro deve carregar a identidade principal da Home: branco, preto, azul e terminal. O terminal deve ser estrutura visual e narrativa, não enfeite aleatório.
+**The Laboratory OS Rule.** O tema claro deve carregar a identidade principal da Home: branco/cinza muito claro, azul escuro, azul de ação, terminal pontual, painéis técnicos, atmosfera sutil e grid operacional. O terminal deve ser assinatura visual e narrativa, não um bloco dominante.
 
 ## 3. Typography
 
@@ -99,8 +100,8 @@ Como este `DESIGN.md` ainda é seed, os componentes finais devem ser extraídos 
 
 ### Header
 
-- **Marca:** `YAHub` com `by YA LABS` abaixo.
-- **Navegação:** itens técnicos numerados: `[01] Ecossistema`, `[02] Produtos`, `[03] Fluxo`, `[04] Membros`, `[05] Docs`.
+- **Marca:** `YAHub` apenas. O canto superior esquerdo identifica o site/portal; a marca YA LABS aparece no hero.
+- **Navegação:** itens técnicos numerados e minimalistas, como `01. Início`, `02. Soluções`, `03. Tecnologia`, `04. Sobre`, `05. Contato`, ou equivalentes da arquitetura final.
 - **CTA principal:** `Acessar o portal →`.
 - **Estilo:** simples, espaçado, técnico e sem excesso de itens. A numeração deve reforçar a linguagem de sistema/terminal sem deixar a navegação poluída.
 
@@ -108,7 +109,11 @@ Como este `DESIGN.md` ainda é seed, os componentes finais devem ser extraídos 
 
 - **Uso:** primeira dobra da Home.
 - **Foco:** `YA LABS` grande como protagonista visual, com `Code. Automate. Scale.` e uma descrição curta em português.
-- **Composição:** ampla, clara, aconchegante, técnica e minimalista.
+- **Marca no título:** o `YA` do título deve seguir o símbolo oficial da marca, incluindo o corte correto no `A`.
+- **Composição:** ampla, clara, técnica, respirável e futurista, com sensação de laboratório limpo e sistema operacional.
+- **Cena:** grande ASCII `YA` centralizado sobre uma plataforma circular, com órbitas leves ao fundo, nuvens/fumaça sutis, chão/grid técnico na parte inferior e painéis flutuantes de dados sem excesso.
+- **Terminal:** abaixo da descrição, usar comando curto como `yahub:~$ boot portal`.
+- **Painel inferior:** informações operacionais integradas diretamente ao fundo, como versão, kernel, ambiente, região, hora do sistema e conexão segura.
 - **Regra:** a primeira dobra deve fechar em si mesma. A seção `Construímos como laboratório.` começa apenas após o scroll e não deve aparecer como prévia visível na tela inicial.
 - **CTA:** `Acessar o portal →`.
 - **Assinatura:** `status: online` com ponto verde.
@@ -116,14 +121,14 @@ Como este `DESIGN.md` ainda é seed, os componentes finais devem ser extraídos 
 ### Terminal Narrative
 
 - **Uso:** microdetalhes do hero, seções de ecossistema, fluxo e produtos.
-- **Estilo:** comandos como `yahub:~$ welcome`, pequenos prompts, cursores, status, rótulos técnicos e marcadores de seção.
+- **Estilo:** comandos como `yahub:~$ boot portal`, pequenos prompts, cursores, status, rótulos técnicos e marcadores de seção.
 - **Função:** guiar a narrativa como se o YA Hub estivesse inicializando e apresentando a YA LABS.
-- **Regra:** evitar um bloco grande de terminal no hero. A linguagem terminal deve aparecer distribuída pela interface para dar identidade sem competir com `YA LABS`.
+- **Regra:** evitar um bloco grande de terminal no hero. A linguagem terminal deve aparecer distribuída pela interface para dar identidade sem competir com `YA LABS` ou com o ASCII `YA`.
 
 ### ASCII / YA Mark
 
 - **Uso:** elemento visual recorrente da identidade da Home.
-- **Estilo:** marca ASCII memorável, formada por caracteres monoespaçados, pontos, partículas, linhas orbitais, nós e sensação de renderização.
+- **Estilo:** marca ASCII memorável, formada por caracteres monoespaçados, pontos, partículas, órbitas leves, nós e sensação de renderização. Na hero final, o ASCII `YA` é grande, centralizado sobre uma plataforma circular e integrado à atmosfera de laboratório.
 - **Função:** representar a YA LABS como laboratório técnico, ecossistema em formação e sistema vivo.
 - **Regra:** o ASCII não deve ser apenas decoração. Ele deve parecer um artefato de marca reconhecível e reaproveitável em heros, seções e futuras peças do design system.
 
@@ -147,10 +152,12 @@ Como este `DESIGN.md` ainda é seed, os componentes finais devem ser extraídos 
 - **Do** oferecer tema escuro como opção completa em sites, aplicativos e ferramentas, não só como efeito visual de seções especiais.
 - **Do** usar o tema escuro também para profundidade, hero, momentos premium e futuras experiências exploráveis.
 - **Do** criar uma Home narrativa, com primeira dobra focada na YA LABS e seções progressivas com bastante espaço em branco.
-- **Do** usar a direção white space + terminal como linguagem principal da Home.
+- **Do** usar a direção laboratório futurista + sistema operacional técnico como linguagem principal da Home.
 - **Do** usar `Acessar o portal →` como CTA principal.
 - **Do** apresentar o YA Hub depois do contexto da organização, como portal oficial do ecossistema.
-- **Do** manter `YAHub by YA LABS` no topo e `YA LABS — Code. Automate. Scale.` como foco do hero.
+- **Do** manter `YAHub` sozinho no topo e `YA LABS — Code. Automate. Scale.` como foco do hero.
+- **Do** usar o `YA` do título com o símbolo oficial da marca, incluindo o corte correto no `A`.
+- **Do** usar nuvens/fumaça sutis, plataforma circular, órbitas leves, grid inferior e painéis técnicos integrados quando reforçarem a sensação de laboratório/OS.
 - **Do** separar Ecossistema YA de Produtos: ferramentas oficiais com prefixo `YA`, produtos com identidade própria.
 - **Do** usar interações para orientar, encantar e reforçar a identidade, não para esconder conteúdo.
 - **Do** tratar o mascote como assistente digital amigável e técnico, aplicado com cuidado.
@@ -160,7 +167,7 @@ Como este `DESIGN.md` ainda é seed, os componentes finais devem ser extraídos 
 
 - **Don't** criar uma landing page SaaS genérica roxa/azul com gradientes e cards repetitivos.
 - **Don't** usar visual abstrato de IA, cripto, NFT ou web3 sem clareza de propósito.
-- **Don't** transformar a Home em dashboard administrativo antigo.
+- **Don't** transformar a Home em dashboard administrativo antigo ou em painel compacto cheio de cards.
 - **Don't** tentar mostrar projetos, métricas, docs, bot, atividades e atalhos na primeira dobra.
 - **Don't** tratar YA Hub como sinônimo de YA LABS. YA LABS é a organização; YA Hub é o portal.
 - **Don't** usar `Entrar no laboratório` como CTA principal. Laboratório é o conceito da YA LABS; portal é a função do YA Hub.

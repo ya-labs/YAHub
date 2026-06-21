@@ -20,7 +20,7 @@ O sucesso do produto significa entregar uma experiência institucional clara, co
 
 A Home não deve tentar mostrar tudo acima da dobra. Ela deve funcionar como uma narrativa progressiva: primeiro identidade, depois proposta, depois cultura de criação, depois ecossistema oficial e produtos.
 
-A direção final da Home é uma interface híbrida de **white space + terminal**. O YA Hub deve parecer a porta de entrada da YA LABS: um portal técnico, autoral e útil, com sensação de sistema operacional/dev tool, sem virar landing page genérica.
+A direção final da Home é uma interface de **laboratório futurista + sistema operacional técnico**. O YA Hub deve parecer a porta de entrada da YA LABS: um portal técnico, autoral e útil, com sensação de OS/dev tool, atmosfera limpa de laboratório e identidade visual própria, sem virar landing page genérica.
 
 Separação conceitual:
 
@@ -51,7 +51,7 @@ O YA Hub não deve parecer:
 - landing page SaaS genérica, especialmente com excesso de roxo, azul, gradientes e cards repetitivos;
 - site abstrato de IA, cripto, NFT ou web3 sem clareza de propósito;
 - sistema administrativo antigo;
-- dashboard operacional na Home pública;
+- dashboard operacional compacto na Home pública;
 - portal cheio de cards, métricas e atalhos competindo na primeira dobra;
 - uso de "Entrar no laboratório" como CTA principal, porque laboratório é o conceito da YA LABS e portal é a função real do YA Hub;
 - interface poluída ou decorativa demais;
@@ -61,6 +61,8 @@ O YA Hub não deve parecer:
 Referências como Linear, Vercel, Apple, Raycast, Supabase, Mintlify e Railway são úteis pela clareza, acabamento e composição, mas não devem ser copiadas literalmente.
 
 Referências mais atmosféricas, como ASM e Starlight, podem inspirar profundidade visual, brilho e impacto, mas apenas como tempero. A YA LABS não deve parecer uma startup genérica de web3 ou uma marca puramente especulativa.
+
+Painéis técnicos leves, dados operacionais e indicadores de sistema podem aparecer na hero quando estiverem integrados à atmosfera e ao fundo. Eles não devem virar um dashboard de cards competindo com a marca.
 
 ## Design Principles
 
@@ -76,19 +78,21 @@ A Home deve conduzir o usuário por uma história: o que é a YA LABS, como uma 
 
 A YA LABS é a organização e o ecossistema. O YA Hub é o portal oficial desse ecossistema. A primeira dobra deve apresentar a YA LABS; o YA Hub deve aparecer depois como porta de entrada para projetos, membros, documentação e atividades.
 
-O header pode mostrar `YAHub by YA LABS`, pois a pessoa está navegando pelo portal. O hero deve apresentar `YA LABS — Code. Automate. Scale.`, pois a Home apresenta a organização por meio do portal.
+O header deve mostrar apenas `YAHub`, pois esse é o nome do site/portal. O hero deve apresentar `YA LABS — Code. Automate. Scale.`, pois a Home comunica a organização por meio do portal.
+
+No título principal, o `YA` deve seguir o símbolo oficial da marca, incluindo o corte correto no `A`.
 
 O CTA principal da Home deve ser `Acessar o portal`.
 
 A seção `Construímos como laboratório.` não deve aparecer na primeira dobra. Ela é a segunda etapa da narrativa e deve surgir apenas após o usuário iniciar o scroll.
 
-### White space + terminal
+### Laboratório OS
 
-A Home deve misturar muito espaço em branco, tipografia forte, comandos de terminal, detalhes em azul, status de sistema, botões pretos, linhas finas, cards minimalistas e sensação de dev tool própria.
+A Home deve misturar muito espaço em branco, tipografia forte, comando de terminal pontual, azul escuro, status de sistema, painéis técnicos discretos, órbitas leves, nuvens/fumaça sutis, chão/grid de laboratório, painel inferior operacional e sensação de dev tool própria.
 
-Na direção final aprovada, o terminal não deve dominar o hero como um bloco grande. A linguagem terminal deve aparecer em microdetalhes: prompts curtos, itens de navegação numerados, status `online`, cursores, rótulos técnicos e pequenos comandos espalhados pela interface.
+Na direção final aprovada, o terminal não deve dominar o hero como um bloco grande. A linguagem terminal deve aparecer em microdetalhes: prompt curto como `yahub:~$ boot portal`, itens de navegação numerados, status `online`, cursores, rótulos técnicos e pequenos comandos espalhados pela interface.
 
-O elemento ASCII/YA Mark deve ser tratado como assinatura visual da marca: uma construção monoespaçada memorável, integrada com partículas, pontos, linhas orbitais e sensação de renderização/formação do símbolo YA.
+O elemento ASCII/YA Mark deve ser tratado como assinatura visual da marca: uma construção monoespaçada memorável, grande e centralizada, integrada com partículas, pontos, linhas orbitais, plataforma circular e sensação de renderização/formação do símbolo YA.
 
 A experiência desejada é:
 

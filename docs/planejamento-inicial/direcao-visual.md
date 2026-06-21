@@ -38,9 +38,9 @@ O objetivo não é criar apenas uma landing page bonita, nem um painel informati
 
 ## Direção final escolhida
 
-A direção final para a Home do YA Hub é uma interface híbrida de **white space + terminal**.
+A direção final para a Home do YA Hub é uma interface de **laboratório futurista + sistema operacional técnico**.
 
-Essa direção combina com a identidade da YA LABS porque faz o site parecer uma ferramenta própria, um terminal visual e uma central técnica da organização, em vez de uma landing page genérica de startup.
+Essa direção combina com a identidade da YA LABS porque faz o site parecer uma ferramenta própria, um portal técnico e uma central viva da organização, em vez de uma landing page genérica de startup.
 
 Separação conceitual:
 
@@ -66,7 +66,7 @@ Sensação desejada:
 ```text
 Não parece só um site.
 Parece uma ferramenta.
-Parece um terminal visual.
+Parece um laboratório técnico.
 Parece o sistema operacional da YA LABS.
 ```
 
@@ -76,11 +76,16 @@ Manter como base:
 
 - muito espaço em branco;
 - tipografia grande, forte e limpa;
-- comandos de terminal;
+- comandos de terminal como microdetalhes;
 - fonte monoespaçada em pontos estratégicos;
-- detalhes em azul;
+- azul escuro como cor secundária principal;
 - status de sistema;
-- botões pretos;
+- CTA azul escuro/azul forte;
+- painéis flutuantes com dados técnicos;
+- nuvens/fumaça sutis no fundo;
+- chão de laboratório/grid sutil na parte inferior;
+- plataforma circular como base da arte central;
+- órbitas leves atrás do ASCII;
 - cards minimalistas;
 - linhas finas;
 - sensação de sistema operacional/dev tool;
@@ -139,15 +144,7 @@ e evoluir software com propósito.
 Terminal sugerido:
 
 ```text
-yahub:~$ welcome
-
-> inicializando YA LABS...
-> conectando ecossistema...
-> verificando projetos...
-> documentação online
-> automações ativas
-
-> pronto!
+yahub:~$ boot portal
 ```
 
 CTA:
@@ -189,20 +186,25 @@ e evoluir software com propósito.
 
 Elementos visuais:
 
-- `YAHub` no topo esquerdo;
-- `by YA LABS` abaixo;
-- navbar central com itens numerados, como `[01] Ecossistema`, `[02] Produtos`, `[03] Fluxo`, `[04] Membros` e `[05] Docs`;
+- `YAHub` sozinho no topo esquerdo, sem `by YA LABS`;
+- navbar central minimalista e numerada, como `01. Início`, `02. Soluções`, `03. Tecnologia`, `04. Sobre` e `05. Contato`, ou equivalentes definidos pela arquitetura final;
 - botão `Acessar o portal →` no canto direito;
-- microdetalhes de terminal distribuídos pela interface, como `yahub:~$ welcome`, cursor, comandos curtos e rótulos técnicos;
-- título central `YA LABS`;
+- microdetalhes de terminal distribuídos pela interface, como `yahub:~$ boot portal`, cursor, comandos curtos e rótulos técnicos;
+- título principal `YA LABS`;
+- `YA` do título seguindo o símbolo oficial da marca, com o corte correto no `A`;
 - subtítulo `Code. Automate. Scale.`;
-- arte ASCII/terminal à direita, formando algo relacionado à identidade YA;
+- grande ASCII `YA` centralizado sobre uma plataforma circular;
+- órbitas leves atrás do ASCII;
+- nuvens/fumaça sutis no fundo;
+- chão de laboratório/grid sutil na parte inferior;
+- painéis flutuantes com dados técnicos;
+- painel inferior com informações operacionais diretamente integrado ao fundo;
 - `status: online` no canto inferior;
-- fundo branco e muito espaço vazio.
+- fundo branco/cinza muito claro e muito espaço vazio.
 
-A arte ASCII da direita deve ser marcante e memorável, não apenas decorativa. Ela pode ser animada na implementação real, como se o sistema estivesse formando o símbolo ou identidade da YA LABS com caracteres monoespaçados, pontos, partículas, linhas orbitais, nós e pequenos sinais de renderização.
+A arte ASCII central deve ser marcante e memorável, não apenas decorativa. Ela pode ser animada na implementação real, como se o sistema estivesse formando o símbolo ou identidade da YA LABS com caracteres monoespaçados, pontos, partículas, linhas orbitais, nós, plataforma circular e pequenos sinais de renderização.
 
-O hero não deve ter um bloco grande de terminal competindo com `YA LABS`. A linguagem terminal deve aparecer como assinatura visual em microdetalhes.
+O hero não deve ter um bloco grande de terminal competindo com `YA LABS` ou com o ASCII `YA`. A linguagem terminal deve aparecer como assinatura visual em microdetalhes.
 
 A primeira dobra deve fechar em si mesma. A seção `Construímos como laboratório.` não deve aparecer visível na tela inicial; ela começa apenas depois do scroll.
 
