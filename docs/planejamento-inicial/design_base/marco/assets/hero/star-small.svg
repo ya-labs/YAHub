@@ -1,0 +1,15 @@
+<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Estrela pequena</title>
+  <desc id="desc">Variao menor da estrela dourada para detalhes de interface.</desc>
+  <defs>
+    <linearGradient id="gold" x1="26" y1="14" x2="70" y2="84" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF8D9"/>
+      <stop offset="0.4" stop-color="#E2B45E"/>
+      <stop offset="1" stop-color="#9F6A20"/>
+    </linearGradient>
+    <filter id="glow" x="-90%" y="-90%" width="280%" height="280%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#BD8A35" flood-opacity="0.38"/>
+    </filter>
+  </defs>
+  <path d="M48 10 L56 38 L86 48 L56 58 L48 86 L40 58 L10 48 L40 38 Z" fill="url(#gold)" filter="url(#glow)"/>
+</svg>

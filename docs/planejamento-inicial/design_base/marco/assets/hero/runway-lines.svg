@@ -1,0 +1,16 @@
+<svg width="980" height="240" viewBox="0 0 980 240" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Linhas runway</title>
+  <desc id="desc">Linhas inclinadas claras e douradas usadas atrs do monumento YA no Design 03.</desc>
+  <defs>
+    <linearGradient id="runway" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="0.58" stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#BD8A35" stop-opacity="0.42"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-200%" width="140%" height="500%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="22" stdDeviation="16" flood-color="#061A3C" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+  <rect x="160" y="92" width="760" height="10" rx="5" fill="url(#runway)" filter="url(#shadow)" transform="rotate(-7 160 92)"/>
+  <rect x="300" y="142" width="600" height="10" rx="5" fill="url(#runway)" filter="url(#shadow)" transform="rotate(-7 300 142)"/>
+</svg>

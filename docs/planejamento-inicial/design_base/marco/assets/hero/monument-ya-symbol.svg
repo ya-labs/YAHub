@@ -1,0 +1,22 @@
+<svg width="980" height="780" viewBox="0 0 980 780" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Monumento YA editorial</title>
+  <desc id="desc">Elemento principal da direita do Design 03 com letras monumentais YA, sem estrela.</desc>
+  <defs>
+    <linearGradient id="letterGradient" x1="160" y1="42" x2="780" y2="626" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#102A57"/>
+      <stop offset="0.42" stop-color="#071D42"/>
+      <stop offset="0.46" stop-color="#FFFAF0"/>
+      <stop offset="0.56" stop-color="#C79A45"/>
+      <stop offset="0.74" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#F8F3EC"/>
+    </linearGradient>
+    <filter id="letterShadow" x="-20%" y="-20%" width="150%" height="150%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="16" dy="20" stdDeviation="0" flood-color="#FFFFFF" flood-opacity="0.42"/>
+      <feDropShadow dx="0" dy="36" stdDeviation="18" flood-color="#061A3C" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+  <g transform="skewX(-8)" filter="url(#letterShadow)">
+    <text x="80" y="540" fill="url(#letterGradient)" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="480" font-weight="900" letter-spacing="-88">Y</text>
+    <text x="484" y="540" fill="url(#letterGradient)" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="480" font-weight="900" letter-spacing="-88">A</text>
+  </g>
+</svg>

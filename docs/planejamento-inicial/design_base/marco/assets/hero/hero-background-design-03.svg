@@ -1,0 +1,39 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Background base Design 03</title>
+  <desc id="desc">Fundo editorial claro com azul suave, glows brancos e grid de horizonte sem monumento, estrela ou nuvens.</desc>
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="1920" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FDF8EF"/>
+      <stop offset="0.48" stop-color="#F4EFE8"/>
+      <stop offset="1" stop-color="#DFEAF4"/>
+    </linearGradient>
+    <radialGradient id="rightLight" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1440 238) rotate(90) scale(420)">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.94"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="leftLight" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(346 194) rotate(90) scale(350)">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.82"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="blueAir" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1540 850) rotate(90) scale(540)">
+      <stop offset="0" stop-color="#4A74AB" stop-opacity="0.13"/>
+      <stop offset="1" stop-color="#4A74AB" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="horizonGrid" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M64 0H0V64" stroke="#061A3C" stroke-opacity="0.05" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="gridFade" x1="960" y1="280" x2="960" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="white" stop-opacity="0"/>
+      <stop offset="0.56" stop-color="white" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="white" stop-opacity="0.72"/>
+    </linearGradient>
+    <mask id="gridMask">
+      <rect width="1920" height="1080" fill="url(#gridFade)"/>
+    </mask>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#base)"/>
+  <rect width="1920" height="1080" fill="url(#rightLight)"/>
+  <rect width="1920" height="1080" fill="url(#leftLight)"/>
+  <rect width="1920" height="1080" fill="url(#blueAir)"/>
+  <rect width="1920" height="1080" fill="url(#horizonGrid)" opacity="0.58" mask="url(#gridMask)"/>
+</svg>
