@@ -38,9 +38,9 @@ O objetivo não é criar apenas uma landing page bonita, nem um painel informati
 
 ## Direção final escolhida
 
-A direção final para a Home do YA Hub é uma interface de **laboratório futurista + sistema operacional técnico**.
+A direção final para a hero da Home do YA Hub é uma interface **escura, minimalista, premium e autoral**.
 
-Essa direção combina com a identidade da YA LABS porque faz o site parecer uma ferramenta própria, um portal técnico e uma central viva da organização, em vez de uma landing page genérica de startup.
+Essa direção combina com a identidade da YA LABS porque faz a primeira dobra parecer uma apresentação de marca forte, sóbria e tecnológica, em vez de uma landing page genérica, um dashboard ou uma tela cheia de efeitos.
 
 Separação conceitual:
 
@@ -65,40 +65,50 @@ Sensação desejada:
 
 ```text
 Não parece só um site.
-Parece uma ferramenta.
-Parece um laboratório técnico.
-Parece o sistema operacional da YA LABS.
+Parece uma marca.
+Parece uma organização técnica premium.
+Parece uma presença escura, discreta e autoral.
 ```
 
 ### Linguagem visual
 
-Manter como base:
+Manter como base da hero:
 
-- muito espaço em branco;
-- tipografia grande, forte e limpa;
-- comandos de terminal como microdetalhes;
-- fonte monoespaçada em pontos estratégicos;
-- azul escuro como cor secundária principal;
-- status de sistema;
-- CTA azul escuro/azul forte;
-- dois painéis flutuantes com dados técnicos: `ATIVIDADE DO SISTEMA` e `YA.SYSTEM`;
-- nuvens/fumaça sutis no fundo;
-- chão de laboratório/grid sutil na parte inferior;
-- plataforma circular como base da arte central;
-- órbitas visíveis atrás do ASCII;
-- cards minimalistas;
-- linhas finas;
-- sensação de sistema operacional/dev tool;
-- aparência de produto técnico, não de landing page comum.
+- fundo azul-marinho muito escuro, quase preto;
+- logo grande `YA LABS` como elemento principal;
+- `YA` em branco/off-white, com estrela dourada no `A`;
+- `LABS` espaçado horizontalmente;
+- slogan `Code. Automate. Scale.`;
+- `Scale.` em dourado;
+- navbar minúscula, fina e espaçada;
+- item ativo da navbar em dourado;
+- botão `acessar portal` discreto, com borda dourada fina;
+- textura escura/material no lado direito;
+- grid quase invisível;
+- órbitas discretas e de baixa opacidade;
+- pequenos pontos e detalhes dourados;
+- indicação `scroll` na parte inferior;
+- tecnologia como atmosfera, não como acúmulo de UI.
 
-Não manter a barra inferior grande com dados operacionais na hero. A primeira dobra deve respirar; dados como versão, kernel, ambiente, região e conexão podem aparecer em outras áreas do portal, mas não como faixa inferior da hero.
+Não manter na hero:
+
+- fundo claro;
+- command bar;
+- terminal;
+- descrição longa;
+- painéis flutuantes;
+- barra inferior grande com dados operacionais;
+- ASCII grande como protagonista;
+- plataforma circular;
+- nuvens claras;
+- cards ou métricas.
 
 ### CTA principal
 
 O CTA principal deve ser:
 
 ```text
-Acessar o portal →
+acessar portal
 ```
 
 Evitar como CTA principal:
@@ -136,29 +146,17 @@ YA LABS
 Code. Automate. Scale.
 ```
 
-Texto base sugerido:
-
-```text
-Um laboratório para construir, automatizar
-e evoluir software com propósito.
-```
-
-Terminal sugerido:
-
-```text
-yahub:~$ boot portal
-```
-
 CTA:
 
 ```text
-Acessar o portal →
+acessar portal
 ```
 
-Status:
+Scroll:
 
 ```text
-status: online ●
+scroll
+↓
 ```
 
 Evitar na primeira dobra:
@@ -168,6 +166,10 @@ Evitar na primeira dobra:
 - listagem de projetos;
 - atalhos competindo;
 - aparência de dashboard;
+- terminal;
+- command bar;
+- descrição longa;
+- painéis flutuantes;
 - tentativa de explicar todo o ecossistema de uma vez.
 
 ## Seções da Home
@@ -181,74 +183,30 @@ Conteúdo:
 ```text
 YA LABS
 Code. Automate. Scale.
-
-Um laboratório para construir, automatizar
-e evoluir software com propósito.
 ```
 
 Elementos visuais:
 
-- `YAHub` sozinho no topo esquerdo, sem `by YA LABS`;
-- navbar central minimalista e numerada, como `01. Início`, `02. Soluções`, `03. Tecnologia`, `04. Sobre` e `05. Contato`, ou equivalentes definidos pela arquitetura final;
-- botão `Acessar o portal →` no canto direito;
-- microdetalhes de terminal distribuídos pela interface, como `yahub:~$ boot portal`, cursor, comandos curtos e rótulos técnicos;
-- título principal `YA LABS`;
-- `YA` do título seguindo o símbolo oficial da marca, com o corte correto no `A`;
+- sem logo pequeno no canto superior esquerdo, para não repetir a informação principal;
+- navbar central minimalista com itens minúsculos: `home`, `about`, `ecosystem`, `products`;
+- botão `acessar portal` no canto superior direito;
+- título principal `YA LABS` como protagonista visual;
+- `YA` do título seguindo o símbolo oficial da marca, com estrela dourada no `A`;
 - subtítulo `Code. Automate. Scale.`;
-- grande ASCII `YA` centralizado sobre uma plataforma circular;
-- órbitas visíveis atrás do ASCII;
-- nuvens/fumaça sutis no fundo;
-- chão de laboratório/grid sutil na parte inferior;
-- dois painéis flutuantes com dados técnicos: `ATIVIDADE DO SISTEMA` e `YA.SYSTEM`;
-- sem barra inferior grande de informações operacionais;
-- `status: online` no canto inferior;
-- fundo branco/cinza muito claro e muito espaço vazio.
+- `Scale.` em dourado;
+- textura escura/rochosa ou material abstrato no lado direito;
+- grid quase invisível;
+- linhas orbitais discretas de baixa opacidade;
+- pequenos pontos dourados;
+- detalhes técnicos mínimos;
+- indicador `scroll` com seta na parte inferior;
+- fundo azul-marinho muito escuro, quase preto.
 
-A arte ASCII central deve ser marcante e memorável, não apenas decorativa. Ela pode ser animada na implementação real, como se o sistema estivesse formando o símbolo ou identidade da YA LABS com caracteres monoespaçados, pontos, partículas, linhas orbitais, nós, plataforma circular e pequenos sinais de renderização.
+A hero não deve explicar tudo de primeira. Ela deve vender presença de marca. Textos explicativos, terminal, ASCII, produtos, ecossistema e documentação entram em seções posteriores.
 
-O hero não deve ter um bloco grande de terminal competindo com `YA LABS` ou com o ASCII `YA`. A linguagem terminal deve aparecer como assinatura visual em microdetalhes.
+O ASCII `YA` pode existir como detalhe muito sutil no fundo ou em seções posteriores, mas não deve ser protagonista da hero.
 
 A primeira dobra deve fechar em si mesma. A seção `Construímos como laboratório.` não deve aparecer visível na tela inicial; ela começa apenas depois do scroll.
-
-#### Tema claro
-
-O tema claro deve usar a imagem clara refinada como referência principal.
-
-Direção:
-
-- fundo branco/cinza muito claro, frio, limpo e premium;
-- bastante espaço em branco;
-- `YA` do título em navy quase preto, forte e pesado;
-- `LABS` fino, elegante e espaçado;
-- `Scale.` pode receber azul de destaque;
-- ASCII `YA` grande, formado por caracteres/dígitos, sem ficar azul demais nem apagado;
-- órbitas suaves, finas e visíveis atrás/em volta do ASCII, com pequenos pontos luminosos;
-- nuvens/fumaça suaves e névoa leve, presentes sem pesar;
-- chão/plano inferior sutil, com grid/reflexos de laboratório;
-- plataforma circular clara, prateada, com glow suave;
-- terminal/input claro com glassmorphism leve, borda suave e cursor no final;
-- painéis `ATIVIDADE DO SISTEMA` e `YA.SYSTEM` em glass claro, com sombra leve e textos legíveis.
-
-Evitar fundo cinza pesado, brilho estourado, ASCII azul saturado, excesso de labels técnicos e aparência de concept art sem cara de site.
-
-#### Tema escuro
-
-O tema escuro deve parecer a mesma hero em versão noturna.
-
-Direção:
-
-- fundo navy profundo, sem preto seco;
-- evitar roxo demais, mas permitir azul violeta muito suave no glow e nas bordas;
-- `YA` do título branco ou quase branco;
-- `LABS` fino, elegante e claro;
-- ASCII `YA` maior, holográfico, branco/azul gelo, com brilho controlado;
-- órbitas visíveis, finas e elegantes, com pontos luminosos;
-- plataforma circular mais presente, com glow azul/branco suave e profundidade;
-- fumaça/nuvens escuras discretas;
-- terminal/input escuro com glassmorphism, borda azul suave e cursor claro;
-- painéis `ATIVIDADE DO SISTEMA` e `YA.SYSTEM` em glass escuro translúcido, bordas azuladas e glow sutil.
-
-Evitar neon agressivo, fundo preto puro, azul saturado demais, brilho estourado, excesso de cards, barra inferior operacional e visual sci-fi poluído.
 
 ### 02. O laboratório / organização
 
@@ -594,8 +552,8 @@ O mascote não deve ser a identidade inteira da YA LABS. Ele deve funcionar como
 - Priorizar scroll narrativo, seções grandes e uma ideia por vez na Home.
 - Separar claramente YA LABS, Ecossistema YA, Produtos e YA Hub.
 - Evitar transformar a primeira dobra em dashboard, portal cheio de cards ou listagem compacta de projetos.
-- Usar linguagem de terminal e comandos como parte estrutural da narrativa visual.
-- Usar `Acessar o portal →` como CTA principal da Home.
+- Usar linguagem de terminal e comandos em seções posteriores, não como protagonista da hero.
+- Usar `acessar portal` como CTA principal da Home.
 - Tratar interações como parte da identidade, não como enfeites soltos.
 - Evitar que o site pareça uma landing page SaaS genérica, especialmente com excesso de roxo, azul, gradientes e cards repetitivos.
 - Evitar visual cripto, NFT ou web3 abstrato quando isso não comunicar algo real sobre a YA LABS.
@@ -610,11 +568,11 @@ As cores oficiais da marca devem seguir o YABook:
 - superfície clara: `#F8FAFC`;
 - texto principal: `#0F172A`.
 
-O tema claro deve representar o padrão inicial da YA LABS: branco, limpo, organizado e com detalhes em azul escuro, azul forte e azul claro.
+Na Home pública do YA Hub, o tema escuro deve representar a primeira impressão institucional da YA LABS: azul-marinho profundo, off-white, dourado pontual, pouco ruído e presença de marca.
 
-O tema escuro também deve ser previsto desde o início como opção completa para todos os sites, aplicativos e ferramentas da YA LABS. Ele não deve ser tratado apenas como decoração, seção especial ou recurso exclusivo da Home.
+O tema claro continua sendo necessário como opção completa para todos os sites, aplicativos e ferramentas da YA LABS, mas não é mais a direção principal da hero pública.
 
-No YA Hub, o tema escuro pode carregar momentos mais imersivos, premium e marcantes da experiência, principalmente na Home, em áreas de destaque e em futuras experiências exploráveis. Ainda assim, a navegação, as páginas internas, os cards, os formulários e os estados da interface devem funcionar bem em tema claro e escuro.
+No YA Hub, o tema escuro carrega os momentos mais imersivos, premium e marcantes da experiência, principalmente na Home, em áreas de destaque e em futuras experiências exploráveis. Ainda assim, a navegação, as páginas internas, os cards, os formulários e os estados da interface devem funcionar bem em tema claro e escuro.
 
 A identidade da YA LABS não deve depender exclusivamente de dark mode. O sistema visual precisa funcionar bem em tema claro e escuro.
 

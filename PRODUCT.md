@@ -20,7 +20,7 @@ O sucesso do produto significa entregar uma experiência institucional clara, co
 
 A Home não deve tentar mostrar tudo acima da dobra. Ela deve funcionar como uma narrativa progressiva: primeiro identidade, depois proposta, depois cultura de criação, depois ecossistema oficial e produtos.
 
-A direção final da Home é uma interface de **laboratório futurista + sistema operacional técnico**. O YA Hub deve parecer a porta de entrada da YA LABS: um portal técnico, autoral e útil, com sensação de OS/dev tool, atmosfera limpa de laboratório e identidade visual própria, sem virar landing page genérica.
+A direção final da Home é uma interface **escura, minimalista, premium e autoral**. O YA Hub deve parecer a porta de entrada da YA LABS: uma presença de marca forte, tecnológica, discreta e elegante, sem virar landing page genérica, dashboard ou vitrine cheia de elementos.
 
 Separação conceitual:
 
@@ -62,7 +62,7 @@ Referências como Linear, Vercel, Apple, Raycast, Supabase, Mintlify e Railway s
 
 Referências mais atmosféricas, como ASM e Starlight, podem inspirar profundidade visual, brilho e impacto, mas apenas como tempero. A YA LABS não deve parecer uma startup genérica de web3 ou uma marca puramente especulativa.
 
-Painéis técnicos leves, dados operacionais e indicadores de sistema podem aparecer na hero quando estiverem integrados à atmosfera e ao fundo. Eles não devem virar um dashboard de cards competindo com a marca.
+Painéis técnicos, dados operacionais e indicadores de sistema podem aparecer em seções posteriores. Na hero principal, tecnologia deve aparecer como atmosfera: textura, grid sutil, órbitas discretas, pontos dourados e detalhes mínimos.
 
 ## Design Principles
 
@@ -78,28 +78,50 @@ A Home deve conduzir o usuário por uma história: o que é a YA LABS, como uma 
 
 A YA LABS é a organização e o ecossistema. O YA Hub é o portal oficial desse ecossistema. A primeira dobra deve apresentar a YA LABS; o YA Hub deve aparecer depois como porta de entrada para projetos, membros, documentação e atividades.
 
-O header deve mostrar apenas `YAHub`, pois esse é o nome do site/portal. O hero deve apresentar `YA LABS — Code. Automate. Scale.`, pois a Home comunica a organização por meio do portal.
+O header da hero não precisa repetir o logo `YAHub` no canto superior esquerdo, porque o protagonista visual da primeira dobra é `YA LABS`. A navegação aparece no topo e o CTA principal fica no canto superior direito.
 
 No título principal, o `YA` deve seguir o símbolo oficial da marca, incluindo o corte correto no `A`.
 
-O CTA principal da Home deve ser `Acessar o portal`.
+O CTA principal da Home deve ser `acessar portal`.
 
 A seção `Construímos como laboratório.` não deve aparecer na primeira dobra. Ela é a segunda etapa da narrativa e deve surgir apenas após o usuário iniciar o scroll.
 
-### Laboratório OS
+### Hero escura premium
 
-A Home deve misturar muito espaço em branco, tipografia forte, comando de terminal pontual, azul escuro, status de sistema, dois painéis técnicos flutuantes, órbitas leves, nuvens/fumaça sutis, chão/grid de laboratório, plataforma circular e sensação de dev tool própria.
+A hero final deve misturar fundo azul-marinho muito escuro, tipografia forte, logo `YA LABS` grande, `Scale.` em dourado, navbar minúscula e espaçada, CTA discreto, detalhes técnicos sutis, textura escura no lado direito, órbitas de baixa opacidade, grid quase invisível e pontos dourados mínimos.
 
-Na direção final aprovada, o terminal não deve dominar o hero como um bloco grande. A linguagem terminal deve aparecer em microdetalhes: prompt curto como `yahub:~$ boot portal`, itens de navegação numerados, status `online`, cursores, rótulos técnicos e pequenos comandos espalhados pela interface.
+Na direção final aprovada, a hero não deve usar terminal, command bar, painéis, cards, descrição longa nem ASCII protagonista. Esses recursos podem aparecer em seções posteriores para explicar ecossistema, fluxo, produtos e documentação.
 
-O elemento ASCII/YA Mark deve ser tratado como assinatura visual da marca: uma construção monoespaçada memorável, grande e centralizada, integrada com partículas, pontos, linhas orbitais, plataforma circular e sensação de renderização/formação do símbolo YA.
+O logo `YA LABS` deve ser tratado como assinatura visual da marca: `YA` grande, branco/off-white, com estrela dourada no `A`; `LABS` espaçado horizontalmente; slogan `Code. Automate. Scale.` abaixo, com `Scale.` em dourado.
 
-A hero deve ter duas versões equivalentes:
+A hero final deve conter somente:
 
-- **Tema claro:** branco/cinza frio, leve, respirável e premium, com `YA` quase preto/navy, `Scale.` em azul, nuvens suaves, órbitas visíveis, chão de laboratório sutil e plataforma clara luminosa.
-- **Tema escuro:** navy profundo, sem preto seco, com `YA` branco/quase branco, ASCII holográfico, plataforma mais luminosa, fumaça escura discreta, órbitas fortes e bordas/glow azulados com leve violeta controlado.
+```text
+YA LABS
+Code. Automate. Scale.
+```
 
-Em ambos os temas, manter apenas dois painéis à direita: `ATIVIDADE DO SISTEMA` e `YA.SYSTEM`. Não usar barra inferior grande de informações na hero.
+Navbar:
+
+```text
+home
+about
+ecosystem
+products
+```
+
+CTA:
+
+```text
+acessar portal
+```
+
+Scroll:
+
+```text
+scroll
+↓
+```
 
 A experiência desejada é:
 
@@ -129,11 +151,11 @@ O design system da YA LABS deve nascer de decisões aplicadas primeiro no YA Hub
 
 Microinterações, motion, mascote e futuras experiências exploráveis devem reforçar a marca e ajudar a navegação. Interação não deve ser usada como decoração solta.
 
-### Tema claro como padrão, tema escuro como opção completa
+### Hero escura, temas completos
 
-A identidade da YA LABS deve funcionar em tema claro e escuro em todos os sites, aplicativos e ferramentas da organização. O tema claro é o padrão inicial, com base institucional limpa, branca e azul. O tema escuro deve ser uma alternativa completa de uso, não apenas um recurso decorativo ou uma área especial.
+A primeira impressão institucional da Home do YA Hub deve usar a direção escura premium. Ainda assim, a identidade da YA LABS deve funcionar em tema claro e escuro em todos os sites, aplicativos e ferramentas da organização.
 
-No YA Hub, o tema escuro também pode carregar momentos mais imersivos, premium e marcantes, mas isso não elimina a obrigação de oferecer dark mode como opção consistente para toda a experiência.
+O tema claro continua necessário como opção completa de produto, com base limpa, branca e azul. O tema escuro não deve ser apenas decoração ou área especial: ele também precisa funcionar como modo real de uso.
 
 ### Personalidade sem perder maturidade
 

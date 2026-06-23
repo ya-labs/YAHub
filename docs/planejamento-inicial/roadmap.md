@@ -129,15 +129,14 @@ Objetivo: aplicar uma primeira versão da identidade visual da YA LABS no portal
 Entregas previstas:
 
 - Hero quase fullscreen apresentando a YA LABS, não o dashboard do YA Hub;
-- Home institucional com primeira impressão forte, scroll narrativo e direção de laboratório futurista + sistema operacional técnico;
+- Home institucional com primeira impressão forte, scroll narrativo e direção escura, premium, minimalista e autoral;
 - seções amplas com uma ideia por vez;
-- hero com `YA LABS` como protagonista, `YA` seguindo o símbolo oficial da marca com o corte correto no `A`, microdetalhes de terminal, arte ASCII/YA Mark, `status: online` e CTA `Acessar o portal`;
-- navbar minimalista com identidade técnica e itens numerados;
-- ASCII/YA Mark grande e central, com partículas, pontos, linhas orbitais, plataforma circular e sensação de formação/renderização;
-- tema claro com fundo branco/cinza frio, nuvens/fumaça sutis, órbitas visíveis, plataforma clara e chão/grid de laboratório na parte inferior;
-- tema escuro com fundo navy profundo, ASCII branco/azul gelo, plataforma mais luminosa, fumaça escura discreta e bordas/glow azulados;
-- dois painéis flutuantes com dados técnicos: `ATIVIDADE DO SISTEMA` e `YA.SYSTEM`, sem virar dashboard compacto;
-- ausência de barra inferior operacional na hero;
+- hero com `YA LABS` como protagonista, `YA` seguindo o símbolo oficial da marca, estrela dourada no `A`, `LABS` espaçado, slogan `Code. Automate. Scale.` e `Scale.` em dourado;
+- navbar minimalista, centralizada, com itens minúsculos como `home`, `about`, `ecosystem` e `products`;
+- CTA discreto `acessar portal`, com borda dourada fina;
+- fundo azul-marinho muito escuro, quase preto, com textura material/rochosa sutil no lado direito;
+- grid quase invisível, linhas orbitais discretas, pequenos pontos dourados e indicação `scroll`;
+- ausência de descrição longa, terminal, command bar, ASCII protagonista, painéis flutuantes e barra inferior operacional na hero;
 - seção "Construímos como laboratório" começando após a primeira dobra, sem aparecer como prévia no hero;
 - seção "Ecossistema YA", separando YAHub, YABook, YAGit e YABot;
 - seção "Como uma ideia vira produto", conectando ideia, documentação, issue, branch, Pull Request e release;
