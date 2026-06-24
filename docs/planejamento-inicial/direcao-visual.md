@@ -42,6 +42,8 @@ A direção final para a hero da Home do YA Hub é uma interface **escura, minim
 
 Essa direção combina com a identidade da YA LABS porque faz a primeira dobra parecer uma apresentação de marca forte, sóbria e tecnológica, em vez de uma landing page genérica, um dashboard ou uma tela cheia de efeitos.
 
+Esta issue registra a decisão conceitual e visual. A prototipagem navegável, a criação de base em código, a validação responsiva e a implementação da Home devem ser tratadas em issues próprias dentro do épico de identidade e experiência visual.
+
 Separação conceitual:
 
 ```text
@@ -587,3 +589,25 @@ Ferramentas como SVNFlow e futuros painéis internos devem adaptar a mesma ident
 Este documento registra a direção visual específica do YA Hub.
 
 Tokens globais, filosofia visual, governança de design e decisões reutilizáveis devem ficar no YABook.
+
+## Encerramento da idealização
+
+Esta documentação fecha a etapa de idealização visual inicial da marca no YA Hub.
+
+O resultado desta etapa é:
+
+- direção visual da hero definida;
+- narrativa da Home registrada;
+- separação entre YA LABS, Ecossistema YA, Produtos e YA Hub documentada;
+- limites entre experiência institucional e ferramentas operacionais definidos;
+- relação com o design system e o YABook esclarecida.
+
+O que fica para issues futuras:
+
+- prototipar a hero e a Home em base navegável;
+- validar responsividade, acessibilidade e performance;
+- implementar componentes reais;
+- extrair tokens reutilizáveis após validação prática;
+- promover padrões consolidados para o YABook.
+
+Nenhuma pasta de protótipo deve ser mantida nesta issue apenas como experimento visual. Protótipos devem nascer vinculados a uma issue própria, com escopo, critérios de aceite e validação definidos.
