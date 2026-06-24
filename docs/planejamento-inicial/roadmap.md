@@ -19,7 +19,7 @@ Entregas previstas:
 - atividade recente simples;
 - exibição básica do Spotifolio como projeto da YA LABS;
 - contratos de API limpos para o front-end;
-- configuração inicial para dados que o GitHub não cobre.
+- configuração inicial para dados que o GitHub não cobre;
 - direção visual inicial alinhada ao design system da YA LABS.
 
 Fora da V1:
@@ -118,6 +118,108 @@ Fora da V5:
 - misturar regras de produto do Spotifolio;
 - publicar automações críticas sem revisão.
 
+## Roadmap visual e de experiência
+
+Esta trilha orienta a evolução visual do YA Hub em paralelo ao roadmap funcional. Ela deve ajudar a validar a identidade da YA LABS em uso real antes de extrair padrões reutilizáveis para o YABook.
+
+### V1 - Identidade aplicada e Home marcante
+
+Objetivo: aplicar uma primeira versão da identidade visual da YA LABS no portal público, com uma Home narrativa, memorável e objetiva.
+
+Entregas previstas:
+
+- Hero quase fullscreen apresentando a YA LABS, não o dashboard do YA Hub;
+- Home institucional com primeira impressão forte, scroll narrativo e direção escura, premium, minimalista e autoral;
+- seções amplas com uma ideia por vez;
+- hero com `YA LABS` como protagonista, `YA` seguindo o símbolo oficial da marca, estrela dourada no `A`, `LABS` espaçado, slogan `Code. Automate. Scale.` e `Scale.` em dourado;
+- navbar minimalista, centralizada, com itens minúsculos como `home`, `about`, `ecosystem` e `products`;
+- CTA discreto `acessar portal`, com borda dourada fina;
+- fundo azul-marinho muito escuro, quase preto, com textura material/rochosa sutil no lado direito;
+- grid quase invisível, linhas orbitais discretas, pequenos pontos dourados e indicação `scroll`;
+- ausência de descrição longa, terminal, command bar, ASCII protagonista, painéis flutuantes e barra inferior operacional na hero;
+- seção "Construímos como laboratório" começando após a primeira dobra, sem aparecer como prévia no hero;
+- seção "Ecossistema YA", separando YAHub, YABook, YAGit e YABot;
+- seção "Como uma ideia vira produto", conectando ideia, documentação, issue, branch, Pull Request e release;
+- seção "Produtos", separando SVNFlow, DevLab, Spotifolio, CADE-O-DANO, RMAWorker e Meu Treino;
+- seção "Central YAHub", apresentando o YA Hub como portal oficial do ecossistema;
+- navegação clara para projetos, membros, documentação, atividades e links oficiais;
+- tema claro como padrão institucional, com branco, azul escuro, azul forte e azul claro;
+- tema escuro como opção completa para sites, aplicativos e ferramentas da YA LABS;
+- uso do tema escuro também em momentos mais imersivos;
+- cards ou vitrines de projetos objetivos, legíveis e fáceis de comparar, sem competir com o hero;
+- interações leves e progressivas conforme o scroll;
+- introdução sutil do mascote ou assistente digital;
+- validação inicial de linguagem visual, espaçamentos, cards, botões e seções.
+
+Fora da V1 visual:
+
+- modo explorável completo;
+- dashboard compacto na primeira dobra;
+- tentativa de mostrar projetos, métricas, atividades, documentação e bot no mesmo espaço;
+- mascote como assistente funcional;
+- experiência 3D ou mundo navegável;
+- tokens finais do design system;
+- documentação oficial no YABook antes de validação prática.
+
+### V1.5 - Exploração visual inicial
+
+Objetivo: criar uma primeira camada explorável dentro da Home sem substituir a navegação tradicional.
+
+Entregas previstas:
+
+- seção "Explore o laboratório";
+- representação visual dos projetos e áreas da YA LABS;
+- microinterações em cards, links e elementos de navegação;
+- mascote atuando como guia contextual em pontos específicos;
+- alternativa objetiva para todas as informações exibidas de forma visual;
+- testes de responsividade, acessibilidade e performance da camada interativa.
+
+Fora da V1.5 visual:
+
+- transformar a exploração visual no único caminho de navegação;
+- bloquear conteúdo importante atrás de interação;
+- depender de animações para compreensão da interface.
+
+### V2 visual - Modo Explorar
+
+Objetivo: criar uma experiência separada para explorar o ecossistema da YA LABS de forma mais marcante.
+
+Entregas previstas:
+
+- entrada específica para o modo "Explorar o laboratório";
+- navegação visual por áreas, projetos, documentos e iniciativas;
+- mascote ou assistente digital como guia principal da experiência;
+- interações mais expressivas, mas ainda acessíveis;
+- fallback para navegação tradicional;
+- respeito a `prefers-reduced-motion`;
+- validação de performance em dispositivos comuns.
+
+Fora da V2 visual:
+
+- substituir as páginas objetivas de projetos e documentos;
+- criar uma experiência pesada antes da identidade visual estar validada;
+- tratar o mascote como decoração solta, sem função clara.
+
+### V3 visual - Experiência integrada ao ecossistema
+
+Objetivo: conectar a experiência visual a dados reais e transformar decisões validadas em padrões reutilizáveis.
+
+Entregas previstas:
+
+- interações conectadas a dados reais de projetos, atividades ou releases;
+- mascote evoluindo para assistente reutilizável da YA LABS;
+- possíveis integrações com documentação, Discord, changelog ou automações;
+- padrões visuais extraídos para o YABook;
+- tokens, componentes e regras documentados apenas após validação no YA Hub.
+
+Fora da V3 visual:
+
+- oficializar padrões que ainda não foram testados;
+- acoplar identidade visual a uma única página ou interação;
+- transformar experimentos visuais em obrigação para todos os produtos.
+
 ## Diretriz de evolução
 
 O YA Hub deve ser planejado para integrar com painel admin, Spotifolio e Discord no futuro, mas não deve depender dessas integrações para funcionar nas primeiras versões.
+
+A evolução visual deve seguir a mesma lógica: começar com uma identidade aplicável e útil, validar interações em partes controladas da interface e só depois transformar padrões em design system oficial no YABook.
