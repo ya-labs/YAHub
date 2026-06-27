@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 540" role="img" aria-labelledby="title">
+  <title id="title">Símbolo YA LABS para fundos claros</title>
+  <g fill="#06101F">
+    <path d="M30 29h134l158 239L480 29h134L378 376v155H262V376L30 29Z"/>
+    <path d="m445 531 273-377 37 54-232 323h-78Z"/>
+    <path d="m757 100 38-71h38l267 502h-77L757 100Z"/>
+  </g>
+  <path fill="#D99F2F" d="M773 219c7 60 32 85 93 99-61 14-86 39-93 99-8-60-33-85-94-99 61-14 86-39 94-99Z"/>
+</svg>

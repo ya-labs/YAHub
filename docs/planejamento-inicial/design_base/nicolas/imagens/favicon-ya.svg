@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">Ícone YA LABS</title>
+  <rect width="128" height="128" rx="16" fill="#020812"/>
+  <g fill="#F4F4F1">
+    <path d="M12 24h15l19 29 19-29h15L53 65v39H39V65L12 24Z"/>
+    <path d="m55 104 33-80h13l31 80h-16L94 47l-23 57H55Z"/>
+  </g>
+  <path fill="#D99F2F" d="M94 57c2 10 6 14 16 16-10 2-14 6-16 16-2-10-6-14-16-16 10-2 14-6 16-16Z"/>
+</svg>

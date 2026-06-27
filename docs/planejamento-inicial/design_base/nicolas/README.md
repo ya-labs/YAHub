@@ -12,6 +12,14 @@ Abra o arquivo `index.html` no navegador.
 
 - `screenshots/hero-desktop.png`
 - `screenshots/hero-mobile.png`
+- `screenshots/hero-assets-desktop.png`
+- `screenshots/hero-assets-mobile.png`
+
+## Assets separados
+
+A pasta `imagens/` contém os elementos visuais separados do mockup aprovado:
+logo, símbolo, fundo, montanha transparente, órbitas, grid, partículas e estrelas.
+Consulte `imagens/README.md` para a ordem de composição.
 
 ## Escopo
 

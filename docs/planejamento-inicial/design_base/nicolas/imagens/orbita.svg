@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 820" fill="none" role="img" aria-labelledby="title">
+  <title id="title">Sistema orbital técnico</title>
+  <g opacity=".78">
+    <ellipse cx="622" cy="410" rx="387" ry="162" transform="rotate(-16 622 410)" stroke="#C8912E" stroke-opacity=".42" stroke-width="1.2" stroke-dasharray="7 8"/>
+    <ellipse cx="625" cy="408" rx="354" ry="245" transform="rotate(22 625 408)" stroke="#8792AA" stroke-opacity=".28"/>
+    <ellipse cx="627" cy="409" rx="285" ry="357" transform="rotate(67 627 409)" stroke="#8B96AD" stroke-opacity=".3"/>
+    <ellipse cx="628" cy="410" rx="198" ry="383" transform="rotate(82 628 410)" stroke="#C8912E" stroke-opacity=".32"/>
+    <circle cx="627" cy="409" r="291" stroke="#7F8A9E" stroke-opacity=".22"/>
+    <circle cx="627" cy="409" r="214" stroke="#7F8A9E" stroke-opacity=".18"/>
+  </g>
+  <g fill="#D39A35">
+    <circle cx="887" cy="322" r="4"/>
+    <circle cx="750" cy="669" r="4.5"/>
+    <circle cx="461" cy="267" r="3.5"/>
+    <circle cx="979" cy="476" r="2.5"/>
+    <circle cx="339" cy="558" r="2.5"/>
+  </g>
+  <g fill="#D39A35" opacity=".65">
+    <rect x="922" y="184" width="8" height="8" rx="2"/>
+    <rect x="512" y="733" width="6" height="6" rx="1.5"/>
+    <rect x="280" y="366" width="6" height="6" rx="1.5"/>
+    <rect x="743" y="80" width="5" height="5" rx="1"/>
+  </g>
+</svg>
