@@ -6,8 +6,11 @@ Este documento registra os contratos conceituais da API V1 do YA Hub.
 
 Os nomes finais de DTOs, propriedades e rotas podem ser refinados durante a implementação, mas a intenção da API deve permanecer clara: entregar dados públicos da YA LABS já tratados para o front-end.
 
+<<<<<<< HEAD
 Este documento é conceitual. Quando a implementação definir contratos reais, os exemplos devem ser atualizados para refletir o comportamento efetivo da API.
 
+=======
+>>>>>>> f739e744cdfb39f6ee09f3db9a8eea594a4da654
 ## Padrão de resposta
 
 A API deve usar um envelope de resposta inspirado no `ServiceResult<T>` usado no CADE O DANO.
@@ -40,6 +43,11 @@ GET /api/projects
 GET /api/projects/:slug
 GET /api/members
 GET /api/activity
+<<<<<<< HEAD
+POST /api/register
+POST /api/login
+=======
+>>>>>>> f739e744cdfb39f6ee09f3db9a8eea594a4da654
 ```
 
 ## GET /api/organization
@@ -189,11 +197,82 @@ Dados esperados:
 - data;
 - URL de referência.
 
+<<<<<<< HEAD
+## POST /api/register
+
+Cadastra um usuário administrativo inicial.
+
+Este endpoint foi antecipado para a V1 para permitir a evolução do cadastro de projetos pelo back-end.
+
+Entrada esperada:
+
+```json
+{
+  "name": "Caio",
+  "email": "caio@email.com",
+  "password": "senha"
+}
+```
+
+Resposta esperada:
+
+```json
+{
+  "result": true,
+  "message": null,
+  "data": {
+    "id": "00000000-0000-0000-0000-000000000000",
+    "name": "Caio",
+    "email": "caio@email.com"
+  }
+}
+```
+
+Regras:
+
+- senha deve ser armazenada apenas como hash;
+- `passwordHash` não deve ser retornado pela API;
+- email deve ser único.
+
+## POST /api/login
+
+Autentica um usuário administrativo.
+
+Entrada esperada:
+
+```json
+{
+  "email": "caio@email.com",
+  "password": "senha"
+}
+```
+
+Resposta inicial esperada:
+
+```json
+{
+  "result": true,
+  "message": null,
+  "data": {
+    "id": "00000000-0000-0000-0000-000000000000",
+    "name": "Caio",
+    "email": "caio@email.com"
+  }
+}
+```
+
+Em uma evolução posterior, o login deve retornar token JWT para proteger endpoints administrativos.
+
+=======
+>>>>>>> f739e744cdfb39f6ee09f3db9a8eea594a4da654
 ## Fora da API V1
 
 Não fazem parte da API V1:
 
+<<<<<<< HEAD
+=======
 - login;
+>>>>>>> f739e744cdfb39f6ee09f3db9a8eea594a4da654
 - permissões;
 - painel administrativo;
 - upload;

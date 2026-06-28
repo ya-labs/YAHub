@@ -10,7 +10,7 @@ Objetivo: colocar o YA Hub no ar como portal oficial da YA LABS, com front-end e
 
 Entregas previstas:
 
-- front-end em React, TypeScript e Vite;
+- front-end em Angular e TypeScript;
 - back-end inicial do YA Hub;
 - integração do back-end com a GitHub API;
 - Home do portal;
