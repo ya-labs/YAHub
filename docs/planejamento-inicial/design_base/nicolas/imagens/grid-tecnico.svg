@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 820" role="img" aria-labelledby="title">
+  <title id="title">Grid técnico sutil</title>
+  <defs>
+    <pattern id="grid" width="54" height="54" patternUnits="userSpaceOnUse">
+      <path d="M54 0H0V54" fill="none" stroke="#C9D2E2" stroke-opacity=".075"/>
+    </pattern>
+    <radialGradient id="fade">
+      <stop offset=".3" stop-color="#fff"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <mask id="mask">
+      <rect width="960" height="820" fill="url(#fade)"/>
+    </mask>
+  </defs>
+  <rect width="960" height="820" fill="url(#grid)" mask="url(#mask)"/>
+</svg>

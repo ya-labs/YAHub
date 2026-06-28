@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Protótipo visual da hero dark premium da Home do YAHub."
+    />
+    <title>YAHub | Protótipo Hero</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="prototype-shell">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-art" aria-hidden="true">
+          <img class="art-layer art-background" src="./imagens/fundo-base.svg" alt="" />
+          <img class="art-layer art-grid" src="./imagens/grid-tecnico.svg" alt="" data-depth="0.2" />
+          <img class="art-layer art-mountain" src="./imagens/montanha.png" alt="" data-depth="0.45" />
+          <img class="art-layer art-orbit" src="./imagens/orbita.svg" alt="" data-depth="0.7" />
+          <img class="art-layer art-particles" src="./imagens/particulas.svg" alt="" data-depth="0.9" />
+          <img class="art-star art-star-primary" src="./imagens/estrela-principal.svg" alt="" data-depth="1.1" />
+          <img class="art-star art-star-secondary" src="./imagens/estrela-pequena.svg" alt="" data-depth="0.8" />
+        </div>
+
+        <header class="site-header" aria-label="Navegação principal">
+          <nav class="main-nav" aria-label="Seções da Home">
+            <a class="nav-link is-active" href="#home">home</a>
+            <a class="nav-link" href="#about">about</a>
+            <a class="nav-link" href="#ecosystem">ecosystem</a>
+            <a class="nav-link" href="#products">products</a>
+          </nav>
+
+          <a class="portal-link" href="#portal">
+            acessar portal
+          </a>
+        </header>
+
+        <div class="hero-content" id="home">
+          <h1 class="brand-lockup" id="hero-title">
+            <span class="sr-only">YA LABS</span>
+            <img src="./imagens/marca-horizontal-fina.svg" alt="" aria-hidden="true" />
+          </h1>
+
+          <p class="tagline" aria-label="Code. Automate. Scale.">
+            <span>Code.</span>
+            <span>Automate.</span>
+            <span>Scale.</span>
+          </p>
+        </div>
+
+        <a class="scroll-cue" href="#about" aria-label="Ir para a próxima seção">
+          <span>scroll</span>
+          <span aria-hidden="true">↓</span>
+        </a>
+      </section>
+
+      <section class="next-section" id="about" aria-labelledby="about-title">
+        <div class="section-inner">
+          <p class="section-kicker">próxima dobra</p>
+          <h2 id="about-title">Construímos como laboratório.</h2>
+          <p>
+            Esta área existe apenas para validar que a hero termina limpa na
+            primeira dobra. A narrativa completa da Home deve ser prototipada
+            em issues posteriores.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <script src="./main.js"></script>
+  </body>
+</html>

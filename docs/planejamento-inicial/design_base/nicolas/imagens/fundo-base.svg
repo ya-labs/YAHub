@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1680 941" role="img" aria-labelledby="title desc">
+  <title id="title">Fundo base da hero YAHub</title>
+  <desc id="desc">Fundo azul-marinho profundo com iluminação atmosférica sutil.</desc>
+  <defs>
+    <radialGradient id="leftGlow" cx="0" cy="0" r="1" gradientTransform="translate(570 486) rotate(90) scale(540 680)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0A1A30" stop-opacity=".72"/>
+      <stop offset=".62" stop-color="#06101E" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#020812" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="rightGlow" cx="0" cy="0" r="1" gradientTransform="translate(1382 480) rotate(90) scale(540 630)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#111A2D" stop-opacity=".72"/>
+      <stop offset=".58" stop-color="#07111F" stop-opacity=".3"/>
+      <stop offset="1" stop-color="#020812" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="base" x1="62" y1="35" x2="1607" y2="927" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#020812"/>
+      <stop offset=".52" stop-color="#030B17"/>
+      <stop offset="1" stop-color="#07111F"/>
+    </linearGradient>
+    <filter id="noise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency=".78" numOctaves="2" seed="17"/>
+      <feColorMatrix values="1 0 0 0 0
+                             0 1 0 0 0
+                             0 0 1 0 0
+                             0 0 0 .035 0"/>
+    </filter>
+  </defs>
+  <rect width="1680" height="941" fill="url(#base)"/>
+  <rect width="1680" height="941" fill="url(#leftGlow)"/>
+  <rect width="1680" height="941" fill="url(#rightGlow)"/>
+  <rect width="1680" height="941" filter="url(#noise)" opacity=".35"/>
+</svg>
