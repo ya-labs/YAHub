@@ -62,20 +62,14 @@ Use o YABook como fonte para:
 - [Roadmap](planejamento-inicial/roadmap.md)
 - [Arquitetura planejada](planejamento-inicial/arquitetura.md)
 - [Conteúdo dos projetos](planejamento-inicial/conteudo-dos-projetos.md)
-<<<<<<< HEAD
 - [Direção visual](planejamento-inicial/direcao-visual.md)
-=======
->>>>>>> f739e744cdfb39f6ee09f3db9a8eea594a4da654
 - [Painel administrativo](planejamento-inicial/painel-admin.md)
 - [Integrações futuras](planejamento-inicial/integracoes-futuras.md)
 
 ### Técnico
 
 - [Arquitetura da V1](tecnico/arquitetura/v1.md)
-<<<<<<< HEAD
 - [Back-end da V1](tecnico/back-end/v1.md)
-=======
->>>>>>> f739e744cdfb39f6ee09f3db9a8eea594a4da654
 - [Contratos da API V1](tecnico/api/v1-contratos.md)
 
 ## O que não deve ficar aqui
