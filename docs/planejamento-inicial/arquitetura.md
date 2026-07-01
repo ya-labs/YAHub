@@ -4,7 +4,7 @@
 
 A arquitetura do YA Hub deve começar simples, mas preparada para evolução. A V1 já será full-stack para permitir que o back-end centralize integrações, trate dados externos e entregue contratos estáveis para o front-end.
 
-## V1 - Portal público full-stack
+## V1 - Portal público e admin básico
 
 Fluxo planejado:
 
@@ -12,14 +12,15 @@ Fluxo planejado:
 YA Hub Frontend
   -> YA Hub Backend
       -> GitHub API
-      -> configuração inicial de produto
+      -> PostgreSQL
+      -> dados editoriais cadastrados no admin
       -> tratamento dos dados
       -> contratos para o front-end
 ```
 
 Responsabilidades do front-end:
 
-- construir as telas públicas;
+- construir a Home institucional, o portal público e o admin básico;
 - organizar componentes e rotas;
 - cuidar da experiência visual;
 - aplicar a direção visual institucional do YA Hub;
@@ -29,63 +30,74 @@ Responsabilidades do front-end:
 Responsabilidades do back-end:
 
 - consultar a GitHub API;
+- persistir projetos e membros no PostgreSQL;
+- autenticar administradores;
+- expor endpoints administrativos para projetos e membros;
 - tratar e padronizar dados;
 - proteger tokens quando necessário;
 - definir contratos de resposta para o front-end;
-- preparar base para cache, painel admin, Spotifolio e Discord.
+- preparar base para cache, YABook, Spotifolio e Discord.
 
 Endpoints conceituais iniciais:
 
 ```text
 GET /api/organization
 GET /api/projects
-GET /api/projects/:slug
+GET /api/projects/{slug}
 GET /api/activity
 GET /api/members
+GET /api/members/{slug}
+POST /api/login
+POST /api/register
+GET /api/admin/projects
+POST /api/admin/projects
+PUT /api/admin/projects/{id}
+DELETE /api/admin/projects/{id}
+GET /api/admin/members
+POST /api/admin/members
+PUT /api/admin/members/{id}
+DELETE /api/admin/members/{id}
 ```
 
 Esses nomes representam a intenção inicial dos contratos e podem ser refinados durante a implementação técnica.
 
-## V2 - Metadados ricos por projeto
+Na V1, `POST /api/register` representa o cadastro administrativo inicial planejado para o back-end. Antes de produção, esse fluxo deve ser protegido ou limitado para evitar cadastro público aberto de administradores.
+
+## V2 - Portal público mais rico
 
 Fluxo planejado:
 
 ```text
 YA Hub Backend
   -> GitHub API
-  -> .yahub/project.json dos repositórios
-  -> assets dos projetos
-  -> fallback/configuração inicial
+  -> PostgreSQL
+  -> dados editoriais cadastrados no admin
+  -> links externos dos projetos
 ```
 
-Nessa fase, o back-end passa a buscar informações ricas nos próprios repositórios dos projetos.
+Nessa fase, o back-end pode enriquecer as páginas públicas com mais dados editoriais e técnicos, mantendo o banco do YA Hub como fonte oficial dos metadados.
 
 O YA Hub deve tratar três cenários:
 
-- projeto com `.yahub/project.json` válido;
-- projeto sem metadados próprios;
+- projeto cadastrado e visível no banco;
+- projeto com GitHub indisponível ou sem dados técnicos complementares;
 - falha ao buscar dados externos.
 
 Em todos os casos, o front-end deve receber uma resposta previsível.
 
-## V3 - Painel administrativo
+## Integração futura com YABook
 
-Fluxo planejado:
+Fluxo conceitual:
 
 ```text
-YA Hub Admin
-  -> YA Hub Backend
-      -> autenticação
-      -> GitHub API
-      -> criação de branch
-      -> alteração de .yahub/project.json
-      -> versionamento de assets
-      -> abertura de Pull Request
+YA Hub
+  -> Abrir com o YABook
+      -> documentação, contexto ou fluxo assistido do projeto
 ```
 
-O painel administrativo não deve escrever diretamente na branch principal dos projetos. A publicação das alterações deve passar por Pull Request.
+Na V1, essa integração deve ficar apenas preparada conceitualmente. Enquanto o YABook não oferecer suporte direto, a documentação dos projetos deve ser acessada pelo GitHub do repositório.
 
-## V4 - Integração com Spotifolio
+## V3 - Integração com Spotifolio
 
 Fluxo conceitual:
 
@@ -112,7 +124,7 @@ Padrões reutilizáveis de documentação, condução de projeto, uso de IA, flu
 
 Quando a implementação do portal consolidar decisões visuais reutilizáveis, essas decisões podem ser promovidas para o YABook. Enquanto forem específicas do portal, devem ficar em [Direção visual](direcao-visual.md).
 
-## V5 - Discord e automações
+## V4 - Discord e automações
 
 Fluxo conceitual:
 
@@ -127,7 +139,6 @@ O back-end do YA Hub pode se tornar a camada central para tratar eventos e dados
 ## Separação de dados
 
 - **GitHub:** dados técnicos e dinâmicos dos repositórios.
-- **Back-end do YA Hub:** tratamento, contratos, cache futuro e segurança.
-- **`.yahub/project.json`:** metadados ricos definidos pelo próprio projeto.
-- **Configuração inicial do YA Hub:** fallback, ordem, destaque e informações ainda não disponíveis nos projetos.
+- **PostgreSQL:** fonte oficial dos metadados editoriais de projetos, membros, status, destaque, categoria e visibilidade.
+- **Back-end do YA Hub:** tratamento, contratos, cache futuro, segurança e persistência.
 - **Front-end:** apresentação e experiência, sem acoplamento direto com integrações externas.

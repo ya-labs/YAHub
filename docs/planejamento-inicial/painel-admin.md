@@ -2,48 +2,46 @@
 
 ## Objetivo
 
-O painel administrativo será a forma futura de manter os metadados dos projetos sem editar arquivos manualmente.
+O painel administrativo será a forma de manter os dados editoriais do YA Hub sem editar arquivos manualmente.
 
-Ele deve facilitar a atualização de descrições, links, imagens, showcase e notas de atualização, preservando revisão e histórico pelo GitHub.
+Na V1, o painel deve ser simples e focado em cadastro e manutenção de projetos e membros.
 
-O fluxo de publicação deve seguir o YABook: mudanças relevantes precisam manter rastreabilidade entre issue, branch, commit, Pull Request e validação.
+## Papel na V1
 
-## Papel no roadmap
+O painel administrativo entra na V1 e deve ficar na mesma aplicação front-end do YA Hub.
 
-O painel administrativo está planejado para a V3.
+Ele não deve ser um repositório separado e não precisa nascer como um CMS completo.
 
-Antes disso, a V1 deve estabelecer o portal full-stack e a V2 deve definir o padrão de metadados por projeto.
+Rotas conceituais:
 
-## Fluxo planejado
+```text
+/admin
+/admin/projetos
+/admin/projetos/novo
+/admin/projetos/:id
+/admin/membros
+/admin/membros/novo
+/admin/membros/:id
+```
+
+## Fluxo inicial
 
 ```text
 Admin acessa o painel
-  -> escolhe um projeto
-  -> back-end carrega .yahub/project.json
-  -> admin edita descrição, links, showcase e notas
-  -> admin anexa imagens
-  -> painel mostra preview
+  -> autentica
+  -> cadastra ou edita projetos e membros
   -> back-end valida os dados
-  -> back-end cria branch no repositório do projeto
-  -> back-end altera project.json e assets
-  -> back-end abre Pull Request
-  -> owners revisam e fazem merge
-  -> YA Hub passa a exibir os dados atualizados
+  -> back-end persiste no PostgreSQL
+  -> portal público passa a consumir os dados atualizados
 ```
 
-## Por que usar Pull Request
+## Acesso administrativo
 
-O painel não deve fazer commit direto na branch principal.
+O acesso administrativo entra na V1 com login e cadastro.
 
-Usar Pull Request traz:
+O back-end pode expor endpoints iniciais de autenticação, como `POST /api/login` e `POST /api/register`, seguindo o planejamento inicial do Caio.
 
-- revisão antes da publicação;
-- histórico claro;
-- menor risco de quebrar produção;
-- rastreabilidade;
-- alinhamento com o fluxo profissional da YA LABS.
-
-Esse comportamento não é uma regra exclusiva do YA Hub; é uma aplicação do fluxo oficial da YA LABS documentado no YABook.
+Antes de produção, o cadastro precisa ser controlado. A V1 pode manter o endpoint de cadastro, mas não deve permitir criação pública aberta de administradores sem validação, convite, semente inicial ou outro controle equivalente.
 
 ## Responsabilidades
 
@@ -51,20 +49,15 @@ Front-end:
 
 - telas administrativas;
 - formulários;
-- upload visual de arquivos;
-- preview;
 - estados de validação e erro;
 - experiência de edição.
 
 Back-end:
 
 - autenticação;
-- integração com GitHub API;
-- leitura e escrita do `.yahub/project.json`;
+- persistência no PostgreSQL;
 - validação dos dados;
-- versionamento de assets;
-- criação de branch;
-- abertura de Pull Request.
+- proteção de endpoints administrativos.
 
 Plataforma:
 
@@ -73,24 +66,25 @@ Plataforma:
 - configuração segura de tokens;
 - observabilidade e suporte ao deploy.
 
-## Limites da V3
+## Limites da V1
 
-A V3 deve focar manutenção de metadados dos projetos.
+Ficam fora da V1:
 
-Ficam fora dessa fase:
-
-- rede social do Spotifolio;
-- bot completo no Discord;
-- automações críticas sem revisão;
-- edição de qualquer arquivo arbitrário do projeto;
-- publicação direta na branch principal.
+- upload de imagens;
+- permissões granulares;
+- editor rico avançado;
+- workflow de aprovação;
+- criação automática de branch;
+- abertura automática de Pull Request;
+- edição de arquivos em repositórios externos;
+- `.yahub/project.json` como fonte oficial.
 
 ## Segurança
 
-Tokens do GitHub não devem ficar no front-end.
+Tokens e credenciais não devem ficar no front-end.
 
-Operações de escrita em repositórios devem passar pelo back-end, com autenticação, validação e permissões controladas.
+Operações administrativas devem passar pelo back-end, com autenticação, validação e permissões controladas.
 
 ## Resultado esperado
 
-Ao final dessa fase, administradores devem conseguir atualizar informações públicas dos projetos de forma visual, mas mantendo o GitHub como fonte de versionamento, revisão e histórico.
+Ao final da V1, administradores devem conseguir atualizar projetos e membros de forma visual, mantendo o banco do YA Hub como fonte oficial dos dados editoriais.

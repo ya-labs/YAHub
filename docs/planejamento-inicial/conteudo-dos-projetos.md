@@ -2,117 +2,106 @@
 
 ## Objetivo
 
-O YA Hub deve apresentar projetos da YA LABS com informações úteis, visuais e atualizadas. Para evitar que o YA Hub vire um repositório central de conteúdo manual, cada projeto poderá ser dono dos próprios metadados ricos.
+O YA Hub deve apresentar projetos da YA LABS com informações úteis, visuais e atualizadas.
 
-## Estrutura planejada
+Na V1, os metadados oficiais dos projetos serão mantidos no banco de dados do YA Hub e gerenciados pelo painel administrativo.
 
-Cada projeto poderá ter:
+O repositório GitHub de cada projeto pode ser vinculado como referência técnica, mas não será a fonte oficial dos dados editoriais exibidos no portal.
+
+## Fonte de verdade da V1
+
+Fonte principal:
+
+- banco de dados do YA Hub;
+- painel administrativo do YA Hub.
+
+Fonte complementar:
+
+- GitHub API para dados técnicos, repositório e atividade recente.
+
+Fora da V1:
+
+- documentação interna dos projetos dentro do YA Hub;
+- `.yahub/project.json` como fonte oficial;
+- assets versionados pelo YA Hub;
+- edição de metadados via Pull Request automático.
+
+## Categorias de projeto
+
+A listagem de projetos do portal deve separar:
+
+- **Produtos:** projetos entregáveis para usuários ou mercado.
+- **Ecossistema:** projetos internos, estruturais ou de suporte da YA LABS.
+
+Ecossistema continua sendo projeto. Por isso, na V1, ele deve aparecer como categoria dentro de `/portal/projetos`, não como rota própria.
+
+## Campos obrigatórios da V1
+
+Campos mínimos do projeto:
+
+- `slug`;
+- `displayName`;
+- `tagline`;
+- `shortDescription`;
+- `fullDescription`;
+- `category`;
+- `status`;
+- `visibility`;
+- `repositoryUrl`;
+- `websiteUrl`;
+- `documentationUrl`;
+- `technologies`;
+- `featured`;
+- `displayOrder`.
+
+Os nomes acima representam o contrato técnico esperado da API. Na interface administrativa, eles podem aparecer traduzidos para português, como Nome, Descrição curta, Categoria, Status e Visibilidade.
+
+Campos relacionais previstos:
+
+- membros relacionados;
+- responsáveis;
+- links complementares.
+
+## Valores fechados
+
+Categoria:
+
+- `produto`;
+- `ecossistema`.
+
+Status:
+
+- `ideia`;
+- `planejamento`;
+- `desenvolvimento`;
+- `ativo`;
+- `pausado`;
+- `arquivado`.
+
+Visibilidade:
+
+- `publico`;
+- `oculto`.
+
+## Documentação dos projetos
+
+A documentação interna dos projetos não entra na V1 do YA Hub.
+
+Na V1, quando a pessoa visitante quiser consultar documentação, o portal deve apontar para o GitHub do repositório.
+
+O YA Hub deve preparar uma integração futura com o YABook. Quando o YABook tiver suporte, cada projeto poderá exibir uma ação como:
 
 ```text
-.yahub/
-  project.json
-  assets/
-    cover.png
-    screenshot-1.png
-    screenshot-2.png
+Abrir com o YABook
 ```
-
-O arquivo `project.json` guarda as informações públicas do projeto. A pasta `assets/` guarda imagens usadas no showcase.
-
-Esse formato é uma proposta específica do YA Hub para metadados de projetos. Se futuramente esse padrão virar reutilizável para outros produtos da YA LABS, a parte geral deve ser consolidada no YABook.
-
-## Campos planejados
-
-Campos iniciais esperados:
-
-- `displayName`;
-- `slug`;
-- `shortDescription`;
-- `description`;
-- `status`;
-- `category`;
-- `websiteUrl`;
-- `repositoryUrl`;
-- `technologies`;
-- `team`;
-- `featuredImage`;
-- `showcase`;
-- `updateNotes`;
-- `links`.
-
-## Exemplo
-
-```json
-{
-  "displayName": "CADE O DANO",
-  "slug": "cade-o-dano",
-  "shortDescription": "Consulta de dados e estatísticas de jogadores.",
-  "description": "Aplicação para consultar dados de League of Legends usando a Riot API.",
-  "status": "Em desenvolvimento",
-  "category": "Produto",
-  "websiteUrl": "https://ya-labs.github.io/CADE-O-DANO/",
-  "repositoryUrl": "https://github.com/ya-labs/CADE-O-DANO",
-  "technologies": ["React", "TypeScript", "Riot API"],
-  "team": ["nicolas", "caio"],
-  "featuredImage": ".yahub/assets/cover.png",
-  "showcase": [
-    {
-      "title": "Busca por jogador",
-      "description": "Tela principal para consultar jogadores pelo Riot ID.",
-      "image": ".yahub/assets/search-page.png"
-    }
-  ],
-  "updateNotes": [
-    {
-      "version": "0.3.0",
-      "date": "2026-06-06",
-      "notes": [
-        "Adicionada tela de histórico de partidas.",
-        "Melhorado layout mobile."
-      ]
-    }
-  ],
-  "links": [
-    {
-      "label": "Site",
-      "url": "https://ya-labs.github.io/CADE-O-DANO/"
-    }
-  ]
-}
-```
-
-## Responsabilidade dos dados
-
-O projeto é dono dos próprios metadados ricos.
-
-O YA Hub deve:
-
-- buscar os metadados;
-- tratar ausências ou inconsistências;
-- juntar dados ricos com dados técnicos do GitHub;
-- apresentar as informações no portal.
-
-O YA Hub não deve duplicar manualmente tudo que pertence ao projeto.
-
-O GitHub continua sendo fonte de versionamento e revisão. Quando o painel administrativo existir, alterações nesses metadados devem passar por branch e Pull Request, seguindo o fluxo do YABook.
-
-## Fallback
-
-Se um projeto ainda não tiver `.yahub/project.json`, o YA Hub deve usar dados disponíveis no GitHub e uma configuração inicial mínima.
-
-Esse fallback permite migrar projeto por projeto, sem bloquear a evolução do portal.
-
-## Imagens
-
-As imagens de showcase devem ficar no repositório do próprio projeto, dentro de `.yahub/assets/`.
-
-Isso mantém os assets próximos do produto que eles representam e evita que o YA Hub vire um depósito de imagens de todos os projetos.
 
 ## Evitar duplicação
 
-Informações que o GitHub já fornece bem não devem ser duplicadas sem motivo.
+Informações editoriais pertencem ao YA Hub.
 
-Exemplos de dados normalmente vindos do GitHub:
+Informações técnicas que o GitHub já fornece bem podem ser consumidas pela API e tratadas pelo back-end.
+
+Exemplos:
 
 - nome técnico do repositório;
 - URL do repositório;
@@ -120,13 +109,3 @@ Exemplos de dados normalmente vindos do GitHub:
 - última atualização;
 - estatísticas públicas;
 - commits recentes.
-
-Exemplos de dados editoriais que podem ficar no `project.json`:
-
-- nome de exibição;
-- descrição de produto;
-- status;
-- equipe;
-- showcase;
-- notas de atualização;
-- links públicos relevantes.

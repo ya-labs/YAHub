@@ -21,6 +21,7 @@ docs/
 |-- guia-de-documentacao-para-ia.md
 |-- fluxo-de-trabalho-github.md
 |-- planejamento-inicial/
+|   `-- sessoes/
 `-- tecnico/
     |-- back-end/
     |-- arquitetura/
@@ -65,6 +66,7 @@ Use o YABook como fonte para:
 - [Direção visual](planejamento-inicial/direcao-visual.md)
 - [Painel administrativo](planejamento-inicial/painel-admin.md)
 - [Integrações futuras](planejamento-inicial/integracoes-futuras.md)
+- [Sessões de planejamento](planejamento-inicial/sessoes/)
 
 ### Técnico
 
