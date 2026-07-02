@@ -4,46 +4,58 @@
 
 O roadmap do YA Hub deve organizar a evolução do produto em versões incrementais. Cada versão precisa entregar valor próprio e preparar a próxima sem transformar a primeira entrega em uma plataforma grande demais.
 
-## V1 - Portal público full-stack
+## V1 - Portal público e admin básico
 
-Objetivo: colocar o YA Hub no ar como portal oficial da YA LABS, com front-end e back-end próprios.
+Objetivo: colocar o YA Hub no ar como portal oficial da YA LABS, com Home institucional, portal navegável, back-end próprio e painel administrativo básico para manter projetos e membros.
 
 Entregas previstas:
 
 - front-end em Angular e TypeScript;
 - back-end inicial do YA Hub;
 - integração do back-end com a GitHub API;
-- Home do portal;
+- Home institucional da YA LABS;
+- dashboard inicial do portal;
 - listagem de projetos;
+- página completa de detalhe de projeto;
+- separação de projetos entre Produtos e Ecossistema;
 - listagem de membros;
-- atividade recente simples;
+- atividade recente real via GitHub;
 - exibição básica do Spotifolio como projeto da YA LABS;
 - contratos de API limpos para o front-end;
-- configuração inicial para dados que o GitHub não cobre;
+- painel administrativo na mesma aplicação;
+- autenticação administrativa com login e cadastro;
+- cadastro administrativo de projetos;
+- descoberta de repositórios públicos da organização no Admin;
+- cadastro de projetos orientados por URL pública do GitHub;
+- exibição separada de projetos oficiais e orientados;
+- cadastro administrativo de membros;
+- metadados oficiais de projetos e membros no banco de dados;
+- links para documentação dos projetos no GitHub;
+- preparação futura para ação `Abrir com o YABook`;
 - direção visual inicial alinhada ao design system da YA LABS.
 
 Fora da V1:
 
-- painel administrativo;
-- autenticação de administradores;
+- documentação interna dos projetos dentro do YA Hub;
 - upload de imagens;
 - escrita automática em repositórios;
+- criação automática de Pull Requests;
+- permissões administrativas granulares;
+- editor rico ou CMS completo;
+- cadastro público aberto de administradores sem controle;
 - integração real com Spotifolio;
-- bot ou automações no Discord.
+- bot ou automações no Discord;
+- `.yahub/project.json` como fonte oficial de metadados;
+- projetos sem repositório público no GitHub.
 
 Critério de direção visual: a V1 deve validar a linguagem institucional do YA Hub sem tentar consolidar todo o design system da organização dentro deste repositório.
 
-## V2 - Metadados ricos por projeto
+## V2 - Portal público mais rico
 
-Objetivo: permitir que cada projeto seja dono das próprias informações públicas usadas pelo YA Hub.
+Objetivo: enriquecer a apresentação pública dos projetos e membros usando os dados mantidos no admin e complementos técnicos do GitHub.
 
 Entregas previstas:
 
-- padrão `.yahub/project.json` nos repositórios dos projetos;
-- pasta `.yahub/assets/` para imagens de showcase;
-- back-end consumindo metadados dos repositórios;
-- fallback para projetos sem `.yahub/project.json`;
-- página individual de projeto;
 - showcase com imagens;
 - links de site/deploy e repositório;
 - tecnologias;
@@ -53,34 +65,11 @@ Entregas previstas:
 
 Fora da V2:
 
-- edição visual dos metadados;
-- painel administrativo;
 - upload pelo YA Hub;
-- criação automática de Pull Request.
+- criação automática de Pull Request;
+- documentação interna completa dos projetos.
 
-## V3 - Painel administrativo
-
-Objetivo: permitir que administradores mantenham os metadados dos projetos sem editar arquivos manualmente.
-
-Entregas previstas:
-
-- área administrativa;
-- autenticação de administradores;
-- listagem de projetos editáveis;
-- edição visual do `.yahub/project.json`;
-- upload ou versionamento de assets;
-- preview antes de publicar;
-- validação dos dados no back-end;
-- criação automática de branch;
-- abertura de Pull Request no repositório do projeto.
-
-Fora da V3:
-
-- transformar o Spotifolio em dependência do YA Hub;
-- bot completo no Discord;
-- automações críticas sem revisão.
-
-## V4 - Integração com Spotifolio
+## V3 - Integração com Spotifolio
 
 Objetivo: conectar o portfólio institucional da YA LABS com os portfólios pessoais do Spotifolio.
 
@@ -93,13 +82,13 @@ Entregas previstas:
 - possível consumo de dados públicos do Spotifolio pelo YA Hub;
 - possível consumo de dados do YA Hub pelo Spotifolio.
 
-Fora da V4:
+Fora da V3:
 
 - transformar o Spotifolio em seção interna do YA Hub;
 - obrigar todo usuário do Spotifolio a ser membro da YA LABS;
 - tornar o YA Hub dependente do Spotifolio para funcionar.
 
-## V5 - Discord e automações
+## V4 - Discord e automações
 
 Objetivo: transformar o Discord em um canal vivo de comunicação da organização.
 
@@ -112,7 +101,7 @@ Entregas previstas:
 - possível bot próprio da YA LABS;
 - integração com dados do back-end do YA Hub.
 
-Fora da V5:
+Fora da V4:
 
 - substituir o YA Hub como fonte pública de informação;
 - misturar regras de produto do Spotifolio;
@@ -220,6 +209,6 @@ Fora da V3 visual:
 
 ## Diretriz de evolução
 
-O YA Hub deve ser planejado para integrar com painel admin, Spotifolio e Discord no futuro, mas não deve depender dessas integrações para funcionar nas primeiras versões.
+O YA Hub deve ser planejado para integrar melhor com YABook, Spotifolio e Discord no futuro, mas não deve depender dessas integrações para funcionar nas primeiras versões.
 
 A evolução visual deve seguir a mesma lógica: começar com uma identidade aplicável e útil, validar interações em partes controladas da interface e só depois transformar padrões em design system oficial no YABook.

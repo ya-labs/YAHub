@@ -14,7 +14,7 @@ Dentro desse ecossistema, o YA Hub tem o papel de responder:
 O que a YA LABS constrói?
 ```
 
-O projeto deve evoluir de forma incremental, começando como portal público full-stack e abrindo caminho para integrações futuras com painel administrativo, Spotifolio e automações no Discord.
+O projeto deve evoluir de forma incremental, começando com Home institucional, portal público full-stack e painel administrativo básico, abrindo caminho para integrações futuras com YABook, Spotifolio e automações no Discord.
 
 O YA Hub também terá papel importante na evolução do design system da YA LABS: decisões visuais estáveis podem nascer aqui e, depois de validadas em uso real, serem registradas no YABook como padrão reutilizável.
 
@@ -33,8 +33,8 @@ Em planejamento inicial.
 ## Stack prevista
 
 - Front-end: Angular e TypeScript.
-- Back-end: a definir durante o planejamento técnico.
-- Integrações: GitHub API, Spotifolio e Discord em fases futuras.
+- Back-end: Java Spring Boot.
+- Integrações: GitHub API na V1; YABook, Spotifolio e Discord em fases futuras.
 - Infraestrutura: a definir, com possibilidade de uso da Azure para o back-end.
 
 ## Documentação do projeto

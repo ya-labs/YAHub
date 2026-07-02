@@ -55,8 +55,9 @@ As responsabilidades podem evoluir conforme o projeto crescer, mas essa divisão
 - O YA Hub deve ser específico do produto, sem duplicar padrões gerais do YABook.
 - O backend deve funcionar como camada de contrato entre integrações externas e front-end.
 - O GitHub deve ser usado como fonte técnica de dados dos repositórios.
-- Os projetos devem ser donos futuros dos seus próprios metadados ricos.
-- O YA Hub deve agregar e apresentar informações, não virar depósito manual de todos os projetos.
+- Os metadados editoriais de projetos e membros devem ser mantidos no banco do YA Hub e gerenciados pelo painel administrativo.
+- O GitHub deve continuar sendo a fonte inicial para consulta de documentação dos projetos.
+- A integração com o YABook deve ser preparada para o futuro, com possibilidade de ação como `Abrir com o YABook` quando esse suporte existir.
 - A direção visual do YA Hub deve respeitar o design system da YA LABS e alimentar o YABook apenas quando uma decisão se tornar reutilizável.
 - Integrações futuras devem ser planejadas desde cedo, mas não podem bloquear as primeiras versões.
 - A evolução deve ser incremental, com cada versão entregando valor real.

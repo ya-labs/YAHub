@@ -26,8 +26,9 @@ O YA Hub segue as diretrizes gerais do YABook, mas mantém aqui apenas documenta
 | Arquitetura planejada | `docs/planejamento-inicial/arquitetura.md` |
 | Conteúdo e metadados dos projetos | `docs/planejamento-inicial/conteudo-dos-projetos.md` |
 | Direção visual do portal | `docs/planejamento-inicial/direcao-visual.md` |
-| Painel administrativo futuro | `docs/planejamento-inicial/painel-admin.md` |
+| Painel administrativo | `docs/planejamento-inicial/painel-admin.md` |
 | Integrações futuras | `docs/planejamento-inicial/integracoes-futuras.md` |
+| Resumos de sessões de planejamento | `docs/planejamento-inicial/sessoes/` |
 | Arquitetura técnica da V1 | `docs/tecnico/arquitetura/v1.md` |
 | Especificação do back-end da V1 | `docs/tecnico/back-end/v1.md` |
 | Contratos conceituais da API V1 | `docs/tecnico/api/v1-contratos.md` |

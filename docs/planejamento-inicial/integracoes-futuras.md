@@ -4,10 +4,25 @@
 
 O YA Hub deve ser planejado para integrar com outros produtos e canais da YA LABS, mas não deve depender dessas integrações para funcionar nas primeiras versões.
 
-As duas integrações futuras mais importantes são:
+As integrações futuras mais importantes são:
 
+- YABook;
 - Spotifolio;
 - Discord e automações.
+
+## YABook
+
+Na V1, a documentação interna dos projetos não será mantida dentro do YA Hub.
+
+Quando uma pessoa quiser consultar documentação de um projeto, o portal deve apontar para o GitHub do repositório.
+
+O YA Hub deve preparar uma integração futura com o YABook. Quando o YABook oferecer suporte para abrir contexto, documentação ou fluxos assistidos de um projeto, o YA Hub poderá exibir uma ação como:
+
+```text
+Abrir com o YABook
+```
+
+Essa preparação não deve bloquear a V1.
 
 ## Spotifolio
 
@@ -96,5 +111,5 @@ O back-end do YA Hub pode tratar os eventos antes de enviar mensagens ao Discord
 O YA Hub deve nascer preparado para integrações futuras, mas a prioridade inicial é construir uma base clara:
 
 ```text
-portal público -> metadados ricos -> painel admin -> Spotifolio -> Discord
+Home institucional -> portal público -> admin básico -> integração com YABook -> Spotifolio -> Discord
 ```
