@@ -6,7 +6,7 @@ O YA Hub deve apresentar projetos da YA LABS com informações úteis, visuais e
 
 Na V1, os metadados oficiais dos projetos serão mantidos no banco de dados do YA Hub e gerenciados pelo painel administrativo.
 
-O repositório GitHub de cada projeto pode ser vinculado como referência técnica, mas não será a fonte oficial dos dados editoriais exibidos no portal.
+Todo projeto cadastrado deve possuir exatamente um repositório principal e público no GitHub. O repositório fornece identidade técnica e dados complementares, mas não será a fonte oficial dos dados editoriais exibidos no portal.
 
 ## Fonte de verdade da V1
 
@@ -17,6 +17,7 @@ Fonte principal:
 
 Fonte complementar:
 
+- GitHub API para descobrir e validar repositórios públicos;
 - GitHub API para dados técnicos, repositório e atividade recente.
 
 Fora da V1:
@@ -35,16 +36,42 @@ A listagem de projetos do portal deve separar:
 
 Ecossistema continua sendo projeto. Por isso, na V1, ele deve aparecer como categoria dentro de `/portal/projetos`, não como rota própria.
 
+## Vínculo com a YA LABS
+
+A categoria descreve o que o projeto é. O vínculo descreve sua relação com a YA LABS.
+
+Valores de `affiliation`:
+
+- `oficial`: projeto cujo repositório pertence à organização `ya-labs`;
+- `orientado`: projeto independente de membro ou parceiro, mantido no perfil do próprio autor e apoiado pela YA LABS.
+
+Projetos orientados:
+
+- devem usar a categoria `produto`;
+- devem apontar para um repositório público fora da organização `ya-labs`;
+- continuam pertencendo e sendo mantidos por seus autores;
+- devem deixar explícito no Portal que recebem apoio, mas não pertencem à YA LABS.
+
+O Portal deve apresentar três agrupamentos:
+
+- Produtos da YA LABS;
+- Ecossistema YA;
+- Projetos orientados pela YA LABS.
+
 ## Campos obrigatórios da V1
 
 Campos mínimos do projeto:
 
+- `githubRepositoryId`;
+- `githubOwner`;
+- `githubName`;
 - `slug`;
 - `displayName`;
 - `tagline`;
 - `shortDescription`;
 - `fullDescription`;
 - `category`;
+- `affiliation`;
 - `status`;
 - `visibility`;
 - `repositoryUrl`;
@@ -53,6 +80,12 @@ Campos mínimos do projeto:
 - `technologies`;
 - `featured`;
 - `displayOrder`.
+
+Campos adicionais para projetos orientados:
+
+- `authorDisplayName`;
+- `supportTypes`;
+- `yalabsMentorIds`.
 
 Os nomes acima representam o contrato técnico esperado da API. Na interface administrativa, eles podem aparecer traduzidos para português, como Nome, Descrição curta, Categoria, Status e Visibilidade.
 
@@ -68,6 +101,19 @@ Categoria:
 
 - `produto`;
 - `ecossistema`.
+
+Vínculo:
+
+- `oficial`;
+- `orientado`.
+
+Tipos de apoio:
+
+- `apoio_tecnico`;
+- `documentacao`;
+- `revisao`;
+- `divulgacao`;
+- `mentoria`.
 
 Status:
 
@@ -100,6 +146,8 @@ Abrir com o YABook
 Informações editoriais pertencem ao YA Hub.
 
 Informações técnicas que o GitHub já fornece bem podem ser consumidas pela API e tratadas pelo back-end.
+
+O identificador `githubRepositoryId` deve impedir o cadastro duplicado mesmo quando um repositório for renomeado. Se o repositório ficar indisponível, o projeto não deve ser apagado automaticamente do YA Hub.
 
 Exemplos:
 

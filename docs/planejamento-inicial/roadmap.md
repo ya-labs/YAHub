@@ -25,6 +25,9 @@ Entregas previstas:
 - painel administrativo na mesma aplicação;
 - autenticação administrativa com login e cadastro;
 - cadastro administrativo de projetos;
+- descoberta de repositórios públicos da organização no Admin;
+- cadastro de projetos orientados por URL pública do GitHub;
+- exibição separada de projetos oficiais e orientados;
 - cadastro administrativo de membros;
 - metadados oficiais de projetos e membros no banco de dados;
 - links para documentação dos projetos no GitHub;
@@ -42,7 +45,8 @@ Fora da V1:
 - cadastro público aberto de administradores sem controle;
 - integração real com Spotifolio;
 - bot ou automações no Discord;
-- `.yahub/project.json` como fonte oficial de metadados.
+- `.yahub/project.json` como fonte oficial de metadados;
+- projetos sem repositório público no GitHub.
 
 Critério de direção visual: a V1 deve validar a linguagem institucional do YA Hub sem tentar consolidar todo o design system da organização dentro deste repositório.
 

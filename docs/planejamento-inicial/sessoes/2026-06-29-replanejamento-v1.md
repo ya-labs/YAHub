@@ -20,6 +20,11 @@ O objetivo foi corrigir o rumo do produto antes de avançar no roadmap e evitar 
 - A página `/portal/projetos/:slug` entra completa na V1.
 - A área de projetos separa `produto` e `ecossistema`.
 - Ecossistema é uma categoria de projeto, não uma rota própria.
+- Todo projeto cadastrado deve possuir exatamente um repositório principal e público no GitHub.
+- O Admin lista os repositórios públicos da organização `ya-labs` e aceita URL pública para projetos orientados.
+- Projetos oficiais pertencem à organização `ya-labs`.
+- Projetos orientados pertencem a membros ou parceiros, usam categoria `produto` e continuam mantidos por seus autores.
+- O vínculo `oficial` ou `orientado` é derivado da origem do repositório.
 - Os metadados oficiais dos projetos ficam no banco do YA Hub.
 - O GitHub é fonte complementar para dados técnicos e documentação inicial dos projetos.
 - Documentação interna dos projetos não entra na V1.
@@ -47,6 +52,19 @@ Visibilidade:
 - `publico`;
 - `oculto`.
 
+Vínculo:
+
+- `oficial`;
+- `orientado`.
+
+Tipos de apoio para projetos orientados:
+
+- `apoio_tecnico`;
+- `documentacao`;
+- `revisao`;
+- `divulgacao`;
+- `mentoria`.
+
 ## Fora da V1
 
 - Documentação interna dos projetos dentro do YA Hub.
@@ -59,6 +77,8 @@ Visibilidade:
 - Integração real com Spotifolio.
 - Bot ou automações no Discord.
 - `.yahub/project.json` como fonte oficial.
+- Projetos sem repositório público no GitHub.
+- Mais de um repositório principal por projeto.
 
 ## Impactos
 
@@ -67,6 +87,8 @@ Visibilidade:
 - Os contratos da API passam a considerar endpoints administrativos para projetos e membros.
 - O back-end passa a ter PostgreSQL como fonte oficial dos metadados editoriais.
 - GitHub permanece relevante para atividade, repositório e acesso inicial à documentação.
+- O cadastro de projetos passa a começar pela descoberta ou validação de um repositório público no GitHub.
+- A página pública de projetos passa a distinguir Produtos, Ecossistema e Projetos orientados pela YA LABS.
 
 ## Pendências
 

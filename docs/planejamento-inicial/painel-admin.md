@@ -29,11 +29,35 @@ Rotas conceituais:
 ```text
 Admin acessa o painel
   -> autentica
-  -> cadastra ou edita projetos e membros
+  -> escolhe entre repositório oficial ou projeto orientado
+  -> seleciona um repositório público da YA LABS
+     ou informa a URL pública de um repositório externo
+  -> GitHub é consultado e o formulário recebe dados técnicos iniciais
+  -> administrador completa os metadados editoriais
   -> back-end valida os dados
   -> back-end persiste no PostgreSQL
   -> portal público passa a consumir os dados atualizados
 ```
+
+### Cadastro de projeto oficial
+
+- listar automaticamente os repositórios públicos da organização `ya-labs`;
+- permitir busca e filtros;
+- ocultar arquivados e forks por padrão;
+- indicar quais repositórios já estão cadastrados;
+- definir `affiliation = oficial`;
+- permitir escolher `category = produto` ou `category = ecossistema`.
+
+### Cadastro de projeto orientado
+
+- receber uma URL pública do GitHub;
+- validar repositório, proprietário e duplicidade;
+- rejeitar URL privada, inválida ou fora do GitHub;
+- definir `affiliation = orientado`;
+- definir `category = produto`;
+- permitir informar autoria, tipos de apoio e mentores da YA LABS.
+
+O vínculo não deve ser escolhido livremente. Se a URL pertencer à organização `ya-labs`, o cadastro deve seguir como projeto oficial.
 
 ## Acesso administrativo
 
@@ -48,6 +72,8 @@ Antes de produção, o cadastro precisa ser controlado. A V1 pode manter o endpo
 Front-end:
 
 - telas administrativas;
+- seleção e busca de repositórios da YA LABS;
+- entrada de URL para projeto orientado;
 - formulários;
 - estados de validação e erro;
 - experiência de edição.
@@ -55,6 +81,8 @@ Front-end:
 Back-end:
 
 - autenticação;
+- consulta e validação de repositórios públicos no GitHub;
+- prevenção de cadastro duplicado pelo identificador do repositório;
 - persistência no PostgreSQL;
 - validação dos dados;
 - proteção de endpoints administrativos.
@@ -77,6 +105,9 @@ Ficam fora da V1:
 - criação automática de branch;
 - abertura automática de Pull Request;
 - edição de arquivos em repositórios externos;
+- repositórios privados;
+- projetos sem repositório no GitHub;
+- mais de um repositório principal por projeto;
 - `.yahub/project.json` como fonte oficial.
 
 ## Segurança

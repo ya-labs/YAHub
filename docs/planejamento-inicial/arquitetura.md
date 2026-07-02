@@ -30,6 +30,8 @@ Responsabilidades do front-end:
 Responsabilidades do back-end:
 
 - consultar a GitHub API;
+- listar repositórios públicos da organização `ya-labs`;
+- resolver e validar URLs públicas de repositórios externos;
 - persistir projetos e membros no PostgreSQL;
 - autenticar administradores;
 - expor endpoints administrativos para projetos e membros;
@@ -53,6 +55,8 @@ GET /api/admin/projects
 POST /api/admin/projects
 PUT /api/admin/projects/{id}
 DELETE /api/admin/projects/{id}
+GET /api/admin/github/repositories
+POST /api/admin/github/repositories/resolve
 GET /api/admin/members
 POST /api/admin/members
 PUT /api/admin/members/{id}
@@ -139,6 +143,6 @@ O back-end do YA Hub pode se tornar a camada central para tratar eventos e dados
 ## Separação de dados
 
 - **GitHub:** dados técnicos e dinâmicos dos repositórios.
-- **PostgreSQL:** fonte oficial dos metadados editoriais de projetos, membros, status, destaque, categoria e visibilidade.
+- **PostgreSQL:** fonte oficial dos metadados editoriais de projetos, membros, status, destaque, categoria, vínculo e visibilidade.
 - **Back-end do YA Hub:** tratamento, contratos, cache futuro, segurança e persistência.
 - **Front-end:** apresentação e experiência, sem acoplamento direto com integrações externas.

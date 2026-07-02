@@ -47,6 +47,8 @@ GET /api/admin/projects
 POST /api/admin/projects
 PUT /api/admin/projects/{id}
 DELETE /api/admin/projects/{id}
+GET /api/admin/github/repositories
+POST /api/admin/github/repositories/resolve
 GET /api/admin/members
 POST /api/admin/members
 PUT /api/admin/members/{id}
@@ -98,6 +100,7 @@ Dados esperados:
 - slug;
 - nome de exibição;
 - categoria;
+- vínculo com a YA LABS;
 - descrição curta;
 - status;
 - linguagem principal;
@@ -105,6 +108,8 @@ Dados esperados:
 - URL do site, quando existir;
 - data da última atualização;
 - indicação de destaque.
+
+Para projetos orientados, a resposta também deve incluir autoria e tipos de apoio da YA LABS.
 
 Exemplo conceitual:
 
@@ -118,6 +123,7 @@ Exemplo conceitual:
       "slug": "cade-o-dano",
       "displayName": "CADE O DANO",
       "category": "produto",
+      "affiliation": "oficial",
       "shortDescription": "Projeto desenvolvido para testar APIs do League of Legends.",
       "status": "Em desenvolvimento",
       "primaryLanguage": "TypeScript",
@@ -139,6 +145,8 @@ Na V1, este endpoint não deve depender de `.yahub/project.json`. O detalhe deve
 Dados esperados:
 
 - dados do projeto;
+- categoria e vínculo com a YA LABS;
+- autoria e tipos de apoio, quando for orientado;
 - links;
 - responsáveis;
 - tecnologias;
@@ -281,20 +289,30 @@ Resposta esperada:
 Endpoints previstos:
 
 ```text
+GET /api/admin/github/repositories
+POST /api/admin/github/repositories/resolve
 GET /api/admin/projects
 POST /api/admin/projects
 PUT /api/admin/projects/{id}
 DELETE /api/admin/projects/{id}
 ```
 
+`GET /api/admin/github/repositories` lista os repositórios públicos da organização `ya-labs` disponíveis para cadastro. A resposta deve indicar quais já possuem projeto no YA Hub.
+
+`POST /api/admin/github/repositories/resolve` recebe uma URL pública do GitHub, valida o repositório e retorna os dados técnicos usados para iniciar o formulário. Repositórios privados, inexistentes ou já cadastrados devem ser rejeitados.
+
 Campos obrigatórios:
 
+- `githubRepositoryId`;
+- `githubOwner`;
+- `githubName`;
 - `slug`;
 - `displayName`;
 - `tagline`;
 - `shortDescription`;
 - `fullDescription`;
 - `category`;
+- `affiliation`;
 - `status`;
 - `visibility`;
 - `repositoryUrl`;
@@ -307,8 +325,32 @@ Campos obrigatórios:
 Valores fechados:
 
 - `category`: `produto`, `ecossistema`;
+- `affiliation`: `oficial`, `orientado`;
 - `status`: `ideia`, `planejamento`, `desenvolvimento`, `ativo`, `pausado`, `arquivado`;
 - `visibility`: `publico`, `oculto`.
+
+Campos de projetos orientados:
+
+- `authorDisplayName`;
+- `supportTypes`;
+- `yalabsMentorIds`.
+
+Valores de `supportTypes`:
+
+- `apoio_tecnico`;
+- `documentacao`;
+- `revisao`;
+- `divulgacao`;
+- `mentoria`.
+
+Regras:
+
+- cada projeto possui exatamente um repositório principal;
+- somente repositórios públicos podem ser cadastrados;
+- `githubRepositoryId` não pode se repetir;
+- repositório de `ya-labs` gera `affiliation = oficial`;
+- repositório externo gera `affiliation = orientado` e exige `category = produto`;
+- o vínculo é calculado pelo back-end e não deve ser aceito livremente do cliente.
 
 Na interface administrativa, os campos podem ser exibidos em português. No payload da API, o contrato deve permanecer consistente com os nomes técnicos acima.
 
