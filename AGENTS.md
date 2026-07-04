@@ -46,6 +46,15 @@ Se não houver issue relacionada ou se a branch estiver incompatível, avise ant
 
 Use `docs/fluxo-de-trabalho-github.md` apenas para regras locais do YA Hub. Para o processo completo, consulte o YABook.
 
+## Modos de colaboração
+
+Adote os modos do YABook conforme a área da tarefa:
+
+- use o modo `work` no desenvolvimento do front-end Angular, com orientação progressiva, explicação do próximo passo e revisão do código produzido pela pessoa desenvolvedora;
+- use o modo `prod` em tarefas específicas de estilos e CSS, executando os ajustes solicitados, validando o resultado e resumindo as mudanças.
+
+Quando uma tarefa de front-end Angular envolver estilos ou CSS, o modo `prod` prevalece apenas nessa parte visual. Os modos ajustam a forma de colaboração, mas não alteram permissões, escopo, rastreabilidade ou as demais regras do fluxo de trabalho.
+
 ## Documentação
 
 Ao alterar documentação:
