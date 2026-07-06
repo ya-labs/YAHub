@@ -32,8 +32,8 @@ Em planejamento inicial.
 
 ## Stack prevista
 
-- Front-end: Angular e TypeScript.
-- Back-end: Java Spring Boot.
+- Front-end: stack a definir.
+- Back-end: .NET, ASP.NET Core e arquitetura DDD.
 - Integrações: GitHub API na V1; YABook, Spotifolio e Discord em fases futuras.
 - Infraestrutura: a definir, com possibilidade de uso da Azure para o back-end.
 

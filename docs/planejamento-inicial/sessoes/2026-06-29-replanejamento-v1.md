@@ -10,7 +10,7 @@ O objetivo foi corrigir o rumo do produto antes de avançar no roadmap e evitar 
 
 - A Home institucional fica em `/` e apresenta a YA LABS.
 - O Portal fica em `/portal` e funciona como área navegável para explorar projetos, membros, documentação externa, atividade e status.
-- O front-end será em Angular.
+- A stack do front-end ainda não está fechada; Angular foi uma hipótese inicial, mas não deve ser tratado como decisão definitiva.
 - O admin fica na mesma aplicação front-end do YA Hub.
 - Projetos serão cadastrados no admin.
 - Membros serão cadastrados no admin.
