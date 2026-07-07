@@ -8,3 +8,4 @@ obj/
 
 Back-end/**/bin/
 Back-end/**/obj/
+Back-end/src/YaHub.Api/appsettings.Development.json
