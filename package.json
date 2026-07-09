@@ -1,0 +1,11 @@
+{
+  "name": "yahub",
+  "private": true,
+  "scripts": {
+    "wdev": "npm --prefix apps/web run dev",
+    "wbuild": "npm --prefix apps/web run build",
+    "wtest": "npm --prefix apps/web run test",
+    "wlint": "npm --prefix apps/web run lint",
+    "winstall": "npm --prefix apps/web install"
+  }
+}
