@@ -1,3 +1,3 @@
-export function AdminPage () {
-    return <h1>Admin do YAHub</h1>
+export function AdminPage() {
+    return <h1>Admin do YAHub</h1>;
 }

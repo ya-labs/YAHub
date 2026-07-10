@@ -6,14 +6,14 @@ import { PortalPage } from '../features/portal/pages/PortalPage';
 export const routes: RouteObject[] = [
     {
         path: '/',
-        element: <HomePage/>,
-    },
-    {
-        path: '/admin',
-        element: <AdminPage/>,
+        element: <HomePage />,
     },
     {
         path: '/portal',
-        element: <PortalPage/>,
+        element: <PortalPage />,
     },
-]
+    {
+        path: '/admin',
+        element: <AdminPage />,
+    },
+];
