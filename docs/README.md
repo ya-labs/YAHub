@@ -67,6 +67,7 @@ Use o YABook como fonte para:
 - [Painel administrativo](planejamento-inicial/painel-admin.md)
 - [Integrações futuras](planejamento-inicial/integracoes-futuras.md)
 - [Sessões de planejamento](planejamento-inicial/sessoes/)
+  - [Protocolo de desenvolvimento delegado com IA](planejamento-inicial/sessoes/2026-07-10-protocolo-desenvolvimento-delegado-com-ia.md)
 
 ### Técnico
 

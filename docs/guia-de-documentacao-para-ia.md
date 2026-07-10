@@ -22,7 +22,7 @@ Não leia todos os documentos por padrão. Leitura ampla é adequada quando a ta
 | `README.md` | Entrada pública do projeto. | Visão geral e links principais. | Mudança de posicionamento ou leitura inicial. |
 | `docs/README.md` | Índice geral. | Localizar documentos disponíveis. | Novo documento, pasta ou mudança de organização. |
 | `docs/guia-da-documentacao.md` | Roteiro de consulta. | Saber onde atualizar cada assunto. | Mudança na estrutura documental. |
-| `docs/fluxo-de-trabalho-github.md` | Regras locais de trabalho. | Confirmar adaptações do YAHub ao YABook. | Mudança de fluxo local. |
+| `docs/fluxo-de-trabalho-github.md` | Regras locais de trabalho. | Confirmar adaptações do YAHub ao YABook e o protocolo de desenvolvimento delegado com IA. | Mudança de fluxo local. |
 | `docs/planejamento-inicial/` | Planejamento do produto. | Visão, roadmap, arquitetura conceitual e integrações. | Mudança de escopo, fase ou direção do produto. |
 | `docs/tecnico/arquitetura/` | Arquitetura técnica. | Estrutura, responsabilidades e decisões técnicas da V1. | Mudança estrutural relevante. |
 | `docs/tecnico/api/` | Contratos conceituais. | Endpoints, DTOs e formato esperado de resposta. | Mudança de contrato, rota ou estado esperado. |
@@ -49,6 +49,7 @@ Não copie o conteúdo do YABook para o YAHub. Se existir uma regra geral nova, 
 - O back-end deve tratar integrações externas e entregar contratos estáveis ao front-end.
 - O YAHub deve servir como referência visual institucional da YA LABS.
 - Decisões reutilizáveis para outros projetos devem ser consolidadas no YABook.
+- O YAHub usa desenvolvimento delegado com IA: a issue concentra decisões, a IA executa no escopo aprovado e a Pull Request sustenta a revisão e o aceite humano.
 
 ## Quando avisar antes de editar
 
