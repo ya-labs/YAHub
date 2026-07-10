@@ -1,13 +1,9 @@
+import { useRoutes } from 'react-router-dom';
 import './App.css'
+import { routes } from './routes';
 
 function App() {
-
-  return (
-    <>
-      <h1>YA Hub</h1>
-      <p>Base React da V1</p>
-    </>
-  )
+    return useRoutes(routes);
 }
 
 export default App;
