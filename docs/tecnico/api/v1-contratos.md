@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Este documento registra os contratos conceituais da API V1 do YA Hub.
+Este documento registra os contratos conceituais da API V1 do YAHub.
 
 Os nomes finais de DTOs, propriedades e rotas podem ser refinados durante a implementação, mas a intenção da API deve permanecer clara: entregar dados públicos da YA LABS já tratados para o front-end e permitir manutenção administrativa básica de projetos e membros.
 
@@ -57,7 +57,7 @@ DELETE /api/admin/members/{id}
 
 ## GET /api/organization
 
-Retorna informações públicas da organização para a Home do YA Hub.
+Retorna informações públicas da organização para a Home do YAHub.
 
 Dados esperados:
 
@@ -92,7 +92,7 @@ Exemplo conceitual:
 
 ## GET /api/projects
 
-Retorna a listagem de projetos públicos exibidos no YA Hub.
+Retorna a listagem de projetos públicos exibidos no YAHub.
 
 Dados esperados:
 
@@ -140,7 +140,7 @@ Exemplo conceitual:
 
 Retorna o detalhe básico de um projeto.
 
-Na V1, este endpoint não deve depender de `.yahub/project.json`. O detalhe deve usar metadados cadastrados no banco do YA Hub e pode combinar dados complementares vindos da GitHub API.
+Na V1, este endpoint não deve depender de `.yahub/project.json`. O detalhe deve usar metadados cadastrados no banco do YAHub e pode combinar dados complementares vindos da GitHub API.
 
 Dados esperados:
 
@@ -154,7 +154,7 @@ Dados esperados:
 
 ## GET /api/members
 
-Retorna membros oficiais da YA LABS exibidos no YA Hub.
+Retorna membros oficiais da YA LABS exibidos no YAHub.
 
 Dados esperados:
 
@@ -180,7 +180,7 @@ Exemplo conceitual:
       "githubUsername": "yoriyoi",
       "spotifolioUsername": null,
       "responsibilities": [
-        "Idealização do YA Hub",
+        "Idealização do YAHub",
         "Direção funcional",
         "Front-end"
       ]
@@ -297,7 +297,7 @@ PUT /api/admin/projects/{id}
 DELETE /api/admin/projects/{id}
 ```
 
-`GET /api/admin/github/repositories` lista os repositórios públicos da organização `ya-labs` disponíveis para cadastro. A resposta deve indicar quais já possuem projeto no YA Hub.
+`GET /api/admin/github/repositories` lista os repositórios públicos da organização `ya-labs` disponíveis para cadastro. A resposta deve indicar quais já possuem projeto no YAHub.
 
 `POST /api/admin/github/repositories/resolve` recebe uma URL pública do GitHub, valida o repositório e retorna os dados técnicos usados para iniciar o formulário. Repositórios privados, inexistentes ou já cadastrados devem ser rejeitados.
 

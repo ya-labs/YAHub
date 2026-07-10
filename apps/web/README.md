@@ -1,6 +1,6 @@
-# YA Hub Web
+# YAHub Web
 
-Aplicação front-end da V1 do YA Hub, construída com React, TypeScript e Vite.
+Aplicação front-end da V1 do YAHub, construída com React, TypeScript e Vite.
 
 ## Requisitos
 

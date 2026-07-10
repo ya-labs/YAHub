@@ -1,6 +1,6 @@
-# Documentação do YA Hub
+# Documentação do YAHub
 
-Este diretório reúne a documentação específica do YA Hub.
+Este diretório reúne a documentação específica do YAHub.
 
 Use este espaço para registrar informações reais do produto, como visão, roadmap, arquitetura, contratos de API, integrações, direção visual, deploy e decisões técnicas.
 
@@ -28,7 +28,7 @@ docs/
     `-- api/
 ```
 
-Crie apenas as pastas e documentos necessários para o momento atual do projeto. O YABook recomenda uma estrutura mais ampla para projetos, mas o YA Hub deve abrir novas pastas somente quando houver conteúdo real para manter.
+Crie apenas as pastas e documentos necessários para o momento atual do projeto. O YABook recomenda uma estrutura mais ampla para projetos, mas o YAHub deve abrir novas pastas somente quando houver conteúdo real para manter.
 
 ## Referência organizacional
 
@@ -47,13 +47,13 @@ Use o YABook como fonte para:
 
 ## O que deve ficar aqui
 
-- Visão e roadmap do YA Hub.
+- Visão e roadmap do YAHub.
 - Arquitetura real do projeto.
-- Contratos de API do YA Hub.
+- Contratos de API do YAHub.
 - Direção visual específica do portal.
 - Decisões técnicas específicas.
 - Integrações próprias do produto.
-- Deploy e infraestrutura do YA Hub.
+- Deploy e infraestrutura do YAHub.
 
 ## Documentos disponíveis
 

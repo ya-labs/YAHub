@@ -1,17 +1,17 @@
-# Roadmap inicial do YA Hub
+# Roadmap inicial do YAHub
 
 ## Visão geral
 
-O roadmap do YA Hub deve organizar a evolução do produto em versões incrementais. Cada versão precisa entregar valor próprio e preparar a próxima sem transformar a primeira entrega em uma plataforma grande demais.
+O roadmap do YAHub deve organizar a evolução do produto em versões incrementais. Cada versão precisa entregar valor próprio e preparar a próxima sem transformar a primeira entrega em uma plataforma grande demais.
 
 ## V1 - Portal público e admin básico
 
-Objetivo: colocar o YA Hub no ar como portal oficial da YA LABS, com Home institucional, portal navegável, back-end próprio e painel administrativo básico para manter projetos e membros.
+Objetivo: colocar o YAHub no ar como portal oficial da YA LABS, com Home institucional, portal navegável, back-end próprio e painel administrativo básico para manter projetos e membros.
 
 Entregas previstas:
 
 - front-end em React e TypeScript;
-- back-end inicial do YA Hub;
+- back-end inicial do YAHub;
 - integração do back-end com a GitHub API;
 - Home institucional da YA LABS;
 - dashboard inicial do portal;
@@ -36,7 +36,7 @@ Entregas previstas:
 
 Fora da V1:
 
-- documentação interna dos projetos dentro do YA Hub;
+- documentação interna dos projetos dentro do YAHub;
 - upload de imagens;
 - escrita automática em repositórios;
 - criação automática de Pull Requests;
@@ -48,7 +48,7 @@ Fora da V1:
 - `.yahub/project.json` como fonte oficial de metadados;
 - projetos sem repositório público no GitHub.
 
-Critério de direção visual: a V1 deve validar a linguagem institucional do YA Hub sem tentar consolidar todo o design system da organização dentro deste repositório.
+Critério de direção visual: a V1 deve validar a linguagem institucional do YAHub sem tentar consolidar todo o design system da organização dentro deste repositório.
 
 ## V2 - Portal público mais rico
 
@@ -65,7 +65,7 @@ Entregas previstas:
 
 Fora da V2:
 
-- upload pelo YA Hub;
+- upload pelo YAHub;
 - criação automática de Pull Request;
 - documentação interna completa dos projetos.
 
@@ -75,18 +75,18 @@ Objetivo: conectar o portfólio institucional da YA LABS com os portfólios pess
 
 Entregas previstas:
 
-- vínculo entre membros do YA Hub e perfis do Spotifolio;
+- vínculo entre membros do YAHub e perfis do Spotifolio;
 - links automáticos para perfis;
 - projetos da YA LABS vinculados aos perfis dos membros;
 - possível badge de membro oficial da YA LABS;
-- possível consumo de dados públicos do Spotifolio pelo YA Hub;
-- possível consumo de dados do YA Hub pelo Spotifolio.
+- possível consumo de dados públicos do Spotifolio pelo YAHub;
+- possível consumo de dados do YAHub pelo Spotifolio.
 
 Fora da V3:
 
-- transformar o Spotifolio em seção interna do YA Hub;
+- transformar o Spotifolio em seção interna do YAHub;
 - obrigar todo usuário do Spotifolio a ser membro da YA LABS;
-- tornar o YA Hub dependente do Spotifolio para funcionar.
+- tornar o YAHub dependente do Spotifolio para funcionar.
 
 ## V4 - Discord e automações
 
@@ -99,17 +99,17 @@ Entregas previstas:
 - changelog automático;
 - comandos básicos;
 - possível bot próprio da YA LABS;
-- integração com dados do back-end do YA Hub.
+- integração com dados do back-end do YAHub.
 
 Fora da V4:
 
-- substituir o YA Hub como fonte pública de informação;
+- substituir o YAHub como fonte pública de informação;
 - misturar regras de produto do Spotifolio;
 - publicar automações críticas sem revisão.
 
 ## Roadmap visual e de experiência
 
-Esta trilha orienta a evolução visual do YA Hub em paralelo ao roadmap funcional. Ela deve ajudar a validar a identidade da YA LABS em uso real antes de extrair padrões reutilizáveis para o YABook.
+Esta trilha orienta a evolução visual do YAHub em paralelo ao roadmap funcional. Ela deve ajudar a validar a identidade da YA LABS em uso real antes de extrair padrões reutilizáveis para o YABook.
 
 ### V1 - Identidade aplicada e Home marcante
 
@@ -117,7 +117,7 @@ Objetivo: aplicar uma primeira versão da identidade visual da YA LABS no portal
 
 Entregas previstas:
 
-- Hero quase fullscreen apresentando a YA LABS, não o dashboard do YA Hub;
+- Hero quase fullscreen apresentando a YA LABS, não o dashboard do YAHub;
 - Home institucional com primeira impressão forte, scroll narrativo e direção escura, premium, minimalista e autoral;
 - seções amplas com uma ideia por vez;
 - hero com `YA LABS` como protagonista, `YA` seguindo o símbolo oficial da marca, estrela dourada no `A`, `LABS` espaçado, slogan `Code. Automate. Scale.` e `Scale.` em dourado;
@@ -130,7 +130,7 @@ Entregas previstas:
 - seção "Ecossistema YA", separando YAHub, YABook, YAGit e YABot;
 - seção "Como uma ideia vira produto", conectando ideia, documentação, issue, branch, Pull Request e release;
 - seção "Produtos", separando SVNFlow, DevLab, Spotifolio, CADE-O-DANO, RMAWorker e Meu Treino;
-- seção "Central YAHub", apresentando o YA Hub como portal oficial do ecossistema;
+- seção "Central YAHub", apresentando o YAHub como portal oficial do ecossistema;
 - navegação clara para projetos, membros, documentação, atividades e links oficiais;
 - tema claro como padrão institucional, com branco, azul escuro, azul forte e azul claro;
 - tema escuro como opção completa para sites, aplicativos e ferramentas da YA LABS;
@@ -199,7 +199,7 @@ Entregas previstas:
 - mascote evoluindo para assistente reutilizável da YA LABS;
 - possíveis integrações com documentação, Discord, changelog ou automações;
 - padrões visuais extraídos para o YABook;
-- tokens, componentes e regras documentados apenas após validação no YA Hub.
+- tokens, componentes e regras documentados apenas após validação no YAHub.
 
 Fora da V3 visual:
 
@@ -209,6 +209,6 @@ Fora da V3 visual:
 
 ## Diretriz de evolução
 
-O YA Hub deve ser planejado para integrar melhor com YABook, Spotifolio e Discord no futuro, mas não deve depender dessas integrações para funcionar nas primeiras versões.
+O YAHub deve ser planejado para integrar melhor com YABook, Spotifolio e Discord no futuro, mas não deve depender dessas integrações para funcionar nas primeiras versões.
 
 A evolução visual deve seguir a mesma lógica: começar com uma identidade aplicável e útil, validar interações em partes controladas da interface e só depois transformar padrões em design system oficial no YABook.

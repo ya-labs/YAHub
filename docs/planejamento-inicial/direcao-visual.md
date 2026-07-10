@@ -1,10 +1,10 @@
-# Direção visual do YA Hub
+# Direção visual do YAHub
 
 ## Objetivo
 
-O YA Hub deve ser a principal referência visual institucional da YA LABS.
+O YAHub deve ser a principal referência visual institucional da YA LABS.
 
-Enquanto ferramentas operacionais da organização precisam priorizar densidade, produtividade e feedback de ação, o YA Hub deve priorizar primeira impressão, clareza institucional, apresentação de projetos e navegação pelo ecossistema.
+Enquanto ferramentas operacionais da organização precisam priorizar densidade, produtividade e feedback de ação, o YAHub deve priorizar primeira impressão, clareza institucional, apresentação de projetos e navegação pelo ecossistema.
 
 ## Relação com o design system
 
@@ -12,13 +12,13 @@ O design system oficial fica no YABook:
 
 - [Design system da YA LABS](https://github.com/ya-labs/YABook/blob/main/docs/guias/design-system.md)
 
-O YA Hub deve aplicar a identidade visual da YA LABS e ajudar a validar decisões em uso real.
+O YAHub deve aplicar a identidade visual da YA LABS e ajudar a validar decisões em uso real.
 
-Quando uma decisão visual do YA Hub se mostrar estável, reutilizável e útil para outros produtos, ela pode ser levada ao YABook como padrão organizacional.
+Quando uma decisão visual do YAHub se mostrar estável, reutilizável e útil para outros produtos, ela pode ser levada ao YABook como padrão organizacional.
 
 ## Papel do portal
 
-O YA Hub deve comunicar:
+O YAHub deve comunicar:
 
 - quem é a YA LABS;
 - o que a organização constrói;
@@ -28,17 +28,17 @@ O YA Hub deve comunicar:
 
 ## Conceito de experiência
 
-O YA Hub deve ser útil por estrutura e marcante por experiência.
+O YAHub deve ser útil por estrutura e marcante por experiência.
 
 A página principal deve funcionar como a cara da YA LABS, não como um painel tentando mostrar todos os dados do portal. Ao acessar a Home, a pessoa deve perceber uma organização técnica, moderna, produtiva e confiável, mas também com identidade própria, criatividade e interações memoráveis.
 
 A experiência visual pode ser mais expressiva na Home, desde que a navegação continue clara e as informações principais sejam encontradas sem esforço.
 
-O objetivo não é criar apenas uma landing page bonita, nem um painel informativo compacto. A Home deve ser uma apresentação narrativa da YA LABS, enquanto o YA Hub como portal pode ser explicado em uma seção própria mais adiante.
+O objetivo não é criar apenas uma landing page bonita, nem um painel informativo compacto. A Home deve ser uma apresentação narrativa da YA LABS, enquanto o YAHub como portal pode ser explicado em uma seção própria mais adiante.
 
 ## Direção final escolhida
 
-A direção final para a hero da Home do YA Hub é uma interface **escura, minimalista, premium e autoral**.
+A direção final para a hero da Home do YAHub é uma interface **escura, minimalista, premium e autoral**.
 
 Essa direção combina com a identidade da YA LABS porque faz a primeira dobra parecer uma apresentação de marca forte, sóbria e tecnológica, em vez de uma landing page genérica, um dashboard ou uma tela cheia de efeitos.
 
@@ -489,7 +489,7 @@ Ela deve transmitir:
 
 A Home não deve compactar projetos, membros, documentação e atividades no hero. Esses conteúdos podem existir, mas devem aparecer em seções separadas, com foco único e bastante respiro visual.
 
-O dashboard pode aparecer como representação do YA Hub em uma seção específica, não como linguagem dominante da Home inteira.
+O dashboard pode aparecer como representação do YAHub em uma seção específica, não como linguagem dominante da Home inteira.
 
 As páginas internas devem ser mais objetivas. Projetos, membros, documentação, atividade recente e futuras áreas operacionais devem priorizar leitura, navegação, filtros, links, status e informações úteis.
 
@@ -537,7 +537,7 @@ Possíveis usos:
 - onboarding;
 - documentação;
 - bot ou integrações futuras com Discord;
-- modo interativo de exploração do YA Hub.
+- modo interativo de exploração do YAHub.
 
 O mascote não deve ser a identidade inteira da YA LABS. Ele deve funcionar como uma camada de personalidade aplicada com cuidado.
 
@@ -552,7 +552,7 @@ O mascote não deve ser a identidade inteira da YA LABS. Ele deve funcionar como
 - Evitar excesso de decoração que atrapalhe leitura, navegação ou manutenção.
 - Permitir uma experiência mais marcante na Home, desde que ela continue acessível e compreensível.
 - Priorizar scroll narrativo, seções grandes e uma ideia por vez na Home.
-- Separar claramente YA LABS, Ecossistema YA, Produtos e YA Hub.
+- Separar claramente YA LABS, Ecossistema YA, Produtos e YAHub.
 - Evitar transformar a primeira dobra em dashboard, portal cheio de cards ou listagem compacta de projetos.
 - Usar linguagem de terminal e comandos em seções posteriores, não como protagonista da hero.
 - Usar `acessar portal` como CTA principal da Home.
@@ -570,35 +570,35 @@ As cores oficiais da marca devem seguir o YABook:
 - superfície clara: `#F8FAFC`;
 - texto principal: `#0F172A`.
 
-Na Home pública do YA Hub, o tema escuro deve representar a primeira impressão institucional da YA LABS: azul-marinho profundo, off-white, dourado pontual, pouco ruído e presença de marca.
+Na Home pública do YAHub, o tema escuro deve representar a primeira impressão institucional da YA LABS: azul-marinho profundo, off-white, dourado pontual, pouco ruído e presença de marca.
 
 O tema claro continua sendo necessário como opção completa para todos os sites, aplicativos e ferramentas da YA LABS, mas não é mais a direção principal da hero pública.
 
-No YA Hub, o tema escuro carrega os momentos mais imersivos, premium e marcantes da experiência, principalmente na Home, em áreas de destaque e em futuras experiências exploráveis. Ainda assim, a navegação, as páginas internas, os cards, os formulários e os estados da interface devem funcionar bem em tema claro e escuro.
+No YAHub, o tema escuro carrega os momentos mais imersivos, premium e marcantes da experiência, principalmente na Home, em áreas de destaque e em futuras experiências exploráveis. Ainda assim, a navegação, as páginas internas, os cards, os formulários e os estados da interface devem funcionar bem em tema claro e escuro.
 
 A identidade da YA LABS não deve depender exclusivamente de dark mode. O sistema visual precisa funcionar bem em tema claro e escuro.
 
 ## Diferença entre portal e ferramentas
 
-O YA Hub pode usar composição mais institucional, seções de apresentação e elementos de marca.
+O YAHub pode usar composição mais institucional, seções de apresentação e elementos de marca.
 
 Ferramentas como SVNFlow e futuros painéis internos devem adaptar a mesma identidade para uso recorrente, com mais densidade de informação, menos decoração e feedback operacional mais direto.
 
 ## Limite da documentação local
 
-Este documento registra a direção visual específica do YA Hub.
+Este documento registra a direção visual específica do YAHub.
 
 Tokens globais, filosofia visual, governança de design e decisões reutilizáveis devem ficar no YABook.
 
 ## Encerramento da idealização
 
-Esta documentação fecha a etapa de idealização visual inicial da marca no YA Hub.
+Esta documentação fecha a etapa de idealização visual inicial da marca no YAHub.
 
 O resultado desta etapa é:
 
 - direção visual da hero definida;
 - narrativa da Home registrada;
-- separação entre YA LABS, Ecossistema YA, Produtos e YA Hub documentada;
+- separação entre YA LABS, Ecossistema YA, Produtos e YAHub documentada;
 - limites entre experiência institucional e ferramentas operacionais definidos;
 - relação com o design system e o YABook esclarecida.
 

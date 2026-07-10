@@ -4,7 +4,7 @@ import App from './App'
 import { MemoryRouter } from 'react-router-dom';
 
 describe('App', () => {
-    it('renderiza a home do YA Hub', () => {
+    it('renderiza a home do YAHub', () => {
         render(
             <MemoryRouter initialEntries={['/']}>
                 <App />

@@ -6,27 +6,27 @@ brand
 
 ## Users
 
-O YA Hub atende visitantes, membros da YA LABS, pessoas interessadas nos projetos da organização, recrutadores, parceiros e o próprio time que precisa consultar projetos, documentos, membros, links oficiais e evolução técnica.
+O YAHub atende visitantes, membros da YA LABS, pessoas interessadas nos projetos da organização, recrutadores, parceiros e o próprio time que precisa consultar projetos, documentos, membros, links oficiais e evolução técnica.
 
 O contexto principal de uso é a descoberta e navegação pelo ecossistema da YA LABS. A pessoa deve entender rapidamente o que a organização constrói, quais produtos existem, quem participa e onde encontrar informações confiáveis.
 
 ## Product Purpose
 
-O YA Hub é o portal oficial da YA LABS.
+O YAHub é o portal oficial da YA LABS.
 
 Ele existe para apresentar a organização, centralizar projetos, membros, atividades e documentos, e servir como primeiro produto real de validação da identidade visual da YA LABS.
 
-O sucesso do produto significa entregar uma experiência institucional clara, confiável e memorável, sem perder objetividade nas informações importantes. A Home deve apresentar primeiro a YA LABS como organização e ecossistema; depois deve mostrar que o YA Hub é o portal oficial para explorar projetos, membros, documentação e atividades.
+O sucesso do produto significa entregar uma experiência institucional clara, confiável e memorável, sem perder objetividade nas informações importantes. A Home deve apresentar primeiro a YA LABS como organização e ecossistema; depois deve mostrar que o YAHub é o portal oficial para explorar projetos, membros, documentação e atividades.
 
 A Home não deve tentar mostrar tudo acima da dobra. Ela deve funcionar como uma narrativa progressiva: primeiro identidade, depois proposta, depois cultura de criação, depois ecossistema oficial e produtos.
 
-A direção final da Home é uma interface **escura, minimalista, premium e autoral**. O YA Hub deve parecer a porta de entrada da YA LABS: uma presença de marca forte, tecnológica, discreta e elegante, sem virar landing page genérica, dashboard ou vitrine cheia de elementos.
+A direção final da Home é uma interface **escura, minimalista, premium e autoral**. O YAHub deve parecer a porta de entrada da YA LABS: uma presença de marca forte, tecnológica, discreta e elegante, sem virar landing page genérica, dashboard ou vitrine cheia de elementos.
 
 Separação conceitual:
 
 ```text
 YA LABS = laboratório, organização e ecossistema.
-YA Hub = portal, interface e central de acesso.
+YAHub = portal, interface e central de acesso.
 ```
 
 ## Brand Personality
@@ -46,14 +46,14 @@ Em resumo:
 
 ## Anti-references
 
-O YA Hub não deve parecer:
+O YAHub não deve parecer:
 
 - landing page SaaS genérica, especialmente com excesso de roxo, azul, gradientes e cards repetitivos;
 - site abstrato de IA, cripto, NFT ou web3 sem clareza de propósito;
 - sistema administrativo antigo;
 - dashboard operacional compacto na Home pública;
 - portal cheio de cards, métricas e atalhos competindo na primeira dobra;
-- uso de "Entrar no laboratório" como CTA principal, porque laboratório é o conceito da YA LABS e portal é a função real do YA Hub;
+- uso de "Entrar no laboratório" como CTA principal, porque laboratório é o conceito da YA LABS e portal é a função real do YAHub;
 - interface poluída ou decorativa demais;
 - experiência infantil, mesmo com mascote;
 - navegação experimental que dificulta encontrar informações.
@@ -68,15 +68,15 @@ Painéis técnicos, dados operacionais e indicadores de sistema podem aparecer e
 
 ### Primeira impressão memorável, uso contínuo objetivo
 
-A Home deve causar impacto e apresentar a YA LABS com personalidade. O hero deve focar na organização, não no YA Hub como produto nem em uma lista compacta de projetos. As páginas internas devem priorizar leitura, navegação, dados úteis, status, links e comparação objetiva entre projetos.
+A Home deve causar impacto e apresentar a YA LABS com personalidade. O hero deve focar na organização, não no YAHub como produto nem em uma lista compacta de projetos. As páginas internas devem priorizar leitura, navegação, dados úteis, status, links e comparação objetiva entre projetos.
 
 ### Narrativa progressiva, uma ideia por seção
 
-A Home deve conduzir o usuário por uma história: o que é a YA LABS, como uma ideia vira produto, quais ferramentas sustentam a organização, quais produtos nasceram dela e como o YA Hub conecta tudo. Cada seção deve ter foco próprio, bastante espaço e revelação progressiva no scroll.
+A Home deve conduzir o usuário por uma história: o que é a YA LABS, como uma ideia vira produto, quais ferramentas sustentam a organização, quais produtos nasceram dela e como o YAHub conecta tudo. Cada seção deve ter foco próprio, bastante espaço e revelação progressiva no scroll.
 
-### YA LABS primeiro, YA Hub depois
+### YA LABS primeiro, YAHub depois
 
-A YA LABS é a organização e o ecossistema. O YA Hub é o portal oficial desse ecossistema. A primeira dobra deve apresentar a YA LABS; o YA Hub deve aparecer depois como porta de entrada para projetos, membros, documentação e atividades.
+A YA LABS é a organização e o ecossistema. O YAHub é o portal oficial desse ecossistema. A primeira dobra deve apresentar a YA LABS; o YAHub deve aparecer depois como porta de entrada para projetos, membros, documentação e atividades.
 
 O header da hero não precisa repetir o logo `YAHub` no canto superior esquerdo, porque o protagonista visual da primeira dobra é `YA LABS`. A navegação aparece no topo e o CTA principal fica no canto superior direito.
 
@@ -126,13 +126,13 @@ scroll
 A experiência desejada é:
 
 ```text
-O usuário abriu o YA Hub.
+O usuário abriu o YAHub.
 O portal inicializa a YA LABS.
 A página apresenta a organização.
 Depois mostra o ecossistema.
 Depois mostra o fluxo.
 Depois mostra os produtos.
-E no final revela o próprio YA Hub como central de acesso.
+E no final revela o próprio YAHub como central de acesso.
 ```
 
 ### Ecossistema YA e produtos com identidade própria
@@ -145,7 +145,7 @@ A experiência visual pode ser interativa e envolvente, mas a estrutura do produ
 
 ### Identidade validada em produto real
 
-O design system da YA LABS deve nascer de decisões aplicadas primeiro no YA Hub. Somente padrões estáveis, reutilizáveis e úteis devem ser extraídos depois para o YABook.
+O design system da YA LABS deve nascer de decisões aplicadas primeiro no YAHub. Somente padrões estáveis, reutilizáveis e úteis devem ser extraídos depois para o YABook.
 
 ### Interação com propósito
 
@@ -153,7 +153,7 @@ Microinterações, motion, mascote e futuras experiências exploráveis devem re
 
 ### Hero escura, temas completos
 
-A primeira impressão institucional da Home do YA Hub deve usar a direção escura premium. Ainda assim, a identidade da YA LABS deve funcionar em tema claro e escuro em todos os sites, aplicativos e ferramentas da organização.
+A primeira impressão institucional da Home do YAHub deve usar a direção escura premium. Ainda assim, a identidade da YA LABS deve funcionar em tema claro e escuro em todos os sites, aplicativos e ferramentas da organização.
 
 O tema claro continua necessário como opção completa de produto, com base limpa, branca e azul. O tema escuro não deve ser apenas decoração ou área especial: ele também precisa funcionar como modo real de uso.
 
@@ -163,7 +163,7 @@ O mascote e a camada amigável da marca devem tornar a YA LABS mais memorável, 
 
 ## Accessibility & Inclusion
 
-O YA Hub deve mirar uma experiência acessível, responsiva e legível desde a primeira versão.
+O YAHub deve mirar uma experiência acessível, responsiva e legível desde a primeira versão.
 
 Diretrizes iniciais:
 

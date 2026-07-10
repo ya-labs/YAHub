@@ -1,11 +1,11 @@
 ---
-name: YA Hub
+name: YAHub
 description: Portal oficial da YA LABS e primeira validação visual da marca.
 ---
 
 <!-- SEED: re-run $impeccable document once there's code to capture the actual tokens and components. -->
 
-# Design System: YA Hub
+# Design System: YAHub
 
 ## 1. Overview
 
@@ -52,7 +52,7 @@ A paleta deve seguir uma estratégia **Committed**: a identidade azul da YA LABS
 
 **The Committed Blue Rule.** O azul da YA LABS deve carregar a identidade, mas nunca virar monocromia sem hierarquia. Use branco, superfície clara, texto forte e profundidade escura para dar ritmo.
 
-**The No Crypto Glow Rule.** Brilho, profundidade e efeitos luminosos só entram quando reforçam a experiência de laboratório digital. Nunca use brilho para transformar o YA Hub em visual cripto, NFT ou web3 abstrato.
+**The No Crypto Glow Rule.** Brilho, profundidade e efeitos luminosos só entram quando reforçam a experiência de laboratório digital. Nunca use brilho para transformar o YAHub em visual cripto, NFT ou web3 abstrato.
 
 **The One Idea Per Section Rule.** Cada dobra ou seção principal deve defender uma ideia clara. Não compacte projetos, métricas, docs, bot, atividades e atalhos no mesmo espaço.
 
@@ -86,7 +86,7 @@ A paleta deve seguir uma estratégia **Committed**: a identidade azul da YA LABS
 
 **The Narrative Scroll Rule.** A escala tipográfica deve ajudar o usuário a descobrir a YA LABS aos poucos. Use títulos fortes e pouco texto por seção, em vez de blocos densos de informação.
 
-**The Strategic Mono Rule.** Monospace é parte da identidade do YA Hub, mas deve aparecer em comandos, status e linguagem de sistema. Não use monospace em todo o conteúdo.
+**The Strategic Mono Rule.** Monospace é parte da identidade do YAHub, mas deve aparecer em comandos, status e linguagem de sistema. Não use monospace em todo o conteúdo.
 
 ## 4. Elevation
 
@@ -126,7 +126,7 @@ Como este `DESIGN.md` ainda é seed, os componentes finais devem ser extraídos 
 
 - **Uso:** seções posteriores de ecossistema, fluxo e produtos; não na hero principal.
 - **Estilo:** comandos curtos, pequenos prompts, status, rótulos técnicos e marcadores de seção.
-- **Função:** guiar a narrativa como se o YA Hub estivesse inicializando e apresentando a YA LABS.
+- **Função:** guiar a narrativa como se o YAHub estivesse inicializando e apresentando a YA LABS.
 - **Regra:** evitar terminal na hero final. A primeira dobra é marca, não console.
 
 ### ASCII / YA Mark
@@ -146,7 +146,7 @@ Como este `DESIGN.md` ainda é seed, os componentes finais devem ser extraídos 
 
 - **Uso:** seção Central YAHub.
 - **Estilo:** preview de portal/dashboard apenas depois da narrativa principal.
-- **Regra:** dashboard representa o YA Hub, mas não define a linguagem da primeira dobra.
+- **Regra:** dashboard representa o YAHub, mas não define a linguagem da primeira dobra.
 
 ## 6. Do's and Don'ts
 
@@ -158,7 +158,7 @@ Como este `DESIGN.md` ainda é seed, os componentes finais devem ser extraídos 
 - **Do** criar uma Home narrativa, com primeira dobra focada na YA LABS e seções progressivas com bastante espaço em branco.
 - **Do** usar a direção escura, premium, minimalista e autoral como linguagem principal da hero.
 - **Do** usar `acessar portal` como CTA principal.
-- **Do** apresentar o YA Hub depois do contexto da organização, como portal oficial do ecossistema.
+- **Do** apresentar o YAHub depois do contexto da organização, como portal oficial do ecossistema.
 - **Do** evitar repetir `YAHub` no canto superior esquerdo da hero quando `YA LABS` já é o protagonista visual.
 - **Do** usar o `YA` do título com o símbolo oficial da marca, incluindo o corte correto no `A`.
 - **Do** usar fundo navy muito escuro, órbitas discretas, grid quase invisível, textura escura e pequenos acentos dourados.
@@ -174,8 +174,8 @@ Como este `DESIGN.md` ainda é seed, os componentes finais devem ser extraídos 
 - **Don't** transformar a Home em dashboard administrativo antigo ou em painel compacto cheio de cards.
 - **Don't** tentar mostrar projetos, métricas, docs, bot, atividades e atalhos na primeira dobra.
 - **Don't** colocar descrição longa, terminal, command bar, painéis ou ASCII grande na hero final.
-- **Don't** tratar YA Hub como sinônimo de YA LABS. YA LABS é a organização; YA Hub é o portal.
-- **Don't** usar `Entrar no laboratório` como CTA principal. Laboratório é o conceito da YA LABS; portal é a função do YA Hub.
+- **Don't** tratar YAHub como sinônimo de YA LABS. YA LABS é a organização; YAHub é o portal.
+- **Don't** usar `Entrar no laboratório` como CTA principal. Laboratório é o conceito da YA LABS; portal é a função do YAHub.
 - **Don't** infantilizar a YA LABS por causa do mascote.
 - **Don't** depender de animação, mascote ou modo explorável para comunicar informação essencial.
 - **Don't** copiar Linear, Raycast, Supabase ou Railway literalmente. Use essas referências como régua de qualidade, não como template.
