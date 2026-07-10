@@ -2,7 +2,7 @@
 
 ## Contexto
 
-Esta sessão consolidou a nova direção funcional da V1 do YA Hub após a separação entre Home institucional, Portal público e painel administrativo básico.
+Esta sessão consolidou a nova direção funcional da V1 do YAHub após a separação entre Home institucional, Portal público e painel administrativo básico.
 
 O objetivo foi corrigir o rumo do produto antes de avançar no roadmap e evitar que a implementação siga documentos antigos que ainda tratavam painel admin e metadados por repositório como fases futuras.
 
@@ -10,8 +10,8 @@ O objetivo foi corrigir o rumo do produto antes de avançar no roadmap e evitar 
 
 - A Home institucional fica em `/` e apresenta a YA LABS.
 - O Portal fica em `/portal` e funciona como área navegável para explorar projetos, membros, documentação externa, atividade e status.
-- O front-end será em Angular.
-- O admin fica na mesma aplicação front-end do YA Hub.
+- O front-end será em React.
+- O admin fica na mesma aplicação front-end do YAHub.
 - Projetos serão cadastrados no admin.
 - Membros serão cadastrados no admin.
 - A atividade GitHub entra na V1 como dado real.
@@ -25,7 +25,7 @@ O objetivo foi corrigir o rumo do produto antes de avançar no roadmap e evitar 
 - Projetos oficiais pertencem à organização `ya-labs`.
 - Projetos orientados pertencem a membros ou parceiros, usam categoria `produto` e continuam mantidos por seus autores.
 - O vínculo `oficial` ou `orientado` é derivado da origem do repositório.
-- Os metadados oficiais dos projetos ficam no banco do YA Hub.
+- Os metadados oficiais dos projetos ficam no banco do YAHub.
 - O GitHub é fonte complementar para dados técnicos e documentação inicial dos projetos.
 - Documentação interna dos projetos não entra na V1.
 - A V1 deve preparar integração futura com o YABook, como a ação `Abrir com o YABook`, quando esse suporte existir.
@@ -67,7 +67,7 @@ Tipos de apoio para projetos orientados:
 
 ## Fora da V1
 
-- Documentação interna dos projetos dentro do YA Hub.
+- Documentação interna dos projetos dentro do YAHub.
 - Upload de imagens.
 - Permissões administrativas granulares.
 - Editor rico ou CMS completo.

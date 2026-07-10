@@ -1,8 +1,8 @@
 # Guia de consulta da documentação
 
-Este documento ajuda pessoas e assistentes a localizar rapidamente onde cada assunto do YA Hub está documentado.
+Este documento ajuda pessoas e assistentes a localizar rapidamente onde cada assunto do YAHub está documentado.
 
-O YA Hub segue as diretrizes gerais do YABook, mas mantém aqui apenas documentação própria do produto.
+O YAHub segue as diretrizes gerais do YABook, mas mantém aqui apenas documentação própria do produto.
 
 ## Leitura rápida recomendada
 
@@ -45,11 +45,11 @@ Use o YABook quando a dúvida for sobre padrão reutilizável da YA LABS:
 
 ## Regra de separação
 
-Markdown no YA Hub deve guardar conhecimento estável do produto.
+Markdown no YAHub deve guardar conhecimento estável do produto.
 
 GitHub deve guardar trabalho executável, como backlog, responsáveis, Project, milestones, issues, Pull Requests e progresso operacional.
 
-Não use a documentação do YA Hub para duplicar templates, processos gerais, status de cards ou regras organizacionais que já pertencem ao YABook.
+Não use a documentação do YAHub para duplicar templates, processos gerais, status de cards ou regras organizacionais que já pertencem ao YABook.
 
 ## Segurança
 

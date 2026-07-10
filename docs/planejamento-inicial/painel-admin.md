@@ -1,14 +1,14 @@
-# Painel administrativo do YA Hub
+# Painel administrativo do YAHub
 
 ## Objetivo
 
-O painel administrativo será a forma de manter os dados editoriais do YA Hub sem editar arquivos manualmente.
+O painel administrativo será a forma de manter os dados editoriais do YAHub sem editar arquivos manualmente.
 
 Na V1, o painel deve ser simples e focado em cadastro e manutenção de projetos e membros.
 
 ## Papel na V1
 
-O painel administrativo entra na V1 e deve ficar na mesma aplicação front-end do YA Hub.
+O painel administrativo entra na V1 e deve ficar na mesma aplicação front-end do YAHub.
 
 Ele não deve ser um repositório separado e não precisa nascer como um CMS completo.
 
@@ -118,4 +118,4 @@ Operações administrativas devem passar pelo back-end, com autenticação, vali
 
 ## Resultado esperado
 
-Ao final da V1, administradores devem conseguir atualizar projetos e membros de forma visual, mantendo o banco do YA Hub como fonte oficial dos dados editoriais.
+Ao final da V1, administradores devem conseguir atualizar projetos e membros de forma visual, mantendo o banco do YAHub como fonte oficial dos dados editoriais.

@@ -1,10 +1,10 @@
-# Conteúdo dos projetos no YA Hub
+# Conteúdo dos projetos no YAHub
 
 ## Objetivo
 
-O YA Hub deve apresentar projetos da YA LABS com informações úteis, visuais e atualizadas.
+O YAHub deve apresentar projetos da YA LABS com informações úteis, visuais e atualizadas.
 
-Na V1, os metadados oficiais dos projetos serão mantidos no banco de dados do YA Hub e gerenciados pelo painel administrativo.
+Na V1, os metadados oficiais dos projetos serão mantidos no banco de dados do YAHub e gerenciados pelo painel administrativo.
 
 Todo projeto cadastrado deve possuir exatamente um repositório principal e público no GitHub. O repositório fornece identidade técnica e dados complementares, mas não será a fonte oficial dos dados editoriais exibidos no portal.
 
@@ -12,8 +12,8 @@ Todo projeto cadastrado deve possuir exatamente um repositório principal e púb
 
 Fonte principal:
 
-- banco de dados do YA Hub;
-- painel administrativo do YA Hub.
+- banco de dados do YAHub;
+- painel administrativo do YAHub.
 
 Fonte complementar:
 
@@ -22,9 +22,9 @@ Fonte complementar:
 
 Fora da V1:
 
-- documentação interna dos projetos dentro do YA Hub;
+- documentação interna dos projetos dentro do YAHub;
 - `.yahub/project.json` como fonte oficial;
-- assets versionados pelo YA Hub;
+- assets versionados pelo YAHub;
 - edição de metadados via Pull Request automático.
 
 ## Categorias de projeto
@@ -131,11 +131,11 @@ Visibilidade:
 
 ## Documentação dos projetos
 
-A documentação interna dos projetos não entra na V1 do YA Hub.
+A documentação interna dos projetos não entra na V1 do YAHub.
 
 Na V1, quando a pessoa visitante quiser consultar documentação, o portal deve apontar para o GitHub do repositório.
 
-O YA Hub deve preparar uma integração futura com o YABook. Quando o YABook tiver suporte, cada projeto poderá exibir uma ação como:
+O YAHub deve preparar uma integração futura com o YABook. Quando o YABook tiver suporte, cada projeto poderá exibir uma ação como:
 
 ```text
 Abrir com o YABook
@@ -143,11 +143,11 @@ Abrir com o YABook
 
 ## Evitar duplicação
 
-Informações editoriais pertencem ao YA Hub.
+Informações editoriais pertencem ao YAHub.
 
 Informações técnicas que o GitHub já fornece bem podem ser consumidas pela API e tratadas pelo back-end.
 
-O identificador `githubRepositoryId` deve impedir o cadastro duplicado mesmo quando um repositório for renomeado. Se o repositório ficar indisponível, o projeto não deve ser apagado automaticamente do YA Hub.
+O identificador `githubRepositoryId` deve impedir o cadastro duplicado mesmo quando um repositório for renomeado. Se o repositório ficar indisponível, o projeto não deve ser apagado automaticamente do YAHub.
 
 Exemplos:
 

@@ -1,14 +1,14 @@
-# YA Hub
+# YAHub
 
 Portal oficial da YA LABS para apresentar a organização, seus projetos, membros, atividades e evolução técnica.
 
-O YA Hub será o painel público da organização: um lugar para centralizar projetos, exibir informações vindas do GitHub, registrar a evolução dos produtos mantidos pela YA LABS e servir como principal referência visual institucional do ecossistema.
+O YAHub será o painel público da organização: um lugar para centralizar projetos, exibir informações vindas do GitHub, registrar a evolução dos produtos mantidos pela YA LABS e servir como principal referência visual institucional do ecossistema.
 
 ## Visão geral
 
 A YA LABS é uma organização voltada a desenvolvimento de produtos, estudos técnicos e experimentos de software.
 
-Dentro desse ecossistema, o YA Hub tem o papel de responder:
+Dentro desse ecossistema, o YAHub tem o papel de responder:
 
 ```text
 O que a YA LABS constrói?
@@ -16,7 +16,7 @@ O que a YA LABS constrói?
 
 O projeto deve evoluir de forma incremental, começando com Home institucional, portal público full-stack e painel administrativo básico, abrindo caminho para integrações futuras com YABook, Spotifolio e automações no Discord.
 
-O YA Hub também terá papel importante na evolução do design system da YA LABS: decisões visuais estáveis podem nascer aqui e, depois de validadas em uso real, serem registradas no YABook como padrão reutilizável.
+O YAHub também terá papel importante na evolução do design system da YA LABS: decisões visuais estáveis podem nascer aqui e, depois de validadas em uso real, serem registradas no YABook como padrão reutilizável.
 
 ## Responsabilidades iniciais
 
@@ -32,14 +32,14 @@ Em planejamento inicial.
 
 ## Stack prevista
 
-- Front-end: Angular e TypeScript.
+- Front-end: React e TypeScript.
 - Back-end: Java Spring Boot.
 - Integrações: GitHub API na V1; YABook, Spotifolio e Discord em fases futuras.
 - Infraestrutura: a definir, com possibilidade de uso da Azure para o back-end.
 
 ## Documentação do projeto
 
-A documentação específica do YA Hub fica em:
+A documentação específica do YAHub fica em:
 
 ```text
 docs/
@@ -66,7 +66,7 @@ O YABook é a fonte oficial para:
 - design system;
 - templates reutilizáveis.
 
-O YA Hub deve manter apenas documentação própria do produto. Regras gerais da organização devem continuar no YABook.
+O YAHub deve manter apenas documentação própria do produto. Regras gerais da organização devem continuar no YABook.
 
 ## Fluxo de trabalho
 
@@ -76,4 +76,4 @@ Mudanças relevantes devem seguir o fluxo da YA LABS:
 Issue -> Branch -> Commit -> Pull Request -> Merge -> Validação
 ```
 
-Consulte o YABook para o processo completo e use `docs/fluxo-de-trabalho-github.md` apenas para adaptações locais do YA Hub.
+Consulte o YABook para o processo completo e use `docs/fluxo-de-trabalho-github.md` apenas para adaptações locais do YAHub.

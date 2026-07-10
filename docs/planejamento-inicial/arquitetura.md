@@ -1,16 +1,16 @@
-# Arquitetura planejada do YA Hub
+# Arquitetura planejada do YAHub
 
 ## Visão geral
 
-A arquitetura do YA Hub deve começar simples, mas preparada para evolução. A V1 já será full-stack para permitir que o back-end centralize integrações, trate dados externos e entregue contratos estáveis para o front-end.
+A arquitetura do YAHub deve começar simples, mas preparada para evolução. A V1 já será full-stack para permitir que o back-end centralize integrações, trate dados externos e entregue contratos estáveis para o front-end.
 
 ## V1 - Portal público e admin básico
 
 Fluxo planejado:
 
 ```text
-YA Hub Frontend
-  -> YA Hub Backend
+YAHub Frontend
+  -> YAHub Backend
       -> GitHub API
       -> PostgreSQL
       -> dados editoriais cadastrados no admin
@@ -23,7 +23,7 @@ Responsabilidades do front-end:
 - construir a Home institucional, o portal público e o admin básico;
 - organizar componentes e rotas;
 - cuidar da experiência visual;
-- aplicar a direção visual institucional do YA Hub;
+- aplicar a direção visual institucional do YAHub;
 - consumir endpoints do back-end;
 - não depender diretamente da origem real dos dados.
 
@@ -72,16 +72,16 @@ Na V1, `POST /api/register` representa o cadastro administrativo inicial planeja
 Fluxo planejado:
 
 ```text
-YA Hub Backend
+YAHub Backend
   -> GitHub API
   -> PostgreSQL
   -> dados editoriais cadastrados no admin
   -> links externos dos projetos
 ```
 
-Nessa fase, o back-end pode enriquecer as páginas públicas com mais dados editoriais e técnicos, mantendo o banco do YA Hub como fonte oficial dos metadados.
+Nessa fase, o back-end pode enriquecer as páginas públicas com mais dados editoriais e técnicos, mantendo o banco do YAHub como fonte oficial dos metadados.
 
-O YA Hub deve tratar três cenários:
+O YAHub deve tratar três cenários:
 
 - projeto cadastrado e visível no banco;
 - projeto com GitHub indisponível ou sem dados técnicos complementares;
@@ -94,7 +94,7 @@ Em todos os casos, o front-end deve receber uma resposta previsível.
 Fluxo conceitual:
 
 ```text
-YA Hub
+YAHub
   -> Abrir com o YABook
       -> documentação, contexto ou fluxo assistido do projeto
 ```
@@ -106,7 +106,7 @@ Na V1, essa integração deve ficar apenas preparada conceitualmente. Enquanto o
 Fluxo conceitual:
 
 ```text
-YA Hub
+YAHub
   <-> Spotifolio
 ```
 
@@ -118,11 +118,11 @@ githubUsername
 spotifolioUsername
 ```
 
-O YA Hub deve apontar para perfis do Spotifolio, e o Spotifolio pode apontar de volta para projetos no YA Hub.
+O YAHub deve apontar para perfis do Spotifolio, e o Spotifolio pode apontar de volta para projetos no YAHub.
 
 ## Relação com documentação e design system
 
-A arquitetura específica do YA Hub deve ficar neste repositório.
+A arquitetura específica do YAHub deve ficar neste repositório.
 
 Padrões reutilizáveis de documentação, condução de projeto, uso de IA, fluxo GitHub e design system devem permanecer no YABook.
 
@@ -134,15 +134,15 @@ Fluxo conceitual:
 
 ```text
 GitHub
-  -> YA Hub Backend
+  -> YAHub Backend
       -> Discord/Webhooks/Bot
 ```
 
-O back-end do YA Hub pode se tornar a camada central para tratar eventos e dados antes de enviá-los ao Discord.
+O back-end do YAHub pode se tornar a camada central para tratar eventos e dados antes de enviá-los ao Discord.
 
 ## Separação de dados
 
 - **GitHub:** dados técnicos e dinâmicos dos repositórios.
 - **PostgreSQL:** fonte oficial dos metadados editoriais de projetos, membros, status, destaque, categoria, vínculo e visibilidade.
-- **Back-end do YA Hub:** tratamento, contratos, cache futuro, segurança e persistência.
+- **Back-end do YAHub:** tratamento, contratos, cache futuro, segurança e persistência.
 - **Front-end:** apresentação e experiência, sem acoplamento direto com integrações externas.
