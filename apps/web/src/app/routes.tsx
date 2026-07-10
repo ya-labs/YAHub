@@ -1,7 +1,7 @@
 import type { RouteObject } from 'react-router-dom';
 import { HomePage } from '../features/home/pages/HomePage';
-import { AdminPage } from '../features/admin/pages/AdminPage';
-import { PortalPage } from '../features/portal/pages/PortalPage';
+import { AdminPage } from '../features/admin/pages/AdminDashboardPage';
+import { PortalPage } from '../features/portal/pages/PortalHomePage';
 
 export const routes: RouteObject[] = [
     {
