@@ -36,6 +36,34 @@ npm run wtest
 npm run wbuild
 ```
 
+## Rotas iniciais
+
+### Home institucional
+
+- `/`
+
+### Portal público
+
+- `/portal`
+- `/portal/projetos`
+- `/portal/projetos/:slug`
+- `/portal/membros`
+- `/portal/membros/:slug`
+- `/portal/docs`
+- `/portal/atividade`
+
+### Área administrativa
+
+- `/admin/login`
+- `/admin`
+- `/admin/projetos`
+- `/admin/membros`
+
+As páginas são carregadas sob demanda com `React.lazy` e exibem um fallback
+enquanto o módulo da rota é carregado. As rotas administrativas estão agrupadas
+no `AdminShell` e passam pelo `RequireAuth`; até a integração de autenticação,
+o guard redireciona acessos para `/admin/login`.
+
 ## Estrutura inicial
 
 ```text
