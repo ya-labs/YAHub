@@ -46,6 +46,22 @@ Se não houver issue relacionada ou se a branch estiver incompatível, avise ant
 
 Use `docs/fluxo-de-trabalho-github.md` apenas para regras locais do YAHub. Para o processo completo, consulte o YABook.
 
+## Desenvolvimento delegado com IA
+
+No YAHub, adote `mode: prod` como postura padrão de colaboração.
+
+- A issue concentra escopo, critérios de aceite e decisões relevantes.
+- A IA implementa dentro do escopo aprovado.
+- Não amplie escopo nem decida produto, arquitetura relevante, contratos ou integrações sem discutir antes.
+- A Pull Request registra mudanças, justificativas, validações, como testar e pontos de atenção.
+- Merge depende do aceite explícito de Nícolas.
+
+Consulte `docs/fluxo-de-trabalho-github.md` somente quando a tarefa envolver
+fluxo local, issues, branches, Pull Requests, merge ou exceções de processo.
+
+Consulte a sessão do protocolo somente ao revisar, alterar ou questionar esta
+convenção.
+
 ## Documentação
 
 Ao alterar documentação:
