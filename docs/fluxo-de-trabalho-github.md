@@ -17,7 +17,22 @@ Use o YABook como fonte principal para:
 
 ## Adaptações locais
 
-No momento, o YAHub não possui exceções específicas ao fluxo da YA LABS.
+O YAHub adota desenvolvimento delegado com IA para suas issues. O YABook
+continua sendo a fonte do fluxo geral e do `mode: prod`; a adaptação local
+define como o produto aplica esse modo:
+
+- a issue é o espaço para discutir escopo, critérios de aceite, riscos e
+  decisões relevantes;
+- a IA implementa a issue dentro do escopo aprovado;
+- decisões de produto e arquitetura relevante exigem aprovação de Nícolas
+  antes da implementação;
+- a Pull Request registra mudanças, justificativas, validações e pontos que
+  exigem revisão;
+- o merge depende do aceite explícito de Nícolas após revisar o código e o
+  produto em execução.
+
+Consulte o [protocolo de desenvolvimento delegado com IA](planejamento-inicial/sessoes/2026-07-10-protocolo-desenvolvimento-delegado-com-ia.md)
+para o contexto e as decisões desta adoção.
 
 Como o projeto ainda está em fase documental e inicial, alterações pequenas e relacionadas de documentação podem usar branch de lote documental quando fizerem parte do mesmo objetivo.
 
