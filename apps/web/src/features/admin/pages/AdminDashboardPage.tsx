@@ -1,4 +1,4 @@
-export function AdminPage() {
+export function AdminDashboardPage() {
     return (
         <main>
             <h1>Painel administrativo</h1>

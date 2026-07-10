@@ -1,6 +1,6 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet } from 'react-router-dom';
 
-export function PortalShell () {
+export function PortalShell() {
     return (
         <div>
             <header>
@@ -19,5 +19,5 @@ export function PortalShell () {
                 <Outlet />
             </main>
         </div>
-    )   
+    );
 }

@@ -1,6 +1,6 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet } from 'react-router-dom';
 
-export function AdminShell () {
+export function AdminShell() {
     return (
         <div>
             <header>
@@ -17,5 +17,5 @@ export function AdminShell () {
                 <Outlet />
             </main>
         </div>
-    )   
+    );
 }

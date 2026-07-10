@@ -1,0 +1,36 @@
+header,
+main,
+footer {
+    width: min(100% - 2rem, 72rem);
+    margin: 0 auto;
+}
+
+header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 0;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+main {
+    padding: 1rem 0;
+}
+
+footer {
+    padding: 1rem 0;
+}
+
+@media (max-width: 40rem) {
+    header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

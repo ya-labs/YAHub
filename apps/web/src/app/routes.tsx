@@ -1,6 +1,6 @@
-import { Suspense } from 'react';
-import type { ReactNode } from 'react';
 import type { RouteObject } from 'react-router-dom';
+import { AdminShell } from '../features/admin/layouts/AdminShell';
+import { RequireAuth } from '../features/admin/guards/RequireAuth';
 import { PortalShell } from '../features/portal/layouts/PortalShell';
 import {
     AdminLoginPage,
@@ -16,14 +16,7 @@ import {
     PortalProjectDetailsPage,
     PortalProjectsPage,
 } from './lazyPages';
-
-function withSuspense(element: ReactNode) {
-    return (
-        <Suspense fallback={<p>Carregando página...</p>}>
-            {element}
-        </Suspense>
-    )
-}
+import { withSuspense } from './withSuspense';
 
 export const routes: RouteObject[] = [
     {
@@ -66,18 +59,28 @@ export const routes: RouteObject[] = [
     },
     {
         path: '/admin',
-        element: withSuspense(<AdminPage />),
+        element: (
+            <RequireAuth>
+                <AdminShell />
+            </RequireAuth>
+        ),
+        children: [
+            {
+                index: true,
+                element: withSuspense(<AdminPage />),
+            },
+            {
+                path: 'projetos',
+                element: withSuspense(<AdminProjectsPage />),
+            },
+            {
+                path: 'membros',
+                element: withSuspense(<AdminMembersPage />),
+            },
+        ],
     },
     {
         path: '/admin/login',
         element: withSuspense(<AdminLoginPage />),
-    },
-    {
-        path: '/admin/projetos',
-        element: withSuspense(<AdminProjectsPage />),
-    },
-    {
-        path: '/admin/membros',
-        element: withSuspense(<AdminMembersPage />),
     },
 ];

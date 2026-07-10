@@ -1,10 +1,10 @@
-import type { ReactNode } from "react";
+import type { ReactNode } from 'react';
 
 type HomeShellProps = {
     children: ReactNode;
 };
 
-export function HomeShell ({ children }: HomeShellProps) {
+export function HomeShell({ children }: HomeShellProps) {
     return (
         <div>
             <header>
@@ -26,5 +26,5 @@ export function HomeShell ({ children }: HomeShellProps) {
                 <small>YA LABS</small>
             </footer>
         </div>
-    )
+    );
 }

@@ -1,6 +1,6 @@
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 
-export function PortalProjectsDetailsPage() {
+export function PortalProjectDetailsPage() {
     const { slug } = useParams();
 
     return (
@@ -8,5 +8,5 @@ export function PortalProjectsDetailsPage() {
             <h1>Projeto: {slug}</h1>
             <p>Detalhes públicos do projeto em construção.</p>
         </section>
-    )
+    );
 }
