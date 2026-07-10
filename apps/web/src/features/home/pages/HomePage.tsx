@@ -1,3 +1,3 @@
 export function HomePage () {
-    return <h1>Home público do YAHub</h1>
+    return <h1>Home do YAHub</h1>
 }
