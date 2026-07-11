@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import type { MemberDetails, ProjectSummary } from '../../../shared/api/contracts';
 import { DataState } from '../../../shared/components/DataState';
 import { useMemberDetails, useProjects } from '../../../shared/api/hooks';
+import type { AsyncDataState } from '../../../shared/hooks/useAsyncData';
 
 function getRelatedProjects(member: MemberDetails, projects: ProjectSummary[]): ProjectSummary[] {
     return member.projectSlugs
@@ -14,10 +15,10 @@ function RelatedProjects({
     projectsState,
 }: {
     member: MemberDetails;
-    projectsState: ReturnType<typeof useProjects>;
+    projectsState: AsyncDataState<ProjectSummary[]>;
 }) {
     return (
-        <DataState {...projectsState} emptyMessage="Nenhum projeto público encontrado.">
+        <DataState {...projectsState} emptyMessage="Nenhum projeto relacionado disponível para este membro.">
             {(projects) => {
                 const relatedProjects = getRelatedProjects(member, projects);
 

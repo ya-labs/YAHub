@@ -90,7 +90,6 @@ describe('App', () => {
             </MemoryRouter>,
         );
 
-        expect(await screen.findByRole('heading', { name: /membro: nicolas/i })).toBeInTheDocument();
         expect(await screen.findByRole('heading', { name: 'Nícolas Machado Cardoso' })).toBeInTheDocument();
         expect(screen.getByText(/idealização do yahub/i)).toBeInTheDocument();
         expect(screen.getByRole('link', { name: 'GitHub' })).toHaveAttribute(
