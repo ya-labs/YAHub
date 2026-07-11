@@ -52,7 +52,6 @@ export function PortalMemberDetailsPage() {
     return (
         <section className="portal-section">
             <p className="portal-kicker">Membro público</p>
-            <h1>Membro: {slug}</h1>
             <DataState {...memberState} emptyMessage="Membro não encontrado.">
                 {(member) => (
                     <article>
@@ -99,7 +98,6 @@ export function PortalMemberDetailsPage() {
                                 ) : (
                                     <p>Nenhum link público cadastrado.</p>
                                 )}
-                                {member.githubUsername ? <p>GitHub: @{member.githubUsername}</p> : null}
                                 {member.spotifolioUsername ? <p>Spotifolio: @{member.spotifolioUsername}</p> : null}
                             </div>
                         </div>
