@@ -18,14 +18,17 @@ describe('App', () => {
         expect(await screen.findByRole('heading', { name: /home do yahub/i })).toBeInTheDocument();
     });
 
-    it('renderiza a página inicial do portal público', async () => {
+    it('renderiza a dashboard inicial do portal público', async () => {
         render(
             <MemoryRouter initialEntries={['/portal']}>
                 <App />
             </MemoryRouter>,
         );
 
-        expect(await screen.findByRole('heading', { name: /portal público do yahub/i })).toBeInTheDocument();
+        expect(await screen.findByRole('heading', { level: 1, name: 'YA LABS' })).toBeInTheDocument();
+        expect(await screen.findByRole('heading', { name: /produtos oficiais/i })).toBeInTheDocument();
+        expect(await screen.findByRole('heading', { name: /projetos com apoio da ya labs/i })).toBeInTheDocument();
+        expect(screen.getByText(/projetos orientados pertencem aos seus autores/i)).toBeInTheDocument();
     });
 
     it('renderiza detalhes de um projeto do portal', async () => {
