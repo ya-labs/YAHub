@@ -19,9 +19,6 @@ export function PortalProjectDetailsPage() {
                                 <p className="portal-kicker">{projectStatusLabels[project.status]}</p>
                                 <h2>{project.displayName}</h2>
                             </div>
-                            <a className="portal-link" href={project.repositoryUrl} target="_blank" rel="noreferrer">
-                                Repositório
-                            </a>
                         </div>
 
                         <p className="portal-section__note">{project.tagline}</p>
