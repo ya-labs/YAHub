@@ -19,7 +19,7 @@ export function PortalProjectDetailsPage() {
                                 <p className="portal-kicker">{projectStatusLabels[project.status]}</p>
                                 <h2>{project.displayName}</h2>
                             </div>
-                            <a className="portal-link" href={project.repositoryUrl}>
+                            <a className="portal-link" href={project.repositoryUrl} target="_blank" rel="noreferrer">
                                 Repositório
                             </a>
                         </div>
@@ -73,20 +73,25 @@ export function PortalProjectDetailsPage() {
                         <h3>Links</h3>
                         <ul>
                             <li>
-                                <a className="portal-link" href={project.repositoryUrl}>
+                                <a className="portal-link" href={project.repositoryUrl} target="_blank" rel="noreferrer">
                                     Repositório
                                 </a>
                             </li>
                             {project.websiteUrl ? (
                                 <li>
-                                    <a className="portal-link" href={project.websiteUrl}>
+                                    <a className="portal-link" href={project.websiteUrl} target="_blank" rel="noreferrer">
                                         Site
                                     </a>
                                 </li>
                             ) : null}
                             {project.documentationUrl ? (
                                 <li>
-                                    <a className="portal-link" target='_blank' href={project.documentationUrl}>
+                                    <a
+                                        className="portal-link"
+                                        href={project.documentationUrl}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
                                         Documentação
                                     </a>
                                 </li>
@@ -104,7 +109,12 @@ export function PortalProjectDetailsPage() {
                                             </time>
                                             <strong>{activity.description}</strong>
                                             {activity.referenceUrl ? (
-                                                <a className="portal-link" href={activity.referenceUrl}>
+                                                <a
+                                                    className="portal-link"
+                                                    href={activity.referenceUrl}
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                >
                                                     Referência
                                                 </a>
                                             ) : null}
