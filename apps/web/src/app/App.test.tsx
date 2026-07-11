@@ -113,7 +113,7 @@ describe('App', () => {
         expect(await screen.findByRole('heading', { level: 2, name: 'Membros disponíveis' })).toBeInTheDocument();
         expect(screen.getByRole('heading', { name: 'Nícolas Machado Cardoso' })).toBeInTheDocument();
         expect(screen.getByRole('heading', { name: 'Caio Matheus Queiroz' })).toBeInTheDocument();
-        expect(screen.getAllByRole('link', { name: /ver membro/i })[0]).toHaveAttribute(
+        expect(screen.getAllByRole('link', { name: /ver detalhe/i })[0]).toHaveAttribute(
             'href',
             '/portal/membros/nicolas',
         );

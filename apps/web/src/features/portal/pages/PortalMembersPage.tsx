@@ -31,7 +31,7 @@ function MemberCard({ member }: { member: MemberSummary }) {
             </div>
 
             <Link className="portal-link" to={`/portal/membros/${member.slug}`}>
-                Ver membro
+                Ver detalhes
             </Link>
         </article>
     );

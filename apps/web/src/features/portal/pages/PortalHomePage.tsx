@@ -166,7 +166,7 @@ function MembersOverview({ members }: { members: MemberSummary[] }) {
                     <h2 id="portal-members">Quem participa</h2>
                 </div>
                 <Link className="portal-link" to="/portal/membros">
-                    Ver membros
+                    Ver detalhes
                 </Link>
             </div>
 
@@ -179,7 +179,7 @@ function MembersOverview({ members }: { members: MemberSummary[] }) {
                             <span>{member.responsibilities.join(', ')}</span>
                         </div>
                         <Link className="portal-link" to={`/portal/membros/${member.slug}`}>
-                            Ver membro
+                            Ver detalhe
                         </Link>
                     </article>
                 ))}
