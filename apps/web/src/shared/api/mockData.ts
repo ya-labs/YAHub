@@ -103,7 +103,7 @@ export const mockProjects: ProjectDetails[] = [
         primaryLanguage: 'Markdown',
         repositoryUrl: 'https://github.com/ya-labs/YABook',
         websiteUrl: null,
-        documentationUrl: 'https://github.com/ya-labs/YABook',
+        documentationUrl: 'https://github.com/ya-labs/YABook/tree/main/docs',
         technologies: ['Markdown', 'GitHub'],
         updatedAt: '2026-06-16T16:21:22Z',
         featured: true,
