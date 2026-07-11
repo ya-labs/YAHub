@@ -1,9 +1,12 @@
 import { cleanup, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { afterEach, describe, expect, it } from 'vitest';
+import { ADMIN_SESSION_STORAGE_KEY } from '../features/admin/auth/adminAuth';
 import App from './App';
 
 afterEach(() => {
+    window.localStorage.clear();
     cleanup();
 });
 
@@ -136,6 +139,40 @@ describe('App', () => {
         );
 
         expect(await screen.findByRole('heading', { name: /acesso administrativo/i })).toBeInTheDocument();
+    });
+
+    it('permite acessar o painel administrativo com login mockado', async () => {
+        const user = userEvent.setup();
+
+        render(
+            <MemoryRouter initialEntries={['/admin']}>
+                <App />
+            </MemoryRouter>,
+        );
+
+        expect(await screen.findByRole('heading', { name: /acesso administrativo/i })).toBeInTheDocument();
+
+        await user.click(screen.getByRole('button', { name: 'Entrar' }));
+
+        expect(await screen.findByRole('heading', { name: /painel administrativo/i })).toBeInTheDocument();
+        expect(window.localStorage.getItem(ADMIN_SESSION_STORAGE_KEY)).not.toBeNull();
+    });
+
+    it('permite cadastrar e entrar com autenticação mockada', async () => {
+        const user = userEvent.setup();
+
+        render(
+            <MemoryRouter initialEntries={['/admin/login']}>
+                <App />
+            </MemoryRouter>,
+        );
+
+        await user.click(await screen.findByRole('button', { name: 'Cadastro' }));
+        await user.type(screen.getByLabelText('Nome'), 'Administrador Teste');
+        await user.click(screen.getByRole('button', { name: 'Cadastrar e entrar' }));
+
+        expect(await screen.findByRole('heading', { name: /painel administrativo/i })).toBeInTheDocument();
+        expect(window.localStorage.getItem(ADMIN_SESSION_STORAGE_KEY)).not.toBeNull();
     });
 
     it.each(['/admin/projetos', '/admin/membros'])('protege a rota administrativa %s', async (path) => {
