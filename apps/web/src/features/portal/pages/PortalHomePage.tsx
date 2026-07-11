@@ -1,15 +1,8 @@
 import { Link } from 'react-router-dom';
-import type { ActivityItem, MemberSummary, Organization, ProjectSummary, ProjectSupportType } from '../../../shared/api/contracts';
+import type { ActivityItem, MemberSummary, Organization, ProjectSummary } from '../../../shared/api/contracts';
 import { useActivity, useMembers, useOrganization, useProjects } from '../../../shared/api/hooks';
 import { DataState } from '../../../shared/components/DataState';
-
-const supportTypeLabels: Record<ProjectSupportType, string> = {
-    apoio_tecnico: 'Apoio técnico',
-    documentacao: 'Documentação',
-    revisao: 'Revisão',
-    divulgacao: 'Divulgação',
-    mentoria: 'Mentoria',
-};
+import { formatProjectDate, projectStatusLabels, projectSupportTypeLabels } from '../projectPresentation';
 
 function formatDate(value: string | null) {
     if (!value) {
@@ -19,26 +12,13 @@ function formatDate(value: string | null) {
     return new Intl.DateTimeFormat('pt-BR').format(new Date(value));
 }
 
-function getStatusLabel(status: ProjectSummary['status']) {
-    const labels: Record<ProjectSummary['status'], string> = {
-        ideia: 'Ideia',
-        planejamento: 'Planejamento',
-        desenvolvimento: 'Em desenvolvimento',
-        ativo: 'Ativo',
-        pausado: 'Pausado',
-        arquivado: 'Arquivado',
-    };
-
-    return labels[status];
-}
-
 function ProjectCard({ project }: { project: ProjectSummary }) {
     const supportTypes = project.supportTypes ?? [];
 
     return (
         <article className="portal-card">
             <div className="portal-card__header">
-                <p className="portal-kicker">{getStatusLabel(project.status)}</p>
+                <p className="portal-kicker">{projectStatusLabels[project.status]}</p>
                 <h3>{project.displayName}</h3>
             </div>
             <p>{project.shortDescription}</p>
@@ -51,14 +31,14 @@ function ProjectCard({ project }: { project: ProjectSummary }) {
             ) : (
                 <div className="portal-card__meta">
                     <span>Linguagem: {project.primaryLanguage ?? 'Não informada'}</span>
-                    <span>Atualizado em {formatDate(project.updatedAt)}</span>
+                    <span>{formatProjectDate(project.updatedAt)}</span>
                 </div>
             )}
 
             {supportTypes.length > 0 ? (
                 <ul className="portal-tags" aria-label="Tipos de apoio">
                     {supportTypes.map((supportType) => (
-                        <li key={supportType}>{supportTypeLabels[supportType]}</li>
+                        <li key={supportType}>{projectSupportTypeLabels[supportType]}</li>
                     ))}
                 </ul>
             ) : null}

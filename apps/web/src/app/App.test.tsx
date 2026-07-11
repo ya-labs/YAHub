@@ -39,6 +39,33 @@ describe('App', () => {
         );
 
         expect(await screen.findByRole('heading', { name: /projeto: yahub/i })).toBeInTheDocument();
+        expect(await screen.findByRole('heading', { name: 'YAHub' })).toBeInTheDocument();
+        expect(screen.getByText(/portal oficial da ya labs/i)).toBeInTheDocument();
+        expect(screen.getByText('React')).toBeInTheDocument();
+    });
+
+    it('lista projetos públicos separados por agrupamento', async () => {
+        render(
+            <MemoryRouter initialEntries={['/portal/projetos']}>
+                <App />
+            </MemoryRouter>,
+        );
+
+        expect(await screen.findByRole('heading', { level: 2, name: 'Produtos' })).toBeInTheDocument();
+        expect(screen.getByRole('heading', { level: 2, name: 'Ecossistema' })).toBeInTheDocument();
+        expect(screen.getByRole('heading', { level: 2, name: 'Projetos orientados' })).toBeInTheDocument();
+        expect(screen.getAllByRole('link', { name: /ver projeto/i })[0]).toHaveAttribute('href', '/portal/projetos/yahub');
+        expect(screen.getByText(/projetos orientados pertencem aos seus autores/i)).toBeInTheDocument();
+    });
+
+    it('mostra erro previsível quando o projeto não existe', async () => {
+        render(
+            <MemoryRouter initialEntries={['/portal/projetos/projeto-inexistente']}>
+                <App />
+            </MemoryRouter>,
+        );
+
+        expect(await screen.findByRole('alert')).toHaveTextContent('Projeto não encontrado.');
     });
 
     it.each([
