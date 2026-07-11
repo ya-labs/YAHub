@@ -90,7 +90,42 @@ describe('App', () => {
             </MemoryRouter>,
         );
 
-        expect(await screen.findByRole('heading', { name: /membro: nicolas/i })).toBeInTheDocument();
+        expect(await screen.findByRole('heading', { name: 'Nícolas Machado Cardoso' })).toBeInTheDocument();
+        expect(screen.getByText(/idealização do yahub/i)).toBeInTheDocument();
+        expect(screen.getByRole('link', { name: 'GitHub' })).toHaveAttribute(
+            'href',
+            'https://github.com/nicolasmacardoso',
+        );
+        expect(screen.getAllByRole('link', { name: /ver projeto/i })[0]).toHaveAttribute(
+            'href',
+            '/portal/projetos/yahub',
+        );
+    });
+
+    it('lista membros públicos com links para detalhes', async () => {
+        render(
+            <MemoryRouter initialEntries={['/portal/membros']}>
+                <App />
+            </MemoryRouter>,
+        );
+
+        expect(await screen.findByRole('heading', { level: 2, name: 'Membros disponíveis' })).toBeInTheDocument();
+        expect(screen.getByRole('heading', { name: 'Nícolas Machado Cardoso' })).toBeInTheDocument();
+        expect(screen.getByRole('heading', { name: 'Caio Matheus Queiroz' })).toBeInTheDocument();
+        expect(screen.getAllByRole('link', { name: /ver detalhe/i })[0]).toHaveAttribute(
+            'href',
+            '/portal/membros/nicolas',
+        );
+    });
+
+    it('mostra erro previsível quando o membro não existe', async () => {
+        render(
+            <MemoryRouter initialEntries={['/portal/membros/membro-inexistente']}>
+                <App />
+            </MemoryRouter>,
+        );
+
+        expect(await screen.findByRole('alert')).toHaveTextContent('Membro não encontrado.');
     });
 
     it('redireciona a área administrativa para o login', async () => {
