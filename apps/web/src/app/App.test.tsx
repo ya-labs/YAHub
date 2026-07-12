@@ -154,7 +154,9 @@ describe('App', () => {
 
         await user.click(screen.getByRole('button', { name: 'Entrar' }));
 
-        expect(await screen.findByRole('heading', { name: /painel administrativo/i })).toBeInTheDocument();
+        expect(await screen.findByRole('heading', { name: /conteúdo do yahub/i })).toBeInTheDocument();
+        expect(screen.getByText('Projetos cadastrados')).toBeInTheDocument();
+        expect(screen.getByText('Membros cadastrados')).toBeInTheDocument();
         expect(window.localStorage.getItem(ADMIN_SESSION_STORAGE_KEY)).not.toBeNull();
     });
 
@@ -171,7 +173,7 @@ describe('App', () => {
         await user.type(screen.getByLabelText('Nome'), 'Administrador Teste');
         await user.click(screen.getByRole('button', { name: 'Cadastrar e entrar' }));
 
-        expect(await screen.findByRole('heading', { name: /painel administrativo/i })).toBeInTheDocument();
+        expect(await screen.findByRole('heading', { name: /conteúdo do yahub/i })).toBeInTheDocument();
         expect(window.localStorage.getItem(ADMIN_SESSION_STORAGE_KEY)).not.toBeNull();
     });
 
