@@ -186,4 +186,33 @@ describe('App', () => {
 
         expect(await screen.findByRole('heading', { name: /acesso administrativo/i })).toBeInTheDocument();
     });
+
+    it('renderiza a listagem administrativa de projetos com sessão mockada', async () => {
+        window.localStorage.setItem(
+            ADMIN_SESSION_STORAGE_KEY,
+            JSON.stringify({
+                token: 'mock-jwt-token',
+                user: {
+                    id: 'admin-test',
+                    name: 'Admin Teste',
+                    email: 'admin@yalabs.local',
+                },
+                authenticatedAt: '2026-07-12T00:00:00.000Z',
+            }),
+        );
+
+        render(
+            <MemoryRouter initialEntries={['/admin/projetos']}>
+                <App />
+            </MemoryRouter>,
+        );
+
+        expect(await screen.findByRole('heading', { name: 'Projetos' })).toBeInTheDocument();
+        expect(screen.getByText('Projetos cadastrados')).toBeInTheDocument();
+        expect(screen.getByRole('list', { name: 'Projetos administrativos' })).toBeInTheDocument();
+        expect(screen.getByRole('heading', { name: 'YAHub' })).toBeInTheDocument();
+        expect(screen.getByText('ya-labs/YA-HUB')).toBeInTheDocument();
+        expect(screen.getAllByRole('button', { name: 'Editar' })[0]).toBeDisabled();
+        expect(screen.getAllByRole('button', { name: 'Remover' })[0]).toBeDisabled();
+    });
 });

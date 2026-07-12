@@ -457,8 +457,148 @@ footer {
     color: #475569;
 }
 
+.admin-page {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.admin-page__header {
+    align-items: end;
+    background: #ffffff;
+    border: 1px solid #d9deea;
+    border-radius: 0.5rem;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding: clamp(1rem, 3vw, 1.5rem);
+}
+
+.admin-page__header h1,
+.admin-page__header p {
+    margin: 0;
+}
+
+.admin-page__header p {
+    color: #475569;
+    line-height: 1.6;
+    max-width: 52rem;
+}
+
+.admin-page__header button:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.admin-page__content {
+    display: grid;
+    gap: 1rem;
+}
+
+.admin-list {
+    display: grid;
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.admin-list__item {
+    background: #ffffff;
+    border: 1px solid #d9deea;
+    border-radius: 0.5rem;
+    padding: clamp(1rem, 3vw, 1.25rem);
+}
+
+.admin-list__item article,
+.admin-list__details {
+    display: grid;
+    gap: 1rem;
+}
+
+.admin-list__item h2,
+.admin-list__item p,
+.admin-list__details,
+.admin-list__details dd {
+    margin: 0;
+}
+
+.admin-list__item p {
+    color: #475569;
+    line-height: 1.6;
+}
+
+.admin-list__header,
+.admin-list__footer {
+    align-items: start;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+.admin-list__badge {
+    background: #eef4ff;
+    border-radius: 999px;
+    color: #0a1a5e;
+    font-size: 0.82rem;
+    font-weight: 800;
+    padding: 0.35rem 0.65rem;
+    white-space: nowrap;
+}
+
+.admin-list__details {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+}
+
+.admin-list__details div {
+    display: grid;
+    gap: 0.2rem;
+}
+
+.admin-list__details dt {
+    color: #64748b;
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.admin-list__details dd {
+    color: #111827;
+    overflow-wrap: anywhere;
+}
+
+.admin-list__footer {
+    align-items: center;
+    border-top: 1px solid #e2e8f0;
+    color: #475569;
+    padding-top: 1rem;
+}
+
+.admin-list__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.admin-list__actions button {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 0.5rem;
+    color: #334155;
+    cursor: not-allowed;
+    font: inherit;
+    font-weight: 800;
+    min-height: 2.5rem;
+    opacity: 0.7;
+    padding: 0.55rem 0.8rem;
+}
+
 @media (max-width: 52rem) {
     .portal-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-page__header {
+        align-items: start;
         grid-template-columns: 1fr;
     }
 
@@ -469,6 +609,11 @@ footer {
 
     .admin-dashboard__actions {
         justify-content: flex-start;
+    }
+
+    .admin-list__header,
+    .admin-list__footer {
+        flex-direction: column;
     }
 
     .portal-section__header {
