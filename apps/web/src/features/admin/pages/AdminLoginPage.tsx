@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import type { FormEvent } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { loginAdmin, registerAdmin } from '../auth/adminAuth';
 
@@ -25,7 +24,7 @@ export function AdminLoginPage() {
     const redirectPath = locationState?.from?.pathname ?? '/admin';
     const isRegisterMode = mode === 'register';
 
-    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    async function handleSubmit(event: { preventDefault: () => void }) {
         event.preventDefault();
         setIsSubmitting(true);
         setError(null);

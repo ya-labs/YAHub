@@ -1,12 +1,15 @@
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { afterEach, describe, expect, it } from 'vitest';
 import { ADMIN_SESSION_STORAGE_KEY } from '../features/admin/auth/adminAuth';
+import { resetMockAdminData } from '../shared/api/mockClient';
 import App from './App';
 
 afterEach(() => {
     window.localStorage.clear();
+    window.sessionStorage.clear();
+    resetMockAdminData();
     cleanup();
 });
 
@@ -155,8 +158,8 @@ describe('App', () => {
         await user.click(screen.getByRole('button', { name: 'Entrar' }));
 
         expect(await screen.findByRole('heading', { name: /conteúdo do yahub/i })).toBeInTheDocument();
-        expect(screen.getByText('Projetos cadastrados')).toBeInTheDocument();
-        expect(screen.getByText('Membros cadastrados')).toBeInTheDocument();
+        expect(await screen.findByText('Projetos cadastrados')).toBeInTheDocument();
+        expect(await screen.findByText('Membros cadastrados')).toBeInTheDocument();
         expect(window.localStorage.getItem(ADMIN_SESSION_STORAGE_KEY)).not.toBeNull();
     });
 
@@ -208,11 +211,107 @@ describe('App', () => {
         );
 
         expect(await screen.findByRole('heading', { name: 'Projetos' })).toBeInTheDocument();
-        expect(screen.getByText('Projetos cadastrados')).toBeInTheDocument();
-        expect(screen.getByRole('list', { name: 'Projetos administrativos' })).toBeInTheDocument();
+        expect(await screen.findByText('Projetos cadastrados')).toBeInTheDocument();
+        expect(await screen.findByRole('list', { name: 'Projetos administrativos' })).toBeInTheDocument();
         expect(screen.getByRole('heading', { name: 'YAHub' })).toBeInTheDocument();
         expect(screen.getByText('ya-labs/YA-HUB')).toBeInTheDocument();
-        expect(screen.getAllByRole('button', { name: 'Editar' })[0]).toBeDisabled();
-        expect(screen.getAllByRole('button', { name: 'Remover' })[0]).toBeDisabled();
+        expect(screen.getAllByRole('button', { name: 'Editar' })[0]).toBeEnabled();
+        expect(screen.getAllByRole('button', { name: 'Remover' })[0]).toBeEnabled();
+        expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    });
+
+    it('mantém rascunho do projeto ao fechar o modal sem salvar', async () => {
+        window.localStorage.setItem(
+            ADMIN_SESSION_STORAGE_KEY,
+            JSON.stringify({
+                token: 'mock-jwt-token',
+                user: {
+                    id: 'admin-test',
+                    name: 'Admin Teste',
+                    email: 'admin@yalabs.local',
+                },
+                authenticatedAt: '2026-07-12T00:00:00.000Z',
+            }),
+        );
+
+        render(
+            <MemoryRouter initialEntries={['/admin/projetos']}>
+                <App />
+            </MemoryRouter>,
+        );
+
+        expect(await screen.findByRole('heading', { name: 'Projetos' })).toBeInTheDocument();
+
+        fireEvent.click(screen.getByRole('button', { name: 'Novo projeto' }));
+        fireEvent.change(screen.getByLabelText('Nome de exibição'), { target: { value: 'Projeto em Rascunho' } });
+        fireEvent.click(screen.getByRole('button', { name: 'Fechar e manter' }));
+
+        expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+
+        fireEvent.click(screen.getByRole('button', { name: 'Novo projeto' }));
+
+        expect(screen.getByLabelText('Nome de exibição')).toHaveValue('Projeto em Rascunho');
+    });
+
+    it('cria, edita e remove projeto no fluxo administrativo mockado', async () => {
+        window.localStorage.setItem(
+            ADMIN_SESSION_STORAGE_KEY,
+            JSON.stringify({
+                token: 'mock-jwt-token',
+                user: {
+                    id: 'admin-test',
+                    name: 'Admin Teste',
+                    email: 'admin@yalabs.local',
+                },
+                authenticatedAt: '2026-07-12T00:00:00.000Z',
+            }),
+        );
+
+        render(
+            <MemoryRouter initialEntries={['/admin/projetos']}>
+                <App />
+            </MemoryRouter>,
+        );
+
+        expect(await screen.findByRole('heading', { name: 'Projetos' })).toBeInTheDocument();
+
+        fireEvent.click(screen.getByRole('button', { name: 'Novo projeto' }));
+        fireEvent.change(screen.getByLabelText('Nome de exibição'), { target: { value: 'Projeto Local Admin' } });
+        fireEvent.change(screen.getByLabelText('Slug'), { target: { value: 'projeto-local-admin' } });
+        fireEvent.change(screen.getByLabelText('Chamada curta'), { target: { value: 'Fluxo administrativo local.' } });
+        fireEvent.change(screen.getByLabelText('Descrição curta'), {
+            target: { value: 'Projeto criado no fluxo mockado.' },
+        });
+        fireEvent.change(screen.getByLabelText('Descrição completa'), {
+            target: { value: 'Projeto usado para validar CRUD local.' },
+        });
+        fireEvent.change(screen.getByLabelText('Linguagem principal'), { target: { value: 'TypeScript' } });
+        fireEvent.change(screen.getByLabelText('URL do repositório'), {
+            target: { value: 'https://github.com/ya-labs/projeto-local-admin' },
+        });
+        fireEvent.change(screen.getByLabelText('Dono no GitHub'), { target: { value: 'ya-labs' } });
+        fireEvent.change(screen.getByLabelText('Nome do repositório'), { target: { value: 'projeto-local-admin' } });
+        fireEvent.change(screen.getByLabelText('ID do repositório GitHub'), {
+            target: { value: 'ya-labs-projeto-local-admin' },
+        });
+        fireEvent.change(screen.getByLabelText('Tecnologias'), { target: { value: 'React, TypeScript' } });
+        fireEvent.change(screen.getByLabelText('Responsáveis'), { target: { value: 'nicolas' } });
+        fireEvent.click(screen.getByRole('button', { name: 'Criar projeto' }));
+
+        expect(await screen.findByText('Projeto Projeto Local Admin criado localmente.')).toBeInTheDocument();
+        expect(screen.getByRole('heading', { name: 'Projeto Local Admin' })).toBeInTheDocument();
+
+        const projectActions = screen.getByLabelText('Ações de Projeto Local Admin');
+        fireEvent.click(projectActions.querySelector('button') as HTMLButtonElement);
+        fireEvent.change(screen.getByLabelText('Nome de exibição'), { target: { value: 'Projeto Local Editado' } });
+        fireEvent.click(screen.getByRole('button', { name: 'Salvar alterações' }));
+
+        expect(await screen.findByText('Projeto Projeto Local Editado atualizado localmente.')).toBeInTheDocument();
+        expect(screen.getByRole('heading', { name: 'Projeto Local Editado' })).toBeInTheDocument();
+
+        fireEvent.click(screen.getByLabelText('Ações de Projeto Local Editado').querySelectorAll('button')[1]);
+
+        expect(await screen.findByText('Projeto Projeto Local Editado removido localmente.')).toBeInTheDocument();
+        expect(screen.queryByRole('heading', { name: 'Projeto Local Editado' })).not.toBeInTheDocument();
     });
 });
