@@ -66,8 +66,20 @@ export const AdminProjectsPage = lazy(() =>
     })),
 );
 
+export const AdminProjectFormPage = lazy(() =>
+    import('../features/admin/pages/AdminProjectFormPage').then(({ AdminProjectFormPage }) => ({
+        default: AdminProjectFormPage,
+    })),
+);
+
 export const AdminMembersPage = lazy(() =>
     import('../features/admin/pages/AdminMembersPage').then(({ AdminMembersPage }) => ({
         default: AdminMembersPage,
+    })),
+);
+
+export const AdminMemberFormPage = lazy(() =>
+    import('../features/admin/pages/AdminMemberFormPage').then(({ AdminMemberFormPage }) => ({
+        default: AdminMemberFormPage,
     })),
 );

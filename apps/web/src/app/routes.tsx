@@ -4,8 +4,10 @@ import { RequireAuth } from '../features/admin/guards/RequireAuth';
 import { PortalShell } from '../features/portal/layouts/PortalShell';
 import {
     AdminLoginPage,
+    AdminMemberFormPage,
     AdminMembersPage,
     AdminPage,
+    AdminProjectFormPage,
     AdminProjectsPage,
     HomePage,
     PortalActivityPage,
@@ -74,8 +76,24 @@ export const routes: RouteObject[] = [
                 element: withSuspense(<AdminProjectsPage />),
             },
             {
+                path: 'projetos/novo',
+                element: withSuspense(<AdminProjectFormPage />),
+            },
+            {
+                path: 'projetos/:projectId/editar',
+                element: withSuspense(<AdminProjectFormPage />),
+            },
+            {
                 path: 'membros',
                 element: withSuspense(<AdminMembersPage />),
+            },
+            {
+                path: 'membros/novo',
+                element: withSuspense(<AdminMemberFormPage />),
+            },
+            {
+                path: 'membros/:memberId/editar',
+                element: withSuspense(<AdminMemberFormPage />),
             },
         ],
     },

@@ -1,9 +1,15 @@
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { afterEach, describe, expect, it } from 'vitest';
+import { ADMIN_SESSION_STORAGE_KEY } from '../features/admin/auth/adminAuth';
+import { resetMockAdminData } from '../shared/api/mockClient';
 import App from './App';
 
 afterEach(() => {
+    window.localStorage.clear();
+    window.sessionStorage.clear();
+    resetMockAdminData();
     cleanup();
 });
 
@@ -138,6 +144,42 @@ describe('App', () => {
         expect(await screen.findByRole('heading', { name: /acesso administrativo/i })).toBeInTheDocument();
     });
 
+    it('permite acessar o painel administrativo com login mockado', async () => {
+        const user = userEvent.setup();
+
+        render(
+            <MemoryRouter initialEntries={['/admin']}>
+                <App />
+            </MemoryRouter>,
+        );
+
+        expect(await screen.findByRole('heading', { name: /acesso administrativo/i })).toBeInTheDocument();
+
+        await user.click(screen.getByRole('button', { name: 'Entrar' }));
+
+        expect(await screen.findByRole('heading', { name: /conteúdo do yahub/i })).toBeInTheDocument();
+        expect(await screen.findByText('Projetos cadastrados')).toBeInTheDocument();
+        expect(await screen.findByText('Membros cadastrados')).toBeInTheDocument();
+        expect(window.localStorage.getItem(ADMIN_SESSION_STORAGE_KEY)).not.toBeNull();
+    });
+
+    it('permite cadastrar e entrar com autenticação mockada', async () => {
+        const user = userEvent.setup();
+
+        render(
+            <MemoryRouter initialEntries={['/admin/login']}>
+                <App />
+            </MemoryRouter>,
+        );
+
+        await user.click(await screen.findByRole('button', { name: 'Cadastro' }));
+        await user.type(screen.getByLabelText('Nome'), 'Administrador Teste');
+        await user.click(screen.getByRole('button', { name: 'Cadastrar e entrar' }));
+
+        expect(await screen.findByRole('heading', { name: /conteúdo do yahub/i })).toBeInTheDocument();
+        expect(window.localStorage.getItem(ADMIN_SESSION_STORAGE_KEY)).not.toBeNull();
+    });
+
     it.each(['/admin/projetos', '/admin/membros'])('protege a rota administrativa %s', async (path) => {
         render(
             <MemoryRouter initialEntries={[path]}>
@@ -146,5 +188,269 @@ describe('App', () => {
         );
 
         expect(await screen.findByRole('heading', { name: /acesso administrativo/i })).toBeInTheDocument();
+    });
+
+    it('renderiza a listagem administrativa de projetos com sessão mockada', async () => {
+        window.localStorage.setItem(
+            ADMIN_SESSION_STORAGE_KEY,
+            JSON.stringify({
+                token: 'mock-jwt-token',
+                user: {
+                    id: 'admin-test',
+                    name: 'Admin Teste',
+                    email: 'admin@yalabs.local',
+                },
+                authenticatedAt: '2026-07-12T00:00:00.000Z',
+            }),
+        );
+
+        render(
+            <MemoryRouter initialEntries={['/admin/projetos']}>
+                <App />
+            </MemoryRouter>,
+        );
+
+        expect(await screen.findByRole('heading', { name: 'Projetos' })).toBeInTheDocument();
+        expect(await screen.findByText('Projetos cadastrados')).toBeInTheDocument();
+        expect(await screen.findByRole('list', { name: 'Projetos administrativos' })).toBeInTheDocument();
+        expect(screen.getByRole('heading', { name: 'YAHub' })).toBeInTheDocument();
+        expect(screen.getByText('ya-labs/YA-HUB')).toBeInTheDocument();
+        expect(screen.getAllByRole('link', { name: 'Editar' })[0]).toHaveAttribute('href', '/admin/projetos/yahub/editar');
+        expect(screen.getAllByRole('button', { name: 'Remover' })[0]).toBeEnabled();
+        expect(screen.getByRole('link', { name: 'Novo projeto' })).toHaveAttribute('href', '/admin/projetos/novo');
+    });
+
+    it('renderiza a listagem administrativa de membros com ações locais', async () => {
+        window.localStorage.setItem(
+            ADMIN_SESSION_STORAGE_KEY,
+            JSON.stringify({
+                token: 'mock-jwt-token',
+                user: { id: 'admin-test', name: 'Admin Teste', email: 'admin@yalabs.local' },
+                authenticatedAt: '2026-07-12T00:00:00.000Z',
+            }),
+        );
+
+        render(
+            <MemoryRouter initialEntries={['/admin/membros']}>
+                <App />
+            </MemoryRouter>,
+        );
+
+        expect(await screen.findByRole('heading', { name: 'Membros' })).toBeInTheDocument();
+        expect(await screen.findByRole('list', { name: 'Membros administrativos' })).toBeInTheDocument();
+        expect(screen.getByRole('heading', { name: 'Nícolas Machado Cardoso' })).toBeInTheDocument();
+        expect(screen.getByText('Product / Front-end / UX')).toBeInTheDocument();
+        expect(screen.getByText('Idealização do YAHub')).toBeInTheDocument();
+        expect(screen.getAllByRole('link', { name: 'Editar' })[0]).toHaveAttribute('href', '/admin/membros/nicolas/editar');
+        expect(screen.getAllByRole('button', { name: 'Remover' })[0]).toBeEnabled();
+        expect(screen.getByRole('link', { name: 'Novo membro' })).toHaveAttribute('href', '/admin/membros/novo');
+    });
+
+    it('mantém rascunho do projeto ao voltar para a listagem sem salvar', async () => {
+        window.localStorage.setItem(
+            ADMIN_SESSION_STORAGE_KEY,
+            JSON.stringify({
+                token: 'mock-jwt-token',
+                user: {
+                    id: 'admin-test',
+                    name: 'Admin Teste',
+                    email: 'admin@yalabs.local',
+                },
+                authenticatedAt: '2026-07-12T00:00:00.000Z',
+            }),
+        );
+
+        render(
+            <MemoryRouter initialEntries={['/admin/projetos/novo']}>
+                <App />
+            </MemoryRouter>,
+        );
+
+        expect(await screen.findByRole('heading', { name: 'Novo projeto' })).toBeInTheDocument();
+        fireEvent.change(screen.getByLabelText('Nome de exibição'), { target: { value: 'Projeto em Rascunho' } });
+        fireEvent.click(screen.getByRole('link', { name: 'Voltar e manter rascunho' }));
+
+        expect(await screen.findByRole('heading', { name: 'Projetos' })).toBeInTheDocument();
+
+        fireEvent.click(screen.getByRole('link', { name: 'Novo projeto' }));
+
+        expect(screen.getByLabelText('Nome de exibição')).toHaveValue('Projeto em Rascunho');
+    });
+
+    it('prioriza os dados do projeto ao editar quando o rascunho da sessão está incompleto', async () => {
+        window.localStorage.setItem(
+            ADMIN_SESSION_STORAGE_KEY,
+            JSON.stringify({
+                token: 'mock-jwt-token',
+                user: { id: 'admin-test', name: 'Admin Teste', email: 'admin@yalabs.local' },
+                authenticatedAt: '2026-07-12T00:00:00.000Z',
+            }),
+        );
+        window.sessionStorage.setItem(
+            'yahub.admin.projects.draft',
+            JSON.stringify({ editingProjectId: 'yahub', formState: { displayName: '', slug: '' } }),
+        );
+
+        render(
+            <MemoryRouter initialEntries={['/admin/projetos/yahub/editar']}>
+                <App />
+            </MemoryRouter>,
+        );
+
+        expect(await screen.findByLabelText('Nome de exibição')).toHaveValue('YAHub');
+        expect(screen.getByLabelText('Slug')).toHaveValue('yahub');
+    });
+
+    it('mantém rascunho do membro ao voltar para a listagem sem salvar', async () => {
+        window.localStorage.setItem(
+            ADMIN_SESSION_STORAGE_KEY,
+            JSON.stringify({
+                token: 'mock-jwt-token',
+                user: { id: 'admin-test', name: 'Admin Teste', email: 'admin@yalabs.local' },
+                authenticatedAt: '2026-07-12T00:00:00.000Z',
+            }),
+        );
+
+        render(
+            <MemoryRouter initialEntries={['/admin/membros/novo']}>
+                <App />
+            </MemoryRouter>,
+        );
+
+        fireEvent.change(await screen.findByLabelText('Nome'), { target: { value: 'Membro em Rascunho' } });
+        fireEvent.click(screen.getByRole('link', { name: 'Voltar e manter rascunho' }));
+        expect(await screen.findByRole('heading', { name: 'Membros' })).toBeInTheDocument();
+
+        fireEvent.click(screen.getByRole('link', { name: 'Novo membro' }));
+        expect(await screen.findByLabelText('Nome')).toHaveValue('Membro em Rascunho');
+    });
+
+    it('prioriza os dados do membro ao editar quando o rascunho da sessão está incompleto', async () => {
+        window.localStorage.setItem(
+            ADMIN_SESSION_STORAGE_KEY,
+            JSON.stringify({
+                token: 'mock-jwt-token',
+                user: { id: 'admin-test', name: 'Admin Teste', email: 'admin@yalabs.local' },
+                authenticatedAt: '2026-07-12T00:00:00.000Z',
+            }),
+        );
+        window.sessionStorage.setItem(
+            'yahub.admin.members.draft',
+            JSON.stringify({ editingMemberId: 'nicolas', formState: { name: '', slug: '' } }),
+        );
+
+        render(
+            <MemoryRouter initialEntries={['/admin/membros/nicolas/editar']}>
+                <App />
+            </MemoryRouter>,
+        );
+
+        expect(await screen.findByLabelText('Nome')).toHaveValue('Nícolas Machado Cardoso');
+        expect(screen.getByLabelText('Slug')).toHaveValue('nicolas');
+    });
+
+    it('cria, edita e remove projeto no fluxo administrativo mockado', async () => {
+        window.localStorage.setItem(
+            ADMIN_SESSION_STORAGE_KEY,
+            JSON.stringify({
+                token: 'mock-jwt-token',
+                user: {
+                    id: 'admin-test',
+                    name: 'Admin Teste',
+                    email: 'admin@yalabs.local',
+                },
+                authenticatedAt: '2026-07-12T00:00:00.000Z',
+            }),
+        );
+
+        render(
+            <MemoryRouter initialEntries={['/admin/projetos']}>
+                <App />
+            </MemoryRouter>,
+        );
+
+        expect(await screen.findByRole('heading', { name: 'Projetos' })).toBeInTheDocument();
+
+        fireEvent.click(screen.getByRole('link', { name: 'Novo projeto' }));
+        fireEvent.change(screen.getByLabelText('Nome de exibição'), { target: { value: 'Projeto Local Admin' } });
+        fireEvent.change(screen.getByLabelText('Slug'), { target: { value: 'projeto-local-admin' } });
+        fireEvent.change(screen.getByLabelText('Chamada curta'), { target: { value: 'Fluxo administrativo local.' } });
+        fireEvent.change(screen.getByLabelText('Descrição curta'), {
+            target: { value: 'Projeto criado no fluxo mockado.' },
+        });
+        fireEvent.change(screen.getByLabelText('Descrição completa'), {
+            target: { value: 'Projeto usado para validar CRUD local.' },
+        });
+        fireEvent.change(screen.getByLabelText('Linguagem principal'), { target: { value: 'TypeScript' } });
+        fireEvent.change(screen.getByLabelText('URL do repositório'), {
+            target: { value: 'https://github.com/ya-labs/projeto-local-admin' },
+        });
+        fireEvent.change(screen.getByLabelText('Dono no GitHub'), { target: { value: 'ya-labs' } });
+        fireEvent.change(screen.getByLabelText('Nome do repositório'), { target: { value: 'projeto-local-admin' } });
+        fireEvent.change(screen.getByLabelText('ID do repositório GitHub'), {
+            target: { value: 'ya-labs-projeto-local-admin' },
+        });
+        fireEvent.change(screen.getByLabelText('Tecnologias'), { target: { value: 'React, TypeScript' } });
+        fireEvent.change(screen.getByLabelText('Responsáveis'), { target: { value: 'nicolas' } });
+        fireEvent.click(screen.getByRole('button', { name: 'Criar projeto' }));
+
+        expect(await screen.findByText('Projeto Projeto Local Admin criado localmente.')).toBeInTheDocument();
+        expect(await screen.findByRole('heading', { name: 'Projeto Local Admin' })).toBeInTheDocument();
+
+        const projectActions = screen.getByLabelText('Ações de Projeto Local Admin');
+        fireEvent.click(projectActions.querySelector('a') as HTMLAnchorElement);
+        fireEvent.change(await screen.findByLabelText('Nome de exibição'), { target: { value: 'Projeto Local Editado' } });
+        fireEvent.click(screen.getByRole('button', { name: 'Salvar alterações' }));
+
+        expect(await screen.findByText('Projeto Projeto Local Editado atualizado localmente.')).toBeInTheDocument();
+        expect(await screen.findByRole('heading', { name: 'Projeto Local Editado' })).toBeInTheDocument();
+
+        fireEvent.click(screen.getByLabelText('Ações de Projeto Local Editado').querySelector('button') as HTMLButtonElement);
+
+        expect(await screen.findByText('Projeto Projeto Local Editado removido localmente.')).toBeInTheDocument();
+        expect(screen.queryByRole('heading', { name: 'Projeto Local Editado' })).not.toBeInTheDocument();
+    });
+
+    it('cria, edita e remove membro no fluxo administrativo mockado', async () => {
+        window.localStorage.setItem(
+            ADMIN_SESSION_STORAGE_KEY,
+            JSON.stringify({
+                token: 'mock-jwt-token',
+                user: { id: 'admin-test', name: 'Admin Teste', email: 'admin@yalabs.local' },
+                authenticatedAt: '2026-07-12T00:00:00.000Z',
+            }),
+        );
+
+        render(
+            <MemoryRouter initialEntries={['/admin/membros']}>
+                <App />
+            </MemoryRouter>,
+        );
+
+        expect(await screen.findByRole('heading', { name: 'Membros' })).toBeInTheDocument();
+        fireEvent.click(screen.getByRole('link', { name: 'Novo membro' }));
+        fireEvent.change(await screen.findByLabelText('Nome'), { target: { value: 'Membro Local Admin' } });
+        fireEvent.change(screen.getByLabelText('Slug'), { target: { value: 'membro-local-admin' } });
+        fireEvent.change(screen.getByLabelText('Função'), { target: { value: 'Front-end' } });
+        fireEvent.change(screen.getByLabelText('Usuário do GitHub'), { target: { value: 'membro-local' } });
+        fireEvent.change(screen.getByLabelText('Responsabilidades'), { target: { value: 'Front-end, UX' } });
+        fireEvent.change(screen.getByLabelText('Projetos associados'), { target: { value: 'yahub' } });
+        fireEvent.change(screen.getByLabelText('Links externos'), { target: { value: 'GitHub | https://github.com/membro-local' } });
+        fireEvent.click(screen.getByRole('button', { name: 'Criar membro' }));
+
+        expect(await screen.findByText('Membro Membro Local Admin criado localmente.')).toBeInTheDocument();
+        expect(await screen.findByRole('heading', { name: 'Membro Local Admin' })).toBeInTheDocument();
+
+        fireEvent.click(screen.getByLabelText('Ações de Membro Local Admin').querySelector('a') as HTMLAnchorElement);
+        fireEvent.change(await screen.findByLabelText('Nome'), { target: { value: 'Membro Local Editado' } });
+        fireEvent.click(screen.getByRole('button', { name: 'Salvar alterações' }));
+
+        expect(await screen.findByText('Membro Membro Local Editado atualizado localmente.')).toBeInTheDocument();
+        expect(await screen.findByRole('heading', { name: 'Membro Local Editado' })).toBeInTheDocument();
+
+        fireEvent.click(screen.getByLabelText('Ações de Membro Local Editado').querySelector('button') as HTMLButtonElement);
+
+        expect(await screen.findByText('Membro Membro Local Editado removido localmente.')).toBeInTheDocument();
+        expect(screen.queryByRole('heading', { name: 'Membro Local Editado' })).not.toBeInTheDocument();
     });
 });

@@ -2,9 +2,17 @@ import type {
     AdminUser,
     GithubRepository,
     LoginResponse,
+    MemberDetails,
+    MemberPayload,
+    ProjectDetails,
+    ProjectPayload,
     YahubApi,
 } from './contracts';
 import { mockActivity, mockMembers, mockOrganization, mockProjects } from './mockData';
+
+function cloneData<T>(data: T): T {
+    return JSON.parse(JSON.stringify(data)) as T;
+}
 
 function findOrFail<T extends { slug: string }>(items: T[], slug: string, entityName: string): T {
     const item = items.find((currentItem) => currentItem.slug === slug);
@@ -16,11 +24,44 @@ function findOrFail<T extends { slug: string }>(items: T[], slug: string, entity
     return item;
 }
 
+function findByIdOrFail<T extends { id: string }>(items: T[], id: string, entityName: string): T {
+    const item = items.find((currentItem) => currentItem.id === id);
+
+    if (!item) {
+        throw new Error(`${entityName} não encontrado.`);
+    }
+
+    return item;
+}
+
+let adminProjects: ProjectDetails[] = cloneData(mockProjects);
+let adminMembers: MemberDetails[] = cloneData(mockMembers);
+
 const adminUser: AdminUser = {
     id: '00000000-0000-0000-0000-000000000000',
     name: 'Administrador YA LABS',
     email: 'admin@yalabs.local',
 };
+
+export function resetMockAdminData() {
+    adminProjects = cloneData(mockProjects);
+    adminMembers = cloneData(mockMembers);
+}
+
+function createProjectDetails(payload: ProjectPayload, id = payload.slug): ProjectDetails {
+    return {
+        id,
+        recentActivities: [],
+        ...payload,
+    };
+}
+
+function createMemberDetails(payload: MemberPayload, id = payload.slug): MemberDetails {
+    return {
+        id,
+        ...payload,
+    };
+}
 
 export const mockYahubApi: YahubApi = {
     auth: {
@@ -28,38 +69,72 @@ export const mockYahubApi: YahubApi = {
             token: 'mock-jwt-token',
             user: adminUser,
         }),
-        register: async () => adminUser,
+        register: async (payload) => ({
+            id: payload.email,
+            name: payload.name,
+            email: payload.email,
+        }),
     },
     organization: {
-        get: async () => mockOrganization,
+        get: async () => cloneData(mockOrganization),
     },
     projects: {
-        list: async () => mockProjects,
-        getBySlug: async (slug) => findOrFail(mockProjects, slug, 'Projeto'),
+        list: async () => cloneData(mockProjects),
+        getBySlug: async (slug) => cloneData(findOrFail(mockProjects, slug, 'Projeto')),
     },
     members: {
-        list: async () => mockMembers,
-        getBySlug: async (slug) => findOrFail(mockMembers, slug, 'Membro'),
+        list: async () => cloneData(mockMembers),
+        getBySlug: async (slug) => cloneData(findOrFail(mockMembers, slug, 'Membro')),
     },
     activity: {
-        list: async () => mockActivity,
+        list: async () => cloneData(mockActivity),
     },
     admin: {
         projects: {
-            list: async () => mockProjects,
-            create: async (payload) => ({ id: payload.slug, recentActivities: [], ...payload }),
-            update: async (id, payload) => ({ id, recentActivities: [], ...payload }),
-            remove: async () => undefined,
+            list: async () => cloneData(adminProjects),
+            create: async (payload) => {
+                const project = createProjectDetails(payload);
+                adminProjects = [...adminProjects, project];
+
+                return cloneData(project);
+            },
+            update: async (id, payload) => {
+                findByIdOrFail(adminProjects, id, 'Projeto');
+
+                const updatedProject = createProjectDetails(payload, id);
+                adminProjects = adminProjects.map((project) => (project.id === id ? updatedProject : project));
+
+                return cloneData(updatedProject);
+            },
+            remove: async (id) => {
+                findByIdOrFail(adminProjects, id, 'Projeto');
+                adminProjects = adminProjects.filter((project) => project.id !== id);
+            },
         },
         members: {
-            list: async () => mockMembers,
-            create: async (payload) => ({ id: payload.slug, ...payload }),
-            update: async (id, payload) => ({ id, ...payload }),
-            remove: async () => undefined,
+            list: async () => cloneData(adminMembers),
+            create: async (payload) => {
+                const member = createMemberDetails(payload);
+                adminMembers = [...adminMembers, member];
+
+                return cloneData(member);
+            },
+            update: async (id, payload) => {
+                findByIdOrFail(adminMembers, id, 'Membro');
+
+                const updatedMember = createMemberDetails(payload, id);
+                adminMembers = adminMembers.map((member) => (member.id === id ? updatedMember : member));
+
+                return cloneData(updatedMember);
+            },
+            remove: async (id) => {
+                findByIdOrFail(adminMembers, id, 'Membro');
+                adminMembers = adminMembers.filter((member) => member.id !== id);
+            },
         },
         githubRepositories: {
             list: async (): Promise<GithubRepository[]> =>
-                mockProjects.map((project) => ({
+                adminProjects.map((project) => ({
                     githubRepositoryId: project.githubRepositoryId,
                     githubOwner: project.githubOwner,
                     githubName: project.githubName,
