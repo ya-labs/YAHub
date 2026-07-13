@@ -251,6 +251,30 @@ describe('App', () => {
         expect(screen.getByLabelText('Nome de exibição')).toHaveValue('Projeto em Rascunho');
     });
 
+    it('prioriza os dados do projeto ao editar quando o rascunho da sessão está incompleto', async () => {
+        window.localStorage.setItem(
+            ADMIN_SESSION_STORAGE_KEY,
+            JSON.stringify({
+                token: 'mock-jwt-token',
+                user: { id: 'admin-test', name: 'Admin Teste', email: 'admin@yalabs.local' },
+                authenticatedAt: '2026-07-12T00:00:00.000Z',
+            }),
+        );
+        window.sessionStorage.setItem(
+            'yahub.admin.projects.draft',
+            JSON.stringify({ editingProjectId: 'yahub', formState: { displayName: '', slug: '' } }),
+        );
+
+        render(
+            <MemoryRouter initialEntries={['/admin/projetos/yahub/editar']}>
+                <App />
+            </MemoryRouter>,
+        );
+
+        expect(await screen.findByLabelText('Nome de exibição')).toHaveValue('YAHub');
+        expect(screen.getByLabelText('Slug')).toHaveValue('yahub');
+    });
+
     it('cria, edita e remove projeto no fluxo administrativo mockado', async () => {
         window.localStorage.setItem(
             ADMIN_SESSION_STORAGE_KEY,

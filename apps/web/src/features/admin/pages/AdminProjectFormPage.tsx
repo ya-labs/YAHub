@@ -39,6 +39,12 @@ function readProjectDraft(): ProjectDraft | null {
     try { return JSON.parse(storedDraft) as ProjectDraft; } catch { window.sessionStorage.removeItem(projectDraftStorageKey); return null; }
 }
 
+function hasEditableProjectDraft(draft: ProjectDraft | null, projectId: string) {
+    return Boolean(
+        draft?.editingProjectId === projectId && draft.formState.displayName.trim() && draft.formState.slug.trim(),
+    );
+}
+
 function createFormStateFromProject(project: ProjectDetails): ProjectFormState {
     return {
         slug: project.slug, displayName: project.displayName, tagline: project.tagline, category: project.category, affiliation: project.affiliation,
@@ -77,6 +83,7 @@ export function AdminProjectFormPage() {
         error: null,
         isLoading: isEditing,
     });
+    const [loadedProjectId, setLoadedProjectId] = useState<string | null>(isEditing ? null : 'new');
     const [formError, setFormError] = useState<string | null>(null);
     const [isSaving, setIsSaving] = useState(false);
 
@@ -89,8 +96,11 @@ export function AdminProjectFormPage() {
             if (!isActive) return;
             const project = projects.find((item) => item.id === projectId);
             if (!project) { setPageState({ data: null, error: 'Projeto não encontrado.', isLoading: false }); return; }
-            setFormState(draft?.editingProjectId === projectId ? draft.formState : createFormStateFromProject(project));
+            setFormState(
+                draft && hasEditableProjectDraft(draft, projectId) ? draft.formState : createFormStateFromProject(project),
+            );
             setPageState({ data: true, error: null, isLoading: false });
+            setLoadedProjectId(projectId);
         }).catch((error: unknown) => {
             if (isActive) setPageState({ data: null, error: error instanceof Error ? error.message : 'Não foi possível carregar o projeto.', isLoading: false });
         });
@@ -99,9 +109,9 @@ export function AdminProjectFormPage() {
     }, [isEditing, projectId]);
 
     useEffect(() => {
-        if (!canUseSessionStorage()) return;
+        if (!canUseSessionStorage() || (isEditing && loadedProjectId !== projectId)) return;
         window.sessionStorage.setItem(projectDraftStorageKey, JSON.stringify({ editingProjectId: projectId ?? null, formState }));
-    }, [formState, projectId]);
+    }, [formState, isEditing, loadedProjectId, projectId]);
 
     function updateForm<Value extends keyof ProjectFormState>(field: Value, value: ProjectFormState[Value]) {
         setFormState((currentState) => ({ ...currentState, [field]: value }));
