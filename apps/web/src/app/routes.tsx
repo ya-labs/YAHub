@@ -4,6 +4,7 @@ import { RequireAuth } from '../features/admin/guards/RequireAuth';
 import { PortalShell } from '../features/portal/layouts/PortalShell';
 import {
     AdminLoginPage,
+    AdminMemberFormPage,
     AdminMembersPage,
     AdminPage,
     AdminProjectFormPage,
@@ -85,6 +86,14 @@ export const routes: RouteObject[] = [
             {
                 path: 'membros',
                 element: withSuspense(<AdminMembersPage />),
+            },
+            {
+                path: 'membros/novo',
+                element: withSuspense(<AdminMemberFormPage />),
+            },
+            {
+                path: 'membros/:memberId/editar',
+                element: withSuspense(<AdminMemberFormPage />),
             },
         ],
     },

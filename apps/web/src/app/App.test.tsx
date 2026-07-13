@@ -220,7 +220,7 @@ describe('App', () => {
         expect(screen.getByRole('link', { name: 'Novo projeto' })).toHaveAttribute('href', '/admin/projetos/novo');
     });
 
-    it('renderiza a listagem administrativa de membros com ações indisponíveis', async () => {
+    it('renderiza a listagem administrativa de membros com ações locais', async () => {
         window.localStorage.setItem(
             ADMIN_SESSION_STORAGE_KEY,
             JSON.stringify({
@@ -241,8 +241,9 @@ describe('App', () => {
         expect(screen.getByRole('heading', { name: 'Nícolas Machado Cardoso' })).toBeInTheDocument();
         expect(screen.getByText('Product / Front-end / UX')).toBeInTheDocument();
         expect(screen.getByText('Idealização do YAHub')).toBeInTheDocument();
-        expect(screen.getAllByRole('button', { name: 'Editar' })[0]).toBeDisabled();
-        expect(screen.getAllByRole('button', { name: 'Remover' })[0]).toBeDisabled();
+        expect(screen.getAllByRole('link', { name: 'Editar' })[0]).toHaveAttribute('href', '/admin/membros/nicolas/editar');
+        expect(screen.getAllByRole('button', { name: 'Remover' })[0]).toBeEnabled();
+        expect(screen.getByRole('link', { name: 'Novo membro' })).toHaveAttribute('href', '/admin/membros/novo');
     });
 
     it('mantém rascunho do projeto ao voltar para a listagem sem salvar', async () => {
@@ -360,5 +361,48 @@ describe('App', () => {
 
         expect(await screen.findByText('Projeto Projeto Local Editado removido localmente.')).toBeInTheDocument();
         expect(screen.queryByRole('heading', { name: 'Projeto Local Editado' })).not.toBeInTheDocument();
+    });
+
+    it('cria, edita e remove membro no fluxo administrativo mockado', async () => {
+        window.localStorage.setItem(
+            ADMIN_SESSION_STORAGE_KEY,
+            JSON.stringify({
+                token: 'mock-jwt-token',
+                user: { id: 'admin-test', name: 'Admin Teste', email: 'admin@yalabs.local' },
+                authenticatedAt: '2026-07-12T00:00:00.000Z',
+            }),
+        );
+
+        render(
+            <MemoryRouter initialEntries={['/admin/membros']}>
+                <App />
+            </MemoryRouter>,
+        );
+
+        expect(await screen.findByRole('heading', { name: 'Membros' })).toBeInTheDocument();
+        fireEvent.click(screen.getByRole('link', { name: 'Novo membro' }));
+        fireEvent.change(await screen.findByLabelText('Nome'), { target: { value: 'Membro Local Admin' } });
+        fireEvent.change(screen.getByLabelText('Slug'), { target: { value: 'membro-local-admin' } });
+        fireEvent.change(screen.getByLabelText('Função'), { target: { value: 'Front-end' } });
+        fireEvent.change(screen.getByLabelText('Usuário do GitHub'), { target: { value: 'membro-local' } });
+        fireEvent.change(screen.getByLabelText('Responsabilidades'), { target: { value: 'Front-end, UX' } });
+        fireEvent.change(screen.getByLabelText('Projetos associados'), { target: { value: 'yahub' } });
+        fireEvent.change(screen.getByLabelText('Links externos'), { target: { value: 'GitHub | https://github.com/membro-local' } });
+        fireEvent.click(screen.getByRole('button', { name: 'Criar membro' }));
+
+        expect(await screen.findByText('Membro Membro Local Admin criado localmente.')).toBeInTheDocument();
+        expect(await screen.findByRole('heading', { name: 'Membro Local Admin' })).toBeInTheDocument();
+
+        fireEvent.click(screen.getByLabelText('Ações de Membro Local Admin').querySelector('a') as HTMLAnchorElement);
+        fireEvent.change(await screen.findByLabelText('Nome'), { target: { value: 'Membro Local Editado' } });
+        fireEvent.click(screen.getByRole('button', { name: 'Salvar alterações' }));
+
+        expect(await screen.findByText('Membro Membro Local Editado atualizado localmente.')).toBeInTheDocument();
+        expect(await screen.findByRole('heading', { name: 'Membro Local Editado' })).toBeInTheDocument();
+
+        fireEvent.click(screen.getByLabelText('Ações de Membro Local Editado').querySelector('button') as HTMLButtonElement);
+
+        expect(await screen.findByText('Membro Membro Local Editado removido localmente.')).toBeInTheDocument();
+        expect(screen.queryByRole('heading', { name: 'Membro Local Editado' })).not.toBeInTheDocument();
     });
 });

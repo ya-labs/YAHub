@@ -77,3 +77,9 @@ export const AdminMembersPage = lazy(() =>
         default: AdminMembersPage,
     })),
 );
+
+export const AdminMemberFormPage = lazy(() =>
+    import('../features/admin/pages/AdminMemberFormPage').then(({ AdminMemberFormPage }) => ({
+        default: AdminMemberFormPage,
+    })),
+);
