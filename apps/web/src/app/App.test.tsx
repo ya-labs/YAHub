@@ -301,6 +301,54 @@ describe('App', () => {
         expect(screen.getByLabelText('Slug')).toHaveValue('yahub');
     });
 
+    it('mantém rascunho do membro ao voltar para a listagem sem salvar', async () => {
+        window.localStorage.setItem(
+            ADMIN_SESSION_STORAGE_KEY,
+            JSON.stringify({
+                token: 'mock-jwt-token',
+                user: { id: 'admin-test', name: 'Admin Teste', email: 'admin@yalabs.local' },
+                authenticatedAt: '2026-07-12T00:00:00.000Z',
+            }),
+        );
+
+        render(
+            <MemoryRouter initialEntries={['/admin/membros/novo']}>
+                <App />
+            </MemoryRouter>,
+        );
+
+        fireEvent.change(await screen.findByLabelText('Nome'), { target: { value: 'Membro em Rascunho' } });
+        fireEvent.click(screen.getByRole('link', { name: 'Voltar e manter rascunho' }));
+        expect(await screen.findByRole('heading', { name: 'Membros' })).toBeInTheDocument();
+
+        fireEvent.click(screen.getByRole('link', { name: 'Novo membro' }));
+        expect(await screen.findByLabelText('Nome')).toHaveValue('Membro em Rascunho');
+    });
+
+    it('prioriza os dados do membro ao editar quando o rascunho da sessão está incompleto', async () => {
+        window.localStorage.setItem(
+            ADMIN_SESSION_STORAGE_KEY,
+            JSON.stringify({
+                token: 'mock-jwt-token',
+                user: { id: 'admin-test', name: 'Admin Teste', email: 'admin@yalabs.local' },
+                authenticatedAt: '2026-07-12T00:00:00.000Z',
+            }),
+        );
+        window.sessionStorage.setItem(
+            'yahub.admin.members.draft',
+            JSON.stringify({ editingMemberId: 'nicolas', formState: { name: '', slug: '' } }),
+        );
+
+        render(
+            <MemoryRouter initialEntries={['/admin/membros/nicolas/editar']}>
+                <App />
+            </MemoryRouter>,
+        );
+
+        expect(await screen.findByLabelText('Nome')).toHaveValue('Nícolas Machado Cardoso');
+        expect(screen.getByLabelText('Slug')).toHaveValue('nicolas');
+    });
+
     it('cria, edita e remove projeto no fluxo administrativo mockado', async () => {
         window.localStorage.setItem(
             ADMIN_SESSION_STORAGE_KEY,

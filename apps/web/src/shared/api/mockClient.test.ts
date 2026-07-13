@@ -127,4 +127,18 @@ describe('mockYahubApi admin data', () => {
         const adminMembers = await mockYahubApi.admin.members.list();
         expect(adminMembers.some((member) => member.id === createdMember.id)).toBe(false);
     });
+
+    it('devolve cópias para que mutações do consumidor não alterem o estado administrativo', async () => {
+        const [adminProject] = await mockYahubApi.admin.projects.list();
+        const [adminMember] = await mockYahubApi.admin.members.list();
+
+        adminProject.technologies.push('Mutação externa');
+        adminMember.responsibilities.push('Mutação externa');
+
+        const [storedProject] = await mockYahubApi.admin.projects.list();
+        const [storedMember] = await mockYahubApi.admin.members.list();
+
+        expect(storedProject.technologies).not.toContain('Mutação externa');
+        expect(storedMember.responsibilities).not.toContain('Mutação externa');
+    });
 });
