@@ -220,6 +220,31 @@ describe('App', () => {
         expect(screen.getByRole('link', { name: 'Novo projeto' })).toHaveAttribute('href', '/admin/projetos/novo');
     });
 
+    it('renderiza a listagem administrativa de membros com ações indisponíveis', async () => {
+        window.localStorage.setItem(
+            ADMIN_SESSION_STORAGE_KEY,
+            JSON.stringify({
+                token: 'mock-jwt-token',
+                user: { id: 'admin-test', name: 'Admin Teste', email: 'admin@yalabs.local' },
+                authenticatedAt: '2026-07-12T00:00:00.000Z',
+            }),
+        );
+
+        render(
+            <MemoryRouter initialEntries={['/admin/membros']}>
+                <App />
+            </MemoryRouter>,
+        );
+
+        expect(await screen.findByRole('heading', { name: 'Membros' })).toBeInTheDocument();
+        expect(await screen.findByRole('list', { name: 'Membros administrativos' })).toBeInTheDocument();
+        expect(screen.getByRole('heading', { name: 'Nícolas Machado Cardoso' })).toBeInTheDocument();
+        expect(screen.getByText('Product / Front-end / UX')).toBeInTheDocument();
+        expect(screen.getByText('Idealização do YAHub')).toBeInTheDocument();
+        expect(screen.getAllByRole('button', { name: 'Editar' })[0]).toBeDisabled();
+        expect(screen.getAllByRole('button', { name: 'Remover' })[0]).toBeDisabled();
+    });
+
     it('mantém rascunho do projeto ao voltar para a listagem sem salvar', async () => {
         window.localStorage.setItem(
             ADMIN_SESSION_STORAGE_KEY,
