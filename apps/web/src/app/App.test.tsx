@@ -215,12 +215,12 @@ describe('App', () => {
         expect(await screen.findByRole('list', { name: 'Projetos administrativos' })).toBeInTheDocument();
         expect(screen.getByRole('heading', { name: 'YAHub' })).toBeInTheDocument();
         expect(screen.getByText('ya-labs/YA-HUB')).toBeInTheDocument();
-        expect(screen.getAllByRole('button', { name: 'Editar' })[0]).toBeEnabled();
+        expect(screen.getAllByRole('link', { name: 'Editar' })[0]).toHaveAttribute('href', '/admin/projetos/yahub/editar');
         expect(screen.getAllByRole('button', { name: 'Remover' })[0]).toBeEnabled();
-        expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+        expect(screen.getByRole('link', { name: 'Novo projeto' })).toHaveAttribute('href', '/admin/projetos/novo');
     });
 
-    it('mantém rascunho do projeto ao fechar o modal sem salvar', async () => {
+    it('mantém rascunho do projeto ao voltar para a listagem sem salvar', async () => {
         window.localStorage.setItem(
             ADMIN_SESSION_STORAGE_KEY,
             JSON.stringify({
@@ -235,20 +235,18 @@ describe('App', () => {
         );
 
         render(
-            <MemoryRouter initialEntries={['/admin/projetos']}>
+            <MemoryRouter initialEntries={['/admin/projetos/novo']}>
                 <App />
             </MemoryRouter>,
         );
 
+        expect(await screen.findByRole('heading', { name: 'Novo projeto' })).toBeInTheDocument();
+        fireEvent.change(screen.getByLabelText('Nome de exibição'), { target: { value: 'Projeto em Rascunho' } });
+        fireEvent.click(screen.getByRole('link', { name: 'Voltar e manter rascunho' }));
+
         expect(await screen.findByRole('heading', { name: 'Projetos' })).toBeInTheDocument();
 
-        fireEvent.click(screen.getByRole('button', { name: 'Novo projeto' }));
-        fireEvent.change(screen.getByLabelText('Nome de exibição'), { target: { value: 'Projeto em Rascunho' } });
-        fireEvent.click(screen.getByRole('button', { name: 'Fechar e manter' }));
-
-        expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
-
-        fireEvent.click(screen.getByRole('button', { name: 'Novo projeto' }));
+        fireEvent.click(screen.getByRole('link', { name: 'Novo projeto' }));
 
         expect(screen.getByLabelText('Nome de exibição')).toHaveValue('Projeto em Rascunho');
     });
@@ -275,7 +273,7 @@ describe('App', () => {
 
         expect(await screen.findByRole('heading', { name: 'Projetos' })).toBeInTheDocument();
 
-        fireEvent.click(screen.getByRole('button', { name: 'Novo projeto' }));
+        fireEvent.click(screen.getByRole('link', { name: 'Novo projeto' }));
         fireEvent.change(screen.getByLabelText('Nome de exibição'), { target: { value: 'Projeto Local Admin' } });
         fireEvent.change(screen.getByLabelText('Slug'), { target: { value: 'projeto-local-admin' } });
         fireEvent.change(screen.getByLabelText('Chamada curta'), { target: { value: 'Fluxo administrativo local.' } });
@@ -299,17 +297,17 @@ describe('App', () => {
         fireEvent.click(screen.getByRole('button', { name: 'Criar projeto' }));
 
         expect(await screen.findByText('Projeto Projeto Local Admin criado localmente.')).toBeInTheDocument();
-        expect(screen.getByRole('heading', { name: 'Projeto Local Admin' })).toBeInTheDocument();
+        expect(await screen.findByRole('heading', { name: 'Projeto Local Admin' })).toBeInTheDocument();
 
         const projectActions = screen.getByLabelText('Ações de Projeto Local Admin');
-        fireEvent.click(projectActions.querySelector('button') as HTMLButtonElement);
-        fireEvent.change(screen.getByLabelText('Nome de exibição'), { target: { value: 'Projeto Local Editado' } });
+        fireEvent.click(projectActions.querySelector('a') as HTMLAnchorElement);
+        fireEvent.change(await screen.findByLabelText('Nome de exibição'), { target: { value: 'Projeto Local Editado' } });
         fireEvent.click(screen.getByRole('button', { name: 'Salvar alterações' }));
 
         expect(await screen.findByText('Projeto Projeto Local Editado atualizado localmente.')).toBeInTheDocument();
-        expect(screen.getByRole('heading', { name: 'Projeto Local Editado' })).toBeInTheDocument();
+        expect(await screen.findByRole('heading', { name: 'Projeto Local Editado' })).toBeInTheDocument();
 
-        fireEvent.click(screen.getByLabelText('Ações de Projeto Local Editado').querySelectorAll('button')[1]);
+        fireEvent.click(screen.getByLabelText('Ações de Projeto Local Editado').querySelector('button') as HTMLButtonElement);
 
         expect(await screen.findByText('Projeto Projeto Local Editado removido localmente.')).toBeInTheDocument();
         expect(screen.queryByRole('heading', { name: 'Projeto Local Editado' })).not.toBeInTheDocument();

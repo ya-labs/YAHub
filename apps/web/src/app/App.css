@@ -504,40 +504,6 @@ footer {
     padding: 0.85rem 1rem;
 }
 
-.admin-modal {
-    align-items: center;
-    background: rgba(15, 23, 42, 0.52);
-    display: grid;
-    inset: 0;
-    padding: 1rem;
-    position: fixed;
-    z-index: 40;
-}
-
-.admin-modal__panel {
-    background: #ffffff;
-    border-radius: 0.75rem;
-    display: grid;
-    gap: 1rem;
-    max-height: min(90vh, 54rem);
-    overflow: auto;
-    padding: clamp(1rem, 3vw, 1.25rem);
-    width: min(100%, 64rem);
-    justify-self: center;
-}
-
-.admin-modal__close {
-    background: #ffffff;
-    border: 1px solid #cbd5e1;
-    border-radius: 0.5rem;
-    color: #334155;
-    cursor: pointer;
-    font: inherit;
-    font-weight: 800;
-    min-height: 2.5rem;
-    padding: 0.55rem 0.8rem;
-}
-
 .admin-form-section {
     background: #ffffff;
     border: 1px solid #d9deea;
@@ -604,6 +570,29 @@ footer {
     font-weight: 800;
     min-height: 2.75rem;
     padding: 0.7rem 1rem;
+}
+
+.admin-link-action {
+    align-items: center;
+    color: #0a1a5e;
+    display: inline-flex;
+    font-weight: 800;
+    gap: 0.45rem;
+    justify-content: center;
+    min-height: 2.5rem;
+    text-decoration: none;
+}
+
+.admin-page__header > .admin-link-action,
+.admin-form__actions .admin-link-action,
+.admin-list__actions .admin-link-action {
+    border: 1px solid #cbd5e1;
+    border-radius: 0.5rem;
+    padding: 0.55rem 0.8rem;
+}
+
+.admin-page__header > .portal-button.admin-link-action {
+    color: #052e16;
 }
 
 .admin-list {

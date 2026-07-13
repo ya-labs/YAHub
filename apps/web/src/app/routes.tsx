@@ -6,6 +6,7 @@ import {
     AdminLoginPage,
     AdminMembersPage,
     AdminPage,
+    AdminProjectFormPage,
     AdminProjectsPage,
     HomePage,
     PortalActivityPage,
@@ -72,6 +73,14 @@ export const routes: RouteObject[] = [
             {
                 path: 'projetos',
                 element: withSuspense(<AdminProjectsPage />),
+            },
+            {
+                path: 'projetos/novo',
+                element: withSuspense(<AdminProjectFormPage />),
+            },
+            {
+                path: 'projetos/:projectId/editar',
+                element: withSuspense(<AdminProjectFormPage />),
             },
             {
                 path: 'membros',
