@@ -1,0 +1,11 @@
+.git
+.agents
+.codex
+**/node_modules
+**/dist
+**/dist-ssr
+**/coverage
+**/target
+**/.mvn
+**/*.min.js
+**/*.min.css

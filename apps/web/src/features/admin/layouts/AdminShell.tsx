@@ -5,7 +5,7 @@ export function AdminShell() {
         <div>
             <header>
                 <strong>YAHub Admin</strong>
- 
+
                 <nav aria-label="Navegação do admin">
                     <Link to="/admin">Início</Link>
                     <Link to="/admin/projetos">Projetos</Link>

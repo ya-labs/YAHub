@@ -88,15 +88,16 @@ function getProjectGroups(projects: ProjectSummary[]): ProjectGroup[] {
             title: 'Ecossistema',
             kicker: 'Projetos de suporte',
             emptyMessage: 'Nenhum projeto de ecossistema cadastrado.',
-            projects: projects.filter((project) => project.category === 'ecossistema' && project.affiliation === 'oficial'),
+            projects: projects.filter(
+                (project) => project.category === 'ecossistema' && project.affiliation === 'oficial',
+            ),
         },
         {
             id: 'portal-guided',
             title: 'Projetos orientados',
             kicker: 'Apoio YA LABS',
             emptyMessage: 'Nenhum projeto orientado cadastrado.',
-            note:
-                'Projetos orientados pertencem aos seus autores. A YA LABS atua com apoio técnico, mentoria, revisão, documentação ou divulgação conforme o contexto.',
+            note: 'Projetos orientados pertencem aos seus autores. A YA LABS atua com apoio técnico, mentoria, revisão, documentação ou divulgação conforme o contexto.',
             projects: projects.filter((project) => project.affiliation === 'orientado'),
         },
     ];

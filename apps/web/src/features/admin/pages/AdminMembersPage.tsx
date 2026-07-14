@@ -55,7 +55,10 @@ export function AdminMembersPage() {
                 <div>
                     <p className="portal-kicker">Administração</p>
                     <h1>Membros</h1>
-                    <p>Gerencie as pessoas apresentadas no portal público e os vínculos operacionais mantidos localmente.</p>
+                    <p>
+                        Gerencie as pessoas apresentadas no portal público e os vínculos operacionais mantidos
+                        localmente.
+                    </p>
                 </div>
                 <Link className="portal-button admin-link-action" to="/admin/membros/novo">
                     <span>Novo membro</span>
@@ -69,9 +72,18 @@ export function AdminMembersPage() {
                 {() => (
                     <section className="admin-page__content">
                         <section className="admin-dashboard__stats" aria-label="Resumo administrativo de membros">
-                            <article className="portal-stat"><strong>{members.length}</strong><span>Membros cadastrados</span></article>
-                            <article className="portal-stat"><strong>{members.filter((member) => member.githubUsername).length}</strong><span>Com perfil GitHub</span></article>
-                            <article className="portal-stat"><strong>{members.filter((member) => member.projectSlugs.length > 0).length}</strong><span>Com projetos associados</span></article>
+                            <article className="portal-stat">
+                                <strong>{members.length}</strong>
+                                <span>Membros cadastrados</span>
+                            </article>
+                            <article className="portal-stat">
+                                <strong>{members.filter((member) => member.githubUsername).length}</strong>
+                                <span>Com perfil GitHub</span>
+                            </article>
+                            <article className="portal-stat">
+                                <strong>{members.filter((member) => member.projectSlugs.length > 0).length}</strong>
+                                <span>Com projetos associados</span>
+                            </article>
                         </section>
 
                         <ul className="admin-list" aria-label="Membros administrativos">
@@ -87,26 +99,62 @@ export function AdminMembersPage() {
                                         </header>
                                         <p>{member.bio ?? 'Biografia ainda não informada.'}</p>
                                         <dl className="admin-list__details">
-                                            <div><dt>GitHub</dt><dd>{member.githubUsername ? `@${member.githubUsername}` : 'Não informado'}</dd></div>
-                                            <div><dt>Spotifolio</dt><dd>{member.spotifolioUsername ? `@${member.spotifolioUsername}` : 'Não informado'}</dd></div>
-                                            <div><dt>Projetos</dt><dd>{member.projectSlugs.length || 'Nenhum associado'}</dd></div>
-                                            <div><dt>Links externos</dt><dd>{member.links.length || 'Nenhum informado'}</dd></div>
+                                            <div>
+                                                <dt>GitHub</dt>
+                                                <dd>
+                                                    {member.githubUsername
+                                                        ? `@${member.githubUsername}`
+                                                        : 'Não informado'}
+                                                </dd>
+                                            </div>
+                                            <div>
+                                                <dt>Spotifolio</dt>
+                                                <dd>
+                                                    {member.spotifolioUsername
+                                                        ? `@${member.spotifolioUsername}`
+                                                        : 'Não informado'}
+                                                </dd>
+                                            </div>
+                                            <div>
+                                                <dt>Projetos</dt>
+                                                <dd>{member.projectSlugs.length || 'Nenhum associado'}</dd>
+                                            </div>
+                                            <div>
+                                                <dt>Links externos</dt>
+                                                <dd>{member.links.length || 'Nenhum informado'}</dd>
+                                            </div>
                                         </dl>
                                         <div className="admin-member-details">
                                             <div>
                                                 <strong>Responsabilidades</strong>
-                                                <ul className="admin-list__tags">{member.responsibilities.map((item) => <li key={item}>{item}</li>)}</ul>
+                                                <ul className="admin-list__tags">
+                                                    {member.responsibilities.map((item) => (
+                                                        <li key={item}>{item}</li>
+                                                    ))}
+                                                </ul>
                                             </div>
                                             <div>
                                                 <strong>Projetos associados</strong>
-                                                <ul className="admin-list__tags">{member.projectSlugs.map((item) => <li key={item}>{item}</li>)}</ul>
+                                                <ul className="admin-list__tags">
+                                                    {member.projectSlugs.map((item) => (
+                                                        <li key={item}>{item}</li>
+                                                    ))}
+                                                </ul>
                                             </div>
                                         </div>
                                         <footer className="admin-list__footer">
                                             <span>Dados mockados, mantidos apenas nesta sessão local.</span>
                                             <div className="admin-list__actions" aria-label={`Ações de ${member.name}`}>
-                                                <Link className="admin-link-action" to={`/admin/membros/${member.id}/editar`}><span>Editar</span><span aria-hidden="true">→</span></Link>
-                                                <button type="button" onClick={() => void handleRemove(member)}>Remover</button>
+                                                <Link
+                                                    className="admin-link-action"
+                                                    to={`/admin/membros/${member.id}/editar`}
+                                                >
+                                                    <span>Editar</span>
+                                                    <span aria-hidden="true">→</span>
+                                                </Link>
+                                                <button type="button" onClick={() => void handleRemove(member)}>
+                                                    Remover
+                                                </button>
                                             </div>
                                         </footer>
                                     </article>

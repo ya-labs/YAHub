@@ -18,9 +18,7 @@ export function HomeShell({ children }: HomeShellProps) {
                 </nav>
             </header>
 
-            <main>
-                {children}
-            </main>
+            <main>{children}</main>
 
             <footer>
                 <small>YA LABS</small>

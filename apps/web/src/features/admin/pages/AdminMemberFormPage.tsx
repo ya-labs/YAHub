@@ -50,7 +50,10 @@ function readMemberDraft(): MemberDraft | null {
 }
 
 function splitList(value: string) {
-    return value.split(',').map((item) => item.trim()).filter(Boolean);
+    return value
+        .split(',')
+        .map((item) => item.trim())
+        .filter(Boolean);
 }
 
 function nullableText(value: string) {
@@ -129,26 +132,43 @@ export function AdminMemberFormPage() {
         let isActive = true;
         const draft = readMemberDraft();
 
-        void yahubApi.admin.members.list().then((members) => {
-            if (!isActive) return;
-            const member = members.find((item) => item.id === memberId);
-            if (!member) {
-                setPageState({ data: null, error: 'Membro não encontrado.', isLoading: false });
-                return;
-            }
-            setFormState(draft && hasEditableMemberDraft(draft, memberId) ? draft.formState : createFormStateFromMember(member));
-            setPageState({ data: true, error: null, isLoading: false });
-            setLoadedMemberId(memberId);
-        }).catch((error: unknown) => {
-            if (isActive) setPageState({ data: null, error: error instanceof Error ? error.message : 'Não foi possível carregar o membro.', isLoading: false });
-        });
+        void yahubApi.admin.members
+            .list()
+            .then((members) => {
+                if (!isActive) return;
+                const member = members.find((item) => item.id === memberId);
+                if (!member) {
+                    setPageState({ data: null, error: 'Membro não encontrado.', isLoading: false });
+                    return;
+                }
+                setFormState(
+                    draft && hasEditableMemberDraft(draft, memberId)
+                        ? draft.formState
+                        : createFormStateFromMember(member),
+                );
+                setPageState({ data: true, error: null, isLoading: false });
+                setLoadedMemberId(memberId);
+            })
+            .catch((error: unknown) => {
+                if (isActive)
+                    setPageState({
+                        data: null,
+                        error: error instanceof Error ? error.message : 'Não foi possível carregar o membro.',
+                        isLoading: false,
+                    });
+            });
 
-        return () => { isActive = false; };
+        return () => {
+            isActive = false;
+        };
     }, [isEditing, memberId]);
 
     useEffect(() => {
         if (!canUseSessionStorage() || (isEditing && loadedMemberId !== memberId)) return;
-        window.sessionStorage.setItem(memberDraftStorageKey, JSON.stringify({ editingMemberId: memberId ?? null, formState }));
+        window.sessionStorage.setItem(
+            memberDraftStorageKey,
+            JSON.stringify({ editingMemberId: memberId ?? null, formState }),
+        );
     }, [formState, isEditing, loadedMemberId, memberId]);
 
     function updateForm<Value extends keyof MemberFormState>(field: Value, value: MemberFormState[Value]) {
@@ -170,7 +190,9 @@ export function AdminMemberFormPage() {
             if (isEditing && memberId) await yahubApi.admin.members.update(memberId, payload);
             else await yahubApi.admin.members.create(payload);
             window.sessionStorage.removeItem(memberDraftStorageKey);
-            navigate('/admin/membros', { state: { feedback: `Membro ${payload.name} ${isEditing ? 'atualizado' : 'criado'} localmente.` } });
+            navigate('/admin/membros', {
+                state: { feedback: `Membro ${payload.name} ${isEditing ? 'atualizado' : 'criado'} localmente.` },
+            });
         } catch (error: unknown) {
             setFormError(error instanceof Error ? error.message : 'Não foi possível salvar o membro.');
         } finally {
@@ -186,28 +208,109 @@ export function AdminMemberFormPage() {
                     <h1>{isEditing ? 'Editar membro' : 'Novo membro'}</h1>
                     <p>Preencha os dados administrativos. O rascunho é preservado nesta sessão enquanto você navega.</p>
                 </div>
-                <Link className="admin-link-action" to="/admin/membros"><span>Voltar para membros</span><span aria-hidden="true">←</span></Link>
+                <Link className="admin-link-action" to="/admin/membros">
+                    <span>Voltar para membros</span>
+                    <span aria-hidden="true">←</span>
+                </Link>
             </section>
 
             <DataState {...pageState} emptyMessage="">
                 {() => (
                     <section className="admin-form-section">
-                        <p className="portal-section__note">Use vírgulas para responsabilidades e projetos. Informe um link externo por linha no formato “Nome | https://url”.</p>
+                        <p className="portal-section__note">
+                            Use vírgulas para responsabilidades e projetos. Informe um link externo por linha no formato
+                            “Nome | https://url”.
+                        </p>
                         {formError ? <p role="alert">{formError}</p> : null}
                         <form className="admin-form" onSubmit={handleSubmit}>
-                            <label>Nome<input type="text" value={formState.name} onChange={(event) => updateForm('name', event.target.value)} required /></label>
-                            <label>Slug<input type="text" value={formState.slug} onChange={(event) => updateForm('slug', event.target.value)} required /></label>
-                            <label>Função<input type="text" value={formState.role} onChange={(event) => updateForm('role', event.target.value)} required /></label>
-                            <label>Usuário do GitHub<input type="text" value={formState.githubUsername} onChange={(event) => updateForm('githubUsername', event.target.value)} placeholder="nicolasmacardoso" /></label>
-                            <label>Usuário do Spotifolio<input type="text" value={formState.spotifolioUsername} onChange={(event) => updateForm('spotifolioUsername', event.target.value)} /></label>
-                            <label>Responsabilidades<input type="text" value={formState.responsibilities} onChange={(event) => updateForm('responsibilities', event.target.value)} placeholder="Front-end, UX" /></label>
-                            <label>Projetos associados<input type="text" value={formState.projectSlugs} onChange={(event) => updateForm('projectSlugs', event.target.value)} placeholder="yahub, cade-o-dano" /></label>
-                            <label>Biografia<textarea value={formState.bio} onChange={(event) => updateForm('bio', event.target.value)} /></label>
-                            <label>Links externos<textarea value={formState.links} onChange={(event) => updateForm('links', event.target.value)} placeholder="GitHub | https://github.com/usuario" /></label>
+                            <label>
+                                Nome
+                                <input
+                                    type="text"
+                                    value={formState.name}
+                                    onChange={(event) => updateForm('name', event.target.value)}
+                                    required
+                                />
+                            </label>
+                            <label>
+                                Slug
+                                <input
+                                    type="text"
+                                    value={formState.slug}
+                                    onChange={(event) => updateForm('slug', event.target.value)}
+                                    required
+                                />
+                            </label>
+                            <label>
+                                Função
+                                <input
+                                    type="text"
+                                    value={formState.role}
+                                    onChange={(event) => updateForm('role', event.target.value)}
+                                    required
+                                />
+                            </label>
+                            <label>
+                                Usuário do GitHub
+                                <input
+                                    type="text"
+                                    value={formState.githubUsername}
+                                    onChange={(event) => updateForm('githubUsername', event.target.value)}
+                                    placeholder="nicolasmacardoso"
+                                />
+                            </label>
+                            <label>
+                                Usuário do Spotifolio
+                                <input
+                                    type="text"
+                                    value={formState.spotifolioUsername}
+                                    onChange={(event) => updateForm('spotifolioUsername', event.target.value)}
+                                />
+                            </label>
+                            <label>
+                                Responsabilidades
+                                <input
+                                    type="text"
+                                    value={formState.responsibilities}
+                                    onChange={(event) => updateForm('responsibilities', event.target.value)}
+                                    placeholder="Front-end, UX"
+                                />
+                            </label>
+                            <label>
+                                Projetos associados
+                                <input
+                                    type="text"
+                                    value={formState.projectSlugs}
+                                    onChange={(event) => updateForm('projectSlugs', event.target.value)}
+                                    placeholder="yahub, cade-o-dano"
+                                />
+                            </label>
+                            <label>
+                                Biografia
+                                <textarea
+                                    value={formState.bio}
+                                    onChange={(event) => updateForm('bio', event.target.value)}
+                                />
+                            </label>
+                            <label>
+                                Links externos
+                                <textarea
+                                    value={formState.links}
+                                    onChange={(event) => updateForm('links', event.target.value)}
+                                    placeholder="GitHub | https://github.com/usuario"
+                                />
+                            </label>
                             <div className="admin-form__actions">
-                                <button type="submit" className="portal-button" disabled={isSaving}>{isSaving ? 'Salvando...' : isEditing ? 'Salvar alterações' : 'Criar membro'}</button>
-                                <Link className="admin-link-action" to="/admin/membros"><span>Voltar e manter rascunho</span><span aria-hidden="true">←</span></Link>
-                                <button type="button" onClick={discardDraft}>Descartar rascunho</button>
+                                <button type="submit" className="portal-button" disabled={isSaving}>
+                                    {isSaving ? 'Salvando...' : isEditing ? 'Salvar alterações' : 'Criar membro'}
+                                </button>
+                                <Link className="admin-link-action" to="/admin/membros">
+                                    <span>Voltar e manter rascunho</span>
+                                    <span aria-hidden="true">←</span>
+                                </Link>
+                                <button type="button" onClick={discardDraft}>
+                                    Descartar rascunho
+                                </button>
                             </div>
                         </form>
                     </section>

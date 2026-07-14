@@ -11,13 +11,15 @@ export function useProjects() {
 }
 
 export function useProjectDetails(slug: string | undefined) {
-    return useAsyncData(useCallback(() => {
-        if (!slug) {
-            throw new Error('Projeto não informado.');
-        }
+    return useAsyncData(
+        useCallback(() => {
+            if (!slug) {
+                throw new Error('Projeto não informado.');
+            }
 
-        return yahubApi.projects.getBySlug(slug);
-    }, [slug]));
+            return yahubApi.projects.getBySlug(slug);
+        }, [slug]),
+    );
 }
 
 export function useMembers() {
@@ -25,13 +27,15 @@ export function useMembers() {
 }
 
 export function useMemberDetails(slug: string | undefined) {
-    return useAsyncData(useCallback(() => {
-        if (!slug) {
-            throw new Error('Membro não informado.');
-        }
+    return useAsyncData(
+        useCallback(() => {
+            if (!slug) {
+                throw new Error('Membro não informado.');
+            }
 
-        return yahubApi.members.getBySlug(slug);
-    }, [slug]));
+            return yahubApi.members.getBySlug(slug);
+        }, [slug]),
+    );
 }
 
 export function useActivity() {
