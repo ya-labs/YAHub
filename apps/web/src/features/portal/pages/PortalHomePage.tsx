@@ -82,7 +82,9 @@ function OrganizationSummary({ organization }: { organization: Organization }) {
 
 function ProjectsOverview({ projects }: { projects: ProjectSummary[] }) {
     const products = projects.filter((project) => project.category === 'produto' && project.affiliation === 'oficial');
-    const ecosystem = projects.filter((project) => project.category === 'ecossistema' && project.affiliation === 'oficial');
+    const ecosystem = projects.filter(
+        (project) => project.category === 'ecossistema' && project.affiliation === 'oficial',
+    );
     const guidedProjects = projects.filter((project) => project.affiliation === 'orientado');
 
     return (
@@ -140,8 +142,8 @@ function ProjectsOverview({ projects }: { projects: ProjectSummary[] }) {
                     </Link>
                 </div>
                 <p className="portal-section__note">
-                    Projetos orientados pertencem aos seus autores e são mantidos por eles. A YA LABS atua com apoio técnico,
-                    mentoria, revisão, documentação ou divulgação conforme o contexto.
+                    Projetos orientados pertencem aos seus autores e são mantidos por eles. A YA LABS atua com apoio
+                    técnico, mentoria, revisão, documentação ou divulgação conforme o contexto.
                 </p>
                 {guidedProjects.length > 0 ? (
                     <div className="portal-grid">

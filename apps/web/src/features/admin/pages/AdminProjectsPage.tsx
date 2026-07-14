@@ -88,10 +88,24 @@ export function AdminProjectsPage() {
                 {() => (
                     <section className="admin-page__content">
                         <section className="admin-dashboard__stats" aria-label="Resumo administrativo de projetos">
-                            <article className="portal-stat"><strong>{projects.length}</strong><span>Projetos cadastrados</span></article>
-                            <article className="portal-stat"><strong>{projects.filter((project) => project.visibility === 'publico').length}</strong><span>Visíveis no portal</span></article>
-                            <article className="portal-stat"><strong>{projects.filter((project) => project.featured).length}</strong><span>Em destaque</span></article>
-                            <article className="portal-stat"><strong>{projects.filter((project) => project.documentationUrl === null).length}</strong><span>Sem documentação</span></article>
+                            <article className="portal-stat">
+                                <strong>{projects.length}</strong>
+                                <span>Projetos cadastrados</span>
+                            </article>
+                            <article className="portal-stat">
+                                <strong>{projects.filter((project) => project.visibility === 'publico').length}</strong>
+                                <span>Visíveis no portal</span>
+                            </article>
+                            <article className="portal-stat">
+                                <strong>{projects.filter((project) => project.featured).length}</strong>
+                                <span>Em destaque</span>
+                            </article>
+                            <article className="portal-stat">
+                                <strong>
+                                    {projects.filter((project) => project.documentationUrl === null).length}
+                                </strong>
+                                <span>Sem documentação</span>
+                            </article>
                         </section>
 
                         <ul className="admin-list" aria-label="Projetos administrativos">
@@ -109,20 +123,42 @@ export function AdminProjectsPage() {
                                         <p>{project.shortDescription}</p>
 
                                         <dl className="admin-list__details">
-                                            <div><dt>Repositório</dt><dd>{project.githubOwner}/{project.githubName}</dd></div>
-                                            <div><dt>Linguagem</dt><dd>{project.primaryLanguage ?? 'Não informada'}</dd></div>
-                                            <div><dt>Ordem</dt><dd>{project.displayOrder}</dd></div>
-                                            <div><dt>Visibilidade</dt><dd>{project.visibility === 'publico' ? 'Público' : 'Oculto'}</dd></div>
+                                            <div>
+                                                <dt>Repositório</dt>
+                                                <dd>
+                                                    {project.githubOwner}/{project.githubName}
+                                                </dd>
+                                            </div>
+                                            <div>
+                                                <dt>Linguagem</dt>
+                                                <dd>{project.primaryLanguage ?? 'Não informada'}</dd>
+                                            </div>
+                                            <div>
+                                                <dt>Ordem</dt>
+                                                <dd>{project.displayOrder}</dd>
+                                            </div>
+                                            <div>
+                                                <dt>Visibilidade</dt>
+                                                <dd>{project.visibility === 'publico' ? 'Público' : 'Oculto'}</dd>
+                                            </div>
                                         </dl>
 
                                         <footer className="admin-list__footer">
                                             <span>{project.featured ? 'Exibido em destaque' : 'Sem destaque'}</span>
-                                            <div className="admin-list__actions" aria-label={`Ações de ${project.displayName}`}>
-                                                <Link className="admin-link-action" to={`/admin/projetos/${project.id}/editar`}>
+                                            <div
+                                                className="admin-list__actions"
+                                                aria-label={`Ações de ${project.displayName}`}
+                                            >
+                                                <Link
+                                                    className="admin-link-action"
+                                                    to={`/admin/projetos/${project.id}/editar`}
+                                                >
                                                     <span>Editar</span>
                                                     <span aria-hidden="true">→</span>
                                                 </Link>
-                                                <button type="button" onClick={() => void handleRemove(project)}>Remover</button>
+                                                <button type="button" onClick={() => void handleRemove(project)}>
+                                                    Remover
+                                                </button>
                                             </div>
                                         </footer>
                                     </article>

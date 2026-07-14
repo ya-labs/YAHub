@@ -16,9 +16,9 @@ Exemplo de sucesso:
 
 ```json
 {
-  "result": true,
-  "message": null,
-  "data": {}
+    "result": true,
+    "message": null,
+    "data": {}
 }
 ```
 
@@ -26,9 +26,9 @@ Exemplo de falha:
 
 ```json
 {
-  "result": false,
-  "message": "Não foi possível buscar os projetos da YA LABS.",
-  "data": null
+    "result": false,
+    "message": "Não foi possível buscar os projetos da YA LABS.",
+    "data": null
 }
 ```
 
@@ -71,22 +71,22 @@ Exemplo conceitual:
 
 ```json
 {
-  "result": true,
-  "message": null,
-  "data": {
-    "name": "YA LABS",
-    "description": "Organização voltada a desenvolvimento de produtos, estudos técnicos e experimentos de software.",
-    "links": [
-      {
-        "label": "GitHub",
-        "url": "https://github.com/ya-labs"
-      }
-    ],
-    "stats": {
-      "projects": 6,
-      "members": 3
+    "result": true,
+    "message": null,
+    "data": {
+        "name": "YA LABS",
+        "description": "Organização voltada a desenvolvimento de produtos, estudos técnicos e experimentos de software.",
+        "links": [
+            {
+                "label": "GitHub",
+                "url": "https://github.com/ya-labs"
+            }
+        ],
+        "stats": {
+            "projects": 6,
+            "members": 3
+        }
     }
-  }
 }
 ```
 
@@ -115,24 +115,24 @@ Exemplo conceitual:
 
 ```json
 {
-  "result": true,
-  "message": null,
-  "data": [
-    {
-      "id": "cade-o-dano",
-      "slug": "cade-o-dano",
-      "displayName": "CADE O DANO",
-      "category": "produto",
-      "affiliation": "oficial",
-      "shortDescription": "Projeto desenvolvido para testar APIs do League of Legends.",
-      "status": "Em desenvolvimento",
-      "primaryLanguage": "TypeScript",
-      "repositoryUrl": "https://github.com/ya-labs/CADE-O-DANO",
-      "websiteUrl": "https://ya-labs.github.io/CADE-O-DANO/",
-      "updatedAt": "2026-06-05T15:20:28Z",
-      "featured": true
-    }
-  ]
+    "result": true,
+    "message": null,
+    "data": [
+        {
+            "id": "cade-o-dano",
+            "slug": "cade-o-dano",
+            "displayName": "CADE O DANO",
+            "category": "produto",
+            "affiliation": "oficial",
+            "shortDescription": "Projeto desenvolvido para testar APIs do League of Legends.",
+            "status": "Em desenvolvimento",
+            "primaryLanguage": "TypeScript",
+            "repositoryUrl": "https://github.com/ya-labs/CADE-O-DANO",
+            "websiteUrl": "https://ya-labs.github.io/CADE-O-DANO/",
+            "updatedAt": "2026-06-05T15:20:28Z",
+            "featured": true
+        }
+    ]
 }
 ```
 
@@ -170,22 +170,18 @@ Exemplo conceitual:
 
 ```json
 {
-  "result": true,
-  "message": null,
-  "data": [
-    {
-      "id": "nicolas",
-      "name": "Nícolas Machado Cardoso",
-      "role": "Product / Front-end / UX",
-      "githubUsername": "yoriyoi",
-      "spotifolioUsername": null,
-      "responsibilities": [
-        "Idealização do YAHub",
-        "Direção funcional",
-        "Front-end"
-      ]
-    }
-  ]
+    "result": true,
+    "message": null,
+    "data": [
+        {
+            "id": "nicolas",
+            "name": "Nícolas Machado Cardoso",
+            "role": "Product / Front-end / UX",
+            "githubUsername": "yoriyoi",
+            "spotifolioUsername": null,
+            "responsibilities": ["Idealização do YAHub", "Direção funcional", "Front-end"]
+        }
+    ]
 }
 ```
 
@@ -232,8 +228,8 @@ Entrada esperada:
 
 ```json
 {
-  "email": "caio@email.com",
-  "password": "senha"
+    "email": "caio@email.com",
+    "password": "senha"
 }
 ```
 
@@ -241,16 +237,16 @@ Resposta esperada:
 
 ```json
 {
-  "result": true,
-  "message": null,
-  "data": {
-    "token": "jwt",
-    "user": {
-      "id": "00000000-0000-0000-0000-000000000000",
-      "name": "Caio",
-      "email": "caio@email.com"
+    "result": true,
+    "message": null,
+    "data": {
+        "token": "jwt",
+        "user": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "Caio",
+            "email": "caio@email.com"
+        }
     }
-  }
 }
 ```
 
@@ -264,9 +260,9 @@ Entrada esperada:
 
 ```json
 {
-  "name": "Caio",
-  "email": "caio@email.com",
-  "password": "senha"
+    "name": "Caio",
+    "email": "caio@email.com",
+    "password": "senha"
 }
 ```
 
@@ -274,13 +270,13 @@ Resposta esperada:
 
 ```json
 {
-  "result": true,
-  "message": "Usuário cadastrado com sucesso.",
-  "data": {
-    "id": "00000000-0000-0000-0000-000000000000",
-    "name": "Caio",
-    "email": "caio@email.com"
-  }
+    "result": true,
+    "message": "Usuário cadastrado com sucesso.",
+    "data": {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "name": "Caio",
+        "email": "caio@email.com"
+    }
 }
 ```
 

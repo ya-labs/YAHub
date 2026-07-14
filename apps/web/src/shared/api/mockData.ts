@@ -71,7 +71,8 @@ export const mockProjects: ProjectDetails[] = [
         category: 'produto',
         affiliation: 'oficial',
         shortDescription: 'Projeto de estudo para testar integrações com APIs do League of Legends.',
-        fullDescription: 'Projeto público usado como laboratório de front-end, consumo de API e organização de produto.',
+        fullDescription:
+            'Projeto público usado como laboratório de front-end, consumo de API e organização de produto.',
         status: 'desenvolvimento',
         visibility: 'publico',
         primaryLanguage: 'TypeScript',

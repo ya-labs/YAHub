@@ -93,12 +93,7 @@ export function AdminLoginPage() {
 
                     <label>
                         E-mail
-                        <input
-                            type="email"
-                            value={email}
-                            onChange={(event) => setEmail(event.target.value)}
-                            required
-                        />
+                        <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} required />
                     </label>
 
                     <label>
@@ -120,8 +115,8 @@ export function AdminLoginPage() {
                 </form>
 
                 <p className="admin-auth__note">
-                    Fluxo temporário com sessão local. A estrutura já usa os contratos de login e cadastro para facilitar
-                    a troca pela API real.
+                    Fluxo temporário com sessão local. A estrutura já usa os contratos de login e cadastro para
+                    facilitar a troca pela API real.
                 </p>
             </section>
         </main>

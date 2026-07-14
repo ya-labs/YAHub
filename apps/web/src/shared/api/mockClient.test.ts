@@ -84,9 +84,7 @@ describe('mockYahubApi admin data', () => {
 
         const createdProject = await mockYahubApi.admin.projects.create(payload);
         expect(createdProject.id).toBe('projeto-admin-local');
-        await expect(mockYahubApi.projects.getBySlug('projeto-admin-local')).rejects.toThrow(
-            'Projeto não encontrado.',
-        );
+        await expect(mockYahubApi.projects.getBySlug('projeto-admin-local')).rejects.toThrow('Projeto não encontrado.');
 
         await mockYahubApi.admin.projects.remove(createdProject.id);
 

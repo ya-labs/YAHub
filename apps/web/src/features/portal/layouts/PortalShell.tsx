@@ -19,7 +19,9 @@ export function PortalShell() {
                 <nav aria-label="Navegação do portal" className="portal-nav">
                     {portalLinks.map((link) => (
                         <NavLink
-                            className={({ isActive }) => (isActive ? 'portal-nav__link portal-nav__link--active' : 'portal-nav__link')}
+                            className={({ isActive }) =>
+                                isActive ? 'portal-nav__link portal-nav__link--active' : 'portal-nav__link'
+                            }
                             end={link.end}
                             key={link.to}
                             to={link.to}

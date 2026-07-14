@@ -9,11 +9,11 @@ export function HomePage() {
     return (
         <HomeShell>
             <h1>Home do YAHub</h1>
-            <HeroSection/>
-            <AboutSection/>
-            <ProjectsPreviewSection/>
-            <MembersPreviewSection/>
-            <ContactSection/>
+            <HeroSection />
+            <AboutSection />
+            <ProjectsPreviewSection />
+            <MembersPreviewSection />
+            <ContactSection />
         </HomeShell>
     );
 }

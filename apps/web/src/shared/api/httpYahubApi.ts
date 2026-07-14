@@ -38,8 +38,7 @@ export const httpYahubApi: YahubApi = {
         },
         githubRepositories: {
             list: () => http.request('/admin/github/repositories'),
-            resolve: (payload) =>
-                http.request('/admin/github/repositories/resolve', { method: 'POST', body: payload }),
+            resolve: (payload) => http.request('/admin/github/repositories/resolve', { method: 'POST', body: payload }),
         },
     },
 };

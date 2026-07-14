@@ -27,12 +27,12 @@ manutenção ou aprendizado prático sobre as decisões que sustentam o produto.
 
 ## Responsabilidades
 
-| Etapa | Nícolas | IA |
-| --- | --- | --- |
-| Discussão da issue | Define objetivo, prioridade e aprova decisões relevantes. | Estrutura o problema, aponta riscos e propõe a abordagem. |
-| Desenvolvimento | Acompanha decisões novas que ultrapassem o escopo acordado. | Implementa, valida e mantém a solução dentro do escopo. |
-| Pull Request | Revisa código, comportamento e impacto no produto. | Documenta mudanças, justificativas, validações e pendências. |
-| Merge | Dá o aceite final. | Não realiza merge sem solicitação explícita. |
+| Etapa              | Nícolas                                                     | IA                                                           |
+| ------------------ | ----------------------------------------------------------- | ------------------------------------------------------------ |
+| Discussão da issue | Define objetivo, prioridade e aprova decisões relevantes.   | Estrutura o problema, aponta riscos e propõe a abordagem.    |
+| Desenvolvimento    | Acompanha decisões novas que ultrapassem o escopo acordado. | Implementa, valida e mantém a solução dentro do escopo.      |
+| Pull Request       | Revisa código, comportamento e impacto no produto.          | Documenta mudanças, justificativas, validações e pendências. |
+| Merge              | Dá o aceite final.                                          | Não realiza merge sem solicitação explícita.                 |
 
 ## Guardrails
 

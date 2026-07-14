@@ -70,13 +70,23 @@ export function PortalProjectDetailsPage() {
                         <h3>Links</h3>
                         <ul>
                             <li>
-                                <a className="portal-link" href={project.repositoryUrl} target="_blank" rel="noreferrer">
+                                <a
+                                    className="portal-link"
+                                    href={project.repositoryUrl}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
                                     Repositório
                                 </a>
                             </li>
                             {project.websiteUrl ? (
                                 <li>
-                                    <a className="portal-link" href={project.websiteUrl} target="_blank" rel="noreferrer">
+                                    <a
+                                        className="portal-link"
+                                        href={project.websiteUrl}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
                                         Site
                                     </a>
                                 </li>

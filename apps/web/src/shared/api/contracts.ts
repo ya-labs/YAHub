@@ -8,22 +8,11 @@ export type ProjectCategory = 'produto' | 'ecossistema';
 
 export type ProjectAffiliation = 'oficial' | 'orientado';
 
-export type ProjectStatus =
-    | 'ideia'
-    | 'planejamento'
-    | 'desenvolvimento'
-    | 'ativo'
-    | 'pausado'
-    | 'arquivado';
+export type ProjectStatus = 'ideia' | 'planejamento' | 'desenvolvimento' | 'ativo' | 'pausado' | 'arquivado';
 
 export type ProjectVisibility = 'publico' | 'oculto';
 
-export type ProjectSupportType =
-    | 'apoio_tecnico'
-    | 'documentacao'
-    | 'revisao'
-    | 'divulgacao'
-    | 'mentoria';
+export type ProjectSupportType = 'apoio_tecnico' | 'documentacao' | 'revisao' | 'divulgacao' | 'mentoria';
 
 export type OrganizationLink = {
     label: string;
