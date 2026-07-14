@@ -1,0 +1,6 @@
+# Dependências e artefatos de build
+**/node_modules/
+**/dist/
+**/dist-ssr/
+**/coverage/
+**/target/

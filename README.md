@@ -37,6 +37,17 @@ Em planejamento inicial.
 - Integrações: GitHub API na V1; YABook, Spotifolio e Discord em fases futuras.
 - Infraestrutura: a definir, com possibilidade de uso da Azure para o back-end.
 
+## Formatação
+
+Use os comandos abaixo na raiz do repositório:
+
+```bash
+npm run format
+npm run format:check
+```
+
+O primeiro aplica a formatação aos arquivos suportados. O segundo apenas verifica a formatação, sendo adequado para desenvolvimento e CI.
+
 ## Documentação do projeto
 
 A documentação específica do YAHub fica em:
