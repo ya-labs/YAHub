@@ -3,7 +3,7 @@ using YaHub.Domain.Projects;
 namespace YaHub.Domain.Members;
 public class Member
 {
-    public Guid Id { get; private set; } = Guid.NewGuid();
+    public int Id { get; private set; }
     public string Name { get; private set; }
     public string Role { get; private set; }
 
