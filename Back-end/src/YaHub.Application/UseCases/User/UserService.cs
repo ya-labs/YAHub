@@ -2,20 +2,24 @@ using YaHub.Application.Common;
 using YaHub.Application.DTOs.User;
 using YaHub.Application.Interfaces.User;
 using Microsoft.Extensions.Logging;
-using YaHub.Application.Mappers;
 using YaHub.Application.Interfaces.Security;
+using YaHub.Application.Interfaces.Mappers;
 
 namespace YaHub.Application.UseCases.User;
 
 public class UserService : IUserService
 {
     private readonly IUserRepository _repository;
-    private readonly ILogger _logger;
-    private readonly UserMapper _mapper;
+    private readonly ILogger<UserService> _logger;
+    private readonly IUserMapper _mapper;
 
     private readonly IPasswordHasherService _passwordHasher;
 
-    public UserService(IUserRepository repository, ILogger logger, UserMapper mapper, IPasswordHasherService passwordHasher)
+    public UserService(
+        IUserRepository repository,
+        ILogger<UserService> logger,
+        IUserMapper mapper,
+        IPasswordHasherService passwordHasher)
     {
         _repository = repository;
         _logger = logger;
@@ -26,7 +30,10 @@ public class UserService : IUserService
     public async Task<Result<UserResponse>> CreateAsync(UserRequest userRequest)
     {
         if (userRequest == null)
-            return Result<UserResponse>.Fail($"");
+            return Result<UserResponse>.Fail($"User request cannot be empty.");
+
+        if (await _repository.ExistsByEmailAsync(userRequest.Email))
+            return Result<UserResponse>.Fail($"User with email {userRequest.Email} already exists.");
 
         var hashedPassword = _passwordHasher.Hash(userRequest.Password);
 
@@ -57,7 +64,7 @@ public class UserService : IUserService
         return Result<List<UserResponse>>.Ok(usersResponse);
     }
 
-    public async Task<Result<UserResponse>> UpdateAsync(int id, UserRequest userRequest)
+    public async Task<Result<UserResponse>> UpdateAsync(Guid id, UserRequest userRequest)
     {
         var user = await _repository.FindByIdAsync(id);
         _logger.LogInformation($"Searching user by id {id} on database.");
@@ -65,17 +72,17 @@ public class UserService : IUserService
         if (user == null)
             return Result<UserResponse>.Fail($"User with id {id} not found on database.");
 
-        var updatedUser = _mapper.ToEntity(userRequest, user.PasswordHash);
+        user.Update(userRequest.Username, userRequest.Email);
 
-        await _repository.UpdateAsync(updatedUser);
+        await _repository.UpdateAsync(user);
         _logger.LogInformation($"Updating user with id {id} on database.");
 
-        var userResponse = _mapper.ToResponse(updatedUser);
+        var userResponse = _mapper.ToResponse(user);
 
         return Result<UserResponse>.Ok(userResponse);
     }
 
-    public async Task<Result<UserResponse>> DeleteAsync(int id)
+    public async Task<Result<UserResponse>> DeleteAsync(Guid id)
     {
         var user = await _repository.FindByIdAsync(id);
         _logger.LogInformation($"Searching user by id {id} on database.");

@@ -2,17 +2,27 @@ namespace YaHub.Domain.Users;
 
 public sealed class User
 {
-    public int Id { get; private set; }
+    public Guid Id { get; private set; }
     public string Name { get; private set; }
     public string Email { get; private set; }
     public string PasswordHash { get; private set; }
+    public DateTimeOffset CreatedAt { get; private set; }
+    public DateTimeOffset? UpdatedAt { get; private set; }
 
-    private User(int id, string name, string email, string passwordHash, DateTimeOffset createdAt)
+    private User()
+    {
+        Name = string.Empty;
+        Email = string.Empty;
+        PasswordHash = string.Empty;
+    }
+
+    private User(Guid id, string name, string email, string passwordHash, DateTimeOffset createdAt)
     {
         Id = id;
         Name = name;
         Email = email;
         PasswordHash = passwordHash;
+        CreatedAt = createdAt;
     }
 
     public static User Create(
@@ -21,10 +31,17 @@ public sealed class User
         string passwordHash)
     {
         return new User(
-            0,
+            Guid.NewGuid(),
             name,
             email,
             passwordHash,
             DateTimeOffset.UtcNow);
+    }
+
+    public void Update(string name, string email)
+    {
+        Name = name;
+        Email = email;
+        UpdatedAt = DateTimeOffset.UtcNow;
     }
 }

@@ -11,7 +11,22 @@ public class Project
 
     public List<Member> Members { get; private set; } = [];
 
+    private Project()
+    {
+        Name = string.Empty;
+        Description = string.Empty;
+        Url = string.Empty;
+    }
+
     public Project(string name, string description, string url)
+    {
+        Id = Guid.NewGuid();
+        Name = name;
+        Description = description;
+        Url = url;
+    }
+
+    public void Update(string name, string description, string url)
     {
         Name = name;
         Description = description;

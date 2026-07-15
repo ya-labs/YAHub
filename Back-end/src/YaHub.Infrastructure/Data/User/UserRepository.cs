@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using YaHub.Application.Interfaces.User;
 using YaHub.Domain.Users;
 using YaHub.Infrastructure.Persistence;
@@ -22,15 +23,15 @@ public class UserRepository : IUserRepository
 
     public async Task<List<User>> ReadAllAsync()
     {
-        return _context.Users
+        return await _context.Users
             .OrderBy(x => x.Id)
-            .ToList();
+            .ToListAsync();
     }
 
-    public async Task<User> FindByIdAsync(int id)
+    public async Task<User?> FindByIdAsync(Guid id)
     {
-        return _context.Users
-            .FirstOrDefault(x => x.Id == id);
+        return await _context.Users
+            .FirstOrDefaultAsync(x => x.Id == id);
     }
 
     public async Task UpdateAsync(User user)
@@ -45,5 +46,16 @@ public class UserRepository : IUserRepository
         _context.Remove(user);
 
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<User?> FindByEmailAsync(string email)
+    {
+        return await _context.Users
+            .FirstOrDefaultAsync(x => x.Email == email);
+    }
+
+    public async Task<bool> ExistsByEmailAsync(string email)
+    {
+        return await _context.Users.AnyAsync(x => x.Email == email);
     }
 }

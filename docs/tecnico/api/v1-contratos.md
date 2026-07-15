@@ -55,6 +55,38 @@ PUT /api/admin/members/{id}
 DELETE /api/admin/members/{id}
 ```
 
+## Estado atual da implementação
+
+A implementação inicial do back-end já possui autenticação JWT e CRUD protegido para usuários administrativos, membros e projetos.
+
+Endpoints implementados no momento:
+
+```text
+POST /api/login
+POST /users
+GET /users
+PUT /users/{id}
+DELETE /users/{id}
+GET /api/members
+POST /api/members
+PUT /api/members/{id}
+DELETE /api/members/{id}
+GET /api/projects
+POST /api/projects
+PUT /api/projects/{id}
+DELETE /api/projects/{id}
+```
+
+Todos os endpoints acima, exceto `POST /api/login`, exigem token JWT no header:
+
+```text
+Authorization: Bearer {token}
+```
+
+O Swagger da API permite informar o token pelo botão `Authorize`.
+
+O usuário administrador inicial não é definido no código-fonte. Em ambiente local, ele deve existir no banco de dados ou ser criado por um fluxo autenticado.
+
 ## GET /api/organization
 
 Retorna informações públicas da organização para a Home do YA Hub.
@@ -232,6 +264,37 @@ Entrada esperada:
 
 ```json
 {
+  "email": "admin@yahub.local",
+  "password": "senha"
+}
+```
+
+Resposta esperada:
+
+```json
+{
+  "result": true,
+  "message": null,
+  "data": {
+    "username": "admin",
+    "email": "admin@yahub.local",
+    "token": "jwt",
+    "expiresAt": "2026-07-16T03:35:05Z"
+  }
+}
+```
+
+## POST /users
+
+Cadastra um usuário administrativo.
+
+Este endpoint exige autenticação JWT. Antes de produção, o fluxo deve continuar impedindo cadastro público aberto de administradores.
+
+Entrada esperada:
+
+```json
+{
+  "username": "Caio",
   "email": "caio@email.com",
   "password": "senha"
 }
@@ -244,42 +307,60 @@ Resposta esperada:
   "result": true,
   "message": null,
   "data": {
-    "token": "jwt",
-    "user": {
-      "id": "00000000-0000-0000-0000-000000000000",
-      "name": "Caio",
-      "email": "caio@email.com"
-    }
+    "username": "Caio",
+    "email": "caio@email.com"
   }
 }
 ```
 
-## POST /api/register
+## CRUD atual de projetos
 
-Cadastra um usuário administrativo.
-
-Este endpoint pode existir na V1 para acompanhar a base inicial planejada do back-end. Antes de produção, o fluxo deve ter algum controle para não permitir cadastro público aberto de administradores.
-
-Entrada esperada:
+Entrada atual para criação e atualização:
 
 ```json
 {
-  "name": "Caio",
-  "email": "caio@email.com",
-  "password": "senha"
+  "name": "YA Hub",
+  "description": "Portal oficial da YA LABS.",
+  "url": "https://github.com/ya-labs/YAHub"
 }
 ```
 
-Resposta esperada:
+Resposta atual:
 
 ```json
 {
   "result": true,
-  "message": "Usuário cadastrado com sucesso.",
+  "message": null,
   "data": {
     "id": "00000000-0000-0000-0000-000000000000",
-    "name": "Caio",
-    "email": "caio@email.com"
+    "name": "YA Hub",
+    "description": "Portal oficial da YA LABS.",
+    "url": "https://github.com/ya-labs/YAHub"
+  }
+}
+```
+
+## CRUD atual de membros
+
+Entrada atual para criação e atualização:
+
+```json
+{
+  "name": "Caio Matheus",
+  "role": "Back-end"
+}
+```
+
+Resposta atual:
+
+```json
+{
+  "result": true,
+  "message": null,
+  "data": {
+    "id": "00000000-0000-0000-0000-000000000000",
+    "name": "Caio Matheus",
+    "role": "Back-end"
   }
 }
 ```
