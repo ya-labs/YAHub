@@ -390,17 +390,13 @@ describe('App', () => {
         fireEvent.change(screen.getByLabelText('Descrição completa'), {
             target: { value: 'Projeto usado para validar CRUD local.' },
         });
-        fireEvent.change(screen.getByLabelText('Linguagem principal'), { target: { value: 'TypeScript' } });
-        fireEvent.change(screen.getByLabelText('URL do repositório'), {
-            target: { value: 'https://github.com/ya-labs/projeto-local-admin' },
-        });
-        fireEvent.change(screen.getByLabelText('Dono no GitHub'), { target: { value: 'ya-labs' } });
-        fireEvent.change(screen.getByLabelText('Nome do repositório'), { target: { value: 'projeto-local-admin' } });
-        fireEvent.change(screen.getByLabelText('ID do repositório GitHub'), {
-            target: { value: 'ya-labs-projeto-local-admin' },
-        });
-        fireEvent.change(screen.getByLabelText('Tecnologias'), { target: { value: 'React, TypeScript' } });
+        fireEvent.click(await screen.findByRole('button', { name: /DevLab/ }));
+        fireEvent.change(screen.getByLabelText('Tecnologias'), { target: { value: 'React' } });
+        fireEvent.change(screen.getByLabelText('Tecnologias'), { target: { value: 'TypeScript' } });
         fireEvent.change(screen.getByLabelText('Responsáveis'), { target: { value: 'nicolas' } });
+        expect(screen.getByRole('button', { name: 'Remover React' })).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: 'Remover TypeScript' })).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: 'Remover Nícolas Machado Cardoso' })).toBeInTheDocument();
         fireEvent.click(screen.getByRole('button', { name: 'Criar projeto' }));
 
         expect(await screen.findByText('Projeto Projeto Local Admin criado localmente.')).toBeInTheDocument();

@@ -123,6 +123,8 @@ export type GithubRepository = {
     githubName: string;
     repositoryUrl: string;
     primaryLanguage: string | null;
+    description: string | null;
+    topics: string[];
     alreadyRegistered: boolean;
 };
 

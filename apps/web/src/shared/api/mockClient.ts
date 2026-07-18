@@ -8,7 +8,7 @@ import type {
     ProjectPayload,
     YahubApi,
 } from './contracts';
-import { mockActivity, mockMembers, mockOrganization, mockProjects } from './mockData';
+import { mockActivity, mockGithubRepositories, mockMembers, mockOrganization, mockProjects } from './mockData';
 
 function cloneData<T>(data: T): T {
     return JSON.parse(JSON.stringify(data)) as T;
@@ -133,23 +133,26 @@ export const mockYahubApi: YahubApi = {
             },
         },
         githubRepositories: {
-            list: async (): Promise<GithubRepository[]> =>
-                adminProjects.map((project) => ({
-                    githubRepositoryId: project.githubRepositoryId,
-                    githubOwner: project.githubOwner,
-                    githubName: project.githubName,
-                    repositoryUrl: project.repositoryUrl,
-                    primaryLanguage: project.primaryLanguage,
-                    alreadyRegistered: true,
-                })),
-            resolve: async ({ repositoryUrl }) => ({
-                githubRepositoryId: 'mock-resolved-repository',
-                githubOwner: 'ya-labs',
-                githubName: repositoryUrl.split('/').filter(Boolean).at(-1) ?? 'repositorio',
-                repositoryUrl,
-                primaryLanguage: null,
-                alreadyRegistered: false,
-            }),
+            list: async (): Promise<GithubRepository[]> => cloneData(mockGithubRepositories),
+            resolve: async ({ repositoryUrl }) => {
+                const normalizedUrl = repositoryUrl.trim().replace(/\/$/, '').toLowerCase();
+                const repository = mockGithubRepositories.find(
+                    (item) => item.repositoryUrl.replace(/\/$/, '').toLowerCase() === normalizedUrl,
+                );
+
+                if (repository) return cloneData(repository);
+
+                return {
+                    githubRepositoryId: 'mock-resolved-repository',
+                    githubOwner: 'ya-labs',
+                    githubName: repositoryUrl.split('/').filter(Boolean).at(-1) ?? 'repositorio',
+                    repositoryUrl: repositoryUrl.trim(),
+                    primaryLanguage: null,
+                    description: 'Dados simulados para um repositório informado por URL.',
+                    topics: [],
+                    alreadyRegistered: false,
+                };
+            },
         },
     },
 };
