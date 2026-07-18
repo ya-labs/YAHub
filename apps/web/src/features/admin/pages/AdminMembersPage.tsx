@@ -114,14 +114,6 @@ export function AdminMembersPage() {
                                                         : 'Não informado'}
                                                 </dd>
                                             </div>
-                                            <div>
-                                                <dt>Projetos</dt>
-                                                <dd>{member.projectSlugs.length || 'Nenhum associado'}</dd>
-                                            </div>
-                                            <div>
-                                                <dt>Links externos</dt>
-                                                <dd>{member.links.length || 'Nenhum informado'}</dd>
-                                            </div>
                                         </dl>
                                         <div className="admin-member-details">
                                             <div>
