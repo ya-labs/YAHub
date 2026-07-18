@@ -152,6 +152,7 @@ export const mockYahubApi: YahubApi = {
                     githubName,
                     repositoryUrl: repositoryUrl.trim(),
                     primaryLanguage: null,
+                    technologies: [],
                     description: 'Dados simulados para um repositório informado por URL.',
                     topics: [],
                     alreadyRegistered: false,

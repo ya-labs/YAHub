@@ -281,6 +281,7 @@ describe('App', () => {
 
         expect(await screen.findByRole('heading', { name: 'Novo projeto' })).toBeInTheDocument();
         fireEvent.click(await screen.findByRole('button', { name: /DevLab/ }));
+        expect(screen.getByLabelText('Categoria')).toBeInTheDocument();
         fireEvent.change(screen.getByLabelText('Nome de exibição'), { target: { value: 'Projeto em Rascunho' } });
         fireEvent.click(screen.getByRole('link', { name: 'Voltar e manter rascunho' }));
 
@@ -395,6 +396,7 @@ describe('App', () => {
             'href',
             'https://github.com/nicolasmacardoso',
         );
+        expect(screen.queryByLabelText('Categoria')).not.toBeInTheDocument();
         expect(screen.getByLabelText('Tipos de apoio')).toBeInTheDocument();
         fireEvent.change(screen.getByLabelText('Nome de exibição'), { target: { value: 'Projeto Local Admin' } });
         fireEvent.change(screen.getByLabelText('Chamada curta'), { target: { value: 'Fluxo administrativo local.' } });
@@ -404,8 +406,10 @@ describe('App', () => {
         fireEvent.change(screen.getByLabelText('Descrição completa'), {
             target: { value: 'Projeto usado para validar CRUD local.' },
         });
-        fireEvent.change(screen.getByLabelText('Tecnologias'), { target: { value: 'React' } });
-        fireEvent.change(screen.getByLabelText('Tecnologias'), { target: { value: 'TypeScript' } });
+        fireEvent.change(screen.getByLabelText('Nova opção para Tecnologias'), { target: { value: 'React' } });
+        fireEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
+        fireEvent.change(screen.getByLabelText('Nova opção para Tecnologias'), { target: { value: 'TypeScript' } });
+        fireEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
         fireEvent.change(screen.getByLabelText('Responsáveis'), { target: { value: 'nicolas' } });
         expect(screen.getByRole('button', { name: 'Remover React' })).toBeInTheDocument();
         expect(screen.getByRole('button', { name: 'Remover TypeScript' })).toBeInTheDocument();

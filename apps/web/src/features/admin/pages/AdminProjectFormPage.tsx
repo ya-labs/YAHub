@@ -81,7 +81,6 @@ const statusLabels: Record<ProjectStatus, string> = {
     arquivado: 'Arquivado',
 };
 const visibilityLabels: Record<ProjectVisibility, string> = { publico: 'Público', oculto: 'Oculto' };
-const technologyOptions = ['React', 'TypeScript', 'JavaScript', 'Node.js', 'Spring Boot', 'Java', 'GitHub', 'Markdown'];
 const supportTypeLabels: Record<ProjectSupportType, string> = {
     apoio_tecnico: 'Apoio técnico',
     documentacao: 'Documentação',
@@ -97,6 +96,7 @@ type MultiSelectFieldProps = {
     options: Array<{ value: string; label: string }>;
     onChange: (value: string) => void;
     helpText?: string;
+    allowCustom?: boolean;
 };
 
 function splitList(value: string) {
@@ -115,13 +115,16 @@ function createSlug(value: string) {
         .replace(/(^-|-$)/g, '');
 }
 
-function MultiSelectField({ id, label, value, options, onChange, helpText }: MultiSelectFieldProps) {
+function MultiSelectField({ id, label, value, options, onChange, helpText, allowCustom = false }: MultiSelectFieldProps) {
+    const [customValue, setCustomValue] = useState('');
     const selectedValues = splitList(value);
     const availableOptions = options.filter((option) => !selectedValues.includes(option.value));
 
     function addValue(nextValue: string) {
-        if (!nextValue) return;
-        onChange([...selectedValues, nextValue].join(', '));
+        const normalizedValue = nextValue.trim();
+        if (!normalizedValue || selectedValues.includes(normalizedValue)) return;
+        onChange([...selectedValues, normalizedValue].join(', '));
+        setCustomValue('');
     }
 
     function removeValue(valueToRemove: string) {
@@ -140,6 +143,26 @@ function MultiSelectField({ id, label, value, options, onChange, helpText }: Mul
                 ))}
             </select>
             {helpText ? <span className="admin-field-help">{helpText}</span> : null}
+            {allowCustom ? (
+                <div className="admin-multi-select__custom">
+                    <input
+                        aria-label={`Nova opção para ${label}`}
+                        type="text"
+                        value={customValue}
+                        onChange={(event) => setCustomValue(event.target.value)}
+                        onKeyDown={(event) => {
+                            if (event.key === 'Enter') {
+                                event.preventDefault();
+                                addValue(customValue);
+                            }
+                        }}
+                        placeholder="Adicionar opção"
+                    />
+                    <button type="button" onClick={() => addValue(customValue)} disabled={!customValue.trim()}>
+                        Adicionar
+                    </button>
+                </div>
+            ) : null}
             <div className="admin-selected-values" aria-live="polite">
                 {selectedValues.length ? (
                     selectedValues.map((selectedValue) => {
@@ -298,6 +321,7 @@ export function AdminProjectFormPage() {
                     githubName: project.githubName,
                     repositoryUrl: project.repositoryUrl,
                     primaryLanguage: project.primaryLanguage,
+                    technologies: project.technologies,
                     description: null,
                     topics: [],
                     alreadyRegistered: false,
@@ -366,6 +390,7 @@ export function AdminProjectFormPage() {
             githubName: repository.githubName,
             repositoryUrl: repository.repositoryUrl,
             primaryLanguage: repository.primaryLanguage ?? '',
+            technologies: repository.technologies.join(', '),
             authorDisplayName: affiliation === 'orientado' ? repository.githubOwner : '',
             supportTypes: affiliation === 'orientado' ? currentState.supportTypes : '',
             yalabsMentorIds: affiliation === 'orientado' ? currentState.yalabsMentorIds : '',
@@ -425,6 +450,7 @@ export function AdminProjectFormPage() {
                   githubName: formState.githubName,
                   repositoryUrl: formState.repositoryUrl,
                   primaryLanguage: nullableText(formState.primaryLanguage),
+                  technologies: splitList(formState.technologies),
                   description: null,
                   topics: [],
                   alreadyRegistered: false,
@@ -594,19 +620,21 @@ export function AdminProjectFormPage() {
                                     required
                                 />
                             </label>
-                            <label>
-                                Categoria
-                                <select
-                                    value={formState.category}
-                                    onChange={(event) => updateForm('category', event.target.value as ProjectCategory)}
-                                >
-                                    {Object.entries(categoryLabels).map(([value, label]) => (
-                                        <option key={value} value={value}>
-                                            {label}
-                                        </option>
-                                    ))}
-                                </select>
-                            </label>
+                            {formState.affiliation === 'oficial' ? (
+                                <label>
+                                    Categoria
+                                    <select
+                                        value={formState.category}
+                                        onChange={(event) => updateForm('category', event.target.value as ProjectCategory)}
+                                    >
+                                        {Object.entries(categoryLabels).map(([value, label]) => (
+                                            <option key={value} value={value}>
+                                                {label}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </label>
+                            ) : null}
                             <label>
                                 Status
                                 <select
@@ -647,9 +675,10 @@ export function AdminProjectFormPage() {
                                 id="project-technologies"
                                 label="Tecnologias"
                                 value={formState.technologies}
-                                options={technologyOptions.map((technology) => ({ value: technology, label: technology }))}
+                                options={repositoryDetails?.technologies.map((technology) => ({ value: technology, label: technology })) ?? []}
                                 onChange={(value) => updateForm('technologies', value)}
-                                helpText="Selecione todas as tecnologias relevantes ao projeto."
+                                helpText="As opções vêm do repositório mockado; adicione outras quando necessário."
+                                allowCustom
                             />
                             <label>
                                 Ordem
