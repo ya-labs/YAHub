@@ -92,10 +92,9 @@ export function AdminMembersPage() {
                                     <article>
                                         <header className="admin-list__header">
                                             <div>
-                                                <p className="portal-kicker">Membro</p>
+                                                <p className="portal-kicker">{member.role}</p>
                                                 <h2>{member.name}</h2>
                                             </div>
-                                            <span className="admin-list__badge">{member.role}</span>
                                         </header>
                                         <p>{member.bio ?? 'Biografia ainda não informada.'}</p>
                                         <dl className="admin-list__details">

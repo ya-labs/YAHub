@@ -10,11 +10,10 @@ type MemberFormState = {
     name: string;
     role: string;
     githubUsername: string;
-    spotifolioUsername: string;
     responsibilities: string;
     projectSlugs: string;
     bio: string;
-    links: string;
+    links: OrganizationLink[];
 };
 
 type MemberDraft = { editingMemberId: string | null; formState: MemberFormState };
@@ -25,11 +24,10 @@ const initialFormState: MemberFormState = {
     name: '',
     role: '',
     githubUsername: '',
-    spotifolioUsername: '',
     responsibilities: '',
     projectSlugs: '',
     bio: '',
-    links: '',
+    links: [],
 };
 
 const responsibilitySuggestions = ['Front-end', 'Back-end', 'UX', 'Produto', 'Documentação', 'Infraestrutura'];
@@ -69,18 +67,6 @@ function createSlug(value: string) {
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/(^-|-$)/g, '');
-}
-
-function createLinks(formState: MemberFormState): OrganizationLink[] {
-    return splitList(formState.links).flatMap((linkType) => {
-        if (linkType === 'github' && formState.githubUsername.trim()) {
-            return [{ label: 'GitHub', url: `https://github.com/${formState.githubUsername.trim()}` }];
-        }
-        if (linkType === 'spotifolio' && formState.spotifolioUsername.trim()) {
-            return [{ label: 'Spotifolio', url: `https://spotifolio.com/${formState.spotifolioUsername.trim()}` }];
-        }
-        return [];
-    });
 }
 
 type MultiSelectFieldProps = {
@@ -165,20 +151,88 @@ function MultiSelectField({ id, label, value, options, onChange, allowCustom = f
     );
 }
 
+type ExternalLinksFieldProps = {
+    value: OrganizationLink[];
+    onChange: (links: OrganizationLink[]) => void;
+};
+
+function ExternalLinksField({ value, onChange }: ExternalLinksFieldProps) {
+    const [label, setLabel] = useState('');
+    const [url, setUrl] = useState('');
+
+    function addLink() {
+        const normalizedLabel = label.trim();
+        const normalizedUrl = url.trim();
+        if (!normalizedLabel || !normalizedUrl || value.some((link) => link.url === normalizedUrl)) return;
+        onChange([...value, { label: normalizedLabel, url: normalizedUrl }]);
+        setLabel('');
+        setUrl('');
+    }
+
+    return (
+        <div className="admin-multi-select">
+            <span>Links externos</span>
+            <span className="admin-field-help">Adicione pelo menos um link do GitHub.</span>
+            <select
+                aria-label="Tipo de link externo"
+                value=""
+                onChange={(event) => setLabel(event.target.value)}
+            >
+                <option value="">Usar tipo padrão</option>
+                <option value="GitHub">GitHub</option>
+                <option value="Spotifolio">Spotifolio</option>
+            </select>
+            <div className="admin-external-links__entry">
+                <input
+                    aria-label="Nome do link externo"
+                    type="text"
+                    value={label}
+                    onChange={(event) => setLabel(event.target.value)}
+                    placeholder="Ex.: GitHub"
+                />
+                <input
+                    aria-label="URL do link externo"
+                    type="url"
+                    value={url}
+                    onChange={(event) => setUrl(event.target.value)}
+                    placeholder="https://github.com/usuario"
+                />
+                <button type="button" onClick={addLink} disabled={!label.trim() || !url.trim()}>
+                    Adicionar link
+                </button>
+            </div>
+            <div className="admin-selected-values" aria-live="polite">
+                {value.length ? (
+                    value.map((link) => (
+                        <span className="admin-selected-value" key={`${link.label}-${link.url}`}>
+                            {link.label}: {link.url}
+                            <button
+                                type="button"
+                                aria-label={`Remover ${link.label}`}
+                                onClick={() => onChange(value.filter((item) => item.url !== link.url))}
+                            >
+                                ×
+                            </button>
+                        </span>
+                    ))
+                ) : (
+                    <span className="admin-field-help">Nenhum link adicionado.</span>
+                )}
+            </div>
+        </div>
+    );
+}
+
 function createFormStateFromMember(member: MemberDetails): MemberFormState {
     return {
         slug: member.slug,
         name: member.name,
         role: member.role,
         githubUsername: member.githubUsername ?? '',
-        spotifolioUsername: member.spotifolioUsername ?? '',
         responsibilities: member.responsibilities.join(', '),
         projectSlugs: member.projectSlugs.join(', '),
         bio: member.bio ?? '',
-        links: member.links
-            .map((link) => (link.label.toLowerCase() === 'github' ? 'github' : link.label.toLowerCase() === 'spotifolio' ? 'spotifolio' : ''))
-            .filter(Boolean)
-            .join(', '),
+        links: member.links,
     };
 }
 
@@ -188,11 +242,11 @@ function createPayloadFromForm(formState: MemberFormState): MemberPayload {
         name: formState.name.trim(),
         role: formState.role.trim(),
         githubUsername: nullableText(formState.githubUsername),
-        spotifolioUsername: nullableText(formState.spotifolioUsername),
+        spotifolioUsername: null,
         responsibilities: splitList(formState.responsibilities),
         projectSlugs: splitList(formState.projectSlugs),
         bio: nullableText(formState.bio),
-        links: createLinks(formState),
+        links: formState.links,
     };
 }
 
@@ -277,6 +331,26 @@ export function AdminMemberFormPage() {
         setFormState((currentState) => ({ ...currentState, [field]: value }));
     }
 
+    function updateExternalLinks(links: OrganizationLink[]) {
+        const githubLink = links.find((link) => link.label.trim().toLowerCase() === 'github');
+        let githubUsername = '';
+
+        if (githubLink) {
+            try {
+                const githubUrl = new URL(githubLink.url);
+                if (githubUrl.hostname === 'github.com') githubUsername = githubUrl.pathname.split('/').filter(Boolean)[0] ?? '';
+            } catch {
+                githubUsername = '';
+            }
+        }
+
+        setFormState((currentState) => ({
+            ...currentState,
+            links,
+            githubUsername: githubUsername || currentState.githubUsername,
+        }));
+    }
+
     function discardDraft() {
         window.sessionStorage.removeItem(memberDraftStorageKey);
         navigate('/admin/membros');
@@ -287,14 +361,15 @@ export function AdminMemberFormPage() {
         value: responsibility,
         label: responsibility,
     }));
-    const linkOptions = [
-        { value: 'github', label: 'GitHub' },
-        { value: 'spotifolio', label: 'Spotifolio' },
-    ];
-
     async function handleSubmit(event: { preventDefault: () => void }) {
         event.preventDefault();
         setFormError(null);
+
+        if (!formState.links.some((link) => link.label.trim().toLowerCase() === 'github')) {
+            setFormError('Adicione um link do GitHub antes de salvar o membro.');
+            return;
+        }
+
         setIsSaving(true);
 
         try {
@@ -362,14 +437,6 @@ export function AdminMemberFormPage() {
                                     placeholder="nicolasmacardoso"
                                 />
                             </label>
-                            <label>
-                                Usuário do Spotifolio
-                                <input
-                                    type="text"
-                                    value={formState.spotifolioUsername}
-                                    onChange={(event) => updateForm('spotifolioUsername', event.target.value)}
-                                />
-                            </label>
                             <MultiSelectField
                                 id="member-responsibilities"
                                 label="Responsabilidades"
@@ -392,13 +459,7 @@ export function AdminMemberFormPage() {
                                     onChange={(event) => updateForm('bio', event.target.value)}
                                 />
                             </label>
-                            <MultiSelectField
-                                id="member-links"
-                                label="Links externos"
-                                value={formState.links}
-                                options={linkOptions}
-                                onChange={(value) => updateForm('links', value)}
-                            />
+                            <ExternalLinksField value={formState.links} onChange={updateExternalLinks} />
                             <div className="admin-form__actions">
                                 <button type="submit" className="portal-button" disabled={isSaving}>
                                     {isSaving ? 'Salvando...' : isEditing ? 'Salvar alterações' : 'Criar membro'}

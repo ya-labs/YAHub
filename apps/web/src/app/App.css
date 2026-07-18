@@ -709,6 +709,24 @@ footer {
     grid-template-columns: minmax(0, 1fr) auto;
 }
 
+.admin-external-links__entry {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr) auto;
+}
+
+.admin-external-links__entry button {
+    background: #ffffff;
+    border: 1px solid #94a3b8;
+    border-radius: 0.35rem;
+    color: #334155;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 800;
+    min-height: 2.65rem;
+    padding: 0.5rem 0.75rem;
+}
+
 .admin-multi-select__custom button {
     background: #ffffff;
     border: 1px solid #94a3b8;
@@ -748,6 +766,10 @@ footer {
     }
 
     .admin-multi-select__custom {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-external-links__entry {
         grid-template-columns: 1fr;
     }
 }

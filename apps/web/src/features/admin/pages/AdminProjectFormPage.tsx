@@ -503,6 +503,8 @@ export function AdminProjectFormPage() {
                                 </fieldset>
                             ) : null}
 
+                            {isEditing || repositoryDetails ? (
+                                <>
                             <section className="admin-form__full-width admin-repository-details" aria-live="polite">
                                 <div>
                                     <p className="portal-kicker">Dados simulados do GitHub</p>
@@ -704,6 +706,12 @@ export function AdminProjectFormPage() {
                                     Descartar rascunho
                                 </button>
                             </div>
+                                </>
+                            ) : (
+                                <p className="admin-form__full-width admin-field-help" role="status">
+                                    Selecione um repositório da YA LABS ou informe uma URL para continuar o cadastro.
+                                </p>
+                            )}
                         </form>
                     </section>
                 )}

@@ -276,6 +276,7 @@ describe('App', () => {
         );
 
         expect(await screen.findByRole('heading', { name: 'Novo projeto' })).toBeInTheDocument();
+        fireEvent.click(await screen.findByRole('button', { name: /DevLab/ }));
         fireEvent.change(screen.getByLabelText('Nome de exibição'), { target: { value: 'Projeto em Rascunho' } });
         fireEvent.click(screen.getByRole('link', { name: 'Voltar e manter rascunho' }));
 
@@ -380,14 +381,7 @@ describe('App', () => {
         expect(await screen.findByRole('heading', { name: 'Projetos' })).toBeInTheDocument();
 
         fireEvent.click(screen.getByRole('link', { name: 'Novo projeto' }));
-        fireEvent.change(screen.getByLabelText('Nome de exibição'), { target: { value: 'Projeto Local Admin' } });
-        fireEvent.change(screen.getByLabelText('Chamada curta'), { target: { value: 'Fluxo administrativo local.' } });
-        fireEvent.change(screen.getByLabelText('Descrição curta'), {
-            target: { value: 'Projeto criado no fluxo mockado.' },
-        });
-        fireEvent.change(screen.getByLabelText('Descrição completa'), {
-            target: { value: 'Projeto usado para validar CRUD local.' },
-        });
+        expect(screen.queryByLabelText('Nome de exibição')).not.toBeInTheDocument();
         expect(screen.queryByLabelText('Tipos de apoio')).not.toBeInTheDocument();
         fireEvent.change(await screen.findByLabelText('URL de outro repositório'), {
             target: { value: 'https://github.com/nicolasmacardoso/projeto-local-admin' },
@@ -398,6 +392,14 @@ describe('App', () => {
             'https://github.com/nicolasmacardoso',
         );
         expect(screen.getByLabelText('Tipos de apoio')).toBeInTheDocument();
+        fireEvent.change(screen.getByLabelText('Nome de exibição'), { target: { value: 'Projeto Local Admin' } });
+        fireEvent.change(screen.getByLabelText('Chamada curta'), { target: { value: 'Fluxo administrativo local.' } });
+        fireEvent.change(screen.getByLabelText('Descrição curta'), {
+            target: { value: 'Projeto criado no fluxo mockado.' },
+        });
+        fireEvent.change(screen.getByLabelText('Descrição completa'), {
+            target: { value: 'Projeto usado para validar CRUD local.' },
+        });
         fireEvent.change(screen.getByLabelText('Tecnologias'), { target: { value: 'React' } });
         fireEvent.change(screen.getByLabelText('Tecnologias'), { target: { value: 'TypeScript' } });
         fireEvent.change(screen.getByLabelText('Responsáveis'), { target: { value: 'nicolas' } });
@@ -453,9 +455,17 @@ describe('App', () => {
         fireEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
         await screen.findByRole('option', { name: 'YAHub' });
         fireEvent.change(screen.getByLabelText('Projetos associados'), { target: { value: 'yahub' } });
-        fireEvent.change(screen.getByLabelText('Links externos'), { target: { value: 'github' } });
         expect(screen.getByRole('button', { name: 'Remover UX' })).toBeInTheDocument();
         expect(screen.getByRole('button', { name: 'Remover YAHub' })).toBeInTheDocument();
+
+        fireEvent.click(screen.getByRole('button', { name: 'Criar membro' }));
+        expect(await screen.findByRole('alert')).toHaveTextContent('Adicione um link do GitHub antes de salvar o membro.');
+
+        fireEvent.change(screen.getByLabelText('Tipo de link externo'), { target: { value: 'GitHub' } });
+        fireEvent.change(screen.getByLabelText('URL do link externo'), {
+            target: { value: 'https://github.com/membro-local' },
+        });
+        fireEvent.click(screen.getByRole('button', { name: 'Adicionar link' }));
         expect(screen.getByRole('button', { name: 'Remover GitHub' })).toBeInTheDocument();
         fireEvent.click(screen.getByRole('button', { name: 'Criar membro' }));
 
