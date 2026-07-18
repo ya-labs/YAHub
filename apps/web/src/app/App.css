@@ -585,6 +585,19 @@ footer {
     line-height: 1.45;
 }
 
+.admin-field-error {
+    color: #b91c1c;
+    font-size: 0.82rem;
+    font-weight: 700;
+    line-height: 1.45;
+}
+
+.admin-form input[aria-invalid='true'],
+.admin-form select[aria-invalid='true'],
+.admin-form textarea[aria-invalid='true'] {
+    border-color: #dc2626;
+}
+
 .admin-repository-picker__cards {
     display: grid;
     gap: 0.75rem;

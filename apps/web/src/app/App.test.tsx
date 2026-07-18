@@ -398,12 +398,15 @@ describe('App', () => {
         );
         expect(screen.queryByLabelText('Categoria')).not.toBeInTheDocument();
         expect(screen.getByLabelText('Tipos de apoio')).toBeInTheDocument();
-        fireEvent.change(screen.getByLabelText('Nome de exibição'), { target: { value: 'Projeto Local Admin' } });
-        fireEvent.change(screen.getByLabelText('Chamada curta'), { target: { value: 'Fluxo administrativo local.' } });
-        fireEvent.change(screen.getByLabelText('Descrição curta'), {
+        fireEvent.click(screen.getByRole('button', { name: 'Criar projeto' }));
+        expect(await screen.findByText('Informe o nome de exibição do projeto.')).toBeInTheDocument();
+        expect(screen.getByLabelText(/^Nome de exibição/)).toHaveAttribute('aria-invalid', 'true');
+        fireEvent.change(screen.getByLabelText(/^Nome de exibição/), { target: { value: 'Projeto Local Admin' } });
+        fireEvent.change(screen.getByLabelText(/^Chamada curta/), { target: { value: 'Fluxo administrativo local.' } });
+        fireEvent.change(screen.getByLabelText(/^Descrição curta/), {
             target: { value: 'Projeto criado no fluxo mockado.' },
         });
-        fireEvent.change(screen.getByLabelText('Descrição completa'), {
+        fireEvent.change(screen.getByLabelText(/^Descrição completa/), {
             target: { value: 'Projeto usado para validar CRUD local.' },
         });
         fireEvent.change(screen.getByLabelText('Nova opção para Tecnologias'), { target: { value: 'React' } });
@@ -467,7 +470,7 @@ describe('App', () => {
         expect(screen.getByRole('button', { name: 'Remover YAHub' })).toBeInTheDocument();
 
         fireEvent.click(screen.getByRole('button', { name: 'Criar membro' }));
-        expect(await screen.findByRole('alert')).toHaveTextContent('Adicione um link do GitHub antes de salvar o membro.');
+        expect(await screen.findByText('Adicione um link do GitHub antes de salvar o membro.')).toBeInTheDocument();
 
         fireEvent.change(screen.getByLabelText('Tipo de link externo'), { target: { value: 'GitHub' } });
         fireEvent.change(screen.getByLabelText('URL do link externo'), {

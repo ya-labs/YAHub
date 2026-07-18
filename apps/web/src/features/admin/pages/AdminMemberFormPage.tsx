@@ -17,6 +17,7 @@ type MemberFormState = {
 };
 
 type MemberDraft = { editingMemberId: string | null; formState: MemberFormState };
+type MemberValidationErrors = Partial<Record<'name' | 'role' | 'links', string>>;
 
 const memberDraftStorageKey = 'yahub.admin.members.draft';
 const initialFormState: MemberFormState = {
@@ -154,9 +155,10 @@ function MultiSelectField({ id, label, value, options, onChange, allowCustom = f
 type ExternalLinksFieldProps = {
     value: OrganizationLink[];
     onChange: (links: OrganizationLink[]) => void;
+    error?: string;
 };
 
-function ExternalLinksField({ value, onChange }: ExternalLinksFieldProps) {
+function ExternalLinksField({ value, onChange, error }: ExternalLinksFieldProps) {
     const [label, setLabel] = useState('');
     const [url, setUrl] = useState('');
 
@@ -173,6 +175,7 @@ function ExternalLinksField({ value, onChange }: ExternalLinksFieldProps) {
         <div className="admin-multi-select">
             <span>Links externos</span>
             <span className="admin-field-help">Adicione pelo menos um link do GitHub.</span>
+            {error ? <span id="member-links-error" className="admin-field-error">{error}</span> : null}
             <select
                 aria-label="Tipo de link externo"
                 value=""
@@ -250,6 +253,16 @@ function createPayloadFromForm(formState: MemberFormState): MemberPayload {
     };
 }
 
+function validateMemberForm(formState: MemberFormState): MemberValidationErrors {
+    const errors: MemberValidationErrors = {};
+    if (!formState.name.trim()) errors.name = 'Informe o nome do membro.';
+    if (!formState.role.trim()) errors.role = 'Informe a função do membro.';
+    if (!formState.links.some((link) => link.label.trim().toLowerCase() === 'github')) {
+        errors.links = 'Adicione um link do GitHub antes de salvar o membro.';
+    }
+    return errors;
+}
+
 function hasEditableMemberDraft(draft: MemberDraft | null, memberId: string) {
     return Boolean(draft?.editingMemberId === memberId && draft.formState.name.trim());
 }
@@ -269,6 +282,7 @@ export function AdminMemberFormPage() {
     });
     const [loadedMemberId, setLoadedMemberId] = useState<string | null>(isEditing ? null : 'new');
     const [formError, setFormError] = useState<string | null>(null);
+    const [validationErrors, setValidationErrors] = useState<MemberValidationErrors>({});
     const [isSaving, setIsSaving] = useState(false);
     const [projects, setProjects] = useState<ProjectDetails[]>([]);
 
@@ -329,6 +343,12 @@ export function AdminMemberFormPage() {
 
     function updateForm<Value extends keyof MemberFormState>(field: Value, value: MemberFormState[Value]) {
         setFormState((currentState) => ({ ...currentState, [field]: value }));
+        setValidationErrors((currentErrors) => {
+            if (!(field in currentErrors)) return currentErrors;
+            const nextErrors = { ...currentErrors };
+            delete nextErrors[field as keyof MemberValidationErrors];
+            return nextErrors;
+        });
     }
 
     function updateExternalLinks(links: OrganizationLink[]) {
@@ -349,6 +369,7 @@ export function AdminMemberFormPage() {
             links,
             githubUsername: githubUsername || currentState.githubUsername,
         }));
+        setValidationErrors((currentErrors) => ({ ...currentErrors, links: undefined }));
     }
 
     function discardDraft() {
@@ -364,11 +385,9 @@ export function AdminMemberFormPage() {
     async function handleSubmit(event: { preventDefault: () => void }) {
         event.preventDefault();
         setFormError(null);
-
-        if (!formState.links.some((link) => link.label.trim().toLowerCase() === 'github')) {
-            setFormError('Adicione um link do GitHub antes de salvar o membro.');
-            return;
-        }
+        const nextValidationErrors = validateMemberForm(formState);
+        setValidationErrors(nextValidationErrors);
+        if (Object.keys(nextValidationErrors).length) return;
 
         setIsSaving(true);
 
@@ -416,8 +435,10 @@ export function AdminMemberFormPage() {
                                     type="text"
                                     value={formState.name}
                                     onChange={(event) => updateForm('name', event.target.value)}
-                                    required
+                                    aria-invalid={Boolean(validationErrors.name) || undefined}
+                                    aria-describedby={validationErrors.name ? 'member-name-error' : undefined}
                                 />
+                                {validationErrors.name ? <span id="member-name-error" className="admin-field-error">{validationErrors.name}</span> : null}
                             </label>
                             <label>
                                 Função
@@ -425,8 +446,10 @@ export function AdminMemberFormPage() {
                                     type="text"
                                     value={formState.role}
                                     onChange={(event) => updateForm('role', event.target.value)}
-                                    required
+                                    aria-invalid={Boolean(validationErrors.role) || undefined}
+                                    aria-describedby={validationErrors.role ? 'member-role-error' : undefined}
                                 />
+                                {validationErrors.role ? <span id="member-role-error" className="admin-field-error">{validationErrors.role}</span> : null}
                             </label>
                             <label>
                                 Usuário do GitHub
@@ -459,7 +482,7 @@ export function AdminMemberFormPage() {
                                     onChange={(event) => updateForm('bio', event.target.value)}
                                 />
                             </label>
-                            <ExternalLinksField value={formState.links} onChange={updateExternalLinks} />
+                            <ExternalLinksField value={formState.links} onChange={updateExternalLinks} error={validationErrors.links} />
                             <div className="admin-form__actions">
                                 <button type="submit" className="portal-button" disabled={isSaving}>
                                     {isSaving ? 'Salvando...' : isEditing ? 'Salvar alterações' : 'Criar membro'}

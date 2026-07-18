@@ -42,6 +42,7 @@ type ProjectFormState = {
 };
 
 type ProjectDraft = { editingProjectId: string | null; formState: ProjectFormState };
+type ProjectValidationErrors = Partial<Record<'displayName' | 'tagline' | 'shortDescription' | 'fullDescription' | 'displayOrder', string>>;
 
 const projectDraftStorageKey = 'yahub.admin.projects.draft';
 const initialFormState: ProjectFormState = {
@@ -274,6 +275,18 @@ function createPayloadFromForm(formState: ProjectFormState): ProjectPayload {
     };
 }
 
+function validateProjectForm(formState: ProjectFormState): ProjectValidationErrors {
+    const errors: ProjectValidationErrors = {};
+    if (!formState.displayName.trim()) errors.displayName = 'Informe o nome de exibição do projeto.';
+    if (!formState.tagline.trim()) errors.tagline = 'Informe uma chamada curta para o projeto.';
+    if (!formState.shortDescription.trim()) errors.shortDescription = 'Informe uma descrição curta do projeto.';
+    if (!formState.fullDescription.trim()) errors.fullDescription = 'Informe uma descrição completa do projeto.';
+    if (!Number.isInteger(Number(formState.displayOrder)) || Number(formState.displayOrder) < 1) {
+        errors.displayOrder = 'Informe uma ordem igual ou maior que 1.';
+    }
+    return errors;
+}
+
 export function AdminProjectFormPage() {
     const { projectId } = useParams();
     const navigate = useNavigate();
@@ -289,6 +302,7 @@ export function AdminProjectFormPage() {
     });
     const [loadedProjectId, setLoadedProjectId] = useState<string | null>(isEditing ? null : 'new');
     const [formError, setFormError] = useState<string | null>(null);
+    const [validationErrors, setValidationErrors] = useState<ProjectValidationErrors>({});
     const [isSaving, setIsSaving] = useState(false);
     const [repositories, setRepositories] = useState<GithubRepository[]>([]);
     const [members, setMembers] = useState<MemberDetails[]>([]);
@@ -376,6 +390,12 @@ export function AdminProjectFormPage() {
 
     function updateForm<Value extends keyof ProjectFormState>(field: Value, value: ProjectFormState[Value]) {
         setFormState((currentState) => ({ ...currentState, [field]: value }));
+        setValidationErrors((currentErrors) => {
+            if (!(field in currentErrors)) return currentErrors;
+            const nextErrors = { ...currentErrors };
+            delete nextErrors[field as keyof ProjectValidationErrors];
+            return nextErrors;
+        });
     }
 
     function applyRepository(repository: GithubRepository, affiliation: ProjectAffiliation) {
@@ -422,6 +442,9 @@ export function AdminProjectFormPage() {
     async function handleSubmit(event: { preventDefault: () => void }) {
         event.preventDefault();
         setFormError(null);
+        const nextValidationErrors = validateProjectForm(formState);
+        setValidationErrors(nextValidationErrors);
+        if (Object.keys(nextValidationErrors).length) return;
         setIsSaving(true);
         try {
             const payload = createPayloadFromForm(formState);
@@ -592,8 +615,10 @@ export function AdminProjectFormPage() {
                                     type="text"
                                     value={formState.displayName}
                                     onChange={(event) => updateForm('displayName', event.target.value)}
-                                    required
+                                    aria-invalid={Boolean(validationErrors.displayName) || undefined}
+                                    aria-describedby={validationErrors.displayName ? 'project-display-name-error' : undefined}
                                 />
+                                {validationErrors.displayName ? <span id="project-display-name-error" className="admin-field-error">{validationErrors.displayName}</span> : null}
                             </label>
                             <label>
                                 Chamada curta
@@ -601,24 +626,30 @@ export function AdminProjectFormPage() {
                                     type="text"
                                     value={formState.tagline}
                                     onChange={(event) => updateForm('tagline', event.target.value)}
-                                    required
+                                    aria-invalid={Boolean(validationErrors.tagline) || undefined}
+                                    aria-describedby={validationErrors.tagline ? 'project-tagline-error' : undefined}
                                 />
+                                {validationErrors.tagline ? <span id="project-tagline-error" className="admin-field-error">{validationErrors.tagline}</span> : null}
                             </label>
                             <label>
                                 Descrição curta
                                 <textarea
                                     value={formState.shortDescription}
                                     onChange={(event) => updateForm('shortDescription', event.target.value)}
-                                    required
+                                    aria-invalid={Boolean(validationErrors.shortDescription) || undefined}
+                                    aria-describedby={validationErrors.shortDescription ? 'project-short-description-error' : undefined}
                                 />
+                                {validationErrors.shortDescription ? <span id="project-short-description-error" className="admin-field-error">{validationErrors.shortDescription}</span> : null}
                             </label>
                             <label>
                                 Descrição completa
                                 <textarea
                                     value={formState.fullDescription}
                                     onChange={(event) => updateForm('fullDescription', event.target.value)}
-                                    required
+                                    aria-invalid={Boolean(validationErrors.fullDescription) || undefined}
+                                    aria-describedby={validationErrors.fullDescription ? 'project-full-description-error' : undefined}
                                 />
+                                {validationErrors.fullDescription ? <span id="project-full-description-error" className="admin-field-error">{validationErrors.fullDescription}</span> : null}
                             </label>
                             {formState.affiliation === 'oficial' ? (
                                 <label>
@@ -687,8 +718,10 @@ export function AdminProjectFormPage() {
                                     min="1"
                                     value={formState.displayOrder}
                                     onChange={(event) => updateForm('displayOrder', event.target.value)}
-                                    required
+                                    aria-invalid={Boolean(validationErrors.displayOrder) || undefined}
+                                    aria-describedby={validationErrors.displayOrder ? 'project-display-order-error' : undefined}
                                 />
+                                {validationErrors.displayOrder ? <span id="project-display-order-error" className="admin-field-error">{validationErrors.displayOrder}</span> : null}
                             </label>
                             {formState.affiliation === 'orientado' ? (
                                 <>
