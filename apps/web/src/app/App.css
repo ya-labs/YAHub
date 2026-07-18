@@ -899,6 +899,17 @@ footer {
     gap: 0.5rem;
 }
 
+.admin-member-links a {
+    color: #0a1a5e;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.admin-member-links a:hover,
+.admin-member-links a:focus-visible {
+    text-decoration: underline;
+}
+
 .admin-list__tags {
     display: flex;
     flex-wrap: wrap;

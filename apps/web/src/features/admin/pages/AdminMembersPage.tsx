@@ -140,6 +140,22 @@ export function AdminMembersPage() {
                                                     ))}
                                                 </ul>
                                             </div>
+                                            <div>
+                                                <strong>Links externos</strong>
+                                                {member.links.length ? (
+                                                    <ul className="admin-list__tags admin-member-links">
+                                                        {member.links.map((link) => (
+                                                            <li key={`${link.label}-${link.url}`}>
+                                                                <a href={link.url} target="_blank" rel="noreferrer">
+                                                                    {link.label}
+                                                                </a>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                ) : (
+                                                    <span>Não informado</span>
+                                                )}
+                                            </div>
                                         </div>
                                         <footer className="admin-list__footer">
                                             <span>Dados mockados, mantidos apenas nesta sessão local.</span>

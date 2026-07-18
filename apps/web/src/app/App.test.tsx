@@ -247,6 +247,10 @@ describe('App', () => {
         expect(screen.getByRole('heading', { name: 'Nícolas Machado Cardoso' })).toBeInTheDocument();
         expect(screen.getByText('Product / Front-end / UX')).toBeInTheDocument();
         expect(screen.getByText('Idealização do YAHub')).toBeInTheDocument();
+        expect(screen.getAllByRole('link', { name: 'GitHub' })[0]).toHaveAttribute(
+            'href',
+            'https://github.com/nicolasmacardoso',
+        );
         expect(screen.getAllByRole('link', { name: 'Editar' })[0]).toHaveAttribute(
             'href',
             '/admin/membros/nicolas/editar',
