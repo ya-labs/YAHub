@@ -307,7 +307,7 @@ describe('App', () => {
         );
 
         expect(await screen.findByLabelText('Nome de exibição')).toHaveValue('YAHub');
-        expect(screen.getByLabelText('Slug')).toHaveValue('yahub');
+        expect(screen.getByText('yahub')).toBeInTheDocument();
     });
 
     it('mantém rascunho do membro ao voltar para a listagem sem salvar', async () => {
@@ -355,7 +355,6 @@ describe('App', () => {
         );
 
         expect(await screen.findByLabelText('Nome')).toHaveValue('Nícolas Machado Cardoso');
-        expect(screen.getByLabelText('Slug')).toHaveValue('nicolas');
     });
 
     it('cria, edita e remove projeto no fluxo administrativo mockado', async () => {
@@ -382,7 +381,6 @@ describe('App', () => {
 
         fireEvent.click(screen.getByRole('link', { name: 'Novo projeto' }));
         fireEvent.change(screen.getByLabelText('Nome de exibição'), { target: { value: 'Projeto Local Admin' } });
-        fireEvent.change(screen.getByLabelText('Slug'), { target: { value: 'projeto-local-admin' } });
         fireEvent.change(screen.getByLabelText('Chamada curta'), { target: { value: 'Fluxo administrativo local.' } });
         fireEvent.change(screen.getByLabelText('Descrição curta'), {
             target: { value: 'Projeto criado no fluxo mockado.' },
@@ -390,7 +388,16 @@ describe('App', () => {
         fireEvent.change(screen.getByLabelText('Descrição completa'), {
             target: { value: 'Projeto usado para validar CRUD local.' },
         });
-        fireEvent.click(await screen.findByRole('button', { name: /DevLab/ }));
+        expect(screen.queryByLabelText('Tipos de apoio')).not.toBeInTheDocument();
+        fireEvent.change(await screen.findByLabelText('URL de outro repositório'), {
+            target: { value: 'https://github.com/nicolasmacardoso/projeto-local-admin' },
+        });
+        fireEvent.click(screen.getByRole('button', { name: 'Usar URL mockada' }));
+        expect(await screen.findByRole('link', { name: 'nicolasmacardoso' })).toHaveAttribute(
+            'href',
+            'https://github.com/nicolasmacardoso',
+        );
+        expect(screen.getByLabelText('Tipos de apoio')).toBeInTheDocument();
         fireEvent.change(screen.getByLabelText('Tecnologias'), { target: { value: 'React' } });
         fireEvent.change(screen.getByLabelText('Tecnologias'), { target: { value: 'TypeScript' } });
         fireEvent.change(screen.getByLabelText('Responsáveis'), { target: { value: 'nicolas' } });
@@ -439,14 +446,17 @@ describe('App', () => {
         expect(await screen.findByRole('heading', { name: 'Membros' })).toBeInTheDocument();
         fireEvent.click(screen.getByRole('link', { name: 'Novo membro' }));
         fireEvent.change(await screen.findByLabelText('Nome'), { target: { value: 'Membro Local Admin' } });
-        fireEvent.change(screen.getByLabelText('Slug'), { target: { value: 'membro-local-admin' } });
         fireEvent.change(screen.getByLabelText('Função'), { target: { value: 'Front-end' } });
         fireEvent.change(screen.getByLabelText('Usuário do GitHub'), { target: { value: 'membro-local' } });
-        fireEvent.change(screen.getByLabelText('Responsabilidades'), { target: { value: 'Front-end, UX' } });
+        fireEvent.change(screen.getByLabelText('Responsabilidades'), { target: { value: 'Front-end' } });
+        fireEvent.change(screen.getByLabelText('Nova opção para Responsabilidades'), { target: { value: 'UX' } });
+        fireEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
+        await screen.findByRole('option', { name: 'YAHub' });
         fireEvent.change(screen.getByLabelText('Projetos associados'), { target: { value: 'yahub' } });
-        fireEvent.change(screen.getByLabelText('Links externos'), {
-            target: { value: 'GitHub | https://github.com/membro-local' },
-        });
+        fireEvent.change(screen.getByLabelText('Links externos'), { target: { value: 'github' } });
+        expect(screen.getByRole('button', { name: 'Remover UX' })).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: 'Remover YAHub' })).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: 'Remover GitHub' })).toBeInTheDocument();
         fireEvent.click(screen.getByRole('button', { name: 'Criar membro' }));
 
         expect(await screen.findByText('Membro Membro Local Admin criado localmente.')).toBeInTheDocument();

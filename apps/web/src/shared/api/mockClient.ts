@@ -142,10 +142,14 @@ export const mockYahubApi: YahubApi = {
 
                 if (repository) return cloneData(repository);
 
+                const urlParts = repositoryUrl.trim().split('/').filter(Boolean);
+                const githubOwner = urlParts.at(-2) ?? 'organizacao';
+                const githubName = urlParts.at(-1) ?? 'repositorio';
+
                 return {
-                    githubRepositoryId: 'mock-resolved-repository',
-                    githubOwner: 'ya-labs',
-                    githubName: repositoryUrl.split('/').filter(Boolean).at(-1) ?? 'repositorio',
+                    githubRepositoryId: `mock-${githubOwner}-${githubName}`,
+                    githubOwner,
+                    githubName,
                     repositoryUrl: repositoryUrl.trim(),
                     primaryLanguage: null,
                     description: 'Dados simulados para um repositório informado por URL.',

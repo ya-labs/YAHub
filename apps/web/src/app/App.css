@@ -703,6 +703,24 @@ footer {
     min-height: 1.75rem;
 }
 
+.admin-multi-select__custom {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.admin-multi-select__custom button {
+    background: #ffffff;
+    border: 1px solid #94a3b8;
+    border-radius: 0.35rem;
+    color: #334155;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 800;
+    min-height: 2.65rem;
+    padding: 0.5rem 0.75rem;
+}
+
 .admin-selected-value {
     align-items: center;
     background: #e0e7ff;
@@ -726,6 +744,10 @@ footer {
 
 @media (max-width: 36rem) {
     .admin-repository-picker__url {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-multi-select__custom {
         grid-template-columns: 1fr;
     }
 }

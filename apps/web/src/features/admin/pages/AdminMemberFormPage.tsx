@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import type { MemberDetails, MemberPayload, OrganizationLink } from '../../../shared/api/contracts';
+import type { MemberDetails, MemberPayload, OrganizationLink, ProjectDetails } from '../../../shared/api/contracts';
 import { yahubApi } from '../../../shared/api/yahubApi';
 import { DataState } from '../../../shared/components/DataState';
 import type { AsyncDataState } from '../../../shared/hooks/useAsyncData';
@@ -32,6 +32,8 @@ const initialFormState: MemberFormState = {
     links: '',
 };
 
+const responsibilitySuggestions = ['Front-end', 'Back-end', 'UX', 'Produto', 'Documentação', 'Infraestrutura'];
+
 function canUseSessionStorage() {
     return typeof window !== 'undefined' && typeof window.sessionStorage !== 'undefined';
 }
@@ -60,22 +62,107 @@ function nullableText(value: string) {
     return value.trim() || null;
 }
 
-function joinLinks(links: OrganizationLink[]) {
-    return links.map((link) => `${link.label} | ${link.url}`).join('\n');
+function createSlug(value: string) {
+    return value
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)/g, '');
 }
 
-function parseLinks(value: string): OrganizationLink[] {
-    return value
-        .split('\n')
-        .map((line) => line.trim())
-        .filter(Boolean)
-        .map((line) => {
-            const [label, ...urlParts] = line.split('|');
-            const url = urlParts.join('|').trim();
+function createLinks(formState: MemberFormState): OrganizationLink[] {
+    return splitList(formState.links).flatMap((linkType) => {
+        if (linkType === 'github' && formState.githubUsername.trim()) {
+            return [{ label: 'GitHub', url: `https://github.com/${formState.githubUsername.trim()}` }];
+        }
+        if (linkType === 'spotifolio' && formState.spotifolioUsername.trim()) {
+            return [{ label: 'Spotifolio', url: `https://spotifolio.com/${formState.spotifolioUsername.trim()}` }];
+        }
+        return [];
+    });
+}
 
-            if (!label?.trim() || !url) throw new Error('Cada link deve seguir o formato "Nome | https://url".');
-            return { label: label.trim(), url };
-        });
+type MultiSelectFieldProps = {
+    id: string;
+    label: string;
+    value: string;
+    options: Array<{ value: string; label: string }>;
+    onChange: (value: string) => void;
+    allowCustom?: boolean;
+};
+
+function MultiSelectField({ id, label, value, options, onChange, allowCustom = false }: MultiSelectFieldProps) {
+    const [customValue, setCustomValue] = useState('');
+    const selectedValues = splitList(value);
+    const availableOptions = options.filter((option) => !selectedValues.includes(option.value));
+
+    function addValue(nextValue: string) {
+        const normalizedValue = nextValue.trim();
+        if (!normalizedValue || selectedValues.includes(normalizedValue)) return;
+        onChange([...selectedValues, normalizedValue].join(', '));
+        setCustomValue('');
+    }
+
+    function removeValue(valueToRemove: string) {
+        onChange(selectedValues.filter((item) => item !== valueToRemove).join(', '));
+    }
+
+    return (
+        <div className="admin-multi-select">
+            <label htmlFor={id}>{label}</label>
+            <select id={id} value="" onChange={(event) => addValue(event.target.value)}>
+                <option value="">Selecionar opção</option>
+                {availableOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                        {option.label}
+                    </option>
+                ))}
+            </select>
+            {allowCustom ? (
+                <div className="admin-multi-select__custom">
+                    <input
+                        aria-label={`Nova opção para ${label}`}
+                        type="text"
+                        value={customValue}
+                        onChange={(event) => setCustomValue(event.target.value)}
+                        onKeyDown={(event) => {
+                            if (event.key === 'Enter') {
+                                event.preventDefault();
+                                addValue(customValue);
+                            }
+                        }}
+                        placeholder="Adicionar opção"
+                    />
+                    <button type="button" onClick={() => addValue(customValue)} disabled={!customValue.trim()}>
+                        Adicionar
+                    </button>
+                </div>
+            ) : null}
+            <div className="admin-selected-values" aria-live="polite">
+                {selectedValues.length ? (
+                    selectedValues.map((selectedValue) => {
+                        const option = options.find((item) => item.value === selectedValue);
+                        const selectedLabel = option?.label ?? selectedValue;
+                        return (
+                            <span className="admin-selected-value" key={selectedValue}>
+                                {selectedLabel}
+                                <button
+                                    type="button"
+                                    aria-label={`Remover ${selectedLabel}`}
+                                    onClick={() => removeValue(selectedValue)}
+                                >
+                                    ×
+                                </button>
+                            </span>
+                        );
+                    })
+                ) : (
+                    <span className="admin-field-help">Nenhuma opção selecionada.</span>
+                )}
+            </div>
+        </div>
+    );
 }
 
 function createFormStateFromMember(member: MemberDetails): MemberFormState {
@@ -88,13 +175,16 @@ function createFormStateFromMember(member: MemberDetails): MemberFormState {
         responsibilities: member.responsibilities.join(', '),
         projectSlugs: member.projectSlugs.join(', '),
         bio: member.bio ?? '',
-        links: joinLinks(member.links),
+        links: member.links
+            .map((link) => (link.label.toLowerCase() === 'github' ? 'github' : link.label.toLowerCase() === 'spotifolio' ? 'spotifolio' : ''))
+            .filter(Boolean)
+            .join(', '),
     };
 }
 
 function createPayloadFromForm(formState: MemberFormState): MemberPayload {
     return {
-        slug: formState.slug.trim(),
+        slug: createSlug(formState.name),
         name: formState.name.trim(),
         role: formState.role.trim(),
         githubUsername: nullableText(formState.githubUsername),
@@ -102,12 +192,12 @@ function createPayloadFromForm(formState: MemberFormState): MemberPayload {
         responsibilities: splitList(formState.responsibilities),
         projectSlugs: splitList(formState.projectSlugs),
         bio: nullableText(formState.bio),
-        links: parseLinks(formState.links),
+        links: createLinks(formState),
     };
 }
 
 function hasEditableMemberDraft(draft: MemberDraft | null, memberId: string) {
-    return Boolean(draft?.editingMemberId === memberId && draft.formState.name.trim() && draft.formState.slug.trim());
+    return Boolean(draft?.editingMemberId === memberId && draft.formState.name.trim());
 }
 
 export function AdminMemberFormPage() {
@@ -126,6 +216,7 @@ export function AdminMemberFormPage() {
     const [loadedMemberId, setLoadedMemberId] = useState<string | null>(isEditing ? null : 'new');
     const [formError, setFormError] = useState<string | null>(null);
     const [isSaving, setIsSaving] = useState(false);
+    const [projects, setProjects] = useState<ProjectDetails[]>([]);
 
     useEffect(() => {
         if (!isEditing || !memberId) return;
@@ -164,6 +255,17 @@ export function AdminMemberFormPage() {
     }, [isEditing, memberId]);
 
     useEffect(() => {
+        let isActive = true;
+        void yahubApi.admin.projects.list().then((projectData) => {
+            if (isActive) setProjects(projectData);
+        });
+
+        return () => {
+            isActive = false;
+        };
+    }, []);
+
+    useEffect(() => {
         if (!canUseSessionStorage() || (isEditing && loadedMemberId !== memberId)) return;
         window.sessionStorage.setItem(
             memberDraftStorageKey,
@@ -179,6 +281,16 @@ export function AdminMemberFormPage() {
         window.sessionStorage.removeItem(memberDraftStorageKey);
         navigate('/admin/membros');
     }
+
+    const projectOptions = projects.map((project) => ({ value: project.slug, label: project.displayName }));
+    const responsibilityOptions = responsibilitySuggestions.map((responsibility) => ({
+        value: responsibility,
+        label: responsibility,
+    }));
+    const linkOptions = [
+        { value: 'github', label: 'GitHub' },
+        { value: 'spotifolio', label: 'Spotifolio' },
+    ];
 
     async function handleSubmit(event: { preventDefault: () => void }) {
         event.preventDefault();
@@ -218,8 +330,8 @@ export function AdminMemberFormPage() {
                 {() => (
                     <section className="admin-form-section">
                         <p className="portal-section__note">
-                            Use vírgulas para responsabilidades e projetos. Informe um link externo por linha no formato
-                            “Nome | https://url”.
+                            Selecione projetos e links relacionados. Responsabilidades podem ser escolhidas ou criadas
+                            conforme a necessidade.
                         </p>
                         {formError ? <p role="alert">{formError}</p> : null}
                         <form className="admin-form" onSubmit={handleSubmit}>
@@ -229,15 +341,6 @@ export function AdminMemberFormPage() {
                                     type="text"
                                     value={formState.name}
                                     onChange={(event) => updateForm('name', event.target.value)}
-                                    required
-                                />
-                            </label>
-                            <label>
-                                Slug
-                                <input
-                                    type="text"
-                                    value={formState.slug}
-                                    onChange={(event) => updateForm('slug', event.target.value)}
                                     required
                                 />
                             </label>
@@ -267,24 +370,21 @@ export function AdminMemberFormPage() {
                                     onChange={(event) => updateForm('spotifolioUsername', event.target.value)}
                                 />
                             </label>
-                            <label>
-                                Responsabilidades
-                                <input
-                                    type="text"
-                                    value={formState.responsibilities}
-                                    onChange={(event) => updateForm('responsibilities', event.target.value)}
-                                    placeholder="Front-end, UX"
-                                />
-                            </label>
-                            <label>
-                                Projetos associados
-                                <input
-                                    type="text"
-                                    value={formState.projectSlugs}
-                                    onChange={(event) => updateForm('projectSlugs', event.target.value)}
-                                    placeholder="yahub, cade-o-dano"
-                                />
-                            </label>
+                            <MultiSelectField
+                                id="member-responsibilities"
+                                label="Responsabilidades"
+                                value={formState.responsibilities}
+                                options={responsibilityOptions}
+                                onChange={(value) => updateForm('responsibilities', value)}
+                                allowCustom
+                            />
+                            <MultiSelectField
+                                id="member-projects"
+                                label="Projetos associados"
+                                value={formState.projectSlugs}
+                                options={projectOptions}
+                                onChange={(value) => updateForm('projectSlugs', value)}
+                            />
                             <label>
                                 Biografia
                                 <textarea
@@ -292,14 +392,13 @@ export function AdminMemberFormPage() {
                                     onChange={(event) => updateForm('bio', event.target.value)}
                                 />
                             </label>
-                            <label>
-                                Links externos
-                                <textarea
-                                    value={formState.links}
-                                    onChange={(event) => updateForm('links', event.target.value)}
-                                    placeholder="GitHub | https://github.com/usuario"
-                                />
-                            </label>
+                            <MultiSelectField
+                                id="member-links"
+                                label="Links externos"
+                                value={formState.links}
+                                options={linkOptions}
+                                onChange={(value) => updateForm('links', value)}
+                            />
                             <div className="admin-form__actions">
                                 <button type="submit" className="portal-button" disabled={isSaving}>
                                     {isSaving ? 'Salvando...' : isEditing ? 'Salvar alterações' : 'Criar membro'}

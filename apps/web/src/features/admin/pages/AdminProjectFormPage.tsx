@@ -106,6 +106,15 @@ function splitList(value: string) {
         .filter(Boolean);
 }
 
+function createSlug(value: string) {
+    return value
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)/g, '');
+}
+
 function MultiSelectField({ id, label, value, options, onChange, helpText }: MultiSelectFieldProps) {
     const selectedValues = splitList(value);
     const availableOptions = options.filter((option) => !selectedValues.includes(option.value));
@@ -232,10 +241,13 @@ function createPayloadFromForm(formState: ProjectFormState): ProjectPayload {
         updatedAt: new Date().toISOString(),
         featured: formState.featured,
         displayOrder: Number(formState.displayOrder) || 1,
-        yalabsMentorIds: splitList(formState.yalabsMentorIds),
+        yalabsMentorIds: formState.affiliation === 'orientado' ? splitList(formState.yalabsMentorIds) : [],
         responsibleMemberIds: splitList(formState.responsibleMemberIds),
-        authorDisplayName: nullableText(formState.authorDisplayName),
-        supportTypes: splitList(formState.supportTypes) as ProjectSupportType[],
+        authorDisplayName: formState.affiliation === 'orientado' ? nullableText(formState.authorDisplayName) : null,
+        supportTypes:
+            formState.affiliation === 'orientado'
+                ? (splitList(formState.supportTypes) as ProjectSupportType[])
+                : [],
     };
 }
 
@@ -342,16 +354,21 @@ export function AdminProjectFormPage() {
         setFormState((currentState) => ({ ...currentState, [field]: value }));
     }
 
-    function applyRepository(repository: GithubRepository) {
+    function applyRepository(repository: GithubRepository, affiliation: ProjectAffiliation) {
         setSelectedRepository(repository);
         setRepositoryUrlInput(repository.repositoryUrl);
         setFormState((currentState) => ({
             ...currentState,
+            slug: createSlug(repository.githubName),
+            affiliation,
             githubRepositoryId: repository.githubRepositoryId,
             githubOwner: repository.githubOwner,
             githubName: repository.githubName,
             repositoryUrl: repository.repositoryUrl,
             primaryLanguage: repository.primaryLanguage ?? '',
+            authorDisplayName: affiliation === 'orientado' ? repository.githubOwner : '',
+            supportTypes: affiliation === 'orientado' ? currentState.supportTypes : '',
+            yalabsMentorIds: affiliation === 'orientado' ? currentState.yalabsMentorIds : '',
         }));
     }
 
@@ -361,7 +378,10 @@ export function AdminProjectFormPage() {
         setIsResolvingRepository(true);
 
         try {
-            applyRepository(await yahubApi.admin.githubRepositories.resolve({ repositoryUrl: repositoryUrlInput }));
+            applyRepository(
+                await yahubApi.admin.githubRepositories.resolve({ repositoryUrl: repositoryUrlInput }),
+                'orientado',
+            );
         } catch (error: unknown) {
             setFormError(error instanceof Error ? error.message : 'Não foi possível resolver o repositório informado.');
         } finally {
@@ -451,7 +471,7 @@ export function AdminProjectFormPage() {
                                                 type="button"
                                                 key={repository.githubRepositoryId}
                                                 disabled={repository.alreadyRegistered}
-                                                onClick={() => applyRepository(repository)}
+                                                onClick={() => applyRepository(repository, 'oficial')}
                                             >
                                                 <span>{repository.githubName}</span>
                                                 <small>{repository.description ?? 'Sem descrição mockada.'}</small>
@@ -510,6 +530,28 @@ export function AdminProjectFormPage() {
                                             <dt>Descrição</dt>
                                             <dd>{repositoryDetails.description ?? 'Não informada'}</dd>
                                         </div>
+                                        <div>
+                                            <dt>Slug</dt>
+                                            <dd>{formState.slug || 'Será definido ao selecionar o repositório'}</dd>
+                                        </div>
+                                        <div>
+                                            <dt>Vínculo</dt>
+                                            <dd>{affiliationLabels[formState.affiliation]}</dd>
+                                        </div>
+                                        {formState.affiliation === 'orientado' ? (
+                                            <div>
+                                                <dt>Autor externo</dt>
+                                                <dd>
+                                                    <a
+                                                        href={`https://github.com/${repositoryDetails.githubOwner}`}
+                                                        target="_blank"
+                                                        rel="noreferrer"
+                                                    >
+                                                        {repositoryDetails.githubOwner}
+                                                    </a>
+                                                </dd>
+                                            </div>
+                                        ) : null}
                                     </dl>
                                 ) : (
                                     <p className="admin-field-help">Selecione um repositório para carregar os dados simulados.</p>
@@ -522,15 +564,6 @@ export function AdminProjectFormPage() {
                                     type="text"
                                     value={formState.displayName}
                                     onChange={(event) => updateForm('displayName', event.target.value)}
-                                    required
-                                />
-                            </label>
-                            <label>
-                                Slug
-                                <input
-                                    type="text"
-                                    value={formState.slug}
-                                    onChange={(event) => updateForm('slug', event.target.value)}
                                     required
                                 />
                             </label>
@@ -573,21 +606,6 @@ export function AdminProjectFormPage() {
                                 </select>
                             </label>
                             <label>
-                                Vínculo
-                                <select
-                                    value={formState.affiliation}
-                                    onChange={(event) =>
-                                        updateForm('affiliation', event.target.value as ProjectAffiliation)
-                                    }
-                                >
-                                    {Object.entries(affiliationLabels).map(([value, label]) => (
-                                        <option key={value} value={value}>
-                                            {label}
-                                        </option>
-                                    ))}
-                                </select>
-                            </label>
-                            <label>
                                 Status
                                 <select
                                     value={formState.status}
@@ -616,27 +634,11 @@ export function AdminProjectFormPage() {
                                 </select>
                             </label>
                             <label>
-                                Linguagem principal
-                                <input
-                                    type="text"
-                                    value={formState.primaryLanguage}
-                                    onChange={(event) => updateForm('primaryLanguage', event.target.value)}
-                                />
-                            </label>
-                            <label>
                                 URL do site
                                 <input
                                     type="url"
                                     value={formState.websiteUrl}
                                     onChange={(event) => updateForm('websiteUrl', event.target.value)}
-                                />
-                            </label>
-                            <label>
-                                URL da documentação
-                                <input
-                                    type="url"
-                                    value={formState.documentationUrl}
-                                    onChange={(event) => updateForm('documentationUrl', event.target.value)}
                                 />
                             </label>
                             <MultiSelectField
@@ -657,28 +659,24 @@ export function AdminProjectFormPage() {
                                     required
                                 />
                             </label>
-                            <label>
-                                Autor externo
-                                <input
-                                    type="text"
-                                    value={formState.authorDisplayName}
-                                    onChange={(event) => updateForm('authorDisplayName', event.target.value)}
-                                />
-                            </label>
-                            <MultiSelectField
-                                id="project-support-types"
-                                label="Tipos de apoio"
-                                value={formState.supportTypes}
-                                options={Object.entries(supportTypeLabels).map(([value, label]) => ({ value, label }))}
-                                onChange={(value) => updateForm('supportTypes', value)}
-                            />
-                            <MultiSelectField
-                                id="project-mentors"
-                                label="Mentores YA LABS"
-                                value={formState.yalabsMentorIds}
-                                options={memberOptions}
-                                onChange={(value) => updateForm('yalabsMentorIds', value)}
-                            />
+                            {formState.affiliation === 'orientado' ? (
+                                <>
+                                    <MultiSelectField
+                                        id="project-support-types"
+                                        label="Tipos de apoio"
+                                        value={formState.supportTypes}
+                                        options={Object.entries(supportTypeLabels).map(([value, label]) => ({ value, label }))}
+                                        onChange={(value) => updateForm('supportTypes', value)}
+                                    />
+                                    <MultiSelectField
+                                        id="project-mentors"
+                                        label="Mentores YA LABS"
+                                        value={formState.yalabsMentorIds}
+                                        options={memberOptions}
+                                        onChange={(value) => updateForm('yalabsMentorIds', value)}
+                                    />
+                                </>
+                            ) : null}
                             <MultiSelectField
                                 id="project-responsible-members"
                                 label="Responsáveis"
