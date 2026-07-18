@@ -77,10 +77,6 @@ export function AdminMembersPage() {
                                 <span>Membros cadastrados</span>
                             </article>
                             <article className="portal-stat">
-                                <strong>{members.filter((member) => member.githubUsername).length}</strong>
-                                <span>Com perfil GitHub</span>
-                            </article>
-                            <article className="portal-stat">
                                 <strong>{members.filter((member) => member.projectSlugs.length > 0).length}</strong>
                                 <span>Com projetos associados</span>
                             </article>
