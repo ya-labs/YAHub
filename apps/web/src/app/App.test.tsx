@@ -398,6 +398,7 @@ describe('App', () => {
         );
         expect(screen.queryByLabelText('Categoria')).not.toBeInTheDocument();
         expect(screen.getByLabelText('Tipos de apoio')).toBeInTheDocument();
+        expect(screen.getByLabelText('Nome de exibição')).toHaveAttribute('aria-required', 'true');
         fireEvent.click(screen.getByRole('button', { name: 'Criar projeto' }));
         expect(await screen.findByText('Informe o nome de exibição do projeto.')).toBeInTheDocument();
         expect(screen.getByLabelText(/^Nome de exibição/)).toHaveAttribute('aria-invalid', 'true');
@@ -458,7 +459,9 @@ describe('App', () => {
 
         expect(await screen.findByRole('heading', { name: 'Membros' })).toBeInTheDocument();
         fireEvent.click(screen.getByRole('link', { name: 'Novo membro' }));
-        fireEvent.change(await screen.findByLabelText('Nome'), { target: { value: 'Membro Local Admin' } });
+        expect(await screen.findByLabelText('Nome')).toHaveAttribute('aria-required', 'true');
+        expect(screen.getByLabelText('Função')).toHaveAttribute('aria-required', 'true');
+        fireEvent.change(screen.getByLabelText('Nome'), { target: { value: 'Membro Local Admin' } });
         fireEvent.change(screen.getByLabelText('Função'), { target: { value: 'Front-end' } });
         fireEvent.change(screen.getByLabelText('Usuário do GitHub'), { target: { value: 'membro-local' } });
         fireEvent.change(screen.getByLabelText('Responsabilidades'), { target: { value: 'Front-end' } });

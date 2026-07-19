@@ -617,6 +617,12 @@ footer {
     line-height: 1.45;
 }
 
+.admin-field-label--required::after {
+    color: #dc2626;
+    content: ' *';
+    font-weight: 800;
+}
+
 .admin-form input[aria-invalid='true'],
 .admin-form select[aria-invalid='true'],
 .admin-form textarea[aria-invalid='true'] {

@@ -173,7 +173,7 @@ function ExternalLinksField({ value, onChange, error }: ExternalLinksFieldProps)
 
     return (
         <div className="admin-multi-select">
-            <span>Links externos</span>
+            <span className="admin-field-label admin-field-label--required">Links externos</span>
             <span className="admin-field-help">Adicione pelo menos um link do GitHub.</span>
             {error ? <span id="member-links-error" className="admin-field-error">{error}</span> : null}
             <select
@@ -430,22 +430,24 @@ export function AdminMemberFormPage() {
                         {formError ? <p className="admin-feedback admin-feedback--error" role="alert">{formError}</p> : null}
                         <form className="admin-form" onSubmit={handleSubmit} aria-busy={isSaving}>
                             <label>
-                                Nome
+                                <span className="admin-field-label admin-field-label--required">Nome</span>
                                 <input
                                     type="text"
                                     value={formState.name}
                                     onChange={(event) => updateForm('name', event.target.value)}
+                                    aria-required="true"
                                     aria-invalid={Boolean(validationErrors.name) || undefined}
                                     aria-describedby={validationErrors.name ? 'member-name-error' : undefined}
                                 />
                                 {validationErrors.name ? <span id="member-name-error" className="admin-field-error">{validationErrors.name}</span> : null}
                             </label>
                             <label>
-                                Função
+                                <span className="admin-field-label admin-field-label--required">Função</span>
                                 <input
                                     type="text"
                                     value={formState.role}
                                     onChange={(event) => updateForm('role', event.target.value)}
+                                    aria-required="true"
                                     aria-invalid={Boolean(validationErrors.role) || undefined}
                                     aria-describedby={validationErrors.role ? 'member-role-error' : undefined}
                                 />

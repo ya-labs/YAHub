@@ -615,42 +615,46 @@ export function AdminProjectFormPage() {
                             </section>
 
                             <label>
-                                Nome de exibição
+                                <span className="admin-field-label admin-field-label--required">Nome de exibição</span>
                                 <input
                                     type="text"
                                     value={formState.displayName}
                                     onChange={(event) => updateForm('displayName', event.target.value)}
+                                    aria-required="true"
                                     aria-invalid={Boolean(validationErrors.displayName) || undefined}
                                     aria-describedby={validationErrors.displayName ? 'project-display-name-error' : undefined}
                                 />
                                 {validationErrors.displayName ? <span id="project-display-name-error" className="admin-field-error">{validationErrors.displayName}</span> : null}
                             </label>
                             <label>
-                                Chamada curta
+                                <span className="admin-field-label admin-field-label--required">Chamada curta</span>
                                 <input
                                     type="text"
                                     value={formState.tagline}
                                     onChange={(event) => updateForm('tagline', event.target.value)}
+                                    aria-required="true"
                                     aria-invalid={Boolean(validationErrors.tagline) || undefined}
                                     aria-describedby={validationErrors.tagline ? 'project-tagline-error' : undefined}
                                 />
                                 {validationErrors.tagline ? <span id="project-tagline-error" className="admin-field-error">{validationErrors.tagline}</span> : null}
                             </label>
                             <label>
-                                Descrição curta
+                                <span className="admin-field-label admin-field-label--required">Descrição curta</span>
                                 <textarea
                                     value={formState.shortDescription}
                                     onChange={(event) => updateForm('shortDescription', event.target.value)}
+                                    aria-required="true"
                                     aria-invalid={Boolean(validationErrors.shortDescription) || undefined}
                                     aria-describedby={validationErrors.shortDescription ? 'project-short-description-error' : undefined}
                                 />
                                 {validationErrors.shortDescription ? <span id="project-short-description-error" className="admin-field-error">{validationErrors.shortDescription}</span> : null}
                             </label>
                             <label>
-                                Descrição completa
+                                <span className="admin-field-label admin-field-label--required">Descrição completa</span>
                                 <textarea
                                     value={formState.fullDescription}
                                     onChange={(event) => updateForm('fullDescription', event.target.value)}
+                                    aria-required="true"
                                     aria-invalid={Boolean(validationErrors.fullDescription) || undefined}
                                     aria-describedby={validationErrors.fullDescription ? 'project-full-description-error' : undefined}
                                 />
@@ -717,12 +721,13 @@ export function AdminProjectFormPage() {
                                 allowCustom
                             />
                             <label>
-                                Ordem
+                                <span className="admin-field-label admin-field-label--required">Ordem</span>
                                 <input
                                     type="number"
                                     min="1"
                                     value={formState.displayOrder}
                                     onChange={(event) => updateForm('displayOrder', event.target.value)}
+                                    aria-required="true"
                                     aria-invalid={Boolean(validationErrors.displayOrder) || undefined}
                                     aria-describedby={validationErrors.displayOrder ? 'project-display-order-error' : undefined}
                                 />
