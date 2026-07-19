@@ -510,6 +510,31 @@ footer {
     padding: 0.85rem 1rem;
 }
 
+.admin-feedback--error,
+.admin-state--error {
+    background: #fef2f2;
+    border-color: #fecaca;
+    color: #991b1b;
+}
+
+.admin-state {
+    border: 1px solid #d9deea;
+    border-radius: 0.5rem;
+    color: #475569;
+    margin: 0;
+    padding: 0.85rem 1rem;
+}
+
+.admin-state--loading {
+    background: #eff6ff;
+    border-color: #bfdbfe;
+    color: #1d4ed8;
+}
+
+.admin-state--empty {
+    background: #f8fafc;
+}
+
 .admin-form-section {
     background: #ffffff;
     border: 1px solid #d9deea;

@@ -427,8 +427,8 @@ export function AdminMemberFormPage() {
                             Selecione projetos e links relacionados. Responsabilidades podem ser escolhidas ou criadas
                             conforme a necessidade.
                         </p>
-                        {formError ? <p role="alert">{formError}</p> : null}
-                        <form className="admin-form" onSubmit={handleSubmit}>
+                        {formError ? <p className="admin-feedback admin-feedback--error" role="alert">{formError}</p> : null}
+                        <form className="admin-form" onSubmit={handleSubmit} aria-busy={isSaving}>
                             <label>
                                 Nome
                                 <input

@@ -29,6 +29,8 @@ export function AdminProjectsPage() {
     const [feedback, setFeedback] = useState<string | null>(
         typeof location.state?.feedback === 'string' ? location.state.feedback : null,
     );
+    const [actionError, setActionError] = useState<string | null>(null);
+    const [removingProjectId, setRemovingProjectId] = useState<string | null>(null);
     const projects = useMemo(() => projectsState.data ?? [], [projectsState.data]);
     const orderedProjects = useMemo(
         () => [...projects].sort((first, second) => first.displayOrder - second.displayOrder),
@@ -51,19 +53,41 @@ export function AdminProjectsPage() {
     }, []);
 
     useEffect(() => {
-        void loadProjects();
-    }, [loadProjects]);
+        let isActive = true;
+
+        void yahubApi.admin.projects
+            .list()
+            .then((data) => {
+                if (isActive) setProjectsState({ data, error: null, isLoading: false });
+            })
+            .catch((error: unknown) => {
+                if (isActive) {
+                    setProjectsState({
+                        data: null,
+                        error: error instanceof Error ? error.message : 'Não foi possível carregar os projetos.',
+                        isLoading: false,
+                    });
+                }
+            });
+
+        return () => {
+            isActive = false;
+        };
+    }, []);
 
     async function handleRemove(project: ProjectDetails) {
+        setActionError(null);
+        setFeedback(null);
+        setRemovingProjectId(project.id);
+
         try {
             await yahubApi.admin.projects.remove(project.id);
             setFeedback(`Projeto ${project.displayName} removido localmente.`);
             await loadProjects();
         } catch (error: unknown) {
-            setProjectsState((currentState) => ({
-                ...currentState,
-                error: error instanceof Error ? error.message : 'Não foi possível remover o projeto.',
-            }));
+            setActionError(error instanceof Error ? error.message : 'Não foi possível remover o projeto.');
+        } finally {
+            setRemovingProjectId(null);
         }
     }
 
@@ -82,7 +106,8 @@ export function AdminProjectsPage() {
                 </Link>
             </section>
 
-            {feedback ? <p className="admin-feedback">{feedback}</p> : null}
+            {feedback ? <p className="admin-feedback" role="status" aria-live="polite">{feedback}</p> : null}
+            {actionError ? <p className="admin-feedback admin-feedback--error" role="alert">{actionError}</p> : null}
 
             <DataState {...projectsState} emptyMessage="Nenhum projeto cadastrado.">
                 {() => (
@@ -156,8 +181,12 @@ export function AdminProjectsPage() {
                                                     <span>Editar</span>
                                                     <span aria-hidden="true">→</span>
                                                 </Link>
-                                                <button type="button" onClick={() => void handleRemove(project)}>
-                                                    Remover
+                                                <button
+                                                    type="button"
+                                                    onClick={() => void handleRemove(project)}
+                                                    disabled={removingProjectId !== null}
+                                                >
+                                                    {removingProjectId === project.id ? 'Removendo...' : 'Remover'}
                                                 </button>
                                             </div>
                                         </footer>

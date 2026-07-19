@@ -15,6 +15,8 @@ export function AdminMembersPage() {
     const [feedback, setFeedback] = useState<string | null>(
         typeof location.state?.feedback === 'string' ? location.state.feedback : null,
     );
+    const [actionError, setActionError] = useState<string | null>(null);
+    const [removingMemberId, setRemovingMemberId] = useState<string | null>(null);
     const members = useMemo(() => membersState.data ?? [], [membersState.data]);
 
     const loadMembers = useCallback(async () => {
@@ -33,19 +35,41 @@ export function AdminMembersPage() {
     }, []);
 
     useEffect(() => {
-        void loadMembers();
-    }, [loadMembers]);
+        let isActive = true;
+
+        void yahubApi.admin.members
+            .list()
+            .then((data) => {
+                if (isActive) setMembersState({ data, error: null, isLoading: false });
+            })
+            .catch((error: unknown) => {
+                if (isActive) {
+                    setMembersState({
+                        data: null,
+                        error: error instanceof Error ? error.message : 'Não foi possível carregar os membros.',
+                        isLoading: false,
+                    });
+                }
+            });
+
+        return () => {
+            isActive = false;
+        };
+    }, []);
 
     async function handleRemove(member: MemberDetails) {
+        setActionError(null);
+        setFeedback(null);
+        setRemovingMemberId(member.id);
+
         try {
             await yahubApi.admin.members.remove(member.id);
             setFeedback(`Membro ${member.name} removido localmente.`);
             await loadMembers();
         } catch (error: unknown) {
-            setMembersState((currentState) => ({
-                ...currentState,
-                error: error instanceof Error ? error.message : 'Não foi possível remover o membro.',
-            }));
+            setActionError(error instanceof Error ? error.message : 'Não foi possível remover o membro.');
+        } finally {
+            setRemovingMemberId(null);
         }
     }
 
@@ -66,7 +90,8 @@ export function AdminMembersPage() {
                 </Link>
             </section>
 
-            {feedback ? <p className="admin-feedback">{feedback}</p> : null}
+            {feedback ? <p className="admin-feedback" role="status" aria-live="polite">{feedback}</p> : null}
+            {actionError ? <p className="admin-feedback admin-feedback--error" role="alert">{actionError}</p> : null}
 
             <DataState {...membersState} emptyMessage="Nenhum membro cadastrado.">
                 {() => (
@@ -155,8 +180,12 @@ export function AdminMembersPage() {
                                                     <span>Editar</span>
                                                     <span aria-hidden="true">→</span>
                                                 </Link>
-                                                <button type="button" onClick={() => void handleRemove(member)}>
-                                                    Remover
+                                                <button
+                                                    type="button"
+                                                    onClick={() => void handleRemove(member)}
+                                                    disabled={removingMemberId !== null}
+                                                >
+                                                    {removingMemberId === member.id ? 'Removendo...' : 'Remover'}
                                                 </button>
                                             </div>
                                         </footer>

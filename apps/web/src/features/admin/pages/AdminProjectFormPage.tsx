@@ -504,8 +504,13 @@ export function AdminProjectFormPage() {
                             Os dados de repositório exibidos abaixo são simulados. Nenhuma consulta ao GitHub é feita
                             nesta versão.
                         </p>
-                        {formError ? <p role="alert">{formError}</p> : null}
-                        <form className="admin-form" onSubmit={handleSubmit}>
+                        {formError ? <p className="admin-feedback admin-feedback--error" role="alert">{formError}</p> : null}
+                        {isResolvingRepository ? (
+                            <p className="admin-state admin-state--loading" role="status" aria-live="polite">
+                                Carregando dados mockados do repositório...
+                            </p>
+                        ) : null}
+                        <form className="admin-form" onSubmit={handleSubmit} aria-busy={isSaving || isResolvingRepository}>
                             {!isEditing ? (
                                 <fieldset className="admin-form__full-width admin-repository-picker">
                                     <legend>Repositório de origem</legend>

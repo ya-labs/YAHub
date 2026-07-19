@@ -419,7 +419,7 @@ describe('App', () => {
         expect(screen.getByRole('button', { name: 'Remover Nícolas Machado Cardoso' })).toBeInTheDocument();
         fireEvent.click(screen.getByRole('button', { name: 'Criar projeto' }));
 
-        expect(await screen.findByText('Projeto Projeto Local Admin criado localmente.')).toBeInTheDocument();
+        expect(await screen.findByRole('status')).toHaveTextContent('Projeto Projeto Local Admin criado localmente.');
         expect(await screen.findByRole('heading', { name: 'Projeto Local Admin' })).toBeInTheDocument();
 
         const projectActions = screen.getByLabelText('Ações de Projeto Local Admin');
@@ -480,7 +480,7 @@ describe('App', () => {
         expect(screen.getByRole('button', { name: 'Remover GitHub' })).toBeInTheDocument();
         fireEvent.click(screen.getByRole('button', { name: 'Criar membro' }));
 
-        expect(await screen.findByText('Membro Membro Local Admin criado localmente.')).toBeInTheDocument();
+        expect(await screen.findByRole('status')).toHaveTextContent('Membro Membro Local Admin criado localmente.');
         expect(await screen.findByRole('heading', { name: 'Membro Local Admin' })).toBeInTheDocument();
 
         fireEvent.click(screen.getByLabelText('Ações de Membro Local Admin').querySelector('a') as HTMLAnchorElement);
