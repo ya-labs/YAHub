@@ -247,6 +247,10 @@ describe('App', () => {
         expect(screen.getByRole('heading', { name: 'Nícolas Machado Cardoso' })).toBeInTheDocument();
         expect(screen.getByText('Product / Front-end / UX')).toBeInTheDocument();
         expect(screen.getByText('Idealização do YAHub')).toBeInTheDocument();
+        expect(screen.getAllByRole('link', { name: 'GitHub' })[0]).toHaveAttribute(
+            'href',
+            'https://github.com/nicolasmacardoso',
+        );
         expect(screen.getAllByRole('link', { name: 'Editar' })[0]).toHaveAttribute(
             'href',
             '/admin/membros/nicolas/editar',
@@ -276,6 +280,8 @@ describe('App', () => {
         );
 
         expect(await screen.findByRole('heading', { name: 'Novo projeto' })).toBeInTheDocument();
+        fireEvent.click(await screen.findByRole('button', { name: /DevLab/ }));
+        expect(screen.getByLabelText('Categoria')).toBeInTheDocument();
         fireEvent.change(screen.getByLabelText('Nome de exibição'), { target: { value: 'Projeto em Rascunho' } });
         fireEvent.click(screen.getByRole('link', { name: 'Voltar e manter rascunho' }));
 
@@ -307,7 +313,7 @@ describe('App', () => {
         );
 
         expect(await screen.findByLabelText('Nome de exibição')).toHaveValue('YAHub');
-        expect(screen.getByLabelText('Slug')).toHaveValue('yahub');
+        expect(screen.getByText('yahub')).toBeInTheDocument();
     });
 
     it('mantém rascunho do membro ao voltar para a listagem sem salvar', async () => {
@@ -355,7 +361,6 @@ describe('App', () => {
         );
 
         expect(await screen.findByLabelText('Nome')).toHaveValue('Nícolas Machado Cardoso');
-        expect(screen.getByLabelText('Slug')).toHaveValue('nicolas');
     });
 
     it('cria, edita e remove projeto no fluxo administrativo mockado', async () => {
@@ -381,29 +386,46 @@ describe('App', () => {
         expect(await screen.findByRole('heading', { name: 'Projetos' })).toBeInTheDocument();
 
         fireEvent.click(screen.getByRole('link', { name: 'Novo projeto' }));
-        fireEvent.change(screen.getByLabelText('Nome de exibição'), { target: { value: 'Projeto Local Admin' } });
-        fireEvent.change(screen.getByLabelText('Slug'), { target: { value: 'projeto-local-admin' } });
-        fireEvent.change(screen.getByLabelText('Chamada curta'), { target: { value: 'Fluxo administrativo local.' } });
-        fireEvent.change(screen.getByLabelText('Descrição curta'), {
+        expect(screen.queryByLabelText('Nome de exibição')).not.toBeInTheDocument();
+        expect(screen.queryByLabelText('Tipos de apoio')).not.toBeInTheDocument();
+        fireEvent.change(await screen.findByLabelText('URL de outro repositório'), {
+            target: { value: 'https://github.com/nicolasmacardoso/projeto-local-admin' },
+        });
+        fireEvent.click(screen.getByRole('button', { name: 'Usar URL mockada' }));
+        expect(await screen.findByRole('link', { name: 'nicolasmacardoso' })).toHaveAttribute(
+            'href',
+            'https://github.com/nicolasmacardoso',
+        );
+        expect(screen.queryByLabelText('Categoria')).not.toBeInTheDocument();
+        expect(screen.getByLabelText('Tipos de apoio')).toBeInTheDocument();
+        expect(screen.getByLabelText('Nome de exibição')).toHaveAttribute('aria-required', 'true');
+        fireEvent.click(screen.getByRole('button', { name: 'Criar projeto' }));
+        expect(await screen.findByText('Informe o nome de exibição do projeto.')).toBeInTheDocument();
+        expect(screen.getByLabelText(/^Nome de exibição/)).toHaveAttribute('aria-invalid', 'true');
+        fireEvent.change(screen.getByLabelText(/^Nome de exibição/), { target: { value: 'Projeto Local Admin' } });
+        fireEvent.change(screen.getByLabelText(/^Chamada curta/), { target: { value: 'Fluxo administrativo local.' } });
+        fireEvent.change(screen.getByLabelText(/^Descrição curta/), {
             target: { value: 'Projeto criado no fluxo mockado.' },
         });
-        fireEvent.change(screen.getByLabelText('Descrição completa'), {
+        fireEvent.change(screen.getByLabelText(/^Descrição completa/), {
             target: { value: 'Projeto usado para validar CRUD local.' },
         });
-        fireEvent.change(screen.getByLabelText('Linguagem principal'), { target: { value: 'TypeScript' } });
-        fireEvent.change(screen.getByLabelText('URL do repositório'), {
-            target: { value: 'https://github.com/ya-labs/projeto-local-admin' },
-        });
-        fireEvent.change(screen.getByLabelText('Dono no GitHub'), { target: { value: 'ya-labs' } });
-        fireEvent.change(screen.getByLabelText('Nome do repositório'), { target: { value: 'projeto-local-admin' } });
-        fireEvent.change(screen.getByLabelText('ID do repositório GitHub'), {
-            target: { value: 'ya-labs-projeto-local-admin' },
-        });
-        fireEvent.change(screen.getByLabelText('Tecnologias'), { target: { value: 'React, TypeScript' } });
+        fireEvent.change(screen.getByLabelText('Nova opção para Tecnologias'), { target: { value: 'React' } });
+        fireEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
+        fireEvent.change(screen.getByLabelText('Nova opção para Tecnologias'), { target: { value: 'TypeScript' } });
+        fireEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
         fireEvent.change(screen.getByLabelText('Responsáveis'), { target: { value: 'nicolas' } });
+        expect(screen.getByRole('button', { name: 'Remover React' })).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: 'Remover TypeScript' })).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: 'Remover Nícolas Machado Cardoso' })).toBeInTheDocument();
+        fireEvent.change(screen.getByLabelText('URL do site'), { target: { value: 'ftp://projeto.local' } });
+        fireEvent.click(screen.getByRole('button', { name: 'Criar projeto' }));
+        expect(await screen.findByText('Informe uma URL válida para o site.')).toBeInTheDocument();
+        expect(screen.getByLabelText(/^URL do site/)).toHaveAttribute('aria-invalid', 'true');
+        fireEvent.change(screen.getByLabelText(/^URL do site/), { target: { value: 'https://projeto.local' } });
         fireEvent.click(screen.getByRole('button', { name: 'Criar projeto' }));
 
-        expect(await screen.findByText('Projeto Projeto Local Admin criado localmente.')).toBeInTheDocument();
+        expect(await screen.findByRole('status')).toHaveTextContent('Projeto Projeto Local Admin criado localmente.');
         expect(await screen.findByRole('heading', { name: 'Projeto Local Admin' })).toBeInTheDocument();
 
         const projectActions = screen.getByLabelText('Ações de Projeto Local Admin');
@@ -419,6 +441,8 @@ describe('App', () => {
         fireEvent.click(
             screen.getByLabelText('Ações de Projeto Local Editado').querySelector('button') as HTMLButtonElement,
         );
+        expect(await screen.findByRole('dialog', { name: 'Remover projeto?' })).toBeInTheDocument();
+        fireEvent.click(screen.getByRole('button', { name: 'Remover projeto' }));
 
         expect(await screen.findByText('Projeto Projeto Local Editado removido localmente.')).toBeInTheDocument();
         expect(screen.queryByRole('heading', { name: 'Projeto Local Editado' })).not.toBeInTheDocument();
@@ -442,19 +466,27 @@ describe('App', () => {
 
         expect(await screen.findByRole('heading', { name: 'Membros' })).toBeInTheDocument();
         fireEvent.click(screen.getByRole('link', { name: 'Novo membro' }));
-        fireEvent.change(await screen.findByLabelText('Nome'), { target: { value: 'Membro Local Admin' } });
-        fireEvent.change(screen.getByLabelText('Slug'), { target: { value: 'membro-local-admin' } });
-        fireEvent.change(screen.getByLabelText('Função'), { target: { value: 'Front-end' } });
+        expect(await screen.findByLabelText('Nome')).toHaveAttribute('aria-required', 'true');
+        expect(screen.getByLabelText('Cargo')).toHaveAttribute('aria-required', 'true');
+        expect(screen.getByLabelText('Usuário do GitHub')).toHaveAttribute('aria-required', 'true');
+        fireEvent.change(screen.getByLabelText('Nome'), { target: { value: 'Membro Local Admin' } });
+        fireEvent.change(screen.getByLabelText('Cargo'), { target: { value: 'Front-end' } });
         fireEvent.change(screen.getByLabelText('Usuário do GitHub'), { target: { value: 'membro-local' } });
-        fireEvent.change(screen.getByLabelText('Responsabilidades'), { target: { value: 'Front-end, UX' } });
+        fireEvent.change(screen.getByLabelText('Responsabilidades'), { target: { value: 'Front-end' } });
+        fireEvent.change(screen.getByLabelText('Nova opção para Responsabilidades'), { target: { value: 'UX' } });
+        fireEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
+        await screen.findByRole('option', { name: 'YAHub' });
         fireEvent.change(screen.getByLabelText('Projetos associados'), { target: { value: 'yahub' } });
-        fireEvent.change(screen.getByLabelText('Links externos'), {
-            target: { value: 'GitHub | https://github.com/membro-local' },
-        });
+        expect(screen.getByRole('button', { name: 'Remover UX' })).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: 'Remover YAHub' })).toBeInTheDocument();
         fireEvent.click(screen.getByRole('button', { name: 'Criar membro' }));
 
-        expect(await screen.findByText('Membro Membro Local Admin criado localmente.')).toBeInTheDocument();
+        expect(await screen.findByRole('status')).toHaveTextContent('Membro Membro Local Admin criado localmente.');
         expect(await screen.findByRole('heading', { name: 'Membro Local Admin' })).toBeInTheDocument();
+        expect(screen.getByRole('link', { name: '@membro-local' })).toHaveAttribute(
+            'href',
+            'https://github.com/membro-local',
+        );
 
         fireEvent.click(screen.getByLabelText('Ações de Membro Local Admin').querySelector('a') as HTMLAnchorElement);
         fireEvent.change(await screen.findByLabelText('Nome'), { target: { value: 'Membro Local Editado' } });
@@ -466,6 +498,8 @@ describe('App', () => {
         fireEvent.click(
             screen.getByLabelText('Ações de Membro Local Editado').querySelector('button') as HTMLButtonElement,
         );
+        expect(await screen.findByRole('dialog', { name: 'Remover membro?' })).toBeInTheDocument();
+        fireEvent.click(screen.getByRole('button', { name: 'Remover membro' }));
 
         expect(await screen.findByText('Membro Membro Local Editado removido localmente.')).toBeInTheDocument();
         expect(screen.queryByRole('heading', { name: 'Membro Local Editado' })).not.toBeInTheDocument();

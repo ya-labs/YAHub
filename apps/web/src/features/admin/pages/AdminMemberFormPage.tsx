@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import type { MemberDetails, MemberPayload, OrganizationLink } from '../../../shared/api/contracts';
+import type { MemberDetails, MemberPayload, OrganizationLink, ProjectDetails } from '../../../shared/api/contracts';
 import { yahubApi } from '../../../shared/api/yahubApi';
 import { DataState } from '../../../shared/components/DataState';
 import type { AsyncDataState } from '../../../shared/hooks/useAsyncData';
@@ -10,14 +10,14 @@ type MemberFormState = {
     name: string;
     role: string;
     githubUsername: string;
-    spotifolioUsername: string;
     responsibilities: string;
     projectSlugs: string;
     bio: string;
-    links: string;
+    links: OrganizationLink[];
 };
 
 type MemberDraft = { editingMemberId: string | null; formState: MemberFormState };
+type MemberValidationErrors = Partial<Record<'name' | 'role' | 'githubUsername', string>>;
 
 const memberDraftStorageKey = 'yahub.admin.members.draft';
 const initialFormState: MemberFormState = {
@@ -25,12 +25,13 @@ const initialFormState: MemberFormState = {
     name: '',
     role: '',
     githubUsername: '',
-    spotifolioUsername: '',
     responsibilities: '',
     projectSlugs: '',
     bio: '',
-    links: '',
+    links: [],
 };
+
+const responsibilitySuggestions = ['Front-end', 'Back-end', 'UX', 'Produto', 'Documentação', 'Infraestrutura'];
 
 function canUseSessionStorage() {
     return typeof window !== 'undefined' && typeof window.sessionStorage !== 'undefined';
@@ -60,22 +61,166 @@ function nullableText(value: string) {
     return value.trim() || null;
 }
 
-function joinLinks(links: OrganizationLink[]) {
-    return links.map((link) => `${link.label} | ${link.url}`).join('\n');
+function createSlug(value: string) {
+    return value
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)/g, '');
 }
 
-function parseLinks(value: string): OrganizationLink[] {
-    return value
-        .split('\n')
-        .map((line) => line.trim())
-        .filter(Boolean)
-        .map((line) => {
-            const [label, ...urlParts] = line.split('|');
-            const url = urlParts.join('|').trim();
+type MultiSelectFieldProps = {
+    id: string;
+    label: string;
+    value: string;
+    options: Array<{ value: string; label: string }>;
+    onChange: (value: string) => void;
+    allowCustom?: boolean;
+};
 
-            if (!label?.trim() || !url) throw new Error('Cada link deve seguir o formato "Nome | https://url".');
-            return { label: label.trim(), url };
-        });
+function MultiSelectField({ id, label, value, options, onChange, allowCustom = false }: MultiSelectFieldProps) {
+    const [customValue, setCustomValue] = useState('');
+    const selectedValues = splitList(value);
+    const availableOptions = options.filter((option) => !selectedValues.includes(option.value));
+
+    function addValue(nextValue: string) {
+        const normalizedValue = nextValue.trim();
+        if (!normalizedValue || selectedValues.includes(normalizedValue)) return;
+        onChange([...selectedValues, normalizedValue].join(', '));
+        setCustomValue('');
+    }
+
+    function removeValue(valueToRemove: string) {
+        onChange(selectedValues.filter((item) => item !== valueToRemove).join(', '));
+    }
+
+    return (
+        <div className="admin-multi-select">
+            <label htmlFor={id}>{label}</label>
+            <select id={id} value="" onChange={(event) => addValue(event.target.value)}>
+                <option value="">Selecionar opção</option>
+                {availableOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                        {option.label}
+                    </option>
+                ))}
+            </select>
+            {allowCustom ? (
+                <div className="admin-multi-select__custom">
+                    <input
+                        aria-label={`Nova opção para ${label}`}
+                        type="text"
+                        value={customValue}
+                        onChange={(event) => setCustomValue(event.target.value)}
+                        onKeyDown={(event) => {
+                            if (event.key === 'Enter') {
+                                event.preventDefault();
+                                addValue(customValue);
+                            }
+                        }}
+                        placeholder="Adicionar opção"
+                    />
+                    <button type="button" onClick={() => addValue(customValue)} disabled={!customValue.trim()}>
+                        Adicionar
+                    </button>
+                </div>
+            ) : null}
+            <div className="admin-selected-values" aria-live="polite">
+                {selectedValues.length ? (
+                    selectedValues.map((selectedValue) => {
+                        const option = options.find((item) => item.value === selectedValue);
+                        const selectedLabel = option?.label ?? selectedValue;
+                        return (
+                            <span className="admin-selected-value" key={selectedValue}>
+                                {selectedLabel}
+                                <button
+                                    type="button"
+                                    aria-label={`Remover ${selectedLabel}`}
+                                    onClick={() => removeValue(selectedValue)}
+                                >
+                                    ×
+                                </button>
+                            </span>
+                        );
+                    })
+                ) : (
+                    <span className="admin-field-help">Nenhuma opção selecionada.</span>
+                )}
+            </div>
+        </div>
+    );
+}
+
+type ExternalLinksFieldProps = {
+    value: OrganizationLink[];
+    onChange: (links: OrganizationLink[]) => void;
+};
+
+function ExternalLinksField({ value, onChange }: ExternalLinksFieldProps) {
+    const [label, setLabel] = useState('');
+    const [url, setUrl] = useState('');
+
+    function addLink() {
+        const normalizedLabel = label.trim();
+        const normalizedUrl = url.trim();
+        if (!normalizedLabel || !normalizedUrl || value.some((link) => link.url === normalizedUrl)) return;
+        onChange([...value, { label: normalizedLabel, url: normalizedUrl }]);
+        setLabel('');
+        setUrl('');
+    }
+
+    return (
+        <div className="admin-multi-select">
+            <span>Links externos</span>
+            <span className="admin-field-help">Opcional. Adicione outros perfis ou referências do membro.</span>
+            <select
+                aria-label="Tipo de link externo"
+                value=""
+                onChange={(event) => setLabel(event.target.value)}
+            >
+                <option value="">Usar tipo padrão</option>
+                <option value="Spotifolio">Spotifolio</option>
+            </select>
+            <div className="admin-external-links__entry">
+                <input
+                    aria-label="Nome do link externo"
+                    type="text"
+                    value={label}
+                    onChange={(event) => setLabel(event.target.value)}
+                    placeholder="Ex.: GitHub"
+                />
+                <input
+                    aria-label="URL do link externo"
+                    type="url"
+                    value={url}
+                    onChange={(event) => setUrl(event.target.value)}
+                    placeholder="https://exemplo.com/perfil"
+                />
+                <button type="button" onClick={addLink} disabled={!label.trim() || !url.trim()}>
+                    Adicionar link
+                </button>
+            </div>
+            <div className="admin-selected-values" aria-live="polite">
+                {value.length ? (
+                    value.map((link) => (
+                        <span className="admin-selected-value" key={`${link.label}-${link.url}`}>
+                            {link.label}: {link.url}
+                            <button
+                                type="button"
+                                aria-label={`Remover ${link.label}`}
+                                onClick={() => onChange(value.filter((item) => item.url !== link.url))}
+                            >
+                                ×
+                            </button>
+                        </span>
+                    ))
+                ) : (
+                    <span className="admin-field-help">Nenhum link adicionado.</span>
+                )}
+            </div>
+        </div>
+    );
 }
 
 function createFormStateFromMember(member: MemberDetails): MemberFormState {
@@ -84,30 +229,37 @@ function createFormStateFromMember(member: MemberDetails): MemberFormState {
         name: member.name,
         role: member.role,
         githubUsername: member.githubUsername ?? '',
-        spotifolioUsername: member.spotifolioUsername ?? '',
         responsibilities: member.responsibilities.join(', '),
         projectSlugs: member.projectSlugs.join(', '),
         bio: member.bio ?? '',
-        links: joinLinks(member.links),
+        links: member.links,
     };
 }
 
 function createPayloadFromForm(formState: MemberFormState): MemberPayload {
     return {
-        slug: formState.slug.trim(),
+        slug: createSlug(formState.name),
         name: formState.name.trim(),
         role: formState.role.trim(),
         githubUsername: nullableText(formState.githubUsername),
-        spotifolioUsername: nullableText(formState.spotifolioUsername),
+        spotifolioUsername: null,
         responsibilities: splitList(formState.responsibilities),
         projectSlugs: splitList(formState.projectSlugs),
         bio: nullableText(formState.bio),
-        links: parseLinks(formState.links),
+        links: formState.links,
     };
 }
 
+function validateMemberForm(formState: MemberFormState): MemberValidationErrors {
+    const errors: MemberValidationErrors = {};
+    if (!formState.name.trim()) errors.name = 'Informe o nome do membro.';
+    if (!formState.role.trim()) errors.role = 'Informe o cargo do membro.';
+    if (!formState.githubUsername.trim()) errors.githubUsername = 'Informe o usuário do GitHub.';
+    return errors;
+}
+
 function hasEditableMemberDraft(draft: MemberDraft | null, memberId: string) {
-    return Boolean(draft?.editingMemberId === memberId && draft.formState.name.trim() && draft.formState.slug.trim());
+    return Boolean(draft?.editingMemberId === memberId && draft.formState.name.trim());
 }
 
 export function AdminMemberFormPage() {
@@ -125,7 +277,9 @@ export function AdminMemberFormPage() {
     });
     const [loadedMemberId, setLoadedMemberId] = useState<string | null>(isEditing ? null : 'new');
     const [formError, setFormError] = useState<string | null>(null);
+    const [validationErrors, setValidationErrors] = useState<MemberValidationErrors>({});
     const [isSaving, setIsSaving] = useState(false);
+    const [projects, setProjects] = useState<ProjectDetails[]>([]);
 
     useEffect(() => {
         if (!isEditing || !memberId) return;
@@ -164,6 +318,17 @@ export function AdminMemberFormPage() {
     }, [isEditing, memberId]);
 
     useEffect(() => {
+        let isActive = true;
+        void yahubApi.admin.projects.list().then((projectData) => {
+            if (isActive) setProjects(projectData);
+        });
+
+        return () => {
+            isActive = false;
+        };
+    }, []);
+
+    useEffect(() => {
         if (!canUseSessionStorage() || (isEditing && loadedMemberId !== memberId)) return;
         window.sessionStorage.setItem(
             memberDraftStorageKey,
@@ -173,6 +338,16 @@ export function AdminMemberFormPage() {
 
     function updateForm<Value extends keyof MemberFormState>(field: Value, value: MemberFormState[Value]) {
         setFormState((currentState) => ({ ...currentState, [field]: value }));
+        setValidationErrors((currentErrors) => {
+            if (!(field in currentErrors)) return currentErrors;
+            const nextErrors = { ...currentErrors };
+            delete nextErrors[field as keyof MemberValidationErrors];
+            return nextErrors;
+        });
+    }
+
+    function updateExternalLinks(links: OrganizationLink[]) {
+        setFormState((currentState) => ({ ...currentState, links }));
     }
 
     function discardDraft() {
@@ -180,9 +355,18 @@ export function AdminMemberFormPage() {
         navigate('/admin/membros');
     }
 
+    const projectOptions = projects.map((project) => ({ value: project.slug, label: project.displayName }));
+    const responsibilityOptions = responsibilitySuggestions.map((responsibility) => ({
+        value: responsibility,
+        label: responsibility,
+    }));
     async function handleSubmit(event: { preventDefault: () => void }) {
         event.preventDefault();
         setFormError(null);
+        const nextValidationErrors = validateMemberForm(formState);
+        setValidationErrors(nextValidationErrors);
+        if (Object.keys(nextValidationErrors).length) return;
+
         setIsSaving(true);
 
         try {
@@ -218,73 +402,67 @@ export function AdminMemberFormPage() {
                 {() => (
                     <section className="admin-form-section">
                         <p className="portal-section__note">
-                            Use vírgulas para responsabilidades e projetos. Informe um link externo por linha no formato
-                            “Nome | https://url”.
+                            Selecione projetos e links relacionados. Responsabilidades podem ser escolhidas ou criadas
+                            conforme a necessidade.
                         </p>
-                        {formError ? <p role="alert">{formError}</p> : null}
-                        <form className="admin-form" onSubmit={handleSubmit}>
+                        {formError ? <p className="admin-feedback admin-feedback--error" role="alert">{formError}</p> : null}
+                        <form className="admin-form" onSubmit={handleSubmit} aria-busy={isSaving}>
                             <label>
-                                Nome
+                                <span className="admin-field-label admin-field-label--required">Nome</span>
                                 <input
                                     type="text"
                                     value={formState.name}
                                     onChange={(event) => updateForm('name', event.target.value)}
-                                    required
+                                    aria-required="true"
+                                    aria-invalid={Boolean(validationErrors.name) || undefined}
+                                    aria-describedby={validationErrors.name ? 'member-name-error' : undefined}
                                 />
+                                {validationErrors.name ? <span id="member-name-error" className="admin-field-error">{validationErrors.name}</span> : null}
                             </label>
                             <label>
-                                Slug
-                                <input
-                                    type="text"
-                                    value={formState.slug}
-                                    onChange={(event) => updateForm('slug', event.target.value)}
-                                    required
-                                />
-                            </label>
-                            <label>
-                                Função
+                                <span className="admin-field-label admin-field-label--required">Cargo</span>
                                 <input
                                     type="text"
                                     value={formState.role}
                                     onChange={(event) => updateForm('role', event.target.value)}
-                                    required
+                                    aria-required="true"
+                                    aria-invalid={Boolean(validationErrors.role) || undefined}
+                                    aria-describedby={validationErrors.role ? 'member-role-error' : undefined}
                                 />
+                                {validationErrors.role ? <span id="member-role-error" className="admin-field-error">{validationErrors.role}</span> : null}
                             </label>
                             <label>
-                                Usuário do GitHub
+                                <span className="admin-field-label admin-field-label--required">Usuário do GitHub</span>
                                 <input
                                     type="text"
                                     value={formState.githubUsername}
                                     onChange={(event) => updateForm('githubUsername', event.target.value)}
                                     placeholder="nicolasmacardoso"
+                                    aria-required="true"
+                                    aria-invalid={Boolean(validationErrors.githubUsername) || undefined}
+                                    aria-describedby={validationErrors.githubUsername ? 'member-github-username-error' : undefined}
                                 />
+                                {validationErrors.githubUsername ? (
+                                    <span id="member-github-username-error" className="admin-field-error">
+                                        {validationErrors.githubUsername}
+                                    </span>
+                                ) : null}
                             </label>
-                            <label>
-                                Usuário do Spotifolio
-                                <input
-                                    type="text"
-                                    value={formState.spotifolioUsername}
-                                    onChange={(event) => updateForm('spotifolioUsername', event.target.value)}
-                                />
-                            </label>
-                            <label>
-                                Responsabilidades
-                                <input
-                                    type="text"
-                                    value={formState.responsibilities}
-                                    onChange={(event) => updateForm('responsibilities', event.target.value)}
-                                    placeholder="Front-end, UX"
-                                />
-                            </label>
-                            <label>
-                                Projetos associados
-                                <input
-                                    type="text"
-                                    value={formState.projectSlugs}
-                                    onChange={(event) => updateForm('projectSlugs', event.target.value)}
-                                    placeholder="yahub, cade-o-dano"
-                                />
-                            </label>
+                            <MultiSelectField
+                                id="member-responsibilities"
+                                label="Responsabilidades"
+                                value={formState.responsibilities}
+                                options={responsibilityOptions}
+                                onChange={(value) => updateForm('responsibilities', value)}
+                                allowCustom
+                            />
+                            <MultiSelectField
+                                id="member-projects"
+                                label="Projetos associados"
+                                value={formState.projectSlugs}
+                                options={projectOptions}
+                                onChange={(value) => updateForm('projectSlugs', value)}
+                            />
                             <label>
                                 Biografia
                                 <textarea
@@ -292,14 +470,7 @@ export function AdminMemberFormPage() {
                                     onChange={(event) => updateForm('bio', event.target.value)}
                                 />
                             </label>
-                            <label>
-                                Links externos
-                                <textarea
-                                    value={formState.links}
-                                    onChange={(event) => updateForm('links', event.target.value)}
-                                    placeholder="GitHub | https://github.com/usuario"
-                                />
-                            </label>
+                            <ExternalLinksField value={formState.links} onChange={updateExternalLinks} />
                             <div className="admin-form__actions">
                                 <button type="submit" className="portal-button" disabled={isSaving}>
                                     {isSaving ? 'Salvando...' : isEditing ? 'Salvar alterações' : 'Criar membro'}

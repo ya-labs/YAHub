@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import type { MemberDetails } from '../../../shared/api/contracts';
 import { yahubApi } from '../../../shared/api/yahubApi';
+import { ConfirmationDialog } from '../../../shared/components/ConfirmationDialog';
 import { DataState } from '../../../shared/components/DataState';
 import type { AsyncDataState } from '../../../shared/hooks/useAsyncData';
 
@@ -15,37 +16,52 @@ export function AdminMembersPage() {
     const [feedback, setFeedback] = useState<string | null>(
         typeof location.state?.feedback === 'string' ? location.state.feedback : null,
     );
+    const [actionError, setActionError] = useState<string | null>(null);
+    const [removingMemberId, setRemovingMemberId] = useState<string | null>(null);
+    const [memberPendingRemoval, setMemberPendingRemoval] = useState<MemberDetails | null>(null);
     const members = useMemo(() => membersState.data ?? [], [membersState.data]);
 
-    const loadMembers = useCallback(async () => {
-        setMembersState((currentState) => ({ ...currentState, error: null, isLoading: true }));
+    useEffect(() => {
+        let isActive = true;
 
-        try {
-            const data = await yahubApi.admin.members.list();
-            setMembersState({ data, error: null, isLoading: false });
-        } catch (error: unknown) {
-            setMembersState({
-                data: null,
-                error: error instanceof Error ? error.message : 'Não foi possível carregar os membros.',
-                isLoading: false,
+        void yahubApi.admin.members
+            .list()
+            .then((data) => {
+                if (isActive) setMembersState({ data, error: null, isLoading: false });
+            })
+            .catch((error: unknown) => {
+                if (isActive) {
+                    setMembersState({
+                        data: null,
+                        error: error instanceof Error ? error.message : 'Não foi possível carregar os membros.',
+                        isLoading: false,
+                    });
+                }
             });
-        }
+
+        return () => {
+            isActive = false;
+        };
     }, []);
 
-    useEffect(() => {
-        void loadMembers();
-    }, [loadMembers]);
+    async function handleRemove() {
+        if (!memberPendingRemoval) return;
+        setActionError(null);
+        setFeedback(null);
+        setRemovingMemberId(memberPendingRemoval.id);
 
-    async function handleRemove(member: MemberDetails) {
         try {
-            await yahubApi.admin.members.remove(member.id);
-            setFeedback(`Membro ${member.name} removido localmente.`);
-            await loadMembers();
-        } catch (error: unknown) {
+            await yahubApi.admin.members.remove(memberPendingRemoval.id);
             setMembersState((currentState) => ({
                 ...currentState,
-                error: error instanceof Error ? error.message : 'Não foi possível remover o membro.',
+                data: currentState.data?.filter((member) => member.id !== memberPendingRemoval.id) ?? [],
             }));
+            setFeedback(`Membro ${memberPendingRemoval.name} removido localmente.`);
+            setMemberPendingRemoval(null);
+        } catch (error: unknown) {
+            setActionError(error instanceof Error ? error.message : 'Não foi possível remover o membro.');
+        } finally {
+            setRemovingMemberId(null);
         }
     }
 
@@ -66,7 +82,8 @@ export function AdminMembersPage() {
                 </Link>
             </section>
 
-            {feedback ? <p className="admin-feedback">{feedback}</p> : null}
+            {feedback ? <p className="admin-feedback" role="status" aria-live="polite">{feedback}</p> : null}
+            {actionError ? <p className="admin-feedback admin-feedback--error" role="alert">{actionError}</p> : null}
 
             <DataState {...membersState} emptyMessage="Nenhum membro cadastrado.">
                 {() => (
@@ -75,10 +92,6 @@ export function AdminMembersPage() {
                             <article className="portal-stat">
                                 <strong>{members.length}</strong>
                                 <span>Membros cadastrados</span>
-                            </article>
-                            <article className="portal-stat">
-                                <strong>{members.filter((member) => member.githubUsername).length}</strong>
-                                <span>Com perfil GitHub</span>
                             </article>
                             <article className="portal-stat">
                                 <strong>{members.filter((member) => member.projectSlugs.length > 0).length}</strong>
@@ -92,10 +105,9 @@ export function AdminMembersPage() {
                                     <article>
                                         <header className="admin-list__header">
                                             <div>
-                                                <p className="portal-kicker">Membro</p>
+                                                <p className="portal-kicker">{member.role}</p>
                                                 <h2>{member.name}</h2>
                                             </div>
-                                            <span className="admin-list__badge">{member.role}</span>
                                         </header>
                                         <p>{member.bio ?? 'Biografia ainda não informada.'}</p>
                                         <dl className="admin-list__details">
@@ -103,7 +115,15 @@ export function AdminMembersPage() {
                                                 <dt>GitHub</dt>
                                                 <dd>
                                                     {member.githubUsername
-                                                        ? `@${member.githubUsername}`
+                                                        ? (
+                                                            <a
+                                                                href={`https://github.com/${member.githubUsername}`}
+                                                                target="_blank"
+                                                                rel="noreferrer"
+                                                            >
+                                                                @{member.githubUsername}
+                                                            </a>
+                                                        )
                                                         : 'Não informado'}
                                                 </dd>
                                             </div>
@@ -114,14 +134,6 @@ export function AdminMembersPage() {
                                                         ? `@${member.spotifolioUsername}`
                                                         : 'Não informado'}
                                                 </dd>
-                                            </div>
-                                            <div>
-                                                <dt>Projetos</dt>
-                                                <dd>{member.projectSlugs.length || 'Nenhum associado'}</dd>
-                                            </div>
-                                            <div>
-                                                <dt>Links externos</dt>
-                                                <dd>{member.links.length || 'Nenhum informado'}</dd>
                                             </div>
                                         </dl>
                                         <div className="admin-member-details">
@@ -141,6 +153,22 @@ export function AdminMembersPage() {
                                                     ))}
                                                 </ul>
                                             </div>
+                                            <div>
+                                                <strong>Links externos</strong>
+                                                {member.links.length ? (
+                                                    <ul className="admin-list__tags admin-member-links">
+                                                        {member.links.map((link) => (
+                                                            <li key={`${link.label}-${link.url}`}>
+                                                                <a href={link.url} target="_blank" rel="noreferrer">
+                                                                    {link.label}
+                                                                </a>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                ) : (
+                                                    <span>Não informado</span>
+                                                )}
+                                            </div>
                                         </div>
                                         <footer className="admin-list__footer">
                                             <span>Dados mockados, mantidos apenas nesta sessão local.</span>
@@ -152,8 +180,12 @@ export function AdminMembersPage() {
                                                     <span>Editar</span>
                                                     <span aria-hidden="true">→</span>
                                                 </Link>
-                                                <button type="button" onClick={() => void handleRemove(member)}>
-                                                    Remover
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setMemberPendingRemoval(member)}
+                                                    disabled={removingMemberId !== null}
+                                                >
+                                                    {removingMemberId === member.id ? 'Removendo...' : 'Remover'}
                                                 </button>
                                             </div>
                                         </footer>
@@ -164,6 +196,16 @@ export function AdminMembersPage() {
                     </section>
                 )}
             </DataState>
+            {memberPendingRemoval ? (
+                <ConfirmationDialog
+                    title="Remover membro?"
+                    description={`O membro ${memberPendingRemoval.name} deixará a lista administrativa desta sessão.`}
+                    confirmLabel="Remover membro"
+                    isConfirming={removingMemberId === memberPendingRemoval.id}
+                    onCancel={() => setMemberPendingRemoval(null)}
+                    onConfirm={() => void handleRemove()}
+                />
+            ) : null}
         </main>
     );
 }

@@ -16,15 +16,19 @@ export function DataState<T>({
     children,
 }: DataStateProps<T>) {
     if (isLoading) {
-        return <p>Carregando dados...</p>;
+        return (
+            <p className="admin-state admin-state--loading" role="status" aria-live="polite">
+                Carregando dados...
+            </p>
+        );
     }
 
     if (error) {
-        return <p role="alert">{error}</p>;
+        return <p className="admin-state admin-state--error" role="alert">{error}</p>;
     }
 
     if (data === null || getIsEmpty(data)) {
-        return <p>{emptyMessage}</p>;
+        return <p className="admin-state admin-state--empty">{emptyMessage}</p>;
     }
 
     return children(data);

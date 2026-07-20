@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import type {
+    GithubRepository,
+    MemberDetails,
     ProjectAffiliation,
     ProjectCategory,
     ProjectDetails,
@@ -40,6 +42,9 @@ type ProjectFormState = {
 };
 
 type ProjectDraft = { editingProjectId: string | null; formState: ProjectFormState };
+type ProjectValidationErrors = Partial<
+    Record<'displayName' | 'tagline' | 'shortDescription' | 'fullDescription' | 'websiteUrl' | 'displayOrder', string>
+>;
 
 const projectDraftStorageKey = 'yahub.admin.projects.draft';
 const initialFormState: ProjectFormState = {
@@ -79,12 +84,112 @@ const statusLabels: Record<ProjectStatus, string> = {
     arquivado: 'Arquivado',
 };
 const visibilityLabels: Record<ProjectVisibility, string> = { publico: 'Público', oculto: 'Oculto' };
+const supportTypeLabels: Record<ProjectSupportType, string> = {
+    apoio_tecnico: 'Apoio técnico',
+    documentacao: 'Documentação',
+    revisao: 'Revisão',
+    divulgacao: 'Divulgação',
+    mentoria: 'Mentoria',
+};
+
+type MultiSelectFieldProps = {
+    id: string;
+    label: string;
+    value: string;
+    options: Array<{ value: string; label: string }>;
+    onChange: (value: string) => void;
+    helpText?: string;
+    allowCustom?: boolean;
+};
 
 function splitList(value: string) {
     return value
         .split(',')
         .map((item) => item.trim())
         .filter(Boolean);
+}
+
+function createSlug(value: string) {
+    return value
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)/g, '');
+}
+
+function MultiSelectField({ id, label, value, options, onChange, helpText, allowCustom = false }: MultiSelectFieldProps) {
+    const [customValue, setCustomValue] = useState('');
+    const selectedValues = splitList(value);
+    const availableOptions = options.filter((option) => !selectedValues.includes(option.value));
+
+    function addValue(nextValue: string) {
+        const normalizedValue = nextValue.trim();
+        if (!normalizedValue || selectedValues.includes(normalizedValue)) return;
+        onChange([...selectedValues, normalizedValue].join(', '));
+        setCustomValue('');
+    }
+
+    function removeValue(valueToRemove: string) {
+        onChange(selectedValues.filter((item) => item !== valueToRemove).join(', '));
+    }
+
+    return (
+        <div className="admin-multi-select">
+            <label htmlFor={id}>{label}</label>
+            <select id={id} value="" onChange={(event) => addValue(event.target.value)}>
+                <option value="">Selecionar opção</option>
+                {availableOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                        {option.label}
+                    </option>
+                ))}
+            </select>
+            {helpText ? <span className="admin-field-help">{helpText}</span> : null}
+            {allowCustom ? (
+                <div className="admin-multi-select__custom">
+                    <input
+                        aria-label={`Nova opção para ${label}`}
+                        type="text"
+                        value={customValue}
+                        onChange={(event) => setCustomValue(event.target.value)}
+                        onKeyDown={(event) => {
+                            if (event.key === 'Enter') {
+                                event.preventDefault();
+                                addValue(customValue);
+                            }
+                        }}
+                        placeholder="Adicionar opção"
+                    />
+                    <button type="button" onClick={() => addValue(customValue)} disabled={!customValue.trim()}>
+                        Adicionar
+                    </button>
+                </div>
+            ) : null}
+            <div className="admin-selected-values" aria-live="polite">
+                {selectedValues.length ? (
+                    selectedValues.map((selectedValue) => {
+                        const option = options.find((item) => item.value === selectedValue);
+                        const selectedLabel = option?.label ?? selectedValue;
+                        return (
+                            <span className="admin-selected-value" key={selectedValue}>
+                                {selectedLabel}
+                                <button
+                                    type="button"
+                                    aria-label={`Remover ${selectedLabel}`}
+                                    onClick={() => removeValue(selectedValue)}
+                                >
+                                    ×
+                                </button>
+                            </span>
+                        );
+                    })
+                ) : (
+                    <span className="admin-field-help">Nenhuma opção selecionada.</span>
+                )}
+            </div>
+        </div>
+    );
 }
 function nullableText(value: string) {
     const normalizedValue = value.trim();
@@ -162,11 +267,38 @@ function createPayloadFromForm(formState: ProjectFormState): ProjectPayload {
         updatedAt: new Date().toISOString(),
         featured: formState.featured,
         displayOrder: Number(formState.displayOrder) || 1,
-        yalabsMentorIds: splitList(formState.yalabsMentorIds),
+        yalabsMentorIds: formState.affiliation === 'orientado' ? splitList(formState.yalabsMentorIds) : [],
         responsibleMemberIds: splitList(formState.responsibleMemberIds),
-        authorDisplayName: nullableText(formState.authorDisplayName),
-        supportTypes: splitList(formState.supportTypes) as ProjectSupportType[],
+        authorDisplayName: formState.affiliation === 'orientado' ? nullableText(formState.authorDisplayName) : null,
+        supportTypes:
+            formState.affiliation === 'orientado'
+                ? (splitList(formState.supportTypes) as ProjectSupportType[])
+                : [],
     };
+}
+
+function isValidWebsiteUrl(value: string) {
+    try {
+        const url = new URL(value);
+        return url.protocol === 'http:' || url.protocol === 'https:';
+    } catch {
+        return false;
+    }
+}
+
+function validateProjectForm(formState: ProjectFormState): ProjectValidationErrors {
+    const errors: ProjectValidationErrors = {};
+    if (!formState.displayName.trim()) errors.displayName = 'Informe o nome de exibição do projeto.';
+    if (!formState.tagline.trim()) errors.tagline = 'Informe uma chamada curta para o projeto.';
+    if (!formState.shortDescription.trim()) errors.shortDescription = 'Informe uma descrição curta do projeto.';
+    if (!formState.fullDescription.trim()) errors.fullDescription = 'Informe uma descrição completa do projeto.';
+    if (formState.websiteUrl.trim() && !isValidWebsiteUrl(formState.websiteUrl.trim())) {
+        errors.websiteUrl = 'Informe uma URL válida para o site.';
+    }
+    if (!Number.isInteger(Number(formState.displayOrder)) || Number(formState.displayOrder) < 1) {
+        errors.displayOrder = 'Informe uma ordem igual ou maior que 1.';
+    }
+    return errors;
 }
 
 export function AdminProjectFormPage() {
@@ -184,7 +316,13 @@ export function AdminProjectFormPage() {
     });
     const [loadedProjectId, setLoadedProjectId] = useState<string | null>(isEditing ? null : 'new');
     const [formError, setFormError] = useState<string | null>(null);
+    const [validationErrors, setValidationErrors] = useState<ProjectValidationErrors>({});
     const [isSaving, setIsSaving] = useState(false);
+    const [repositories, setRepositories] = useState<GithubRepository[]>([]);
+    const [members, setMembers] = useState<MemberDetails[]>([]);
+    const [selectedRepository, setSelectedRepository] = useState<GithubRepository | null>(null);
+    const [repositoryUrlInput, setRepositoryUrlInput] = useState('');
+    const [isResolvingRepository, setIsResolvingRepository] = useState(false);
 
     useEffect(() => {
         if (!isEditing || !projectId) return;
@@ -205,6 +343,17 @@ export function AdminProjectFormPage() {
                         ? draft.formState
                         : createFormStateFromProject(project),
                 );
+                setSelectedRepository({
+                    githubRepositoryId: project.githubRepositoryId,
+                    githubOwner: project.githubOwner,
+                    githubName: project.githubName,
+                    repositoryUrl: project.repositoryUrl,
+                    primaryLanguage: project.primaryLanguage,
+                    technologies: project.technologies,
+                    description: null,
+                    topics: [],
+                    alreadyRegistered: false,
+                });
                 setPageState({ data: true, error: null, isLoading: false });
                 setLoadedProjectId(projectId);
             })
@@ -223,6 +372,29 @@ export function AdminProjectFormPage() {
     }, [isEditing, projectId]);
 
     useEffect(() => {
+        let isActive = true;
+
+        void Promise.all([yahubApi.admin.githubRepositories.list(), yahubApi.admin.members.list()])
+            .then(([repositoryData, memberData]) => {
+                if (!isActive) return;
+                setRepositories(repositoryData);
+                setMembers(memberData);
+            })
+            .catch((error: unknown) => {
+                if (isActive)
+                    setFormError(
+                        error instanceof Error
+                            ? error.message
+                            : 'Não foi possível carregar as opções administrativas mockadas.',
+                    );
+            });
+
+        return () => {
+            isActive = false;
+        };
+    }, []);
+
+    useEffect(() => {
         if (!canUseSessionStorage() || (isEditing && loadedProjectId !== projectId)) return;
         window.sessionStorage.setItem(
             projectDraftStorageKey,
@@ -232,6 +404,48 @@ export function AdminProjectFormPage() {
 
     function updateForm<Value extends keyof ProjectFormState>(field: Value, value: ProjectFormState[Value]) {
         setFormState((currentState) => ({ ...currentState, [field]: value }));
+        setValidationErrors((currentErrors) => {
+            if (!(field in currentErrors)) return currentErrors;
+            const nextErrors = { ...currentErrors };
+            delete nextErrors[field as keyof ProjectValidationErrors];
+            return nextErrors;
+        });
+    }
+
+    function applyRepository(repository: GithubRepository, affiliation: ProjectAffiliation) {
+        setSelectedRepository(repository);
+        setRepositoryUrlInput(repository.repositoryUrl);
+        setFormState((currentState) => ({
+            ...currentState,
+            slug: createSlug(repository.githubName),
+            affiliation,
+            githubRepositoryId: repository.githubRepositoryId,
+            githubOwner: repository.githubOwner,
+            githubName: repository.githubName,
+            repositoryUrl: repository.repositoryUrl,
+            primaryLanguage: repository.primaryLanguage ?? '',
+            technologies: repository.technologies.join(', '),
+            authorDisplayName: affiliation === 'orientado' ? repository.githubOwner : '',
+            supportTypes: affiliation === 'orientado' ? currentState.supportTypes : '',
+            yalabsMentorIds: affiliation === 'orientado' ? currentState.yalabsMentorIds : '',
+        }));
+    }
+
+    async function resolveRepositoryUrl() {
+        if (!repositoryUrlInput.trim()) return;
+        setFormError(null);
+        setIsResolvingRepository(true);
+
+        try {
+            applyRepository(
+                await yahubApi.admin.githubRepositories.resolve({ repositoryUrl: repositoryUrlInput }),
+                'orientado',
+            );
+        } catch (error: unknown) {
+            setFormError(error instanceof Error ? error.message : 'Não foi possível resolver o repositório informado.');
+        } finally {
+            setIsResolvingRepository(false);
+        }
     }
 
     function discardDraft() {
@@ -242,6 +456,9 @@ export function AdminProjectFormPage() {
     async function handleSubmit(event: { preventDefault: () => void }) {
         event.preventDefault();
         setFormError(null);
+        const nextValidationErrors = validateProjectForm(formState);
+        setValidationErrors(nextValidationErrors);
+        if (Object.keys(nextValidationErrors).length) return;
         setIsSaving(true);
         try {
             const payload = createPayloadFromForm(formState);
@@ -259,6 +476,23 @@ export function AdminProjectFormPage() {
             setIsSaving(false);
         }
     }
+
+    const memberOptions = members.map((member) => ({ value: member.id, label: member.name }));
+    const repositoryDetails =
+        selectedRepository ??
+        (formState.githubRepositoryId
+            ? {
+                  githubRepositoryId: formState.githubRepositoryId,
+                  githubOwner: formState.githubOwner,
+                  githubName: formState.githubName,
+                  repositoryUrl: formState.repositoryUrl,
+                  primaryLanguage: nullableText(formState.primaryLanguage),
+                  technologies: splitList(formState.technologies),
+                  description: null,
+                  topics: [],
+                  alreadyRegistered: false,
+              }
+            : null);
 
     return (
         <main className="admin-page">
@@ -281,82 +515,185 @@ export function AdminProjectFormPage() {
                 {() => (
                     <section className="admin-form-section">
                         <p className="portal-section__note">
-                            A seleção e o preenchimento automático por repositório GitHub serão tratados em uma próxima
-                            etapa. Nesta versão, os dados são locais e mockados.
+                            Os dados de repositório exibidos abaixo são simulados. Nenhuma consulta ao GitHub é feita
+                            nesta versão.
                         </p>
-                        {formError ? <p role="alert">{formError}</p> : null}
-                        <form className="admin-form" onSubmit={handleSubmit}>
+                        {formError ? <p className="admin-feedback admin-feedback--error" role="alert">{formError}</p> : null}
+                        {isResolvingRepository ? (
+                            <p className="admin-state admin-state--loading" role="status" aria-live="polite">
+                                Carregando dados mockados do repositório...
+                            </p>
+                        ) : null}
+                        <form
+                            className="admin-form"
+                            onSubmit={handleSubmit}
+                            noValidate
+                            aria-busy={isSaving || isResolvingRepository}
+                        >
+                            {!isEditing ? (
+                                <fieldset className="admin-form__full-width admin-repository-picker">
+                                    <legend>Repositório de origem</legend>
+                                    <p className="admin-field-help">
+                                        Selecione um repositório mockado da YA LABS ou informe uma URL para simular a
+                                        busca.
+                                    </p>
+                                    <div className="admin-repository-picker__cards">
+                                        {repositories.map((repository) => (
+                                            <button
+                                                className="admin-repository-card"
+                                                type="button"
+                                                key={repository.githubRepositoryId}
+                                                disabled={repository.alreadyRegistered}
+                                                onClick={() => applyRepository(repository, 'oficial')}
+                                            >
+                                                <span>{repository.githubName}</span>
+                                                <small>{repository.description ?? 'Sem descrição mockada.'}</small>
+                                                <small>
+                                                    {repository.alreadyRegistered
+                                                        ? 'Projeto já cadastrado'
+                                                        : repository.primaryLanguage ?? 'Sem linguagem principal'}
+                                                </small>
+                                            </button>
+                                        ))}
+                                    </div>
+                                    <div className="admin-repository-picker__url">
+                                        <label htmlFor="repository-url-input">URL de outro repositório</label>
+                                        <input
+                                            id="repository-url-input"
+                                            type="url"
+                                            value={repositoryUrlInput}
+                                            onChange={(event) => setRepositoryUrlInput(event.target.value)}
+                                            placeholder="https://github.com/ya-labs/repositorio"
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => void resolveRepositoryUrl()}
+                                            disabled={!repositoryUrlInput.trim() || isResolvingRepository}
+                                        >
+                                            {isResolvingRepository ? 'Carregando...' : 'Usar URL mockada'}
+                                        </button>
+                                    </div>
+                                </fieldset>
+                            ) : null}
+
+                            {isEditing || repositoryDetails ? (
+                                <>
+                            <section className="admin-form__full-width admin-repository-details" aria-live="polite">
+                                <div>
+                                    <p className="portal-kicker">Dados simulados do GitHub</p>
+                                    <h2>Informações do repositório</h2>
+                                </div>
+                                {repositoryDetails ? (
+                                    <dl>
+                                        <div>
+                                            <dt>Repositório</dt>
+                                            <dd>{repositoryDetails.githubOwner}/{repositoryDetails.githubName}</dd>
+                                        </div>
+                                        <div>
+                                            <dt>URL</dt>
+                                            <dd>{repositoryDetails.repositoryUrl}</dd>
+                                        </div>
+                                        <div>
+                                            <dt>Linguagem principal</dt>
+                                            <dd>{repositoryDetails.primaryLanguage ?? 'Não informada'}</dd>
+                                        </div>
+                                        <div>
+                                            <dt>Tópicos</dt>
+                                            <dd>{repositoryDetails.topics.length ? repositoryDetails.topics.join(', ') : 'Não informados'}</dd>
+                                        </div>
+                                        <div>
+                                            <dt>Descrição</dt>
+                                            <dd>{repositoryDetails.description ?? 'Não informada'}</dd>
+                                        </div>
+                                        <div>
+                                            <dt>Slug</dt>
+                                            <dd>{formState.slug || 'Será definido ao selecionar o repositório'}</dd>
+                                        </div>
+                                        <div>
+                                            <dt>Vínculo</dt>
+                                            <dd>{affiliationLabels[formState.affiliation]}</dd>
+                                        </div>
+                                        {formState.affiliation === 'orientado' ? (
+                                            <div>
+                                                <dt>Autor externo</dt>
+                                                <dd>
+                                                    <a
+                                                        href={`https://github.com/${repositoryDetails.githubOwner}`}
+                                                        target="_blank"
+                                                        rel="noreferrer"
+                                                    >
+                                                        {repositoryDetails.githubOwner}
+                                                    </a>
+                                                </dd>
+                                            </div>
+                                        ) : null}
+                                    </dl>
+                                ) : (
+                                    <p className="admin-field-help">Selecione um repositório para carregar os dados simulados.</p>
+                                )}
+                            </section>
+
                             <label>
-                                Nome de exibição
+                                <span className="admin-field-label admin-field-label--required">Nome de exibição</span>
                                 <input
                                     type="text"
                                     value={formState.displayName}
                                     onChange={(event) => updateForm('displayName', event.target.value)}
-                                    required
+                                    aria-required="true"
+                                    aria-invalid={Boolean(validationErrors.displayName) || undefined}
+                                    aria-describedby={validationErrors.displayName ? 'project-display-name-error' : undefined}
                                 />
+                                {validationErrors.displayName ? <span id="project-display-name-error" className="admin-field-error">{validationErrors.displayName}</span> : null}
                             </label>
                             <label>
-                                Slug
-                                <input
-                                    type="text"
-                                    value={formState.slug}
-                                    onChange={(event) => updateForm('slug', event.target.value)}
-                                    required
-                                />
-                            </label>
-                            <label>
-                                Chamada curta
+                                <span className="admin-field-label admin-field-label--required">Chamada curta</span>
                                 <input
                                     type="text"
                                     value={formState.tagline}
                                     onChange={(event) => updateForm('tagline', event.target.value)}
-                                    required
+                                    aria-required="true"
+                                    aria-invalid={Boolean(validationErrors.tagline) || undefined}
+                                    aria-describedby={validationErrors.tagline ? 'project-tagline-error' : undefined}
                                 />
+                                {validationErrors.tagline ? <span id="project-tagline-error" className="admin-field-error">{validationErrors.tagline}</span> : null}
                             </label>
                             <label>
-                                Descrição curta
+                                <span className="admin-field-label admin-field-label--required">Descrição curta</span>
                                 <textarea
                                     value={formState.shortDescription}
                                     onChange={(event) => updateForm('shortDescription', event.target.value)}
-                                    required
+                                    aria-required="true"
+                                    aria-invalid={Boolean(validationErrors.shortDescription) || undefined}
+                                    aria-describedby={validationErrors.shortDescription ? 'project-short-description-error' : undefined}
                                 />
+                                {validationErrors.shortDescription ? <span id="project-short-description-error" className="admin-field-error">{validationErrors.shortDescription}</span> : null}
                             </label>
                             <label>
-                                Descrição completa
+                                <span className="admin-field-label admin-field-label--required">Descrição completa</span>
                                 <textarea
                                     value={formState.fullDescription}
                                     onChange={(event) => updateForm('fullDescription', event.target.value)}
-                                    required
+                                    aria-required="true"
+                                    aria-invalid={Boolean(validationErrors.fullDescription) || undefined}
+                                    aria-describedby={validationErrors.fullDescription ? 'project-full-description-error' : undefined}
                                 />
+                                {validationErrors.fullDescription ? <span id="project-full-description-error" className="admin-field-error">{validationErrors.fullDescription}</span> : null}
                             </label>
-                            <label>
-                                Categoria
-                                <select
-                                    value={formState.category}
-                                    onChange={(event) => updateForm('category', event.target.value as ProjectCategory)}
-                                >
-                                    {Object.entries(categoryLabels).map(([value, label]) => (
-                                        <option key={value} value={value}>
-                                            {label}
-                                        </option>
-                                    ))}
-                                </select>
-                            </label>
-                            <label>
-                                Vínculo
-                                <select
-                                    value={formState.affiliation}
-                                    onChange={(event) =>
-                                        updateForm('affiliation', event.target.value as ProjectAffiliation)
-                                    }
-                                >
-                                    {Object.entries(affiliationLabels).map(([value, label]) => (
-                                        <option key={value} value={value}>
-                                            {label}
-                                        </option>
-                                    ))}
-                                </select>
-                            </label>
+                            {formState.affiliation === 'oficial' ? (
+                                <label>
+                                    Categoria
+                                    <select
+                                        value={formState.category}
+                                        onChange={(event) => updateForm('category', event.target.value as ProjectCategory)}
+                                    >
+                                        {Object.entries(categoryLabels).map(([value, label]) => (
+                                            <option key={value} value={value}>
+                                                {label}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </label>
+                            ) : null}
                             <label>
                                 Status
                                 <select
@@ -386,119 +723,67 @@ export function AdminProjectFormPage() {
                                 </select>
                             </label>
                             <label>
-                                Linguagem principal
-                                <input
-                                    type="text"
-                                    value={formState.primaryLanguage}
-                                    onChange={(event) => updateForm('primaryLanguage', event.target.value)}
-                                />
-                            </label>
-                            <label>
-                                URL do repositório
-                                <input
-                                    type="url"
-                                    value={formState.repositoryUrl}
-                                    onChange={(event) => updateForm('repositoryUrl', event.target.value)}
-                                    required
-                                />
-                            </label>
-                            <label>
-                                Dono no GitHub
-                                <input
-                                    type="text"
-                                    value={formState.githubOwner}
-                                    onChange={(event) => updateForm('githubOwner', event.target.value)}
-                                    required
-                                />
-                            </label>
-                            <label>
-                                Nome do repositório
-                                <input
-                                    type="text"
-                                    value={formState.githubName}
-                                    onChange={(event) => updateForm('githubName', event.target.value)}
-                                    required
-                                />
-                            </label>
-                            <label>
-                                ID do repositório GitHub
-                                <input
-                                    type="text"
-                                    value={formState.githubRepositoryId}
-                                    onChange={(event) => updateForm('githubRepositoryId', event.target.value)}
-                                    required
-                                />
-                            </label>
-                            <label>
                                 URL do site
                                 <input
                                     type="url"
                                     value={formState.websiteUrl}
                                     onChange={(event) => updateForm('websiteUrl', event.target.value)}
+                                    aria-invalid={Boolean(validationErrors.websiteUrl) || undefined}
+                                    aria-describedby={validationErrors.websiteUrl ? 'project-website-url-error' : undefined}
                                 />
+                                {validationErrors.websiteUrl ? (
+                                    <span id="project-website-url-error" className="admin-field-error">
+                                        {validationErrors.websiteUrl}
+                                    </span>
+                                ) : null}
                             </label>
+                            <MultiSelectField
+                                id="project-technologies"
+                                label="Tecnologias"
+                                value={formState.technologies}
+                                options={repositoryDetails?.technologies.map((technology) => ({ value: technology, label: technology })) ?? []}
+                                onChange={(value) => updateForm('technologies', value)}
+                                helpText="As opções vêm do repositório mockado; adicione outras quando necessário."
+                                allowCustom
+                            />
                             <label>
-                                URL da documentação
-                                <input
-                                    type="url"
-                                    value={formState.documentationUrl}
-                                    onChange={(event) => updateForm('documentationUrl', event.target.value)}
-                                />
-                            </label>
-                            <label>
-                                Tecnologias
-                                <input
-                                    type="text"
-                                    value={formState.technologies}
-                                    onChange={(event) => updateForm('technologies', event.target.value)}
-                                    placeholder="React, TypeScript"
-                                />
-                            </label>
-                            <label>
-                                Ordem
+                                <span className="admin-field-label admin-field-label--required">Ordem</span>
                                 <input
                                     type="number"
                                     min="1"
                                     value={formState.displayOrder}
                                     onChange={(event) => updateForm('displayOrder', event.target.value)}
-                                    required
+                                    aria-required="true"
+                                    aria-invalid={Boolean(validationErrors.displayOrder) || undefined}
+                                    aria-describedby={validationErrors.displayOrder ? 'project-display-order-error' : undefined}
                                 />
+                                {validationErrors.displayOrder ? <span id="project-display-order-error" className="admin-field-error">{validationErrors.displayOrder}</span> : null}
                             </label>
-                            <label>
-                                Autor externo
-                                <input
-                                    type="text"
-                                    value={formState.authorDisplayName}
-                                    onChange={(event) => updateForm('authorDisplayName', event.target.value)}
-                                />
-                            </label>
-                            <label>
-                                Tipos de apoio
-                                <input
-                                    type="text"
-                                    value={formState.supportTypes}
-                                    onChange={(event) => updateForm('supportTypes', event.target.value)}
-                                    placeholder="mentoria, documentacao"
-                                />
-                            </label>
-                            <label>
-                                Mentores YA LABS
-                                <input
-                                    type="text"
-                                    value={formState.yalabsMentorIds}
-                                    onChange={(event) => updateForm('yalabsMentorIds', event.target.value)}
-                                    placeholder="nicolas"
-                                />
-                            </label>
-                            <label>
-                                Responsáveis
-                                <input
-                                    type="text"
-                                    value={formState.responsibleMemberIds}
-                                    onChange={(event) => updateForm('responsibleMemberIds', event.target.value)}
-                                    placeholder="nicolas, caio"
-                                />
-                            </label>
+                            {formState.affiliation === 'orientado' ? (
+                                <>
+                                    <MultiSelectField
+                                        id="project-support-types"
+                                        label="Tipos de apoio"
+                                        value={formState.supportTypes}
+                                        options={Object.entries(supportTypeLabels).map(([value, label]) => ({ value, label }))}
+                                        onChange={(value) => updateForm('supportTypes', value)}
+                                    />
+                                    <MultiSelectField
+                                        id="project-mentors"
+                                        label="Mentores YA LABS"
+                                        value={formState.yalabsMentorIds}
+                                        options={memberOptions}
+                                        onChange={(value) => updateForm('yalabsMentorIds', value)}
+                                    />
+                                </>
+                            ) : null}
+                            <MultiSelectField
+                                id="project-responsible-members"
+                                label="Responsáveis"
+                                value={formState.responsibleMemberIds}
+                                options={memberOptions}
+                                onChange={(value) => updateForm('responsibleMemberIds', value)}
+                            />
                             <label className="admin-form__checkbox">
                                 <input
                                     type="checkbox"
@@ -519,6 +804,12 @@ export function AdminProjectFormPage() {
                                     Descartar rascunho
                                 </button>
                             </div>
+                                </>
+                            ) : (
+                                <p className="admin-form__full-width admin-field-help" role="status">
+                                    Selecione um repositório da YA LABS ou informe uma URL para continuar o cadastro.
+                                </p>
+                            )}
                         </form>
                     </section>
                 )}

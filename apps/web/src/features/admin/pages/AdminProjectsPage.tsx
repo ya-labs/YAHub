@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import type { ProjectDetails } from '../../../shared/api/contracts';
 import { yahubApi } from '../../../shared/api/yahubApi';
+import { ConfirmationDialog } from '../../../shared/components/ConfirmationDialog';
 import { DataState } from '../../../shared/components/DataState';
 import type { AsyncDataState } from '../../../shared/hooks/useAsyncData';
 
@@ -29,41 +30,56 @@ export function AdminProjectsPage() {
     const [feedback, setFeedback] = useState<string | null>(
         typeof location.state?.feedback === 'string' ? location.state.feedback : null,
     );
+    const [actionError, setActionError] = useState<string | null>(null);
+    const [removingProjectId, setRemovingProjectId] = useState<string | null>(null);
+    const [projectPendingRemoval, setProjectPendingRemoval] = useState<ProjectDetails | null>(null);
     const projects = useMemo(() => projectsState.data ?? [], [projectsState.data]);
     const orderedProjects = useMemo(
         () => [...projects].sort((first, second) => first.displayOrder - second.displayOrder),
         [projects],
     );
 
-    const loadProjects = useCallback(async () => {
-        setProjectsState((currentState) => ({ ...currentState, error: null, isLoading: true }));
+    useEffect(() => {
+        let isActive = true;
 
-        try {
-            const data = await yahubApi.admin.projects.list();
-            setProjectsState({ data, error: null, isLoading: false });
-        } catch (error: unknown) {
-            setProjectsState({
-                data: null,
-                error: error instanceof Error ? error.message : 'Não foi possível carregar os projetos.',
-                isLoading: false,
+        void yahubApi.admin.projects
+            .list()
+            .then((data) => {
+                if (isActive) setProjectsState({ data, error: null, isLoading: false });
+            })
+            .catch((error: unknown) => {
+                if (isActive) {
+                    setProjectsState({
+                        data: null,
+                        error: error instanceof Error ? error.message : 'Não foi possível carregar os projetos.',
+                        isLoading: false,
+                    });
+                }
             });
-        }
+
+        return () => {
+            isActive = false;
+        };
     }, []);
 
-    useEffect(() => {
-        void loadProjects();
-    }, [loadProjects]);
+    async function handleRemove() {
+        if (!projectPendingRemoval) return;
+        setActionError(null);
+        setFeedback(null);
+        setRemovingProjectId(projectPendingRemoval.id);
 
-    async function handleRemove(project: ProjectDetails) {
         try {
-            await yahubApi.admin.projects.remove(project.id);
-            setFeedback(`Projeto ${project.displayName} removido localmente.`);
-            await loadProjects();
-        } catch (error: unknown) {
+            await yahubApi.admin.projects.remove(projectPendingRemoval.id);
             setProjectsState((currentState) => ({
                 ...currentState,
-                error: error instanceof Error ? error.message : 'Não foi possível remover o projeto.',
+                data: currentState.data?.filter((project) => project.id !== projectPendingRemoval.id) ?? [],
             }));
+            setFeedback(`Projeto ${projectPendingRemoval.displayName} removido localmente.`);
+            setProjectPendingRemoval(null);
+        } catch (error: unknown) {
+            setActionError(error instanceof Error ? error.message : 'Não foi possível remover o projeto.');
+        } finally {
+            setRemovingProjectId(null);
         }
     }
 
@@ -82,7 +98,8 @@ export function AdminProjectsPage() {
                 </Link>
             </section>
 
-            {feedback ? <p className="admin-feedback">{feedback}</p> : null}
+            {feedback ? <p className="admin-feedback" role="status" aria-live="polite">{feedback}</p> : null}
+            {actionError ? <p className="admin-feedback admin-feedback--error" role="alert">{actionError}</p> : null}
 
             <DataState {...projectsState} emptyMessage="Nenhum projeto cadastrado.">
                 {() => (
@@ -156,8 +173,12 @@ export function AdminProjectsPage() {
                                                     <span>Editar</span>
                                                     <span aria-hidden="true">→</span>
                                                 </Link>
-                                                <button type="button" onClick={() => void handleRemove(project)}>
-                                                    Remover
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setProjectPendingRemoval(project)}
+                                                    disabled={removingProjectId !== null}
+                                                >
+                                                    {removingProjectId === project.id ? 'Removendo...' : 'Remover'}
                                                 </button>
                                             </div>
                                         </footer>
@@ -168,6 +189,16 @@ export function AdminProjectsPage() {
                     </section>
                 )}
             </DataState>
+            {projectPendingRemoval ? (
+                <ConfirmationDialog
+                    title="Remover projeto?"
+                    description={`O projeto ${projectPendingRemoval.displayName} deixará a lista administrativa desta sessão.`}
+                    confirmLabel="Remover projeto"
+                    isConfirming={removingProjectId === projectPendingRemoval.id}
+                    onCancel={() => setProjectPendingRemoval(null)}
+                    onConfirm={() => void handleRemove()}
+                />
+            ) : null}
         </main>
     );
 }

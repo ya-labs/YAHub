@@ -27,7 +27,11 @@ function MemberCard({ member }: { member: MemberSummary }) {
                         ? '1 projeto relacionado'
                         : `${member.projectSlugs.length} projetos relacionados`}
                 </span>
-                {member.githubUsername ? <span>GitHub: @{member.githubUsername}</span> : null}
+                {member.githubUsername ? (
+                    <a href={`https://github.com/${member.githubUsername}`} target="_blank" rel="noreferrer">
+                        GitHub: @{member.githubUsername}
+                    </a>
+                ) : null}
             </div>
 
             <Link className="portal-link" to={`/portal/membros/${member.slug}`}>

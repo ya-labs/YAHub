@@ -1,4 +1,4 @@
-import type { ActivityItem, MemberDetails, Organization, ProjectDetails } from './contracts';
+import type { ActivityItem, GithubRepository, MemberDetails, Organization, ProjectDetails } from './contracts';
 
 export const mockActivity: ActivityItem[] = [
     {
@@ -141,6 +141,53 @@ export const mockProjects: ProjectDetails[] = [
         yalabsMentorIds: ['nicolas'],
         responsibleMemberIds: ['nicolas'],
         recentActivities: [],
+    },
+];
+
+export const mockGithubRepositories: GithubRepository[] = [
+    {
+        githubRepositoryId: 'ya-labs-yahub',
+        githubOwner: 'ya-labs',
+        githubName: 'YA-HUB',
+        repositoryUrl: 'https://github.com/ya-labs/YA-HUB',
+        primaryLanguage: 'TypeScript',
+        technologies: ['React', 'TypeScript', 'Spring Boot'],
+        description: 'Portal oficial da YA LABS.',
+        topics: ['react', 'typescript', 'portal'],
+        alreadyRegistered: true,
+    },
+    {
+        githubRepositoryId: 'ya-labs-cade-o-dano',
+        githubOwner: 'ya-labs',
+        githubName: 'CADE-O-DANO',
+        repositoryUrl: 'https://github.com/ya-labs/CADE-O-DANO',
+        primaryLanguage: 'TypeScript',
+        technologies: ['React', 'TypeScript'],
+        description: 'Estudo prático com APIs de jogos.',
+        topics: ['react', 'api', 'estudos'],
+        alreadyRegistered: true,
+    },
+    {
+        githubRepositoryId: 'ya-labs-yabook',
+        githubOwner: 'ya-labs',
+        githubName: 'YABook',
+        repositoryUrl: 'https://github.com/ya-labs/YABook',
+        primaryLanguage: 'Markdown',
+        technologies: ['Markdown', 'GitHub'],
+        description: 'Método de trabalho e base de conhecimento da YA LABS.',
+        topics: ['documentacao', 'processos'],
+        alreadyRegistered: true,
+    },
+    {
+        githubRepositoryId: 'ya-labs-devlab',
+        githubOwner: 'ya-labs',
+        githubName: 'DevLab',
+        repositoryUrl: 'https://github.com/ya-labs/DevLab',
+        primaryLanguage: 'TypeScript',
+        technologies: ['JavaScript', 'TypeScript'],
+        description: 'Laboratório de estudos e práticas de desenvolvimento da YA LABS.',
+        topics: ['estudos', 'javascript', 'typescript'],
+        alreadyRegistered: false,
     },
 ];
 
