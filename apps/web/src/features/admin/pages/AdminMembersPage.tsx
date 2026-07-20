@@ -115,7 +115,15 @@ export function AdminMembersPage() {
                                                 <dt>GitHub</dt>
                                                 <dd>
                                                     {member.githubUsername
-                                                        ? `@${member.githubUsername}`
+                                                        ? (
+                                                            <a
+                                                                href={`https://github.com/${member.githubUsername}`}
+                                                                target="_blank"
+                                                                rel="noreferrer"
+                                                            >
+                                                                @{member.githubUsername}
+                                                            </a>
+                                                        )
                                                         : 'Não informado'}
                                                 </dd>
                                             </div>

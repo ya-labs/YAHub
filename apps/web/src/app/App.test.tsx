@@ -468,6 +468,7 @@ describe('App', () => {
         fireEvent.click(screen.getByRole('link', { name: 'Novo membro' }));
         expect(await screen.findByLabelText('Nome')).toHaveAttribute('aria-required', 'true');
         expect(screen.getByLabelText('Função')).toHaveAttribute('aria-required', 'true');
+        expect(screen.getByLabelText('Usuário do GitHub')).toHaveAttribute('aria-required', 'true');
         fireEvent.change(screen.getByLabelText('Nome'), { target: { value: 'Membro Local Admin' } });
         fireEvent.change(screen.getByLabelText('Função'), { target: { value: 'Front-end' } });
         fireEvent.change(screen.getByLabelText('Usuário do GitHub'), { target: { value: 'membro-local' } });
@@ -478,20 +479,14 @@ describe('App', () => {
         fireEvent.change(screen.getByLabelText('Projetos associados'), { target: { value: 'yahub' } });
         expect(screen.getByRole('button', { name: 'Remover UX' })).toBeInTheDocument();
         expect(screen.getByRole('button', { name: 'Remover YAHub' })).toBeInTheDocument();
-
-        fireEvent.click(screen.getByRole('button', { name: 'Criar membro' }));
-        expect(await screen.findByText('Adicione um link do GitHub antes de salvar o membro.')).toBeInTheDocument();
-
-        fireEvent.change(screen.getByLabelText('Tipo de link externo'), { target: { value: 'GitHub' } });
-        fireEvent.change(screen.getByLabelText('URL do link externo'), {
-            target: { value: 'https://github.com/membro-local' },
-        });
-        fireEvent.click(screen.getByRole('button', { name: 'Adicionar link' }));
-        expect(screen.getByRole('button', { name: 'Remover GitHub' })).toBeInTheDocument();
         fireEvent.click(screen.getByRole('button', { name: 'Criar membro' }));
 
         expect(await screen.findByRole('status')).toHaveTextContent('Membro Membro Local Admin criado localmente.');
         expect(await screen.findByRole('heading', { name: 'Membro Local Admin' })).toBeInTheDocument();
+        expect(screen.getByRole('link', { name: '@membro-local' })).toHaveAttribute(
+            'href',
+            'https://github.com/membro-local',
+        );
 
         fireEvent.click(screen.getByLabelText('Ações de Membro Local Admin').querySelector('a') as HTMLAnchorElement);
         fireEvent.change(await screen.findByLabelText('Nome'), { target: { value: 'Membro Local Editado' } });

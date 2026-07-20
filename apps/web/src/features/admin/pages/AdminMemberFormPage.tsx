@@ -17,7 +17,7 @@ type MemberFormState = {
 };
 
 type MemberDraft = { editingMemberId: string | null; formState: MemberFormState };
-type MemberValidationErrors = Partial<Record<'name' | 'role' | 'links', string>>;
+type MemberValidationErrors = Partial<Record<'name' | 'role' | 'githubUsername', string>>;
 
 const memberDraftStorageKey = 'yahub.admin.members.draft';
 const initialFormState: MemberFormState = {
@@ -155,10 +155,9 @@ function MultiSelectField({ id, label, value, options, onChange, allowCustom = f
 type ExternalLinksFieldProps = {
     value: OrganizationLink[];
     onChange: (links: OrganizationLink[]) => void;
-    error?: string;
 };
 
-function ExternalLinksField({ value, onChange, error }: ExternalLinksFieldProps) {
+function ExternalLinksField({ value, onChange }: ExternalLinksFieldProps) {
     const [label, setLabel] = useState('');
     const [url, setUrl] = useState('');
 
@@ -173,16 +172,14 @@ function ExternalLinksField({ value, onChange, error }: ExternalLinksFieldProps)
 
     return (
         <div className="admin-multi-select">
-            <span className="admin-field-label admin-field-label--required">Links externos</span>
-            <span className="admin-field-help">Adicione pelo menos um link do GitHub.</span>
-            {error ? <span id="member-links-error" className="admin-field-error">{error}</span> : null}
+            <span>Links externos</span>
+            <span className="admin-field-help">Opcional. Adicione outros perfis ou referências do membro.</span>
             <select
                 aria-label="Tipo de link externo"
                 value=""
                 onChange={(event) => setLabel(event.target.value)}
             >
                 <option value="">Usar tipo padrão</option>
-                <option value="GitHub">GitHub</option>
                 <option value="Spotifolio">Spotifolio</option>
             </select>
             <div className="admin-external-links__entry">
@@ -198,7 +195,7 @@ function ExternalLinksField({ value, onChange, error }: ExternalLinksFieldProps)
                     type="url"
                     value={url}
                     onChange={(event) => setUrl(event.target.value)}
-                    placeholder="https://github.com/usuario"
+                    placeholder="https://exemplo.com/perfil"
                 />
                 <button type="button" onClick={addLink} disabled={!label.trim() || !url.trim()}>
                     Adicionar link
@@ -257,9 +254,7 @@ function validateMemberForm(formState: MemberFormState): MemberValidationErrors 
     const errors: MemberValidationErrors = {};
     if (!formState.name.trim()) errors.name = 'Informe o nome do membro.';
     if (!formState.role.trim()) errors.role = 'Informe a função do membro.';
-    if (!formState.links.some((link) => link.label.trim().toLowerCase() === 'github')) {
-        errors.links = 'Adicione um link do GitHub antes de salvar o membro.';
-    }
+    if (!formState.githubUsername.trim()) errors.githubUsername = 'Informe o usuário do GitHub.';
     return errors;
 }
 
@@ -352,24 +347,7 @@ export function AdminMemberFormPage() {
     }
 
     function updateExternalLinks(links: OrganizationLink[]) {
-        const githubLink = links.find((link) => link.label.trim().toLowerCase() === 'github');
-        let githubUsername = '';
-
-        if (githubLink) {
-            try {
-                const githubUrl = new URL(githubLink.url);
-                if (githubUrl.hostname === 'github.com') githubUsername = githubUrl.pathname.split('/').filter(Boolean)[0] ?? '';
-            } catch {
-                githubUsername = '';
-            }
-        }
-
-        setFormState((currentState) => ({
-            ...currentState,
-            links,
-            githubUsername: githubUsername || currentState.githubUsername,
-        }));
-        setValidationErrors((currentErrors) => ({ ...currentErrors, links: undefined }));
+        setFormState((currentState) => ({ ...currentState, links }));
     }
 
     function discardDraft() {
@@ -454,13 +432,21 @@ export function AdminMemberFormPage() {
                                 {validationErrors.role ? <span id="member-role-error" className="admin-field-error">{validationErrors.role}</span> : null}
                             </label>
                             <label>
-                                Usuário do GitHub
+                                <span className="admin-field-label admin-field-label--required">Usuário do GitHub</span>
                                 <input
                                     type="text"
                                     value={formState.githubUsername}
                                     onChange={(event) => updateForm('githubUsername', event.target.value)}
                                     placeholder="nicolasmacardoso"
+                                    aria-required="true"
+                                    aria-invalid={Boolean(validationErrors.githubUsername) || undefined}
+                                    aria-describedby={validationErrors.githubUsername ? 'member-github-username-error' : undefined}
                                 />
+                                {validationErrors.githubUsername ? (
+                                    <span id="member-github-username-error" className="admin-field-error">
+                                        {validationErrors.githubUsername}
+                                    </span>
+                                ) : null}
                             </label>
                             <MultiSelectField
                                 id="member-responsibilities"
@@ -484,7 +470,7 @@ export function AdminMemberFormPage() {
                                     onChange={(event) => updateForm('bio', event.target.value)}
                                 />
                             </label>
-                            <ExternalLinksField value={formState.links} onChange={updateExternalLinks} error={validationErrors.links} />
+                            <ExternalLinksField value={formState.links} onChange={updateExternalLinks} />
                             <div className="admin-form__actions">
                                 <button type="submit" className="portal-button" disabled={isSaving}>
                                     {isSaving ? 'Salvando...' : isEditing ? 'Salvar alterações' : 'Criar membro'}
