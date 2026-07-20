@@ -467,10 +467,10 @@ describe('App', () => {
         expect(await screen.findByRole('heading', { name: 'Membros' })).toBeInTheDocument();
         fireEvent.click(screen.getByRole('link', { name: 'Novo membro' }));
         expect(await screen.findByLabelText('Nome')).toHaveAttribute('aria-required', 'true');
-        expect(screen.getByLabelText('Função')).toHaveAttribute('aria-required', 'true');
+        expect(screen.getByLabelText('Cargo')).toHaveAttribute('aria-required', 'true');
         expect(screen.getByLabelText('Usuário do GitHub')).toHaveAttribute('aria-required', 'true');
         fireEvent.change(screen.getByLabelText('Nome'), { target: { value: 'Membro Local Admin' } });
-        fireEvent.change(screen.getByLabelText('Função'), { target: { value: 'Front-end' } });
+        fireEvent.change(screen.getByLabelText('Cargo'), { target: { value: 'Front-end' } });
         fireEvent.change(screen.getByLabelText('Usuário do GitHub'), { target: { value: 'membro-local' } });
         fireEvent.change(screen.getByLabelText('Responsabilidades'), { target: { value: 'Front-end' } });
         fireEvent.change(screen.getByLabelText('Nova opção para Responsabilidades'), { target: { value: 'UX' } });

@@ -253,7 +253,7 @@ function createPayloadFromForm(formState: MemberFormState): MemberPayload {
 function validateMemberForm(formState: MemberFormState): MemberValidationErrors {
     const errors: MemberValidationErrors = {};
     if (!formState.name.trim()) errors.name = 'Informe o nome do membro.';
-    if (!formState.role.trim()) errors.role = 'Informe a função do membro.';
+    if (!formState.role.trim()) errors.role = 'Informe o cargo do membro.';
     if (!formState.githubUsername.trim()) errors.githubUsername = 'Informe o usuário do GitHub.';
     return errors;
 }
@@ -420,7 +420,7 @@ export function AdminMemberFormPage() {
                                 {validationErrors.name ? <span id="member-name-error" className="admin-field-error">{validationErrors.name}</span> : null}
                             </label>
                             <label>
-                                <span className="admin-field-label admin-field-label--required">Função</span>
+                                <span className="admin-field-label admin-field-label--required">Cargo</span>
                                 <input
                                     type="text"
                                     value={formState.role}
