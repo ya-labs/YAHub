@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import type { ProjectDetails } from '../../../shared/api/contracts';
 import { yahubApi } from '../../../shared/api/yahubApi';
+import { ConfirmationDialog } from '../../../shared/components/ConfirmationDialog';
 import { DataState } from '../../../shared/components/DataState';
 import type { AsyncDataState } from '../../../shared/hooks/useAsyncData';
 
@@ -31,26 +32,12 @@ export function AdminProjectsPage() {
     );
     const [actionError, setActionError] = useState<string | null>(null);
     const [removingProjectId, setRemovingProjectId] = useState<string | null>(null);
+    const [projectPendingRemoval, setProjectPendingRemoval] = useState<ProjectDetails | null>(null);
     const projects = useMemo(() => projectsState.data ?? [], [projectsState.data]);
     const orderedProjects = useMemo(
         () => [...projects].sort((first, second) => first.displayOrder - second.displayOrder),
         [projects],
     );
-
-    const loadProjects = useCallback(async () => {
-        setProjectsState((currentState) => ({ ...currentState, error: null, isLoading: true }));
-
-        try {
-            const data = await yahubApi.admin.projects.list();
-            setProjectsState({ data, error: null, isLoading: false });
-        } catch (error: unknown) {
-            setProjectsState({
-                data: null,
-                error: error instanceof Error ? error.message : 'Não foi possível carregar os projetos.',
-                isLoading: false,
-            });
-        }
-    }, []);
 
     useEffect(() => {
         let isActive = true;
@@ -75,15 +62,20 @@ export function AdminProjectsPage() {
         };
     }, []);
 
-    async function handleRemove(project: ProjectDetails) {
+    async function handleRemove() {
+        if (!projectPendingRemoval) return;
         setActionError(null);
         setFeedback(null);
-        setRemovingProjectId(project.id);
+        setRemovingProjectId(projectPendingRemoval.id);
 
         try {
-            await yahubApi.admin.projects.remove(project.id);
-            setFeedback(`Projeto ${project.displayName} removido localmente.`);
-            await loadProjects();
+            await yahubApi.admin.projects.remove(projectPendingRemoval.id);
+            setProjectsState((currentState) => ({
+                ...currentState,
+                data: currentState.data?.filter((project) => project.id !== projectPendingRemoval.id) ?? [],
+            }));
+            setFeedback(`Projeto ${projectPendingRemoval.displayName} removido localmente.`);
+            setProjectPendingRemoval(null);
         } catch (error: unknown) {
             setActionError(error instanceof Error ? error.message : 'Não foi possível remover o projeto.');
         } finally {
@@ -183,7 +175,7 @@ export function AdminProjectsPage() {
                                                 </Link>
                                                 <button
                                                     type="button"
-                                                    onClick={() => void handleRemove(project)}
+                                                    onClick={() => setProjectPendingRemoval(project)}
                                                     disabled={removingProjectId !== null}
                                                 >
                                                     {removingProjectId === project.id ? 'Removendo...' : 'Remover'}
@@ -197,6 +189,16 @@ export function AdminProjectsPage() {
                     </section>
                 )}
             </DataState>
+            {projectPendingRemoval ? (
+                <ConfirmationDialog
+                    title="Remover projeto?"
+                    description={`O projeto ${projectPendingRemoval.displayName} deixará a lista administrativa desta sessão.`}
+                    confirmLabel="Remover projeto"
+                    isConfirming={removingProjectId === projectPendingRemoval.id}
+                    onCancel={() => setProjectPendingRemoval(null)}
+                    onConfirm={() => void handleRemove()}
+                />
+            ) : null}
         </main>
     );
 }

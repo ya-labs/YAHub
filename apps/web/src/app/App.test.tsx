@@ -436,6 +436,8 @@ describe('App', () => {
         fireEvent.click(
             screen.getByLabelText('Ações de Projeto Local Editado').querySelector('button') as HTMLButtonElement,
         );
+        expect(await screen.findByRole('dialog', { name: 'Remover projeto?' })).toBeInTheDocument();
+        fireEvent.click(screen.getByRole('button', { name: 'Remover projeto' }));
 
         expect(await screen.findByText('Projeto Projeto Local Editado removido localmente.')).toBeInTheDocument();
         expect(screen.queryByRole('heading', { name: 'Projeto Local Editado' })).not.toBeInTheDocument();
@@ -496,6 +498,8 @@ describe('App', () => {
         fireEvent.click(
             screen.getByLabelText('Ações de Membro Local Editado').querySelector('button') as HTMLButtonElement,
         );
+        expect(await screen.findByRole('dialog', { name: 'Remover membro?' })).toBeInTheDocument();
+        fireEvent.click(screen.getByRole('button', { name: 'Remover membro' }));
 
         expect(await screen.findByText('Membro Membro Local Editado removido localmente.')).toBeInTheDocument();
         expect(screen.queryByRole('heading', { name: 'Membro Local Editado' })).not.toBeInTheDocument();

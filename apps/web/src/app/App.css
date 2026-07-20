@@ -1002,6 +1002,62 @@ footer {
     opacity: 0.55;
 }
 
+.admin-confirmation-dialog {
+    align-items: center;
+    background: rgb(15 23 42 / 42%);
+    display: flex;
+    inset: 0;
+    justify-content: center;
+    padding: 1rem;
+    position: fixed;
+    z-index: 10;
+}
+
+.admin-confirmation-dialog__content {
+    background: #ffffff;
+    border: 1px solid #d9deea;
+    border-radius: 0.5rem;
+    box-shadow: 0 18px 45px rgb(15 23 42 / 20%);
+    max-width: 30rem;
+    padding: 1.25rem;
+    width: 100%;
+}
+
+.admin-confirmation-dialog__content h2,
+.admin-confirmation-dialog__content p {
+    margin: 0;
+}
+
+.admin-confirmation-dialog__content p {
+    color: #475569;
+    line-height: 1.55;
+    margin-top: 0.5rem;
+}
+
+.admin-confirmation-dialog__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: end;
+    margin-top: 1.25rem;
+}
+
+.admin-confirmation-dialog__actions button {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 0.5rem;
+    color: #334155;
+    cursor: pointer;
+    font-weight: 700;
+    padding: 0.6rem 0.9rem;
+}
+
+.admin-confirmation-dialog__actions .admin-button--danger {
+    background: #dc2626;
+    border-color: #dc2626;
+    color: #ffffff;
+}
+
 @media (max-width: 52rem) {
     .portal-hero {
         grid-template-columns: 1fr;

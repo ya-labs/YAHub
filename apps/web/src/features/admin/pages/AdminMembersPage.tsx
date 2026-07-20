@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import type { MemberDetails } from '../../../shared/api/contracts';
 import { yahubApi } from '../../../shared/api/yahubApi';
+import { ConfirmationDialog } from '../../../shared/components/ConfirmationDialog';
 import { DataState } from '../../../shared/components/DataState';
 import type { AsyncDataState } from '../../../shared/hooks/useAsyncData';
 
@@ -17,22 +18,8 @@ export function AdminMembersPage() {
     );
     const [actionError, setActionError] = useState<string | null>(null);
     const [removingMemberId, setRemovingMemberId] = useState<string | null>(null);
+    const [memberPendingRemoval, setMemberPendingRemoval] = useState<MemberDetails | null>(null);
     const members = useMemo(() => membersState.data ?? [], [membersState.data]);
-
-    const loadMembers = useCallback(async () => {
-        setMembersState((currentState) => ({ ...currentState, error: null, isLoading: true }));
-
-        try {
-            const data = await yahubApi.admin.members.list();
-            setMembersState({ data, error: null, isLoading: false });
-        } catch (error: unknown) {
-            setMembersState({
-                data: null,
-                error: error instanceof Error ? error.message : 'Não foi possível carregar os membros.',
-                isLoading: false,
-            });
-        }
-    }, []);
 
     useEffect(() => {
         let isActive = true;
@@ -57,15 +44,20 @@ export function AdminMembersPage() {
         };
     }, []);
 
-    async function handleRemove(member: MemberDetails) {
+    async function handleRemove() {
+        if (!memberPendingRemoval) return;
         setActionError(null);
         setFeedback(null);
-        setRemovingMemberId(member.id);
+        setRemovingMemberId(memberPendingRemoval.id);
 
         try {
-            await yahubApi.admin.members.remove(member.id);
-            setFeedback(`Membro ${member.name} removido localmente.`);
-            await loadMembers();
+            await yahubApi.admin.members.remove(memberPendingRemoval.id);
+            setMembersState((currentState) => ({
+                ...currentState,
+                data: currentState.data?.filter((member) => member.id !== memberPendingRemoval.id) ?? [],
+            }));
+            setFeedback(`Membro ${memberPendingRemoval.name} removido localmente.`);
+            setMemberPendingRemoval(null);
         } catch (error: unknown) {
             setActionError(error instanceof Error ? error.message : 'Não foi possível remover o membro.');
         } finally {
@@ -182,7 +174,7 @@ export function AdminMembersPage() {
                                                 </Link>
                                                 <button
                                                     type="button"
-                                                    onClick={() => void handleRemove(member)}
+                                                    onClick={() => setMemberPendingRemoval(member)}
                                                     disabled={removingMemberId !== null}
                                                 >
                                                     {removingMemberId === member.id ? 'Removendo...' : 'Remover'}
@@ -196,6 +188,16 @@ export function AdminMembersPage() {
                     </section>
                 )}
             </DataState>
+            {memberPendingRemoval ? (
+                <ConfirmationDialog
+                    title="Remover membro?"
+                    description={`O membro ${memberPendingRemoval.name} deixará a lista administrativa desta sessão.`}
+                    confirmLabel="Remover membro"
+                    isConfirming={removingMemberId === memberPendingRemoval.id}
+                    onCancel={() => setMemberPendingRemoval(null)}
+                    onConfirm={() => void handleRemove()}
+                />
+            ) : null}
         </main>
     );
 }
