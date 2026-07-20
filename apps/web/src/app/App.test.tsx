@@ -418,6 +418,11 @@ describe('App', () => {
         expect(screen.getByRole('button', { name: 'Remover React' })).toBeInTheDocument();
         expect(screen.getByRole('button', { name: 'Remover TypeScript' })).toBeInTheDocument();
         expect(screen.getByRole('button', { name: 'Remover Nícolas Machado Cardoso' })).toBeInTheDocument();
+        fireEvent.change(screen.getByLabelText('URL do site'), { target: { value: 'ftp://projeto.local' } });
+        fireEvent.click(screen.getByRole('button', { name: 'Criar projeto' }));
+        expect(await screen.findByText('Informe uma URL válida para o site.')).toBeInTheDocument();
+        expect(screen.getByLabelText(/^URL do site/)).toHaveAttribute('aria-invalid', 'true');
+        fireEvent.change(screen.getByLabelText(/^URL do site/), { target: { value: 'https://projeto.local' } });
         fireEvent.click(screen.getByRole('button', { name: 'Criar projeto' }));
 
         expect(await screen.findByRole('status')).toHaveTextContent('Projeto Projeto Local Admin criado localmente.');

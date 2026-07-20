@@ -42,7 +42,9 @@ type ProjectFormState = {
 };
 
 type ProjectDraft = { editingProjectId: string | null; formState: ProjectFormState };
-type ProjectValidationErrors = Partial<Record<'displayName' | 'tagline' | 'shortDescription' | 'fullDescription' | 'displayOrder', string>>;
+type ProjectValidationErrors = Partial<
+    Record<'displayName' | 'tagline' | 'shortDescription' | 'fullDescription' | 'websiteUrl' | 'displayOrder', string>
+>;
 
 const projectDraftStorageKey = 'yahub.admin.projects.draft';
 const initialFormState: ProjectFormState = {
@@ -275,12 +277,24 @@ function createPayloadFromForm(formState: ProjectFormState): ProjectPayload {
     };
 }
 
+function isValidWebsiteUrl(value: string) {
+    try {
+        const url = new URL(value);
+        return url.protocol === 'http:' || url.protocol === 'https:';
+    } catch {
+        return false;
+    }
+}
+
 function validateProjectForm(formState: ProjectFormState): ProjectValidationErrors {
     const errors: ProjectValidationErrors = {};
     if (!formState.displayName.trim()) errors.displayName = 'Informe o nome de exibição do projeto.';
     if (!formState.tagline.trim()) errors.tagline = 'Informe uma chamada curta para o projeto.';
     if (!formState.shortDescription.trim()) errors.shortDescription = 'Informe uma descrição curta do projeto.';
     if (!formState.fullDescription.trim()) errors.fullDescription = 'Informe uma descrição completa do projeto.';
+    if (formState.websiteUrl.trim() && !isValidWebsiteUrl(formState.websiteUrl.trim())) {
+        errors.websiteUrl = 'Informe uma URL válida para o site.';
+    }
     if (!Number.isInteger(Number(formState.displayOrder)) || Number(formState.displayOrder) < 1) {
         errors.displayOrder = 'Informe uma ordem igual ou maior que 1.';
     }
@@ -510,7 +524,12 @@ export function AdminProjectFormPage() {
                                 Carregando dados mockados do repositório...
                             </p>
                         ) : null}
-                        <form className="admin-form" onSubmit={handleSubmit} aria-busy={isSaving || isResolvingRepository}>
+                        <form
+                            className="admin-form"
+                            onSubmit={handleSubmit}
+                            noValidate
+                            aria-busy={isSaving || isResolvingRepository}
+                        >
                             {!isEditing ? (
                                 <fieldset className="admin-form__full-width admin-repository-picker">
                                     <legend>Repositório de origem</legend>
@@ -709,7 +728,14 @@ export function AdminProjectFormPage() {
                                     type="url"
                                     value={formState.websiteUrl}
                                     onChange={(event) => updateForm('websiteUrl', event.target.value)}
+                                    aria-invalid={Boolean(validationErrors.websiteUrl) || undefined}
+                                    aria-describedby={validationErrors.websiteUrl ? 'project-website-url-error' : undefined}
                                 />
+                                {validationErrors.websiteUrl ? (
+                                    <span id="project-website-url-error" className="admin-field-error">
+                                        {validationErrors.websiteUrl}
+                                    </span>
+                                ) : null}
                             </label>
                             <MultiSelectField
                                 id="project-technologies"
