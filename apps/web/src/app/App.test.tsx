@@ -27,6 +27,7 @@ describe('App', () => {
         expect(screen.getByRole('link', { name: 'início' })).toHaveAttribute('href', '#home');
         expect(screen.getByRole('link', { name: 'sobre' })).toHaveAttribute('href', '#organizacao');
         expect(screen.getByRole('link', { name: 'Ecossistema YA' })).toHaveAttribute('href', '#ecossistema');
+        expect(screen.getByRole('link', { name: 'Fluxo de construção' })).toHaveAttribute('href', '#fluxo');
         expect(screen.getByRole('link', { name: 'Produtos' })).toHaveAttribute('href', '#produtos');
         expect(screen.getByRole('link', { name: /pular para o conteúdo principal/i })).toHaveAttribute(
             'href',

@@ -23,7 +23,7 @@ export function HomeShell({ children }: HomeShellProps) {
             home: 'home',
             organizacao: 'organizacao',
             ecossistema: 'ecossistema',
-            fluxo: 'ecossistema',
+            fluxo: 'fluxo',
             produtos: 'produtos',
             yahub: 'produtos',
         };
@@ -79,6 +79,14 @@ export function HomeShell({ children }: HomeShellProps) {
                         aria-current={activeSection === 'ecossistema' ? 'location' : undefined}
                     >
                         ecossistema
+                    </a>
+                    <a
+                        className="home-nav__link"
+                        href="#fluxo"
+                        aria-label="Fluxo de construção"
+                        aria-current={activeSection === 'fluxo' ? 'location' : undefined}
+                    >
+                        fluxo
                     </a>
                     <a
                         className="home-nav__link"

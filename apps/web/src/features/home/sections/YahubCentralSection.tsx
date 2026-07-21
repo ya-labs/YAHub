@@ -31,11 +31,8 @@ export function YahubCentralSection() {
                     <p className="home-command">ya@hub:~$ open portal</p>
                     <h2 id="yahub-title">YAHub: a porta de entrada da YA LABS</h2>
                     <p>
-                        Depois de entender a YA LABS, o ecossistema, o fluxo e os produtos, tudo se conecta no YAHub.
-                    </p>
-                    <p>
-                        YAHub conecta pessoas, projetos e conhecimento. Centralizamos projetos, membros, documentação e
-                        atividade em um só lugar.
+                        Depois de entender a YA LABS, o ecossistema, o fluxo e os produtos, tudo se conecta no YAHub:
+                        projetos, membros, documentação e atividade em um só lugar.
                     </p>
 
                     <nav className="home-central__actions" aria-label="Ações da Central YAHub">
@@ -43,8 +40,6 @@ export function YahubCentralSection() {
                             Acessar o portal
                             <span aria-hidden="true">↗</span>
                         </Link>
-                        <Link to="/portal/projetos">Ver projetos</Link>
-                        <Link to="/portal/docs">Acessar documentação</Link>
                     </nav>
                 </div>
 
@@ -83,7 +78,6 @@ export function YahubCentralSection() {
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
     );
