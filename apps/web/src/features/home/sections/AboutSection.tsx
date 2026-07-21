@@ -1,8 +1,45 @@
 export function AboutSection() {
+    const pillars = [
+        {
+            title: 'Desenvolvimento',
+            description: 'Código limpo, modular e testável.',
+        },
+        {
+            title: 'Automação',
+            description: 'Eliminamos o repetitivo para liberar o que realmente importa.',
+        },
+        {
+            title: 'Documentação',
+            description: 'Registramos o essencial para garantir clareza, uso e evolução.',
+        },
+        {
+            title: 'Aprendizado',
+            description: 'Compartilhamos conhecimento e incentivamos a prática.',
+        },
+    ];
+
     return (
-        <section id="sobre">
-            <h2>Sobre a YA LABS</h2>
-            <p>Seção institucional em construção</p>
+        <section id="organizacao" aria-labelledby="organizacao-title">
+            <p>ya@hub:~$ sobre</p>
+            <h2 id="organizacao-title">Construímos como laboratório.</h2>
+            <p>
+                YA LABS é um laboratório independente de software. Construímos, automatizamos e documentamos soluções
+                para resolver problemas reais com clareza, eficiência e evolução contínua.
+            </p>
+
+            <ul>
+                {pillars.map((pillar) => (
+                    <li key={pillar.title}>
+                        <h3>{pillar.title}</h3>
+                        <p>{pillar.description}</p>
+                    </li>
+                ))}
+            </ul>
+
+            <aside aria-label="Missão da YA LABS">
+                <p>nossa missão:</p>
+                <p>simplificar o complexo. potencializar pessoas.</p>
+            </aside>
         </section>
     );
 }

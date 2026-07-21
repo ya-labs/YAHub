@@ -8,13 +8,15 @@ export function HomeShell({ children }: HomeShellProps) {
     return (
         <div>
             <header>
-                <strong>YAHub</strong>
+                <strong>YA LABS</strong>
 
                 <nav aria-label="Navegação da Home">
-                    <a href="#sobre">Sobre</a>
-                    <a href="#projetos">Projetos</a>
-                    <a href="#membros">Membros</a>
-                    <a href="#contato">Contato</a>
+                    <a href="#home">Home</a>
+                    <a href="#organizacao">Organização</a>
+                    <a href="#ecossistema">Ecossistema YA</a>
+                    <a href="#fluxo">Fluxo</a>
+                    <a href="#produtos">Produtos</a>
+                    <a href="#yahub">YAHub</a>
                 </nav>
             </header>
 

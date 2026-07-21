@@ -21,7 +21,8 @@ describe('App', () => {
             </MemoryRouter>,
         );
 
-        expect(await screen.findByRole('heading', { name: /home do yahub/i })).toBeInTheDocument();
+        expect(await screen.findByRole('heading', { level: 1, name: 'YA LABS' })).toBeInTheDocument();
+        expect(screen.getByRole('heading', { name: /construímos como laboratório/i })).toBeInTheDocument();
     });
 
     it('renderiza a dashboard inicial do portal público', async () => {
