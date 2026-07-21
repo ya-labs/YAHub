@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 
 type HomeShellProps = {
     children: ReactNode;
@@ -18,6 +19,8 @@ export function HomeShell({ children }: HomeShellProps) {
                     <a href="#produtos">Produtos</a>
                     <a href="#yahub">YAHub</a>
                 </nav>
+
+                <Link to="/portal">acessar portal</Link>
             </header>
 
             <main>{children}</main>

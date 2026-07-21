@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const yahubAreas = [
     {
         title: 'Explore projetos',
@@ -39,9 +41,9 @@ export function YahubCentralSection() {
             </ul>
 
             <nav aria-label="Ações da Central YAHub">
-                <a href="/portal">Acessar o portal</a>
-                <a href="/portal/projetos">Ver projetos</a>
-                <a href="/portal/docs">Acessar documentação</a>
+                <Link to="/portal">Acessar o portal</Link>
+                <Link to="/portal/projetos">Ver projetos</Link>
+                <Link to="/portal/docs">Acessar documentação</Link>
             </nav>
         </section>
     );

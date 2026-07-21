@@ -23,6 +23,9 @@ describe('App', () => {
 
         expect(await screen.findByRole('heading', { level: 1, name: 'YA LABS' })).toBeInTheDocument();
         expect(screen.getByRole('heading', { name: /construímos como laboratório/i })).toBeInTheDocument();
+        expect(screen.getAllByRole('link', { name: /acessar portal/i })[0]).toHaveAttribute('href', '/portal');
+        expect(screen.getByRole('link', { name: 'Ecossistema YA' })).toHaveAttribute('href', '#ecossistema');
+        expect(screen.getByRole('link', { name: 'Produtos' })).toHaveAttribute('href', '#produtos');
     });
 
     it('renderiza a dashboard inicial do portal público', async () => {
