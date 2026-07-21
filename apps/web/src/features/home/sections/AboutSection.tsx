@@ -19,16 +19,19 @@ export function AboutSection() {
     ];
 
     return (
-        <section id="organizacao" aria-labelledby="organizacao-title">
-            <p>ya@hub:~$ sobre</p>
-            <p>ya@hub:~$ áreas</p>
-            <h2 id="organizacao-title">Construímos como laboratório.</h2>
-            <p>
-                YA LABS é um laboratório independente de software. Construímos, automatizamos e documentamos soluções
-                para resolver problemas reais com clareza, eficiência e evolução contínua.
-            </p>
+        <section className="home-section home-section--about" id="organizacao" aria-labelledby="organizacao-title">
+            <div className="home-section__intro">
+                <div className="home-terminal-lines" aria-label="Comandos sobre a organização">
+                    <p>ya@hub:~$ sobre</p>
+                </div>
+                <h2 id="organizacao-title">Construímos como laboratório.</h2>
+                <p>
+                    YA LABS é um laboratório independente de software. Construímos, automatizamos e documentamos
+                    soluções para resolver problemas reais com clareza, eficiência e evolução contínua.
+                </p>
+            </div>
 
-            <ul aria-label="Áreas de atuação da YA LABS">
+            <ul className="home-pillar-grid" aria-label="Áreas de atuação da YA LABS">
                 {pillars.map((pillar) => (
                     <li key={pillar.title}>
                         <h3>{pillar.title}</h3>
@@ -37,12 +40,12 @@ export function AboutSection() {
                 ))}
             </ul>
 
-            <aside aria-label="Missão da YA LABS">
+            <aside className="home-mission" aria-label="Missão da YA LABS">
                 <p>nossa missão:</p>
                 <p>simplificar o complexo. potencializar pessoas.</p>
             </aside>
 
-            <dl aria-label="Separação conceitual da Home">
+            <dl className="home-concept-list" aria-label="Separação conceitual da Home">
                 <div>
                     <dt>YA LABS</dt>
                     <dd>organização, laboratório e ecossistema apresentado pelo portal.</dd>

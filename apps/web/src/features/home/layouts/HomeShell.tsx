@@ -7,27 +7,39 @@ type HomeShellProps = {
 
 export function HomeShell({ children }: HomeShellProps) {
     return (
-        <div>
-            <a href="#conteudo-principal">Pular para o conteúdo principal</a>
+        <div className="home-shell">
+            <a className="home-skip-link" href="#conteudo-principal">
+                Pular para o conteúdo principal
+            </a>
 
-            <header>
-                <strong>YA LABS</strong>
+            <header className="home-header">
+                <span className="home-header__spacer" aria-hidden="true" />
 
-                <nav aria-label="Navegação da Home">
-                    <a href="#home">Home</a>
-                    <a href="#organizacao">Organização</a>
-                    <a href="#ecossistema">Ecossistema YA</a>
-                    <a href="#fluxo">Fluxo</a>
-                    <a href="#produtos">Produtos</a>
-                    <a href="#yahub">YAHub</a>
+                <nav className="home-nav" aria-label="Navegação da Home">
+                    <a className="home-nav__link home-nav__link--active" href="#home">
+                        home
+                    </a>
+                    <a className="home-nav__link" href="#organizacao">
+                        about
+                    </a>
+                    <a className="home-nav__link" href="#ecossistema" aria-label="Ecossistema YA">
+                        ecosystem
+                    </a>
+                    <a className="home-nav__link" href="#produtos" aria-label="Produtos">
+                        products
+                    </a>
                 </nav>
 
-                <Link to="/portal">acessar portal</Link>
+                <Link className="home-header__cta" to="/portal">
+                    acessar portal
+                </Link>
             </header>
 
-            <main id="conteudo-principal">{children}</main>
+            <main className="home-main" id="conteudo-principal">
+                {children}
+            </main>
 
-            <footer>
+            <footer className="home-footer">
                 <small>YA LABS</small>
             </footer>
         </div>

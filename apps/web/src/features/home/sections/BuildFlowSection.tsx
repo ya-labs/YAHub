@@ -9,14 +9,16 @@ const buildSteps = [
 
 export function BuildFlowSection() {
     return (
-        <section id="fluxo" aria-labelledby="fluxo-title">
-            <h2 id="fluxo-title">Como uma ideia vira produto.</h2>
-            <p>
-                Um fluxo colaborativo, transparente e iterativo. Da ideia à entrega, com clareza, qualidade e foco em
-                impacto real.
-            </p>
+        <section className="home-section home-section--flow" id="fluxo" aria-labelledby="fluxo-title">
+            <div className="home-section__intro">
+                <h2 id="fluxo-title">Como uma ideia vira produto.</h2>
+                <p>
+                    Um fluxo colaborativo, transparente e iterativo. Da ideia à entrega, com clareza, qualidade e foco
+                    em impacto real.
+                </p>
+            </div>
 
-            <ol aria-label="Etapas do fluxo de construção da YA LABS">
+            <ol className="home-flow" aria-label="Etapas do fluxo de construção da YA LABS">
                 {buildSteps.map((step) => (
                     <li key={step.title}>
                         <h3>{step.title}</h3>
@@ -25,7 +27,7 @@ export function BuildFlowSection() {
                 ))}
             </ol>
 
-            <dl aria-label="Princípios do fluxo de construção">
+            <dl className="home-principles" aria-label="Princípios do fluxo de construção">
                 <div>
                     <dt>status</dt>
                     <dd>contínuo</dd>

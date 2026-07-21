@@ -39,14 +39,16 @@ const products = [
 
 export function ProductsSection() {
     return (
-        <section id="produtos" aria-labelledby="produtos-title">
-            <h2 id="produtos-title">Produtos que nasceram no laboratório.</h2>
-            <p>
-                Softwares com identidade própria, criados na YA LABS para resolver problemas reais com código,
-                automação e escala.
-            </p>
+        <section className="home-section home-section--products" id="produtos" aria-labelledby="produtos-title">
+            <div className="home-section__intro">
+                <h2 id="produtos-title">Produtos que nasceram no laboratório.</h2>
+                <p>
+                    Softwares com identidade própria, criados na YA LABS para resolver problemas reais com código,
+                    automação e escala.
+                </p>
+            </div>
 
-            <ul aria-label="Produtos da YA LABS">
+            <ul className="home-products" aria-label="Produtos da YA LABS">
                 {products.map((product) => (
                     <li key={product.name}>
                         <article>
@@ -59,7 +61,7 @@ export function ProductsSection() {
                 ))}
             </ul>
 
-            <p>
+            <p className="home-rule">
                 Se é um produto criado pela YA LABS, mas com identidade própria, não precisa usar prefixo YA.
             </p>
         </section>
