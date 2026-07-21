@@ -22,6 +22,9 @@ export function YahubCentralSection() {
         <section id="yahub" aria-labelledby="yahub-title">
             <h2 id="yahub-title">YAHub: a porta de entrada da YA LABS</h2>
             <p>
+                Depois de entender a YA LABS, o ecossistema, o fluxo e os produtos, tudo se conecta no YAHub.
+            </p>
+            <p>
                 YAHub conecta pessoas, projetos e conhecimento. Centralizamos projetos, membros, documentação e
                 atividade em um só lugar.
             </p>

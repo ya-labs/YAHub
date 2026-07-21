@@ -21,6 +21,7 @@ export function AboutSection() {
     return (
         <section id="organizacao" aria-labelledby="organizacao-title">
             <p>ya@hub:~$ sobre</p>
+            <p>ya@hub:~$ áreas</p>
             <h2 id="organizacao-title">Construímos como laboratório.</h2>
             <p>
                 YA LABS é um laboratório independente de software. Construímos, automatizamos e documentamos soluções
@@ -40,6 +41,17 @@ export function AboutSection() {
                 <p>nossa missão:</p>
                 <p>simplificar o complexo. potencializar pessoas.</p>
             </aside>
+
+            <dl aria-label="Separação conceitual da Home">
+                <div>
+                    <dt>YA LABS</dt>
+                    <dd>organização, laboratório e ecossistema apresentado pelo portal.</dd>
+                </div>
+                <div>
+                    <dt>YAHub</dt>
+                    <dd>portal, interface e central de acesso da organização.</dd>
+                </div>
+            </dl>
         </section>
     );
 }

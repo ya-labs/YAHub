@@ -23,6 +23,10 @@ export function EcosystemSection() {
             <p>ya@hub:~$ ecossistema ya</p>
             <h2 id="ecossistema-title">Ecossistema YA</h2>
             <p>As ferramentas que mantêm a YA LABS em movimento.</p>
+            <p>
+                O Ecossistema YA reúne ferramentas oficiais usadas para organizar, operar, documentar, automatizar e
+                visualizar a própria YA LABS.
+            </p>
 
             <ul>
                 {ecosystemModules.map((module) => (
@@ -32,6 +36,13 @@ export function EcosystemSection() {
                     </li>
                 ))}
             </ul>
+
+            <pre aria-label="Status do Ecossistema YA">{`> conectando ecossistema...
+> mapeando módulos...
+> estruturando relações...
+> sincronizando ferramentas...
+
+> pronto!`}</pre>
 
             <p>Se serve para organizar, operar, documentar ou automatizar a YA LABS, pode usar prefixo YA.</p>
         </section>
