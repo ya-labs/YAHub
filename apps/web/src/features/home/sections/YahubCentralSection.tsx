@@ -21,17 +21,19 @@ const yahubAreas = [
 
 export function YahubCentralSection() {
     return (
-        <section id="yahub" aria-labelledby="yahub-title">
-            <h2 id="yahub-title">YAHub: a porta de entrada da YA LABS</h2>
-            <p>
-                Depois de entender a YA LABS, o ecossistema, o fluxo e os produtos, tudo se conecta no YAHub.
-            </p>
-            <p>
-                YAHub conecta pessoas, projetos e conhecimento. Centralizamos projetos, membros, documentação e
-                atividade em um só lugar.
-            </p>
+        <section className="home-section home-section--central" id="yahub" aria-labelledby="yahub-title">
+            <div className="home-section__intro">
+                <h2 id="yahub-title">YAHub: a porta de entrada da YA LABS</h2>
+                <p>
+                    Depois de entender a YA LABS, o ecossistema, o fluxo e os produtos, tudo se conecta no YAHub.
+                </p>
+                <p>
+                    YAHub conecta pessoas, projetos e conhecimento. Centralizamos projetos, membros, documentação e
+                    atividade em um só lugar.
+                </p>
+            </div>
 
-            <ul aria-label="Áreas conectadas pelo YAHub">
+            <ul className="home-central-grid" aria-label="Áreas conectadas pelo YAHub">
                 {yahubAreas.map((area) => (
                     <li key={area.title}>
                         <h3>{area.title}</h3>
@@ -40,7 +42,7 @@ export function YahubCentralSection() {
                 ))}
             </ul>
 
-            <nav aria-label="Ações da Central YAHub">
+            <nav className="home-central-actions" aria-label="Ações da Central YAHub">
                 <Link to="/portal">Acessar o portal</Link>
                 <Link to="/portal/projetos">Ver projetos</Link>
                 <Link to="/portal/docs">Acessar documentação</Link>
