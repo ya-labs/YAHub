@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 
 type HomeShellProps = {
     children: ReactNode;
@@ -7,18 +8,24 @@ type HomeShellProps = {
 export function HomeShell({ children }: HomeShellProps) {
     return (
         <div>
+            <a href="#conteudo-principal">Pular para o conteúdo principal</a>
+
             <header>
-                <strong>YAHub</strong>
+                <strong>YA LABS</strong>
 
                 <nav aria-label="Navegação da Home">
-                    <a href="#sobre">Sobre</a>
-                    <a href="#projetos">Projetos</a>
-                    <a href="#membros">Membros</a>
-                    <a href="#contato">Contato</a>
+                    <a href="#home">Home</a>
+                    <a href="#organizacao">Organização</a>
+                    <a href="#ecossistema">Ecossistema YA</a>
+                    <a href="#fluxo">Fluxo</a>
+                    <a href="#produtos">Produtos</a>
+                    <a href="#yahub">YAHub</a>
                 </nav>
+
+                <Link to="/portal">acessar portal</Link>
             </header>
 
-            <main>{children}</main>
+            <main id="conteudo-principal">{children}</main>
 
             <footer>
                 <small>YA LABS</small>
