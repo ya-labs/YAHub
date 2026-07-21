@@ -132,7 +132,7 @@ footer {
 
 .portal-nav__link:hover,
 .portal-nav__link--active {
-    background: var(--yahub-color-brand);
+    background: var(--yahub-color-brand-solid);
     color: var(--yahub-color-on-brand);
 }
 
@@ -147,7 +147,7 @@ footer {
 
 .portal-hero {
     align-items: stretch;
-    background: var(--yahub-color-brand);
+    background: var(--yahub-color-brand-solid);
     border-radius: var(--yahub-radius-md);
     color: var(--yahub-color-on-brand);
     display: grid;

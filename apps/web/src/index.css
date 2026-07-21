@@ -32,6 +32,8 @@
     --yahub-color-border-emphasis: #94a3b8;
     --yahub-color-brand: #0a1a5e;
     --yahub-color-brand-hover: #142a83;
+    --yahub-color-brand-solid: #0a1a5e;
+    --yahub-color-brand-solid-hover: #142a83;
     --yahub-color-brand-subtle: #eef4ff;
     --yahub-color-on-brand: #ffffff;
     --yahub-color-on-brand-soft: #dbeafe;
@@ -73,8 +75,10 @@
         --yahub-color-border-emphasis: #64748b;
         --yahub-color-brand: #8fb4ff;
         --yahub-color-brand-hover: #b7ccff;
+        --yahub-color-brand-solid: #172554;
+        --yahub-color-brand-solid-hover: #1e3a8a;
         --yahub-color-brand-subtle: #18264a;
-        --yahub-color-on-brand: #061126;
+        --yahub-color-on-brand: #f8fafc;
         --yahub-color-on-brand-soft: #dbeafe;
         --yahub-color-link: #93c5fd;
         --yahub-color-accent: #4ade80;
