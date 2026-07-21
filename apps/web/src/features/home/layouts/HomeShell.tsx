@@ -8,6 +8,8 @@ type HomeShellProps = {
 export function HomeShell({ children }: HomeShellProps) {
     return (
         <div>
+            <a href="#conteudo-principal">Pular para o conteúdo principal</a>
+
             <header>
                 <strong>YA LABS</strong>
 
@@ -23,7 +25,7 @@ export function HomeShell({ children }: HomeShellProps) {
                 <Link to="/portal">acessar portal</Link>
             </header>
 
-            <main>{children}</main>
+            <main id="conteudo-principal">{children}</main>
 
             <footer>
                 <small>YA LABS</small>

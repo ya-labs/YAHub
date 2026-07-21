@@ -16,7 +16,7 @@ export function BuildFlowSection() {
                 impacto real.
             </p>
 
-            <ol>
+            <ol aria-label="Etapas do fluxo de construção da YA LABS">
                 {buildSteps.map((step) => (
                     <li key={step.title}>
                         <h3>{step.title}</h3>
@@ -25,7 +25,7 @@ export function BuildFlowSection() {
                 ))}
             </ol>
 
-            <dl>
+            <dl aria-label="Princípios do fluxo de construção">
                 <div>
                     <dt>status</dt>
                     <dd>contínuo</dd>

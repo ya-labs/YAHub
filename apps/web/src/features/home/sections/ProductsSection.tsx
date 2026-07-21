@@ -46,7 +46,7 @@ export function ProductsSection() {
                 automação e escala.
             </p>
 
-            <ul>
+            <ul aria-label="Produtos da YA LABS">
                 {products.map((product) => (
                     <li key={product.name}>
                         <article>

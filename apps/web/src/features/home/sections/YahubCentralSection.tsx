@@ -31,7 +31,7 @@ export function YahubCentralSection() {
                 atividade em um só lugar.
             </p>
 
-            <ul>
+            <ul aria-label="Áreas conectadas pelo YAHub">
                 {yahubAreas.map((area) => (
                     <li key={area.title}>
                         <h3>{area.title}</h3>

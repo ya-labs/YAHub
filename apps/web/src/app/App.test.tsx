@@ -24,8 +24,16 @@ describe('App', () => {
         expect(await screen.findByRole('heading', { level: 1, name: 'YA LABS' })).toBeInTheDocument();
         expect(screen.getByRole('heading', { name: /construímos como laboratório/i })).toBeInTheDocument();
         expect(screen.getAllByRole('link', { name: /acessar portal/i })[0]).toHaveAttribute('href', '/portal');
+        expect(screen.getByRole('link', { name: /pular para o conteúdo principal/i })).toHaveAttribute(
+            'href',
+            '#conteudo-principal',
+        );
+        expect(screen.getByRole('main')).toHaveAttribute('id', 'conteudo-principal');
         expect(screen.getByRole('link', { name: 'Ecossistema YA' })).toHaveAttribute('href', '#ecossistema');
         expect(screen.getByRole('link', { name: 'Produtos' })).toHaveAttribute('href', '#produtos');
+        expect(screen.getByRole('list', { name: /áreas de atuação/i })).toBeInTheDocument();
+        expect(screen.getByRole('list', { name: /módulos do ecossistema ya/i })).toBeInTheDocument();
+        expect(screen.getByRole('list', { name: /produtos da ya labs/i })).toBeInTheDocument();
     });
 
     it('renderiza a dashboard inicial do portal público', async () => {

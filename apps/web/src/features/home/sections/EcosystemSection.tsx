@@ -28,7 +28,7 @@ export function EcosystemSection() {
                 visualizar a própria YA LABS.
             </p>
 
-            <ul>
+            <ul aria-label="Módulos do Ecossistema YA">
                 {ecosystemModules.map((module) => (
                     <li key={module.name}>
                         <h3>{module.name}</h3>

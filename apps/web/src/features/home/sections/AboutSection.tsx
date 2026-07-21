@@ -28,7 +28,7 @@ export function AboutSection() {
                 para resolver problemas reais com clareza, eficiência e evolução contínua.
             </p>
 
-            <ul>
+            <ul aria-label="Áreas de atuação da YA LABS">
                 {pillars.map((pillar) => (
                     <li key={pillar.title}>
                         <h3>{pillar.title}</h3>
