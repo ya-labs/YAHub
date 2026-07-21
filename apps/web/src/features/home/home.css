@@ -322,14 +322,6 @@
     justify-items: center;
 }
 
-.home-hero__scroll span:last-child::before {
-    background: currentColor;
-    content: '';
-    height: 2.5rem;
-    margin-bottom: -0.2rem;
-    width: 1px;
-}
-
 .home-hero__orbit {
     border: 1px solid rgb(216 173 77 / 13%);
     border-radius: 50%;
@@ -1610,10 +1602,6 @@
 
     .home-hero__scroll span:last-child {
         font-size: 0.75rem;
-    }
-
-    .home-hero__scroll span:last-child::before {
-        height: 1.5rem;
     }
 
     .home-hero__orbit--one {
