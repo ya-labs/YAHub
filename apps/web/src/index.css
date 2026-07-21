@@ -1,0 +1,98 @@
+:root {
+    color-scheme: light;
+
+    --yahub-font-family:
+        Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    --yahub-space-1: 0.25rem;
+    --yahub-space-2: 0.5rem;
+    --yahub-space-3: 0.75rem;
+    --yahub-space-4: 1rem;
+    --yahub-space-5: 1.25rem;
+    --yahub-space-6: 1.5rem;
+    --yahub-space-8: 2rem;
+    --yahub-space-10: 2.5rem;
+    --yahub-space-12: 3rem;
+
+    --yahub-radius-sm: 0.35rem;
+    --yahub-radius-md: 0.5rem;
+    --yahub-radius-pill: 999px;
+
+    --yahub-color-canvas: #f7f8fb;
+    --yahub-color-surface: #ffffff;
+    --yahub-color-surface-muted: #f8fafc;
+    --yahub-color-surface-raised: #ffffff;
+    --yahub-color-heading: #0f172a;
+    --yahub-color-text: #111827;
+    --yahub-color-text-soft: #334155;
+    --yahub-color-text-secondary: #475569;
+    --yahub-color-text-muted: #64748b;
+    --yahub-color-border: #d9deea;
+    --yahub-color-border-strong: #cbd5e1;
+    --yahub-color-border-emphasis: #94a3b8;
+    --yahub-color-brand: #0a1a5e;
+    --yahub-color-brand-hover: #142a83;
+    --yahub-color-brand-subtle: #eef4ff;
+    --yahub-color-on-brand: #ffffff;
+    --yahub-color-on-brand-soft: #dbeafe;
+    --yahub-color-link: #2563ff;
+    --yahub-color-accent: #22c55e;
+    --yahub-color-accent-hover: #16a34a;
+    --yahub-color-accent-contrast: #052e16;
+    --yahub-color-danger-contrast: #ffffff;
+    --yahub-color-success-surface: #ecfdf3;
+    --yahub-color-success-border: #bbf7d0;
+    --yahub-color-success-text: #166534;
+    --yahub-color-info-surface: #eff6ff;
+    --yahub-color-info-border: #bfdbfe;
+    --yahub-color-info-text: #1d4ed8;
+    --yahub-color-danger: #dc2626;
+    --yahub-color-danger-surface: #fef2f2;
+    --yahub-color-danger-border: #fecaca;
+    --yahub-color-danger-text: #991b1b;
+    --yahub-color-overlay: rgb(15 23 42 / 42%);
+    --yahub-shadow-dialog: 0 18px 45px rgb(15 23 42 / 20%);
+    --yahub-focus-ring: 0 0 0 3px rgb(37 99 255 / 28%);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        color-scheme: dark;
+
+        --yahub-color-canvas: #0b1020;
+        --yahub-color-surface: #121a2d;
+        --yahub-color-surface-muted: #0f172a;
+        --yahub-color-surface-raised: #172033;
+        --yahub-color-heading: #f8fafc;
+        --yahub-color-text: #e5e7eb;
+        --yahub-color-text-soft: #cbd5e1;
+        --yahub-color-text-secondary: #bac7d8;
+        --yahub-color-text-muted: #94a3b8;
+        --yahub-color-border: #24304a;
+        --yahub-color-border-strong: #334155;
+        --yahub-color-border-emphasis: #64748b;
+        --yahub-color-brand: #8fb4ff;
+        --yahub-color-brand-hover: #b7ccff;
+        --yahub-color-brand-subtle: #18264a;
+        --yahub-color-on-brand: #061126;
+        --yahub-color-on-brand-soft: #dbeafe;
+        --yahub-color-link: #93c5fd;
+        --yahub-color-accent: #4ade80;
+        --yahub-color-accent-hover: #86efac;
+        --yahub-color-accent-contrast: #052e16;
+        --yahub-color-danger-contrast: #450a0a;
+        --yahub-color-success-surface: #052e1a;
+        --yahub-color-success-border: #166534;
+        --yahub-color-success-text: #86efac;
+        --yahub-color-info-surface: #0b2a55;
+        --yahub-color-info-border: #1d4ed8;
+        --yahub-color-info-text: #bfdbfe;
+        --yahub-color-danger: #f87171;
+        --yahub-color-danger-surface: #450a0a;
+        --yahub-color-danger-border: #991b1b;
+        --yahub-color-danger-text: #fecaca;
+        --yahub-color-overlay: rgb(2 6 23 / 68%);
+        --yahub-shadow-dialog: 0 18px 45px rgb(0 0 0 / 36%);
+        --yahub-focus-ring: 0 0 0 3px rgb(147 197 253 / 32%);
+    }
+}
