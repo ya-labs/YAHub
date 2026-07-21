@@ -5,6 +5,7 @@ import { HeroSection } from '../sections/HeroSection';
 import { ProductsSection } from '../sections/ProductsSection';
 import { YahubCentralSection } from '../sections/YahubCentralSection';
 import { HomeShell } from '../layouts/HomeShell';
+import '../home.css';
 
 export function HomePage() {
     return (

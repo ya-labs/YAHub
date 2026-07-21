@@ -19,42 +19,47 @@ export function AboutSection() {
     ];
 
     return (
-        <section className="home-section home-section--about" id="organizacao" aria-labelledby="organizacao-title">
-            <div className="home-section__intro">
-                <div className="home-terminal-lines" aria-label="Comandos sobre a organização">
-                    <p>ya@hub:~$ sobre</p>
+        <section className="home-chapter home-about" id="organizacao" aria-labelledby="organizacao-title">
+            <div className="home-chapter__frame home-about__frame">
+                <div className="home-about__intro">
+                    <p className="home-command">ya@hub:~$ sobre</p>
+                    <h2 id="organizacao-title">Construímos como laboratório.</h2>
+                    <p>
+                        YA LABS é um laboratório independente de software. Construímos, automatizamos e documentamos
+                        soluções para resolver problemas reais com clareza, eficiência e evolução contínua.
+                    </p>
                 </div>
-                <h2 id="organizacao-title">Construímos como laboratório.</h2>
-                <p>
-                    YA LABS é um laboratório independente de software. Construímos, automatizamos e documentamos
-                    soluções para resolver problemas reais com clareza, eficiência e evolução contínua.
-                </p>
+
+                <ul className="home-about__pillars" aria-label="Áreas de atuação da YA LABS">
+                    {pillars.map((pillar) => (
+                        <li key={pillar.title}>
+                            <span className="home-about__pulse" aria-hidden="true" />
+                            <h3>{pillar.title}</h3>
+                            <p>{pillar.description}</p>
+                        </li>
+                    ))}
+                </ul>
+
+                <aside className="home-about__mission" aria-label="Missão da YA LABS">
+                    <p>nossa missão:</p>
+                    <p>
+                        simplificar o complexo.
+                        <br />
+                        potencializar pessoas.
+                    </p>
+                </aside>
+
+                <dl className="home-about__concepts" aria-label="Separação conceitual da Home">
+                    <div>
+                        <dt>YA LABS</dt>
+                        <dd>organização, laboratório e ecossistema apresentado pelo portal.</dd>
+                    </div>
+                    <div>
+                        <dt>YAHub</dt>
+                        <dd>portal, interface e central de acesso da organização.</dd>
+                    </div>
+                </dl>
             </div>
-
-            <ul className="home-pillar-grid" aria-label="Áreas de atuação da YA LABS">
-                {pillars.map((pillar) => (
-                    <li key={pillar.title}>
-                        <h3>{pillar.title}</h3>
-                        <p>{pillar.description}</p>
-                    </li>
-                ))}
-            </ul>
-
-            <aside className="home-mission" aria-label="Missão da YA LABS">
-                <p>nossa missão:</p>
-                <p>simplificar o complexo. potencializar pessoas.</p>
-            </aside>
-
-            <dl className="home-concept-list" aria-label="Separação conceitual da Home">
-                <div>
-                    <dt>YA LABS</dt>
-                    <dd>organização, laboratório e ecossistema apresentado pelo portal.</dd>
-                </div>
-                <div>
-                    <dt>YAHub</dt>
-                    <dd>portal, interface e central de acesso da organização.</dd>
-                </div>
-            </dl>
         </section>
     );
 }
