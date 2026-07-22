@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+import { ChapterSignal } from '../components/ChapterSignal';
+
 const yahubAreas = [
     {
         title: 'Explore projetos',
@@ -26,6 +28,7 @@ const yahubAreas = [
 export function YahubCentralSection() {
     return (
         <section className="home-chapter home-central" id="yahub" aria-labelledby="yahub-title">
+            <ChapterSignal variant="blue" />
             <div className="home-chapter__frame home-central__frame">
                 <div className="home-central__intro">
                     <p className="home-command">ya@hub:~$ open portal</p>

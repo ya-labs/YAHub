@@ -1,3 +1,5 @@
+import { ChapterSignal } from '../components/ChapterSignal';
+
 const products = [
     {
         name: 'SVNFlow',
@@ -52,6 +54,7 @@ const products = [
 export function ProductsSection() {
     return (
         <section className="home-chapter home-portfolio" id="produtos" aria-labelledby="produtos-title">
+            <ChapterSignal variant="blue" />
             <div className="home-chapter__frame home-products__frame">
                 <div className="home-products__intro">
                     <p className="home-command">ys@hub:~$ products --list</p>

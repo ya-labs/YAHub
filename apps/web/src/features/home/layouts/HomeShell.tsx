@@ -10,6 +10,12 @@ export function HomeShell({ children }: HomeShellProps) {
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
+        document.documentElement.classList.add('yahub-home-active');
+
+        return () => document.documentElement.classList.remove('yahub-home-active');
+    }, []);
+
+    useEffect(() => {
         const updateScrollState = () => setIsScrolled(window.scrollY > 24);
 
         updateScrollState();
@@ -25,7 +31,7 @@ export function HomeShell({ children }: HomeShellProps) {
             ecossistema: 'ecossistema',
             fluxo: 'fluxo',
             produtos: 'produtos',
-            yahub: 'produtos',
+            yahub: 'yahub',
         };
         const observer = new IntersectionObserver(
             (entries) => {
@@ -47,6 +53,12 @@ export function HomeShell({ children }: HomeShellProps) {
             observer.disconnect();
         };
     }, []);
+
+    useEffect(() => {
+        document.querySelectorAll<HTMLElement>('.home-main > section[id]').forEach((section) => {
+            section.dataset.active = section.id === activeSection ? 'true' : 'false';
+        });
+    }, [activeSection]);
 
     return (
         <div className="home-shell">
@@ -95,6 +107,14 @@ export function HomeShell({ children }: HomeShellProps) {
                         aria-current={activeSection === 'produtos' ? 'location' : undefined}
                     >
                         produtos
+                    </a>
+                    <a
+                        className="home-nav__link"
+                        href="#yahub"
+                        aria-label="Central YAHub"
+                        aria-current={activeSection === 'yahub' ? 'location' : undefined}
+                    >
+                        yahub
                     </a>
                 </nav>
 

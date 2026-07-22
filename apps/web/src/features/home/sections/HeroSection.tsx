@@ -14,6 +14,8 @@ export function HeroSection() {
 
         event.currentTarget.style.setProperty('--hero-shift-x', `${((x - 0.5) * -14).toFixed(2)}px`);
         event.currentTarget.style.setProperty('--hero-shift-y', `${((y - 0.5) * -10).toFixed(2)}px`);
+        event.currentTarget.style.setProperty('--hero-orbit-x', `${((x - 0.5) * 8).toFixed(2)}px`);
+        event.currentTarget.style.setProperty('--hero-orbit-y', `${((y - 0.5) * 6).toFixed(2)}px`);
         event.currentTarget.style.setProperty('--hero-content-x', `${((x - 0.5) * 5).toFixed(2)}px`);
         event.currentTarget.style.setProperty('--hero-content-y', `${((y - 0.5) * 3).toFixed(2)}px`);
     };
@@ -21,6 +23,8 @@ export function HeroSection() {
     const resetPointerPosition = (event: ReactPointerEvent<HTMLElement>) => {
         event.currentTarget.style.setProperty('--hero-shift-x', '0px');
         event.currentTarget.style.setProperty('--hero-shift-y', '0px');
+        event.currentTarget.style.setProperty('--hero-orbit-x', '0px');
+        event.currentTarget.style.setProperty('--hero-orbit-y', '0px');
         event.currentTarget.style.setProperty('--hero-content-x', '0px');
         event.currentTarget.style.setProperty('--hero-content-y', '0px');
     };
@@ -35,12 +39,20 @@ export function HeroSection() {
         >
             <div className="home-hero__scene" aria-hidden="true">
                 <span className="home-hero__material" />
-                <span className="home-hero__orbit home-hero__orbit--one" />
-                <span className="home-hero__orbit home-hero__orbit--two" />
-                <span className="home-hero__orbit home-hero__orbit--three" />
-                <span className="home-hero__marker home-hero__marker--one" />
-                <span className="home-hero__marker home-hero__marker--two" />
-                <span className="home-hero__marker home-hero__marker--three" />
+                <span className="home-hero__grid" />
+                <div className="home-hero__orbit-field">
+                    <span className="home-hero__orbit home-hero__orbit--one" />
+                    <span className="home-hero__orbit home-hero__orbit--two" />
+                    <span className="home-hero__orbit home-hero__orbit--three" />
+                    <span className="home-hero__orbit home-hero__orbit--four" />
+                    <span className="home-hero__orbit home-hero__orbit--five" />
+                    <span className="home-hero__marker home-hero__marker--one" />
+                    <span className="home-hero__marker home-hero__marker--two" />
+                    <span className="home-hero__marker home-hero__marker--three" />
+                    <span className="home-hero__marker home-hero__marker--four" />
+                    <span className="home-hero__marker home-hero__marker--five" />
+                    <span className="home-hero__marker home-hero__marker--six" />
+                </div>
             </div>
 
             <div className="home-hero__content">

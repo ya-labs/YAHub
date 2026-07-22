@@ -1,3 +1,5 @@
+import { ChapterSignal } from '../components/ChapterSignal';
+
 const buildSteps = [
     {
         index: '01',
@@ -46,6 +48,7 @@ const buildSteps = [
 export function BuildFlowSection() {
     return (
         <section className="home-chapter home-build" id="fluxo" aria-labelledby="fluxo-title">
+            <ChapterSignal variant="blue" />
             <div className="home-chapter__frame home-build__frame">
                 <header className="home-build__intro">
                     <div>

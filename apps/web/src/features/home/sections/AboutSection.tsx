@@ -1,3 +1,5 @@
+import { ChapterSignal } from '../components/ChapterSignal';
+
 export function AboutSection() {
     const pillars = [
         {
@@ -32,6 +34,7 @@ export function AboutSection() {
 
     return (
         <section className="home-chapter home-about" id="organizacao" aria-labelledby="organizacao-title">
+            <ChapterSignal variant="blue" />
             <div className="home-chapter__frame home-about__frame">
                 <header className="home-about__intro">
                     <div>

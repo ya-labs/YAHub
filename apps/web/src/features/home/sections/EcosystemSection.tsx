@@ -1,3 +1,5 @@
+import { ChapterSignal } from '../components/ChapterSignal';
+
 const ecosystemModules = [
     {
         name: 'YAHub',
@@ -28,6 +30,7 @@ const ecosystemModules = [
 export function EcosystemSection() {
     return (
         <section className="home-chapter home-ecosystem" id="ecossistema" aria-labelledby="ecossistema-title">
+            <ChapterSignal variant="orange" />
             <div className="home-chapter__frame home-ecosystem__frame">
                 <div className="home-ecosystem__intro">
                     <p className="home-command">ya@hub:~$ ecossistema ya</p>
