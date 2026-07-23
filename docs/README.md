@@ -68,6 +68,7 @@ Use o YABook como fonte para:
 - [Integrações futuras](planejamento-inicial/integracoes-futuras.md)
 - [Sessões de planejamento](planejamento-inicial/sessoes/)
     - [Protocolo de desenvolvimento delegado com IA](planejamento-inicial/sessoes/2026-07-10-protocolo-desenvolvimento-delegado-com-ia.md)
+    - [Redireção visual da Home](planejamento-inicial/sessoes/2026-07-22-redirecao-visual-home.md)
 
 ### Técnico
 
