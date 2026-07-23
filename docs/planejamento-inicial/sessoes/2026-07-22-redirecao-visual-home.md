@@ -175,6 +175,67 @@ Uma proposta de hero só estará pronta para validação se responder, com compo
 - Desenhar e validar a composição desktop e mobile no Figma antes do código.
 - Consolidar no `direcao-visual.md` somente as decisões que sobreviverem à validação.
 
+## Diagnóstico inicial das seções após a hero
+
+### Problema transversal: consistência sem ritmo
+
+As seções atuais usam repetidamente a mesma fórmula: comando técnico pequeno, título grande à esquerda, texto explicativo à direita e grade de cards abaixo. Ela mantém consistência superficial, mas não responde ao papel de cada capítulo da narrativa. O resultado é uma Home em que o leitor repete o mesmo movimento visual — ler o título, procurar explicação à direita e descer para cards — sem ser guiado por uma progressão.
+
+A harmonia desejada não é tornar todas as seções semelhantes. É fazer cada uma herdar a mesma gramática da Home e, ao mesmo tempo, cumprir uma função visual e informacional distinta.
+
+### 01. Sobre a YA LABS — entendimento direto
+
+**Estado atual:** `Construímos como laboratório.` funciona como ponto de partida, mas a seção distribui mensagens concorrentes: título, texto institucional à direita, missão em outro card grande e quatro princípios em cards menores. O texto de missão repete a intenção do conteúdo já apresentado e aumenta a sensação de slogans em vez de explicar a organização.
+
+**Direção a investigar:** uma apresentação curta, sincera e objetiva de quem é a YA LABS. A pessoa deve concluir rapidamente “entendi o que é esta organização e como ela trabalha”. O título pode permanecer, desde que seja acompanhado por uma explicação única e enxuta. Princípios só devem continuar se virarem suporte da experiência — não outro bloco de texto competindo por protagonismo.
+
+**Papel narrativo:** depois da presença da hero, dar significado à marca sem sobrecarregar a leitura.
+
+### 02. Ecossistema YA — descoberta guiada
+
+**Estado atual:** os projetos aparecem como nós distribuídos em um diagrama estático. O leitor precisa alternar entre título, texto, cards à esquerda e direita, terminal e ligações decorativas. YAHub recebe mais destaque, mas YABook, YAGit e YABot não têm uma apresentação equivalente nem uma sequência de descoberta clara.
+
+**Direção a investigar:** tratar o Ecossistema YA como uma experiência de exploração guiada. Uma navegação explícita — abas, trilho lateral ou controles horizontais — pode revelar uma ferramenta por vez, com contexto, função e caminho para conhecê-la no YAHub. Não deve ser um carrossel automático; a pessoa precisa controlar a mudança e poder navegar por teclado.
+
+**Papel narrativo:** mostrar que a YA LABS não é uma marca abstrata; ela se sustenta em ferramentas que organizam, documentam, automatizam e conectam o trabalho.
+
+### 03. Fluxo de construção — sequência legível
+
+**Estado atual:** a sequência `Ideia → Documentação → Issue → Branch → Pull Request → Release` está correta e representa o modo de trabalho real da YA LABS. Porém, sua divisão em cards reduz a percepção de continuidade e a ordem perde força visual quando os estágios ocupam linhas separadas.
+
+**Direção a investigar:** transformar o fluxo em uma trajetória contínua, com cada etapa revelada ou percorrida em ordem. A direção visual precisa comunicar passagem, transformação e rastreabilidade, sem recorrer a um painel de cards. A interação pode enriquecer a leitura, mas a sequência completa deve continuar clara sem depender dela.
+
+**Papel narrativo:** provar que a organização transforma intenção em entrega de maneira visível e disciplinada.
+
+### 04. Produtos — portfólio com identidades próprias
+
+**Estado atual:** a presença de cor por produto é uma boa decisão e comunica diversidade. Ainda assim, seis cards aparecem simultaneamente, dividindo a atenção e fazendo produtos muito distintos parecerem itens de uma mesma grade.
+
+**Direção a investigar:** apresentar cada produto com espaço e identidade próprios. A mecânica pode dialogar com a exploração do Ecossistema YA, mas a linguagem não deve ser idêntica: ecossistema representa ferramentas conectadas da organização; produtos representam criações diversas que nasceram dela. Uma galeria, trilho ou apresentação por produto pode dar foco a cada identidade, com navegação clara para a página correspondente no YAHub.
+
+**Papel narrativo:** demonstrar a variedade concreta de produtos que a YA LABS constrói, sem diluir a personalidade de cada um.
+
+### 05. YAHub — síntese e chamada para ação
+
+**Estado atual:** a composição de texto à esquerda e preview do portal à direita é a mais clara das seções atuais. Ela já estabelece que o YAHub é o lugar onde o ecossistema se encontra, mas o preview ainda é discreto demais para o encerramento da narrativa.
+
+**Direção a investigar:** manter o YAHub como desfecho, ampliando o sentido de central de acesso. O preview deve parecer uma janela real e mais impactante para o portal: projetos, pessoas, documentação e atividade convergem nele. A CTA precisa ser a consequência natural de toda a narrativa, não apenas mais um botão.
+
+**Papel narrativo:** concluir que, depois de conhecer organização, ferramentas, processo e produtos, a pessoa sabe onde explorar tudo: no YAHub.
+
+## Ritmo narrativo provisório da Home
+
+```text
+Hero            → presença e curiosidade
+Sobre           → entendimento direto
+Ecossistema YA  → descoberta guiada
+Fluxo           → processo e rastreabilidade
+Produtos        → diversidade e resultado concreto
+YAHub           → síntese e acesso
+```
+
+O objetivo é que a linguagem compartilhada — navy profundo, contraste controlado, marca, movimento e matéria visual — acompanhe todos os capítulos sem obrigar cada um a repetir a mesma grade, a mesma posição de texto ou os mesmos cards.
+
 ## Impacto esperado
 
 A Home deve deixar de parecer uma sequência de blocos visualmente bons, porém independentes. O objetivo é uma experiência institucional coesa, criativa e clara, em que a YA LABS seja percebida como uma organização técnica viva, confiável e memorável.
