@@ -106,6 +106,55 @@ A nova Home deve combinar três ambições sem tentar reproduzir uma referência
 
 O resultado desejado é uma experiência institucional criativa e tecnológica, mas clara. A sensação deve ser de uma organização que constrói, conecta e transforma ideias em produtos — não de uma marca de IA abstrata, uma landing page SaaS ou um dashboard público.
 
+## Referências principais para a nova hero
+
+As imagens `fase3design2.png` e `fase3design1.png` passam a ser as referências principais da fase de composição. Elas foram geradas a partir da discussão desta sessão e representam melhor a combinação procurada entre elegância, presença de marca e continuidade no scroll.
+
+### `fase3design2.png` — estrutura e elegância
+
+Esta referência concentra a direção estrutural mais forte:
+
+- primeira dobra limpa, escura e focada em `YA LABS`;
+- marca, slogan, navegação e CTA com hierarquia clara;
+- campo visual à direita como contrapeso da assinatura à esquerda;
+- hero que continua depois da viewport, abrindo espaço para um primeiro capítulo narrativo;
+- `A` monumental usado como arquitetura visual, com respiro e composição organizada.
+
+Ela é a base recomendada para organizar a abertura e a transição inicial da Home.
+
+### `fase3design1.png` — marca como matéria visual
+
+Esta referência contém o gesto visual de maior impacto da discussão:
+
+- o grande `YA` deixa de ser apenas logo e se torna uma estrutura que revela a matéria visual;
+- `LABS` aparece em escala monumental e baixa opacidade como continuação espacial da marca;
+- textura e elementos da cena atravessam ou aparecem dentro das formas tipográficas;
+- a marca ganha força semelhante a uma camada de composição, e não apenas a um título.
+
+O mockup completo é mais denso e perde parte da hierarquia da outra proposta. Não deve ser copiado integralmente. O grande `YA / LABS`, porém, é uma referência visual prioritária e pode se tornar o momento de transformação do primeiro scroll.
+
+### Síntese a investigar no protótipo
+
+O caminho preferencial é combinar os dois papéis, sem tentar fundir todos os elementos de uma vez:
+
+```text
+1ª dobra: estrutura, respiro e clareza de fase3design2.
+↓
+Primeiro scroll: grande YA como máscara, janela ou arquitetura visual, inspirado em fase3design1.
+↓
+Transição: LABS monumental e sutil como limiar para o próximo capítulo da Home.
+```
+
+Essa síntese ainda é uma hipótese de design. A validação deve ocorrer no Figma, em desktop e mobile, antes de alterar o código ou consolidar a direção em `direcao-visual.md`.
+
+### Preferência atual
+
+No encerramento desta investigação, `fase3design2.png` é a referência-base preferida para a hero. Ela orienta a próxima composição por sua clareza, elegância e continuidade após a viewport. O uso monumental de `YA / LABS` de `fase3design1.png` permanece como possibilidade de refinamento para um momento específico do scroll, sem substituir a estrutura-base.
+
+## Encerramento da investigação da hero
+
+A investigação conceitual da hero está encerrada nesta sessão. Não é necessário gerar novas imagens por prompt para continuar. As duas referências principais, os princípios, os critérios e a síntese acima são suficientes para iniciar a composição visual controlada.
+
 ## Critérios para a próxima proposta de design
 
 Uma proposta de hero só estará pronta para validação se responder, com composição desktop e mobile, a todos os pontos abaixo:
