@@ -326,6 +326,30 @@ Para a YA LABS, a elegância não dependerá de gradientes decorativos. A base d
 
 Profundidade pode vir de contraste, áreas sólidas sobrepostas, transparência controlada, recortes, textura material e luz localizada. Isso é diferente de preencher superfícies com gradientes para criar interesse. Gradientes de texto e fundos decorativos devem ser evitados.
 
+## Referência para harmonia narrativa: Railway
+
+O Railway demonstra a forma mais forte de criar continuidade entre capítulos diferentes: uma metáfora estrutural acompanha a página inteira. O trilho, os marcadores de progresso e o trem conectam apresentações, interfaces, provas e transições sem exigir que todos os blocos tenham o mesmo layout. Cada capítulo tem sua própria cena, mas todos pertencem à mesma viagem.
+
+### Princípio aplicável
+
+A Home do YAHub precisa encontrar um elemento de continuidade próprio — uma regra espacial, material ou de transformação que acompanhe a narrativa e ajude a pessoa a perceber progresso. Esse elemento não deve copiar trem, trilho, linha vertical ou a metáfora de infraestrutura do Railway.
+
+Para ser útil, o elemento de continuidade precisa cumprir mais de uma função:
+
+- ligar visualmente os capítulos da página;
+- sinalizar mudança ou progresso sem substituir a navegação normal;
+- reforçar a identidade da YA LABS;
+- permitir que cada seção mantenha uma composição própria;
+- ganhar ou perder intensidade conforme a narrativa avança.
+
+### Cuidado de direção
+
+Uma linha decorativa isolada não resolve a harmonia; esse foi um dos problemas da composição anterior da hero. A continuidade só será adotada se nascer de uma metáfora e puder aparecer de maneira consistente em marca, movimento, conteúdo e transição. A definição concreta desse recurso continua em aberto para o protótipo.
+
+### Aplicação conceitual
+
+O futuro recurso de continuidade pode atravessar os capítulos sem ser igualmente visível em todos eles: surgir como transformação da marca na abertura, orientar a descoberta do Ecossistema, tornar a sequência do Fluxo legível, conectar a diversidade dos Produtos e culminar no YAHub como central de acesso. Essa progressão é mais importante que replicar a aparência do Railway ou suas interfaces de produto.
+
 ## Impacto esperado
 
 A Home deve deixar de parecer uma sequência de blocos visualmente bons, porém independentes. O objetivo é uma experiência institucional coesa, criativa e clara, em que a YA LABS seja percebida como uma organização técnica viva, confiável e memorável.
