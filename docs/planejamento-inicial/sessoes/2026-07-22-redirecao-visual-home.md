@@ -406,6 +406,24 @@ Esse raciocínio reforça a revisão do conteúdo atual do YAHub: menos slogans 
 
 A paleta quente, o laranja, as grades expansivas e a linguagem comercial do Zapier não pertencem automaticamente à YA LABS. A adaptação deve preservar a base navy, off-white, dourado e cores próprias de produtos já definida nesta sessão. O aprendizado é de contraste intencional e hierarquia informacional, não de identidade visual.
 
+## Hipótese para o encerramento: footer como assinatura de marca
+
+O footer é a última impressão da Home e pode ser mais que uma área de links. A referência de `fase3design1.png` sugere um uso mais adequado para o gesto monumental de marca: `YA` em escala dominante, com `LABS` abaixo, como fechamento da narrativa — sem os textos explicativos, rótulos e informações laterais presentes no mockup.
+
+### Papel na narrativa
+
+Depois que o YAHub conclui a história da organização e oferece o acesso ao portal, o footer pode devolver a pessoa à identidade que iniciou a experiência. A marca em grande escala deixa de competir com a leitura das seções e passa a funcionar como assinatura final: uma conclusão visual, silenciosa e memorável.
+
+### Direção a validar
+
+- `YA` monumental como principal gesto gráfico, com `LABS` em uma segunda linha ou plano;
+- uso opcional da matéria visual aprovada para a Home dentro ou ao redor da marca, somente se preservar legibilidade e unidade;
+- sem repetir slogans, descrições institucionais ou textos decorativos do mockup de referência;
+- informações funcionais de footer — navegação essencial, contato, direitos e acessibilidade — continuam disponíveis, porém em uma camada discreta que não disputa com a assinatura;
+- a versão mobile deve manter reconhecimento imediato sem reduzir a marca a uma textura ilegível.
+
+Essa proposta reutiliza o potencial visual de `fase3design1.png` no lugar em que ele agrega mais valor: o desfecho. A composição final continua dependente da matéria visual e da direção de footer que forem validadas no protótipo.
+
 ## Impacto esperado
 
 A Home deve deixar de parecer uma sequência de blocos visualmente bons, porém independentes. O objetivo é uma experiência institucional coesa, criativa e clara, em que a YA LABS seja percebida como uma organização técnica viva, confiável e memorável.
