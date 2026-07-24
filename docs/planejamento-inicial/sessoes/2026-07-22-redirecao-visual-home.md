@@ -424,6 +424,22 @@ Depois que o YAHub conclui a história da organização e oferece o acesso ao po
 
 Essa proposta reutiliza o potencial visual de `fase3design1.png` no lugar em que ele agrega mais valor: o desfecho. A composição final continua dependente da matéria visual e da direção de footer que forem validadas no protótipo.
 
+## Sistema visual transversal em definição
+
+### Sensação central confirmada
+
+A Home deve fazer a YA LABS parecer uma organização **criativa, inovadora, séria e técnica**: um laboratório capaz de produzir coisas muito diferentes com alto nível de execução. Modernidade e elegância não são enfeites; são a percepção de que a organização experimenta com intenção e entrega com qualidade.
+
+Essa direção estabelece uma tensão que a composição precisa sustentar:
+
+- criatividade sem excesso de efeito, aleatoriedade ou estética de template;
+- inovação sem tom abstrato, críptico ou genérico de IA/Web3;
+- seriedade técnica sem aparência de dashboard frio ou instituição burocrática;
+- elegância sem reduzir a marca a minimalismo vazio;
+- diversidade de produtos sem perda de coerência institucional.
+
+Em termos de linguagem visual, o princípio é **criatividade com rigor**. A página deve permitir gestos autorais, matéria e transformação, mas cada um precisa obedecer a uma estrutura clara, tipografia precisa, informação bem editada e acabamento consistente.
+
 ## Impacto esperado
 
 A Home deve deixar de parecer uma sequência de blocos visualmente bons, porém independentes. O objetivo é uma experiência institucional coesa, criativa e clara, em que a YA LABS seja percebida como uma organização técnica viva, confiável e memorável.
