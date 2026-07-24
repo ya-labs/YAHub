@@ -236,6 +236,96 @@ YAHub           → síntese e acesso
 
 O objetivo é que a linguagem compartilhada — navy profundo, contraste controlado, marca, movimento e matéria visual — acompanhe todos os capítulos sem obrigar cada um a repetir a mesma grade, a mesma posição de texto ou os mesmos cards.
 
+## Referência para as seções: Raycast
+
+O Raycast é uma referência importante para a evolução das seções porque preserva uma mesma atmosfera escura, navegação e acabamento, mas trata cada capítulo como uma demonstração visual diferente. Em vez de apresentar a mesma combinação de título, parágrafo e cards, ele alterna entre interface em foco, escolha guiada, galeria horizontal, composição tipográfica, ilustração técnica e CTA final.
+
+### Princípio aplicável
+
+**O texto explica; a cena prova.** Cada seção deve ter uma composição que torna sua ideia perceptível antes mesmo da leitura completa. A interação e a animação atualizam a cena conforme a pessoa avança, em vez de apenas decorar blocos de texto.
+
+### O que preservar da referência
+
+- Pouco texto por estado visual, com leitura guiada e objetiva.
+- Uma ideia por seção e uma demonstração visual correspondente.
+- Movimento que evidencia uma mudança de conteúdo ou foco.
+- Transições fluidas entre capítulos, mantendo fundo, contraste e ritmo comuns.
+- Elementos interativos controlados pela pessoa, como abas ou navegação horizontal, com alternativa clara para teclado e redução de movimento.
+
+### O que não copiar
+
+- A linguagem visual vermelha, os componentes de download e a interface do Raycast.
+- Screens de produto inventadas apenas para preencher composição.
+- Efeitos de entrada repetidos ou movimento sem conteúdo para revelar.
+
+### Aplicação inicial por capítulo
+
+| Capítulo YAHub | Princípio do Raycast reinterpretado |
+| --- | --- |
+| Sobre | Uma composição única que sustente uma explicação curta da organização, em vez de vários slogans e cards. |
+| Ecossistema YA | Navegação guiada por ferramenta, semelhante à galeria de extensões, mas com funções reais de YABook, YAGit, YABot e YAHub. |
+| Fluxo | Uma trajetória visual que atualize cada etapa na ordem `Ideia → Documentação → Issue → Branch → Pull Request → Release`. |
+| Produtos | Galeria ou apresentação focada por produto, para que cada identidade tenha uma cena própria. |
+| YAHub | Preview maior e mais vivo do portal como conclusão prática de toda a narrativa. |
+
+O Raycast reforça que a harmonia da Home deve vir da linguagem compartilhada e do encadeamento do scroll, não da repetição de layout. A execução futura precisa traduzir isso em elementos reais da YA LABS, sem reproduzir as telas ou a identidade visual da referência.
+
+## Referência para leitura e duração: Cleanmeter
+
+O Cleanmeter reforça duas decisões importantes para a Home. Primeiro, quando uma mensagem precisa ser lida, ela recebe uma cena limpa: texto, ritmo e espaço negativo, sem imagem ou card disputando a atenção. Segundo, a seção não é limitada à altura da viewport. O scroll é usado para completar frases, atualizar o contraste das palavras e introduzir imagens ou detalhes apenas quando passam a ter função explicativa.
+
+### Regra de duração das seções
+
+Uma ideia por seção não significa uma única tela por seção. A altura deve servir ao conteúdo e à transição:
+
+- capítulos de leitura podem ocupar mais de uma viewport e conduzir o texto progressivamente;
+- cenas demonstrativas podem se expandir conforme uma interface, imagem ou artefato real é apresentado;
+- momentos de passagem podem ser curtos e deixar espaço para respirar;
+- nenhuma seção deve ocupar altura fixa apenas para preencher a tela.
+
+### Aplicação em todas as seções após a hero
+
+Esta é uma regra da Home inteira, não apenas do Sobre. Cada capítulo deve escolher a duração, a densidade e o tipo de composição que melhor serve à própria ideia:
+
+- **Sobre:** leitura progressiva e objetiva, sem a divisão automática entre título à esquerda, explicação à direita e cards abaixo.
+- **Ecossistema YA:** descoberta guiada por ferramenta, com mudança controlada de foco e contexto.
+- **Fluxo:** sequência contínua que usa o scroll para tornar a passagem entre etapas perceptível.
+- **Produtos:** apresentação por identidade, com espaço de leitura e demonstração adequado a cada produto.
+- **YAHub:** aproximação progressiva do portal, para que a CTA seja resultado da narrativa.
+
+O movimento de preenchimento de texto, mudança de contraste, imagem, preview, rótulo e legenda deve complementar a leitura, não esconder conteúdo. A versão estática precisa permanecer legível; cor e animação são apoio de hierarquia, não a única forma de entender a mensagem.
+
+### Uso de imagens e artefatos
+
+Imagens, previews e elementos visuais devem aparecer quando provarem algo concreto. O Cleanmeter mostra configurações e monitoramento porque são o produto que sua mensagem descreve. Para a YA LABS, qualquer artefato apresentado precisa nascer de documentação, fluxo, projeto ou portal real — nunca de uma interface inventada para ocupar espaço.
+
+## Referência para interatividade e cor: Supabase
+
+O Supabase demonstra como concentrar informação sem despejá-la de uma vez. Abas, seletores e controles simples trocam o conteúdo principal, preservando uma hierarquia estável: a pessoa vê o estado atual, entende-o e escolhe quando explorar outro. O conteúdo não é escondido de forma opaca; ele é revelado gradualmente sob controle da pessoa.
+
+### Interatividade com propósito
+
+Esse princípio é aplicável às seções mais densas da Home:
+
+- **Ecossistema YA:** um seletor de ferramenta pode revelar contexto e artefatos reais de YABook, YAGit, YABot ou YAHub, um por vez.
+- **Produtos:** uma navegação de portfólio pode dar foco a um produto por estado, preservando sua cor e identidade sem mostrar todos como cards equivalentes.
+- **Fluxo:** os estágios podem assumir foco sequencial, com a trajetória e a explicação atualizadas conforme a pessoa explora ou rola.
+- **YAHub:** controles ou marcadores podem revelar dimensões reais do portal, como projetos, membros, documentação e atividade.
+
+Interatividade não deve bloquear a narrativa. A pessoa precisa conseguir continuar a leitura pelo scroll sem concluir controles, e toda troca de estado deve ter rótulo, foco de teclado e alternativa para `prefers-reduced-motion`.
+
+### Cor sólida e hierarquia
+
+Para a YA LABS, a elegância não dependerá de gradientes decorativos. A base deve usar cores sólidas e papéis estáveis:
+
+- navy profundo para fundo e continuidade entre capítulos;
+- off-white para conteúdo prioritário;
+- dourado para foco, ação, estado ativo e pontos de descoberta;
+- neutros escuros para níveis secundários;
+- cores próprias de produtos apenas quando comunicarem sua identidade dentro da seção de portfólio.
+
+Profundidade pode vir de contraste, áreas sólidas sobrepostas, transparência controlada, recortes, textura material e luz localizada. Isso é diferente de preencher superfícies com gradientes para criar interesse. Gradientes de texto e fundos decorativos devem ser evitados.
+
 ## Impacto esperado
 
 A Home deve deixar de parecer uma sequência de blocos visualmente bons, porém independentes. O objetivo é uma experiência institucional coesa, criativa e clara, em que a YA LABS seja percebida como uma organização técnica viva, confiável e memorável.
