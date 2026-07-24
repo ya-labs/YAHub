@@ -350,6 +350,37 @@ Uma linha decorativa isolada não resolve a harmonia; esse foi um dos problemas 
 
 O futuro recurso de continuidade pode atravessar os capítulos sem ser igualmente visível em todos eles: surgir como transformação da marca na abertura, orientar a descoberta do Ecossistema, tornar a sequência do Fluxo legível, conectar a diversidade dos Produtos e culminar no YAHub como central de acesso. Essa progressão é mais importante que replicar a aparência do Railway ou suas interfaces de produto.
 
+## Referência para capítulos imersivos: Ciridae
+
+O Ciridae confirma que uma Home pode alternar composições muito diferentes e ainda preservar unidade quando marca, tipografia, ritmo e transições são consistentes. Algumas cenas são atmosféricas e quase silenciosas; outras usam painéis, imagens ou contrastes de fundo. A variação não é aleatória: cada mudança dá ao conteúdo um novo enquadramento e prepara o capítulo seguinte.
+
+### Scroll como tempo de leitura
+
+Em determinados trechos, o Ciridae mantém a cena fixa durante alguns avanços do scroll enquanto muda o estado exibido. Esse comportamento não deve ser entendido como "prender o leitor", mas como reservar tempo para uma sequência que precisa ser percebida em etapas.
+
+Para a Home do YAHub, a implementação preferencial é uma **narrativa sticky por progresso de scroll**: o capítulo permanece visualmente ancorado por uma distância limitada e os estados avançam de forma clara. A página continua sendo uma página normal; não deve haver sequestro de roda do mouse, bloqueio artificial de rolagem ou exigência de que a pessoa conclua uma interação para seguir adiante.
+
+### Quando usar
+
+Esse recurso deve ser excepcional e ter conteúdo real para revelar. Possíveis capítulos adequados:
+
+- **Ecossistema YA:** cada avanço revela uma ferramenta e sua função dentro da organização.
+- **Fluxo:** os estágios `Ideia → Documentação → Issue → Branch → Pull Request → Release` surgem como uma sequência contínua, reforçando passagem e rastreabilidade.
+- **Produtos:** uma apresentação focada pode trocar contexto, identidade e artefato de um produto por vez.
+- **YAHub:** a central pode ser aproximada por camadas — projetos, pessoas, documentação e atividade — até culminar na CTA.
+
+O **Sobre** tende a pedir uma leitura mais livre e direta. Só deve ganhar um estado sticky se houver uma transformação visual que realmente ajude a explicar a organização, e não apenas para dar movimento a um texto curto.
+
+### Limites de experiência e implementação
+
+- Cada capítulo sticky precisa informar com clareza seu estado ativo e o que mudou.
+- A pessoa deve poder avançar, recuar, navegar por teclado e pular o capítulo sem ficar presa em uma sequência longa.
+- Em telas pequenas, o comportamento pode ser simplificado para conteúdo em fluxo normal ou controles explícitos; desktop e mobile não precisam ter a mesma coreografia.
+- `prefers-reduced-motion` deve preservar a ordem e todo o conteúdo sem animação dependente de scroll.
+- O sticky não substitui boa escrita: texto essencial nunca pode existir somente durante uma etapa animada.
+
+O critério é simples: se a cena não fica mais clara quando percorrida em etapas, ela não deve reter o scroll. O recurso existe para dar ritmo e foco à narrativa, não para tornar a navegação mais difícil.
+
 ## Impacto esperado
 
 A Home deve deixar de parecer uma sequência de blocos visualmente bons, porém independentes. O objetivo é uma experiência institucional coesa, criativa e clara, em que a YA LABS seja percebida como uma organização técnica viva, confiável e memorável.
