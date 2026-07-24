@@ -381,6 +381,31 @@ O **Sobre** tende a pedir uma leitura mais livre e direta. Só deve ganhar um es
 
 O critério é simples: se a cena não fica mais clara quando percorrida em etapas, ela não deve reter o scroll. O recurso existe para dar ritmo e foco à narrativa, não para tornar a navegação mais difícil.
 
+## Referência para contraste entre capítulos: Zapier
+
+O Zapier demonstra que unidade não exige repetição de superfície. Seus capítulos alternam fundos claros e escuros, escala tipográfica, densidade de informação, prova numérica, ilustração, módulos técnicos e chamadas para ação. Mesmo assim, a página continua reconhecível porque há disciplina de grade, tipografia, bordas, espaço e cor de destaque.
+
+### Princípio aplicável
+
+Na Home do YAHub, a harmonia deve vir da gramática comum — marca, tipografia, proporção, ritmo, cor de foco e elemento de continuidade — e não da obrigação de manter todo capítulo com o mesmo fundo navy e a mesma distribuição. Uma mudança de superfície pode marcar uma virada narrativa quando ela aumenta a clareza da mensagem.
+
+Isso abre espaço, por exemplo, para uma cena clara e silenciosa de leitura, uma passagem escura e imersiva de processo, uma cena material para produtos e um encerramento concentrado no portal. Essas variações só fazem sentido se tiverem uma função narrativa; trocar cor apenas para evitar monotonia cria ruído.
+
+### Texto e informação como composição
+
+O Zapier também sustenta cenas inteiras com texto e informação bem editados:
+
+- manchete grande para uma única afirmação;
+- rótulo pequeno que situa o assunto;
+- uma evidência concreta — número, caso, artefato ou estrutura — quando a mensagem precisa de prova;
+- CTA de consequência clara no encerramento do capítulo.
+
+Esse raciocínio reforça a revisão do conteúdo atual do YAHub: menos slogans concorrentes, mais uma ideia principal por cena e mais evidência real quando houver algo a demonstrar. Uma métrica, testemunho ou grid só deve entrar se representar informação verdadeira da organização; não deve ser inventado para reproduzir a aparência da referência.
+
+### Limite de direção
+
+A paleta quente, o laranja, as grades expansivas e a linguagem comercial do Zapier não pertencem automaticamente à YA LABS. A adaptação deve preservar a base navy, off-white, dourado e cores próprias de produtos já definida nesta sessão. O aprendizado é de contraste intencional e hierarquia informacional, não de identidade visual.
+
 ## Impacto esperado
 
 A Home deve deixar de parecer uma sequência de blocos visualmente bons, porém independentes. O objetivo é uma experiência institucional coesa, criativa e clara, em que a YA LABS seja percebida como uma organização técnica viva, confiável e memorável.
